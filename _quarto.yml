@@ -1,0 +1,26 @@
+project:
+  type: book
+
+book:
+  title: "Travaux Pratiques de Biométrie<br> Semestre 3"
+  author: "Benoît Simon-Bouhet"
+  date: today
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+lang: fr
+title-block-banner: true
+
+format:
+  html:
+    theme: flatly
+    highlight-style: kate
+  pdf:
+    documentclass: scrreprt
+
+
+
