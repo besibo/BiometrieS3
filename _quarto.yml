@@ -2,9 +2,12 @@ project:
   type: book
 
 book:
-  title: "Travaux Pratiques de Biométrie<br> Semestre 3"
+  title: "TP de Biométrie<br> Semestre 3<br>"
   author: "Benoît Simon-Bouhet"
   date: today
+  search: true
+  downloads: [pdf]
+  repo-url: "https://github.com/besibo/BiometrieS3"
   chapters:
     - index.qmd
     - intro.qmd
@@ -14,11 +17,21 @@ book:
 bibliography: references.bib
 lang: fr
 title-block-banner: true
+language: 
+  title-block-author-single: "Auteur"
+  title-block-published: "Dernière Mise à jour"
+
+code-block-bg: true
+code-block-border-left: "#31BAE9"
 
 format:
   html:
-    theme: flatly
-    highlight-style: kate
+    theme: united
+    highlight-style: solarized
+    code-tools: 
+      source: false
+      toggle: true
+    code-fold: show
   pdf:
     documentclass: scrreprt
 

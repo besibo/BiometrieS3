@@ -37,6 +37,14 @@ knitr::write_bib(c(
 
 Ce livre contient l'ensemble du matériel (contenus, exemples, exercices...) nécessaire à la réalisation des travaux pratiques de **Biométrie** de l'EC '*Outils pour l'étude et la compréhension du vivant 2*' du semestre 3 de la licence Sciences de la Vie de La Rochelle Université.
 
+```{r}
+# On tire des valeurs au hasard
+a <- rnorm(100)
+3 + 5
+hist(a)
+```
+
+
 Les trois grands chapitres de ce livre correspondent aux 3 objectifs principaux de ces séances de TP et TEA :
 
 1. **Vous faire découvrir les logiciels [R](https://cran.r-project.org) et [Rstudio](https://www.rstudio.com)** dans lesquels vous allez passer beaucoup de temps en licence puis en master. Si vous choisissez une spécialité de master qui implique de traiter des données (c'est-à-dire à peu près toutes les spécialités des Sciences de la Vie !) et/ou de communiquer des résultats d'analyses statistiques, alors `R` et `RStudio` devraient être les logiciels vers lesquels vous vous tournerez naturellement.
