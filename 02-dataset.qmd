@@ -1,0 +1,190 @@
+# Explorez votre premier jeu de données {#sec-dataset}
+
+Mettons en pratique tout ce que nous avons appris pour commencer à explorer un jeu de données réel. Les données nous parviennent sous différents formats, des images au texte en passant par les chiffres. Tout au long de ce document, nous nous concentrerons sur les ensembles de données qui peuvent être stockés dans une feuille de calcul, car il s'agit de la manière la plus courante de collecter des données dans de nombreux domaines. N'oubliez pas ce que nous avons appris dans la section \@ref(sec-objects) : ces ensembles de données de type "tableurs" sont appelés `data.frame` dans R, et nous nous concentrerons sur l'utilisation de ces objets tout au long de ce livre.
+
+Commençons par charger les packages nécessaires pour ce chapitre (cela suppose que vous les ayez déjà installés ; relisez la section \@ref(sec-packages) pour plus d'informations sur l'installation et le chargement des packages R si vous ne l'avez pas déjà fait). Au début de chaque chapitre, nous aurons systématiquement besoin de charger quelques packages. Donc n'oubliez pas de les installer au préalable si besoin.
+
+```{r}
+# Pensez à installer ces packages avant de les charger si besoin 
+library(dplyr)
+library(nycflights13)
+```
+
+
+----
+
+## Le package `nycflights13`
+
+Nous avons probablement déjà presque tous pris l'avion. Les grands aéroports contiennent de nombreuses portes d'embarquement, et pour chacune d'elles, des informations sur les vols en partance sont affichées. Par exemple, le numéro du vol, les heures de décollage et d'atterrissage prévues, les retards etc. Dans la mesure du possible, on aime arriver à destination à l'heure. Dans la suite de ce document, on examinera les jeux de données du package `nycflights13`, notamment afin d'en apprendre plus sur les causes de retard les plus fréquentes.
+
+Ce package contient 5 "tableaux" contenant des informations sur chaque vol intérieur ayant quitté New York en 2013, soit depuis l'aéroport de Newark Liberty International (EWR), soit depuis l'aéroport John F. Kennedy Intenational (JFK), soit depuis l'aéroport LaGuardia (LGA) :
+
+1. `flights` : informations sur chacun des 336776 vols
+2. `airlines` : traduction entre les codes IATA à 2 lettres des compagnies aériennes et leur nom complet (il y en a 16 au total)
+3. `planes` : informations constructeurs pour chacun des 3322 avions utilisés en 2013
+4. `weather` : données météorologiques heure par heure (environ 8705 observations) pour chacun des 3 aéroports de New York
+5. `airports` : noms et localisations géographiques des aéroports desservis (1458 aéroports)
+
+
+----
+
+## Le data frame `flights`
+
+Nous allons commencer par explorer le jeu de données `flights` qui est inclus avec le package `nycflights13` afin de nous faire une idée de sa structure. Dans votre script, tapez la commande suivante et exécutez la dans la console (selon les réglages de RStudio et *la largeur de votre console*, l'affichage peut varier légèrement) :
+
+```{r}
+flights
+```
+
+Essayons de décrypter cet affichage :
+
+- `A tibble: 336,776 x 19` : un tibble est un `data.frame` amélioré. Il a toutes les caractéristiques d'un `data.frame`, (tapez `class(flights)` pour vous en convaincre), mais en plus, il a quelques propriétés intéressantes sur lesquelles nous reviendrons plus tard. Ce `tibble` possède donc :
+    - 336776 lignes
+    - 19 colonnes, qui correspondent aux variables. Dans un `tibble`, les observations sont toujours en ligne et les variables en colonnes.
+- `year`, `month`, `day`, `dep_time`, `sched_dep_time`... sont les noms des colonnes, c'est à dire les variables de ce jeu de données.
+- Nous avons ensuite les 10 premières lignes du tableau qui correspondent à 10 vols.
+- `... with 336,766 rows, and 12 more variables`, nous indique que 336766 lignes et 12 variables ne logent pas à l'écran. Ces données font toutefois partie intégrante du tableau `flights`.
+- le nom et le type de chaque variable qui n'a pas pu être affichée à l'écran
+
+Cette façon d'afficher les tableaux est spécifique des `tibble`s. Vous noterez que le type de chaque variable est indiqué entre `<...>`. Les types que vous pourrez rencontrer sont les suivants :
+
+- `<int>` : nombres entiers ("integers")
+- `<dbl>` : nombres réels ("doubles")
+- `<chr>` : caractères ("characters")
+- `<fct>` : facteurs ("factors")
+- `<ord>` : facteurs ordonnés ("ordinals")
+- `<lgl>` : logiques (colonne de vrais/faux : "logical")
+- `<date>` : dates
+- `<time>` : heures
+- `<dttm>` : combinaison de date et d'heure ("date time")
+
+Cette façon d'afficher le contenu d'un tableau permet d'y voir (beaucoup) plus clair que l'affichage classique d'un `data.frame`. Malheureusement, ce n'est pas toujours suffisant. Voyons quelles sont les autres méthodes permettant d'explorer un `data.frame`.
+
+
+----
+
+## Explorer un `data.frame`
+
+Parmi les nombreuses façons d'avoir une idée des données contenues dans un `data.frame` tel que `flights`, on présente ici 2 fonctions qui prennent le nom du `data.frame` en guise d'argument et un opérateur :
+
+- la fonction `View()` intégrée à RStudio. C'est celle que vous utiliserez le plus souvent. Attention, elle s'écrit avec un "V" majuscule.
+- la fonction `glimpse()` chargée avec le package `dplyr`. Elle est très similaire à la fonction `str()` découverte dans les tutoriels de DataCamp.
+- l'opérateur `$` permet d'accéder à une unique variable d'un `data.frame`.
+- la fonction `skim()` du package `skimr` permet d'obtenir un résumé complet mais très synthétique et visuel des variables d'un `data.frame`.
+
+### `View()` {#sec-View}
+
+Tapez `View(flights)` dans votre script et exécutez la commande. Un nouvel onglet contenant ce qui ressemble à un tableaur doit s'ouvrir.
+
+----
+
+**Question ** : à quoi correspondent chacune des lignes de ce tableau ?
+
+- A. aux données d'une compagnie aérienne
+- B. aux données d'un vol
+- C. aux données d'un aéroport
+- D. aux données de plusieurs vols
+
+----
+
+Ici, vous pouvez donc explorer la totalité du tableau, passer chaque variable en revue, et même appliquer des filtres pour ne visualiser qu'une partie des données. Par exemple, essayez de déterminer combien de vols ont décollé de l'aéroport JFK le 12 février. 
+
+Ce tableau n'est pas facile à manipuler. Il est impossible de corriger des valeurs, et lorsque l'on applique des filtres, il est impossible de récuppérer uniquement les données filtrées. Nous verrons plus tard comment les obtenir en tapant des commandes simples dans un script. La seule utilité de ce tableau est donc l'exploration visuelle des données.
+
+
+### `glimpse()`
+
+La seconde façon d'explorer les données contenues dans un tableau est d'utiliser la fonction `glimpse()` après avoir chargé le package `dplyr` :
+
+```{r}
+glimpse(flights)
+```
+
+Ici, les premières observations sont présentées en lignes pour chaque variable du jeu de données. Là encore, le type de chaque variable est précisé. Essayez d'identifier 3 variables catégorielles. À quoi correspondent-elles ? En quoi sont-elles différentes des variables numériques ?
+
+
+### L'opérateur `$`
+
+Enfin, l'opérateur `$` permet d'accéder à une unique variable grâce à son nom. Par exemple le tableau `airlines` contient seulement 2 variables :
+
+```{r}
+airlines
+```
+
+Nous pouvons accéder à ces variables grâce à leur nom :
+
+```{r}
+airlines$name
+```
+
+Cela nous permet de récupérer les données sous la forme d'un vecteur. Attention toutefois, le tableau `flights` contient tellement de lignes, que récuppérer une variable grâce à cet opérateur peut rapidement saturer la console. Si, par exemple, vous souhaitez extraire les données relatives aux compagnies aériennes (colonne `carrier`) du tableau `flights`, vous pouvez taper ceci :
+
+```{r eval=FALSE}
+flights$carrier
+```
+
+Le résultat est pour le moins indigeste ! Lorsqu'un tableau contient de nombreuses lignes, c'est rarement une bonne idée de transformer l'une de ses colonnes en vecteur. Dans la mesure du possible, les données d'un tableau doivent rester dans le tableau.
+
+
+### `skim()`
+
+Pour utiliser la fonction `skim()`, vous devez au préalable installer le package `skimr` :
+
+```{r eval=FALSE}
+install.packages("skimr")
+```
+
+Ce package est un peu "expérimental" et il se peut que l'installation pose problème. Si un message d'erreur apparaît lors de l'installation, procédez comme suit :
+
+1. Quittez RStudio (sans oublier de sauvegarder votre travail au préalable)
+2. Relancez RStudio et dans la console, tapez ceci :
+
+```{r eval=FALSE}
+install.packages("rlang")
+```
+
+3. Tentez d'installer `skimr` à nouveau.
+4. Exécutez à nouveau votre script afin de retrouver votre travail dans l'état où il était avant de quitter RStudio.
+
+Si l'installation de `skimr` s'est bien passée, vous pouvez maintenant taper ceci :
+
+```{r eval=FALSE}
+library(skimr)
+skim(flights)
+```
+
+
+
+### Les fichiers d'aide
+
+Une fonctionalité particulièrement utile de R est son système d'aide. On peut obtenir de l'aide au sujet de n'importe quelle fonction et de n'importe quel jeu de données en tapant un "`?`" immédiatement suivi du nom de la fonction ou de l'objet.
+
+Par exemple, examinez l'aide du jeu de données `flights` :
+
+```{r eval=FALSE, tidy=FALSE}
+?flights
+```
+
+Vous devriez absolument prendre l'habitude d'examiner les fichiers d'aide des fonctions ou jeux de données pour lesquels vous avez des questions. Ces fichiers sont très complets, et même s'il peuvent paraître impressionnants au premier abord, ils sont tous structurés sur le même modèle et vous aideront à comprendre comment utiliser les fonctions, quels sont les arguments possibles, à quoi ils servent et comment les utiliser.
+
+Prenez le temps d'examiner le fichier d'aide du jeu de données `flights`. Avant de passer à la suite, assurez-vous d'avoir compris à quoi correspondent chacune des 19 variables de ce tableau.
+
+
+----
+
+## Exercices {#sec-Exo-2}
+
+Consultez l'aide du jeu de données `diamonds` du package `ggplot2`.
+
+- Quel est le code de la couleur la plus prisée ?
+- Quel est le code de la moins bonne clarté ?
+- À quoi correspond la variable `z` ?
+- En quoi la variable `depth` est-elle différente de la variable `z` ?
+
+
+Consultez l'aide du package `nycflights13` en tapant `help(package="nycflights13")`.
+
+- Consultez l'aide des 5 jeux de données de ce package. 
+- À quoi correspond la variable `visib` ? 
+- Dans quel tableau se trouve-t'elle ? 
+- Combien de lignes possède ce tableau ?

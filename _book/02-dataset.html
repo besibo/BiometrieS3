@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>TP de Biométrie Semestre 3 - 2&nbsp; Explorez votre premier jeu de données</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./03-visualization.html" rel="next">
+<link href="./01-R-basics.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Pas de résultats",
+    "search-matching-documents-text": "documents trouvés",
+    "search-copy-link-title": "Copier le lien vers la recherche",
+    "search-hide-matches-text": "Cacher les correspondances additionnelles",
+    "search-more-match-text": "correspondance de plus dans ce document",
+    "search-more-matches-text": "correspondances de plus dans ce document",
+    "search-clear-button-title": "Effacer",
+    "search-detached-cancel-button-title": "Annuler",
+    "search-submit-button-title": "Envoyer"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Explorez votre premier jeu de données</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <div class="quarto-title-block"><div><h1 class="title"><span id="sec-dataset" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Explorez votre premier jeu de données</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Montrer tout le code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Cacher tout le code</a></li></ul></div></div>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">TP de Biométrie<br> Semestre 3<br></a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/besibo/BiometrieS3" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="./TP-de-Biométrie-br--Semestre-3-br-.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-R-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R et RStudio : les bases</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-dataset.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Explorez votre premier jeu de données</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visualiser des données avec <code>ggplot2</code></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">Références</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table des matières</h2>
+   
+  <ul>
+  <li><a href="#le-package-nycflights13" id="toc-le-package-nycflights13" class="nav-link active" data-scroll-target="#le-package-nycflights13"> <span class="header-section-number">2.1</span> Le package <code>nycflights13</code></a></li>
+  <li><a href="#le-data-frame-flights" id="toc-le-data-frame-flights" class="nav-link" data-scroll-target="#le-data-frame-flights"> <span class="header-section-number">2.2</span> Le data frame <code>flights</code></a></li>
+  <li><a href="#explorer-un-data.frame" id="toc-explorer-un-data.frame" class="nav-link" data-scroll-target="#explorer-un-data.frame"> <span class="header-section-number">2.3</span> Explorer un <code>data.frame</code></a>
+  <ul class="collapse">
+  <li><a href="#sec-View" id="toc-sec-View" class="nav-link" data-scroll-target="#sec-View"> <span class="header-section-number">2.3.1</span> <code>View()</code></a></li>
+  <li><a href="#glimpse" id="toc-glimpse" class="nav-link" data-scroll-target="#glimpse"> <span class="header-section-number">2.3.2</span> <code>glimpse()</code></a></li>
+  <li><a href="#lopérateur" id="toc-lopérateur" class="nav-link" data-scroll-target="#lopérateur"> <span class="header-section-number">2.3.3</span> L’opérateur <code>$</code></a></li>
+  <li><a href="#skim" id="toc-skim" class="nav-link" data-scroll-target="#skim"> <span class="header-section-number">2.3.4</span> <code>skim()</code></a></li>
+  <li><a href="#les-fichiers-daide" id="toc-les-fichiers-daide" class="nav-link" data-scroll-target="#les-fichiers-daide"> <span class="header-section-number">2.3.5</span> Les fichiers d’aide</a></li>
+  </ul></li>
+  <li><a href="#sec-Exo-2" id="toc-sec-Exo-2" class="nav-link" data-scroll-target="#sec-Exo-2"> <span class="header-section-number">2.4</span> Exercices</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>Mettons en pratique tout ce que nous avons appris pour commencer à explorer un jeu de données réel. Les données nous parviennent sous différents formats, des images au texte en passant par les chiffres. Tout au long de ce document, nous nous concentrerons sur les ensembles de données qui peuvent être stockés dans une feuille de calcul, car il s’agit de la manière la plus courante de collecter des données dans de nombreux domaines. N’oubliez pas ce que nous avons appris dans la section @ref(sec-objects) : ces ensembles de données de type “tableurs” sont appelés <code>data.frame</code> dans R, et nous nous concentrerons sur l’utilisation de ces objets tout au long de ce livre.</p>
+<p>Commençons par charger les packages nécessaires pour ce chapitre (cela suppose que vous les ayez déjà installés ; relisez la section @ref(sec-packages) pour plus d’informations sur l’installation et le chargement des packages R si vous ne l’avez pas déjà fait). Au début de chaque chapitre, nous aurons systématiquement besoin de charger quelques packages. Donc n’oubliez pas de les installer au préalable si besoin.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pensez à installer ces packages avant de les charger si besoin </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attachement du package : 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Les objets suivants sont masqués depuis 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Les objets suivants sont masqués depuis 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<hr>
+<section id="le-package-nycflights13" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="le-package-nycflights13"><span class="header-section-number">2.1</span> Le package <code>nycflights13</code></h2>
+<p>Nous avons probablement déjà presque tous pris l’avion. Les grands aéroports contiennent de nombreuses portes d’embarquement, et pour chacune d’elles, des informations sur les vols en partance sont affichées. Par exemple, le numéro du vol, les heures de décollage et d’atterrissage prévues, les retards etc. Dans la mesure du possible, on aime arriver à destination à l’heure. Dans la suite de ce document, on examinera les jeux de données du package <code>nycflights13</code>, notamment afin d’en apprendre plus sur les causes de retard les plus fréquentes.</p>
+<p>Ce package contient 5 “tableaux” contenant des informations sur chaque vol intérieur ayant quitté New York en 2013, soit depuis l’aéroport de Newark Liberty International (EWR), soit depuis l’aéroport John F. Kennedy Intenational (JFK), soit depuis l’aéroport LaGuardia (LGA) :</p>
+<ol type="1">
+<li><code>flights</code> : informations sur chacun des 336776 vols</li>
+<li><code>airlines</code> : traduction entre les codes IATA à 2 lettres des compagnies aériennes et leur nom complet (il y en a 16 au total)</li>
+<li><code>planes</code> : informations constructeurs pour chacun des 3322 avions utilisés en 2013</li>
+<li><code>weather</code> : données météorologiques heure par heure (environ 8705 observations) pour chacun des 3 aéroports de New York</li>
+<li><code>airports</code> : noms et localisations géographiques des aéroports desservis (1458 aéroports)</li>
+</ol>
+<hr>
+</section>
+<section id="le-data-frame-flights" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="le-data-frame-flights"><span class="header-section-number">2.2</span> Le data frame <code>flights</code></h2>
+<p>Nous allons commencer par explorer le jeu de données <code>flights</code> qui est inclus avec le package <code>nycflights13</code> afin de nous faire une idée de sa structure. Dans votre script, tapez la commande suivante et exécutez la dans la console (selon les réglages de RStudio et <em>la largeur de votre console</em>, l’affichage peut varier légèrement) :</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>flights</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 19
+    year month   day dep_time sched_de…¹ dep_d…² arr_t…³ sched…⁴ arr_d…⁵ carrier
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;      &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;  
+ 1  2013     1     1      517        515       2     830     819      11 UA     
+ 2  2013     1     1      533        529       4     850     830      20 UA     
+ 3  2013     1     1      542        540       2     923     850      33 AA     
+ 4  2013     1     1      544        545      -1    1004    1022     -18 B6     
+ 5  2013     1     1      554        600      -6     812     837     -25 DL     
+ 6  2013     1     1      554        558      -4     740     728      12 UA     
+ 7  2013     1     1      555        600      -5     913     854      19 B6     
+ 8  2013     1     1      557        600      -3     709     723     -14 EV     
+ 9  2013     1     1      557        600      -3     838     846      -8 B6     
+10  2013     1     1      558        600      -2     753     745       8 AA     
+# … with 336,766 more rows, 9 more variables: flight &lt;int&gt;, tailnum &lt;chr&gt;,
+#   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
+#   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, and abbreviated variable names
+#   ¹​sched_dep_time, ²​dep_delay, ³​arr_time, ⁴​sched_arr_time, ⁵​arr_delay</code></pre>
+</div>
+</div>
+<p>Essayons de décrypter cet affichage :</p>
+<ul>
+<li><code>A tibble: 336,776 x 19</code> : un tibble est un <code>data.frame</code> amélioré. Il a toutes les caractéristiques d’un <code>data.frame</code>, (tapez <code>class(flights)</code> pour vous en convaincre), mais en plus, il a quelques propriétés intéressantes sur lesquelles nous reviendrons plus tard. Ce <code>tibble</code> possède donc :
+<ul>
+<li>336776 lignes</li>
+<li>19 colonnes, qui correspondent aux variables. Dans un <code>tibble</code>, les observations sont toujours en ligne et les variables en colonnes.</li>
+</ul></li>
+<li><code>year</code>, <code>month</code>, <code>day</code>, <code>dep_time</code>, <code>sched_dep_time</code>… sont les noms des colonnes, c’est à dire les variables de ce jeu de données.</li>
+<li>Nous avons ensuite les 10 premières lignes du tableau qui correspondent à 10 vols.</li>
+<li><code>... with 336,766 rows, and 12 more variables</code>, nous indique que 336766 lignes et 12 variables ne logent pas à l’écran. Ces données font toutefois partie intégrante du tableau <code>flights</code>.</li>
+<li>le nom et le type de chaque variable qui n’a pas pu être affichée à l’écran</li>
+</ul>
+<p>Cette façon d’afficher les tableaux est spécifique des <code>tibble</code>s. Vous noterez que le type de chaque variable est indiqué entre <code>&lt;...&gt;</code>. Les types que vous pourrez rencontrer sont les suivants :</p>
+<ul>
+<li><code>&lt;int&gt;</code> : nombres entiers (“integers”)</li>
+<li><code>&lt;dbl&gt;</code> : nombres réels (“doubles”)</li>
+<li><code>&lt;chr&gt;</code> : caractères (“characters”)</li>
+<li><code>&lt;fct&gt;</code> : facteurs (“factors”)</li>
+<li><code>&lt;ord&gt;</code> : facteurs ordonnés (“ordinals”)</li>
+<li><code>&lt;lgl&gt;</code> : logiques (colonne de vrais/faux : “logical”)</li>
+<li><code>&lt;date&gt;</code> : dates</li>
+<li><code>&lt;time&gt;</code> : heures</li>
+<li><code>&lt;dttm&gt;</code> : combinaison de date et d’heure (“date time”)</li>
+</ul>
+<p>Cette façon d’afficher le contenu d’un tableau permet d’y voir (beaucoup) plus clair que l’affichage classique d’un <code>data.frame</code>. Malheureusement, ce n’est pas toujours suffisant. Voyons quelles sont les autres méthodes permettant d’explorer un <code>data.frame</code>.</p>
+<hr>
+</section>
+<section id="explorer-un-data.frame" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="explorer-un-data.frame"><span class="header-section-number">2.3</span> Explorer un <code>data.frame</code></h2>
+<p>Parmi les nombreuses façons d’avoir une idée des données contenues dans un <code>data.frame</code> tel que <code>flights</code>, on présente ici 2 fonctions qui prennent le nom du <code>data.frame</code> en guise d’argument et un opérateur :</p>
+<ul>
+<li>la fonction <code>View()</code> intégrée à RStudio. C’est celle que vous utiliserez le plus souvent. Attention, elle s’écrit avec un “V” majuscule.</li>
+<li>la fonction <code>glimpse()</code> chargée avec le package <code>dplyr</code>. Elle est très similaire à la fonction <code>str()</code> découverte dans les tutoriels de DataCamp.</li>
+<li>l’opérateur <code>$</code> permet d’accéder à une unique variable d’un <code>data.frame</code>.</li>
+<li>la fonction <code>skim()</code> du package <code>skimr</code> permet d’obtenir un résumé complet mais très synthétique et visuel des variables d’un <code>data.frame</code>.</li>
+</ul>
+<section id="sec-View" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="sec-View"><span class="header-section-number">2.3.1</span> <code>View()</code></h3>
+<p>Tapez <code>View(flights)</code> dans votre script et exécutez la commande. Un nouvel onglet contenant ce qui ressemble à un tableaur doit s’ouvrir.</p>
+<hr>
+<p><strong>Question </strong> : à quoi correspondent chacune des lignes de ce tableau ?</p>
+<ul>
+<li>A. aux données d’une compagnie aérienne</li>
+<li>B. aux données d’un vol</li>
+<li>C. aux données d’un aéroport</li>
+<li>D. aux données de plusieurs vols</li>
+</ul>
+<hr>
+<p>Ici, vous pouvez donc explorer la totalité du tableau, passer chaque variable en revue, et même appliquer des filtres pour ne visualiser qu’une partie des données. Par exemple, essayez de déterminer combien de vols ont décollé de l’aéroport JFK le 12 février.</p>
+<p>Ce tableau n’est pas facile à manipuler. Il est impossible de corriger des valeurs, et lorsque l’on applique des filtres, il est impossible de récuppérer uniquement les données filtrées. Nous verrons plus tard comment les obtenir en tapant des commandes simples dans un script. La seule utilité de ce tableau est donc l’exploration visuelle des données.</p>
+</section>
+<section id="glimpse" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="glimpse"><span class="header-section-number">2.3.2</span> <code>glimpse()</code></h3>
+<p>La seconde façon d’explorer les données contenues dans un tableau est d’utiliser la fonction <code>glimpse()</code> après avoir chargé le package <code>dplyr</code> :</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(flights)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 336,776
+Columns: 19
+$ year           &lt;int&gt; 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2…
+$ month          &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ day            &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ dep_time       &lt;int&gt; 517, 533, 542, 544, 554, 554, 555, 557, 557, 558, 558, …
+$ sched_dep_time &lt;int&gt; 515, 529, 540, 545, 600, 558, 600, 600, 600, 600, 600, …
+$ dep_delay      &lt;dbl&gt; 2, 4, 2, -1, -6, -4, -5, -3, -3, -2, -2, -2, -2, -2, -1…
+$ arr_time       &lt;int&gt; 830, 850, 923, 1004, 812, 740, 913, 709, 838, 753, 849,…
+$ sched_arr_time &lt;int&gt; 819, 830, 850, 1022, 837, 728, 854, 723, 846, 745, 851,…
+$ arr_delay      &lt;dbl&gt; 11, 20, 33, -18, -25, 12, 19, -14, -8, 8, -2, -3, 7, -1…
+$ carrier        &lt;chr&gt; "UA", "UA", "AA", "B6", "DL", "UA", "B6", "EV", "B6", "…
+$ flight         &lt;int&gt; 1545, 1714, 1141, 725, 461, 1696, 507, 5708, 79, 301, 4…
+$ tailnum        &lt;chr&gt; "N14228", "N24211", "N619AA", "N804JB", "N668DN", "N394…
+$ origin         &lt;chr&gt; "EWR", "LGA", "JFK", "JFK", "LGA", "EWR", "EWR", "LGA",…
+$ dest           &lt;chr&gt; "IAH", "IAH", "MIA", "BQN", "ATL", "ORD", "FLL", "IAD",…
+$ air_time       &lt;dbl&gt; 227, 227, 160, 183, 116, 150, 158, 53, 140, 138, 149, 1…
+$ distance       &lt;dbl&gt; 1400, 1416, 1089, 1576, 762, 719, 1065, 229, 944, 733, …
+$ hour           &lt;dbl&gt; 5, 5, 5, 5, 6, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6…
+$ minute         &lt;dbl&gt; 15, 29, 40, 45, 0, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 59, 0…
+$ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-01 0…</code></pre>
+</div>
+</div>
+<p>Ici, les premières observations sont présentées en lignes pour chaque variable du jeu de données. Là encore, le type de chaque variable est précisé. Essayez d’identifier 3 variables catégorielles. À quoi correspondent-elles ? En quoi sont-elles différentes des variables numériques ?</p>
+</section>
+<section id="lopérateur" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="lopérateur"><span class="header-section-number">2.3.3</span> L’opérateur <code>$</code></h3>
+<p>Enfin, l’opérateur <code>$</code> permet d’accéder à une unique variable grâce à son nom. Par exemple le tableau <code>airlines</code> contient seulement 2 variables :</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>airlines</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 2
+   carrier name                       
+   &lt;chr&gt;   &lt;chr&gt;                      
+ 1 9E      Endeavor Air Inc.          
+ 2 AA      American Airlines Inc.     
+ 3 AS      Alaska Airlines Inc.       
+ 4 B6      JetBlue Airways            
+ 5 DL      Delta Air Lines Inc.       
+ 6 EV      ExpressJet Airlines Inc.   
+ 7 F9      Frontier Airlines Inc.     
+ 8 FL      AirTran Airways Corporation
+ 9 HA      Hawaiian Airlines Inc.     
+10 MQ      Envoy Air                  
+11 OO      SkyWest Airlines Inc.      
+12 UA      United Air Lines Inc.      
+13 US      US Airways Inc.            
+14 VX      Virgin America             
+15 WN      Southwest Airlines Co.     
+16 YV      Mesa Airlines Inc.         </code></pre>
+</div>
+</div>
+<p>Nous pouvons accéder à ces variables grâce à leur nom :</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>airlines<span class="sc">$</span>name</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Endeavor Air Inc."           "American Airlines Inc."     
+ [3] "Alaska Airlines Inc."        "JetBlue Airways"            
+ [5] "Delta Air Lines Inc."        "ExpressJet Airlines Inc."   
+ [7] "Frontier Airlines Inc."      "AirTran Airways Corporation"
+ [9] "Hawaiian Airlines Inc."      "Envoy Air"                  
+[11] "SkyWest Airlines Inc."       "United Air Lines Inc."      
+[13] "US Airways Inc."             "Virgin America"             
+[15] "Southwest Airlines Co."      "Mesa Airlines Inc."         </code></pre>
+</div>
+</div>
+<p>Cela nous permet de récupérer les données sous la forme d’un vecteur. Attention toutefois, le tableau <code>flights</code> contient tellement de lignes, que récuppérer une variable grâce à cet opérateur peut rapidement saturer la console. Si, par exemple, vous souhaitez extraire les données relatives aux compagnies aériennes (colonne <code>carrier</code>) du tableau <code>flights</code>, vous pouvez taper ceci :</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>flights<span class="sc">$</span>carrier</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Le résultat est pour le moins indigeste ! Lorsqu’un tableau contient de nombreuses lignes, c’est rarement une bonne idée de transformer l’une de ses colonnes en vecteur. Dans la mesure du possible, les données d’un tableau doivent rester dans le tableau.</p>
+</section>
+<section id="skim" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4" class="anchored" data-anchor-id="skim"><span class="header-section-number">2.3.4</span> <code>skim()</code></h3>
+<p>Pour utiliser la fonction <code>skim()</code>, vous devez au préalable installer le package <code>skimr</code> :</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"skimr"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Ce package est un peu “expérimental” et il se peut que l’installation pose problème. Si un message d’erreur apparaît lors de l’installation, procédez comme suit :</p>
+<ol type="1">
+<li>Quittez RStudio (sans oublier de sauvegarder votre travail au préalable)</li>
+<li>Relancez RStudio et dans la console, tapez ceci :</li>
+</ol>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"rlang"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol start="3" type="1">
+<li>Tentez d’installer <code>skimr</code> à nouveau.</li>
+<li>Exécutez à nouveau votre script afin de retrouver votre travail dans l’état où il était avant de quitter RStudio.</li>
+</ol>
+<p>Si l’installation de <code>skimr</code> s’est bien passée, vous pouvez maintenant taper ceci :</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(flights)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="les-fichiers-daide" class="level3" data-number="2.3.5">
+<h3 data-number="2.3.5" class="anchored" data-anchor-id="les-fichiers-daide"><span class="header-section-number">2.3.5</span> Les fichiers d’aide</h3>
+<p>Une fonctionalité particulièrement utile de R est son système d’aide. On peut obtenir de l’aide au sujet de n’importe quelle fonction et de n’importe quel jeu de données en tapant un “<code>?</code>” immédiatement suivi du nom de la fonction ou de l’objet.</p>
+<p>Par exemple, examinez l’aide du jeu de données <code>flights</code> :</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>?flights</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Vous devriez absolument prendre l’habitude d’examiner les fichiers d’aide des fonctions ou jeux de données pour lesquels vous avez des questions. Ces fichiers sont très complets, et même s’il peuvent paraître impressionnants au premier abord, ils sont tous structurés sur le même modèle et vous aideront à comprendre comment utiliser les fonctions, quels sont les arguments possibles, à quoi ils servent et comment les utiliser.</p>
+<p>Prenez le temps d’examiner le fichier d’aide du jeu de données <code>flights</code>. Avant de passer à la suite, assurez-vous d’avoir compris à quoi correspondent chacune des 19 variables de ce tableau.</p>
+<hr>
+</section>
+</section>
+<section id="sec-Exo-2" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="sec-Exo-2"><span class="header-section-number">2.4</span> Exercices</h2>
+<p>Consultez l’aide du jeu de données <code>diamonds</code> du package <code>ggplot2</code>.</p>
+<ul>
+<li>Quel est le code de la couleur la plus prisée ?</li>
+<li>Quel est le code de la moins bonne clarté ?</li>
+<li>À quoi correspond la variable <code>z</code> ?</li>
+<li>En quoi la variable <code>depth</code> est-elle différente de la variable <code>z</code> ?</li>
+</ul>
+<p>Consultez l’aide du package <code>nycflights13</code> en tapant <code>help(package="nycflights13")</code>.</p>
+<ul>
+<li>Consultez l’aide des 5 jeux de données de ce package.</li>
+<li>À quoi correspond la variable <code>visib</code> ?</li>
+<li>Dans quel tableau se trouve-t’elle ?</li>
+<li>Combien de lignes possède ce tableau ?</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copié");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01-R-basics.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R et RStudio : les bases</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./03-visualization.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visualiser des données avec <code>ggplot2</code></span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

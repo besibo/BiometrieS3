@@ -1,5 +1,6 @@
 project:
   type: book
+  output-file: "BiometrieS3"
 
 book:
   title: "TP de Biométrie<br> Semestre 3<br>"
@@ -10,19 +11,17 @@ book:
   repo-url: "https://github.com/besibo/BiometrieS3"
   chapters:
     - index.qmd
-    - intro.qmd
-    - summary.qmd
+    - 01-R-basics.qmd
+    - 02-dataset.qmd
+    - 03-visualization.qmd
     - references.qmd
 
-bibliography: references.bib
+bibliography: all.bib
 lang: fr
 title-block-banner: true
 language: 
   title-block-author-single: "Auteur"
   title-block-published: "Dernière Mise à jour"
-
-code-block-bg: true
-code-block-border-left: "#31BAE9"
 
 format:
   html:
@@ -32,6 +31,8 @@ format:
       source: false
       toggle: true
     code-fold: show
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
   pdf:
     documentclass: scrreprt
 

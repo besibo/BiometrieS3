@@ -27,7 +27,7 @@ opts_chunk$set(fig.path = 'figure/', cache.path = 'cache/', tidy = FALSE,
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 'quarto', 'tidyverse', 'ggplot2', 'gridExtra', 'skimr', 'bindrcpp', 'tidyr', 'dplyr', 'readr', "car", "readxl", "broom", "DescTools", "patchwork", "fontawesome"), 'packages.bib')
 
-# system("cat book.bib packages.bib > all.bib")
+system("cat book.bib packages.bib > all.bib")
 ```
 
 
@@ -36,14 +36,6 @@ knitr::write_bib(c(
 ## Objectifs {-}
 
 Ce livre contient l'ensemble du matériel (contenus, exemples, exercices...) nécessaire à la réalisation des travaux pratiques de **Biométrie** de l'EC '*Outils pour l'étude et la compréhension du vivant 2*' du semestre 3 de la licence Sciences de la Vie de La Rochelle Université.
-
-```{r}
-# On tire des valeurs au hasard
-a <- rnorm(100)
-3 + 5
-hist(a)
-```
-
 
 Les trois grands chapitres de ce livre correspondent aux 3 objectifs principaux de ces séances de TP et TEA :
 
