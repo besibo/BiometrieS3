@@ -14,6 +14,7 @@ book:
     - 01-R-basics.qmd
     - 02-dataset.qmd
     - 03-visualization.qmd
+    - 04-DataWrangling.qmd
     - references.qmd
 
 bibliography: all.bib
@@ -27,14 +28,16 @@ format:
   html:
     theme: united
     highlight-style: solarized
-    code-tools: 
-      source: false
-      toggle: true
-    code-fold: show
+    # code-tools: 
+    #   source: false
+    #   toggle: true
+    # code-fold: show
     code-block-bg: true
     code-block-border-left: "#31BAE9"
-  pdf:
-    documentclass: scrreprt
+    smooth-scroll: true
+
+  # pdf:
+  #   documentclass: scrreprt
 
 
 
