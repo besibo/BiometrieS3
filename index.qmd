@@ -5,7 +5,7 @@
 options(replace.assign = TRUE, width = 80)
 options(repos = "http://cran.r-project.org/")
 
-list.of.packages <- c("readxl", "nycflights13", "gapminder", "knitr", "tidyverse", "gridExtra", "devtools", "extrafont", "kableExtra", "skimr", "bindrcpp", "car", "DescTools", "bookdown", "datasauRus", "patchwork", "fontawesome", "palmerpenguins")
+list.of.packages <- c("readxl", "nycflights13", "gapminder", "knitr", "tidyverse", "gridExtra", "devtools", "extrafont", "kableExtra", "skimr", "bindrcpp", "car", "DescTools", "bookdown", "datasauRus", "patchwork", "fontawesome", "palmerpenguins", "ggmosaic")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 
@@ -25,7 +25,7 @@ opts_chunk$set(fig.path = 'figure/', cache.path = 'cache/', tidy = FALSE,
 ```{r package_bibliography, include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'quarto', 'tidyverse', 'ggplot2', 'gridExtra', 'skimr', 'bindrcpp', 'tidyr', 'dplyr', 'readr', "car", "readxl", "broom", "DescTools", "patchwork", "fontawesome", "palmerpenguins"), 'packages.bib')
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'quarto', 'tidyverse', 'ggplot2', 'gridExtra', 'skimr', 'bindrcpp', 'tidyr', 'dplyr', 'readr', "car", "readxl", "broom", "DescTools", "patchwork", "fontawesome", "palmerpenguins", "ggmosaic"), 'packages.bib')
 
 system("cat book.bib packages.bib > all.bib")
 ```

@@ -34,6 +34,7 @@ format:
     # code-fold: show
     code-block-bg: true
     code-block-border-left: "#31BAE9"
+    code-depth: 5
     smooth-scroll: true
 
   # pdf:

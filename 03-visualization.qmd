@@ -155,12 +155,13 @@ Comme indiqué plus haut, le package `ggplot2` [@R-ggplot2] permet de réaliser 
 
 Après avoir spécifié ces éléments, on ajoute des couches supplémentaires au graphique grâce au signe `+`. La couche la plus essentielle à ajouter à un graphique, est une couche contenant un élément géométrique, ou `geom` (par exemple des points, des lignes ou des barres). D'autres couches peuvent s'ajouter pour spécifier des titres, des `facet`s ou des modifications des axes et des thèmes du graphique.
 
-Dans le cadre de ce cours, nous nous limiterons aux 4 types de graphiques suivants : 
+Dans le cadre de ce cours, nous nous limiterons aux 5 types de graphiques suivants : 
 
 1. les nuages de points
 2. les graphiques en lignes
 3. les histogrammes
-5. les diagrammes bâtons
+4. les diagrammes bâtons
+5. les boîtes à moustaches (mais nous en dirons plus à ce sujet au semestre prochain)
 
 
 ### Votre premier graphique
@@ -246,7 +247,7 @@ ggplot(penguins, aes(x = body_mass_g, y = bill_length_mm)) +
 
 ## Quel graphique dans quelle situation ?
 
-Il n'est pas possible de faire n'importe quel type de graphique dans n'importe quelle situation. Selon le nombre de variable dont on dispose ou que l'on souhaite examiner, et selon la nature de ces variables (numériques ou catégorielles), le choix des types de graphiques possibles sera limité. Par exemple, les diagrammes bâtons sont réservés aux variables catégorielles, alors que les histogrammes sont possibles uniquement avec les variables numériques continues. Néanmoins, dans certaines situations, plusieurs choix de graphiques seront possibles, et vous aurez donc une certaine liberté. Vos choix seront alors guidés par les objectifs que vous souhaiterez atteindre grâce aux graphiques, ainsi que par vos préférences. 
+Il n'est pas possible de faire n'importe quel type de graphique dans n'importe quelle situation. Selon le nombre de variables dont on dispose ou que l'on souhaite examiner, et selon la nature de ces variables (numériques et/ou catégorielles), le choix des types de graphiques possibles sera limité. Par exemple, les diagrammes bâtons sont réservés aux variables catégorielles, alors que les histogrammes sont possibles uniquement avec les variables numériques continues. Néanmoins, dans certaines situations, plusieurs choix de graphiques seront possibles, et vous aurez donc une certaine liberté. Vos choix seront alors guidés par les objectifs que vous souhaiterez atteindre grâce aux graphiques, ainsi que par vos préférences. 
 
 :::{.callout-tip}
 ## Objectifs
@@ -467,7 +468,7 @@ ggplot(penguins, aes(x = body_mass_g)) +
 
 Notez l'utilisation des arguments `alpha`, `color` et `size`, pour modifier l'aspect de différents éléments du graphique. Assurez-vous d'avoir compris comment on les utilise, et faites vos propres expériences.
 
-#### Un mot sur la position d'`aes()`
+#### Un mot sur la position de la fonction `aes()`
 
 Sur le dernier exemple, vous constatez que la fonction `aes()` apparaît une fois à l'intérieur de la fonction `ggplot()`, et une autre fois à l'intérieur de `geom_histogram()`. Pourquoi ne pas avoir tapé, plus simplement :
 
@@ -503,957 +504,1506 @@ ggplot(data = penguins) +
 
 C'est plus long, mais c'est tout à fait correct et ça produit exactement le même résultat qu'auparavant.
 
-<!-- ### Over-plotting -->
+### Les nuages de points et stripcharts {#sec-cloud}
 
-<!-- L'over-plotting est la superposition importante d'une grande quantité d'information sur une zone restreinte d'un graphique. Dans notre cas, nous observons un over-plotting important autour de (0,0). Cet effet est gênant car il est difficile de se faire une idée précise du nombre de points accumulés dans cette zone. La façon la plus simple de régler le problème est de modifier la transparence des points grâce à l'argument `alpha` de la fonction `geom_point()`. Par défaut, cette valeur est fixée à 1, pour une opacité totale. Une valeur de 0 rend les points totalement transparents, et donc invisibles. Trouver la bonne valeur peut demander de tâtonner un peu. Le code suivant produit la figure \@ref(sec-fig:transparent) : -->
+Pour ces deux types de graphiques, la variable numérique sera portée par l'axe des `y`, et toutes les valeurs seront visibles, de façon non agrégée (contrairement aux histogrammes où les valeurs individuelles sont rassemblées à l'intérieur de classes). La différence entre les deux types de graphiques tient à la nature des informations qui figureront sur l'axe des `x` :
 
-<!-- ```{r transparent, tidy=FALSE, warning = FALSE, fig.cap="La même figure, avec des points semi-transparents."} -->
-<!-- alaska_flights <- flights %>%  -->
-<!--   filter(carrier == "AS") -->
-<!-- ggplot(data = alaska_flights,  -->
-<!--        mapping = aes(x = dep_delay, y = arr_delay)) +  -->
-<!--   geom_point(alpha = 0.2) -->
-<!-- ``` -->
+- Pour les nuages de points, l'axe des `x` portera simplement l'information du numéro d'observation pour chaque individu. L'individu placé sur la première ligne du tableau de données portera l'indice `1`. L'individu placé sur la deuxième ligne du tableau de données portera l'indice `2`, et ainsi de suite jusqu'à l'individu placé sur la dernière ligne du tableau (il portera ici l'indice 344 puisque le tableau compte 344 lignes)
+- Pour un stripchart, l'axe des `x` portera une unique valeur, la même pour tous les individus
 
-<!-- Sur cette figure, notez que : -->
+Dans les deux cas, l'axe des `x` ne nous sera pas vraiment utile. Il nous servira simplement à afficher des points sur un graphique, mais puisque nous ne disposons que d'une unique variable, c'est bien l'axe des `y` qui nous intéressera en priorité. Pour faire un nuage de points, on utilise `geom_point()`, et pour un stripchart `geom_jitter()`. Commençons par examiner le nuage de points pour la variable `body-mass-g` :
 
-<!-- - la transparence est additive : plus il y a de points, plus la zone est foncée car les points se superposent et rendent la zone plus opaque. -->
-<!-- - l'argument `alpha =` n'est pas intégré à l'intérieur d'une fonction `aes()` car ici, il n'est pas associé à une variable : c'est un simple paramètre. -->
+```{r}
+ggplot(penguins, aes(x = seq_along(body_mass_g), y = body_mass_g)) +
+  geom_point()
+```
 
-<!-- L'over-plotting est souvent rencontré lorsque l'on représente plusieurs nuages de points pour les différentes valeurs d'une variable catégorielle. Par exemple, si on transforme la variable `month` en facteur (`factor(month)`), on peut regarder s'il existe une relation entre les retards à l'atterrissage et le mois de l'année : -->
+C'est la fonction `seq_along()`, que l'on associe à l'axe des `x`, qui permet de faire apparaître les numéros de lignes du tableau `penguins`. On constate ici que 3 groupes de points sont présents :
 
-<!-- ```{r transpfactor, tidy=FALSE, warning=FALSE, fig.cap="Retards à l'arrivée pour les 12 mois de l'année 2013."} -->
-<!-- ggplot(data = alaska_flights,  -->
-<!--        mapping = aes(x = factor(month), y = arr_delay)) + -->
-<!--   geom_point() -->
-<!-- ``` -->
+1. Pour les lignes 1 à 150 (environ), un premier groupe de points présente des masses comprises entre 3000 et 4800 grammes environ.
+2. Pour les lignes 151 à 275 (environ), un second groupes de points présente des masses comprises entre 4000 et plus de 6000 grammes.
+3. Pour les lignes 276 à 344 (environ), un troisième groupe de points présente des valeurs similaires à celles du premier groupe.
 
-<!-- Ici (figure \@ref(sec-fig:transpfactor)), l'ajout de transparence ne serait pas suffisant. Une autre solution est d'appliquer la méthode dîte du "jittering", ou tremblement. Elle consiste à ajouter un bruit aléatoire horizontal et/ou vertical aux points d'un graphique. Ici, on peut ajouter un léger bruit horizontal afin de disperser un peu les points pour chaque mois de l'année. On n'ajoute pas de bruit vertical car on ne souhaite pas que les valeurs de retard (sur l'axe des `y`) soient altérées : -->
+En examinant le tableau `penguins` de plus près, on se rend compte que les 3 espèces de manchots sont présentées dans l'ordre. Ainsi, ces 3 groupes correspondent à 3 espèces différentes. Pour le visualiser, il suffit d'associer la variable `species` à la couleur des points. Puisqu'on cherche à associer une variable du tableau de données à une caractéristique esthétique d'un objet géométrique, on renseigne `color = species` à l'intérieur de `aes()` :
 
-<!-- ```{r jittering, tidy=FALSE, warning=FALSE, fig.cap="Retards à l'arrivée pour les 12 mois de l'année 2013."} -->
-<!-- ggplot(data = alaska_flights,  -->
-<!--        mapping = aes(x = factor(month), y = arr_delay)) + -->
-<!--   geom_jitter(width = 0.25) -->
-<!-- ``` -->
+```{r}
+#| label: fig-cloud
+#| fig-cap: "Nuage de points des masses corporelles des 3 espèces de manchots"
 
-<!-- On y voit déjà plus clair. L'argument `width` permet de spécifier l'intensité de la dispersion horizontale. Pour ajouter du bruit vertical (ce qui n'est pas souhaitable ici !), on peut ajouter l'argument `height`. Le graphique de la figure \@ref(sec-fig:jittering) est parfois appelé un "stripchart". C'est un graphique du type "nuage de points", mais pour lequel l'une des 2 variables est numérique, et l'autre est catégorielle. -->
 
-<!-- Il est évidemment possible d'ajouter de la transparence :  -->
+ggplot(penguins, aes(x = seq_along(body_mass_g), y = body_mass_g)) +
+  geom_point(aes(color = species))
+```
 
-<!-- ```{r tidy=FALSE, warning=FALSE, fig.cap="Retards à l'arrivée pour les 12 mois de l'année 2013."} -->
-<!-- ggplot(data = alaska_flights,  -->
-<!--        mapping = aes(x = factor(month), y = arr_delay)) + -->
-<!--   geom_jitter(width = 0.25, alpha = 0.5) -->
-<!-- ``` -->
+Attention, nous ne sommes déjà plus dans la situation d'une unique variable numérique : nous avons ici visualisé 2 variables : une numérique (portée par l'axe des `y`) et une catégorielle (l'espèce représentée par la couleur des points). Ici, on constate que les espèces Adélie et Chinstrap semblent avoir approximativement la même gamme de masses, alors que les Gentoo semblent nettement plus lourds.
 
+Comme pour les histogrammes, on peut utiliser des caractéristiques esthétiques variées pour modifier l'apparence des points :
 
-<!-- ### Couleur, taille et forme -->
+- `alpha` : la transparence. Choisir une valeur comprise entre 0 (invisible) et 1 (totalement opaque)
+- `size` : la taille des points
+- `color` : la couleur des points (ou de leur contour pour les symboles qui permettent de spécifier une couleur de remplissage et une couleur de contour)
+- `fill` : la couleur de remplissage des points (pour les symboles qui permettent de spécifier une couleur de remplissage et une couleur de contour)
+- `shape` : pour modifier les symboles utilisés. Les symboles possibles sont codés ainsi :
 
-<!-- L'argument `color` (ou `colour`, les deux orthographes fonctionnent) permet de spécifier la couleur des points. L'argument `size` permet de spécifier la taille des points. L'argument `shape` permet de spécifier la forme utilisée en guise de symbole. Ces 3 arguments peuvent être utilisés comme des paramètres, pour modifier l'ensemble des points d'un graphique. Mais ils peuvent aussi être associés à une variable, pour apporter une information supplémentaire. -->
+![Liste des symboles et codes correspondants pour les graphiques faisant apparaître des points. Pour les symboles 21 à 25, il sera possible de spécifier une couleur de remplissage `fill` et une couleur de contour `color`. Pour tous les autres symboles, les changements de couleurs se feront avec l'argument `color`.](images/pch.png){#fig-pch width=50%}
 
-<!-- Comparez les deux graphiques suivants (figures \@ref(sec-fig:rightcolor) et \@ref(sec-fig:wrongcolor)) : -->
+Chacune de ces caractéristiques esthétiques peut être associée à une variable d'un tableau (il faut alors le spécifier à l'intérieur de `aes()`), ou à une valeur unique, constante et identique pour tous les points du graphique (il faut alors le spécifier à l'extérieur de `aes()`). Par exemple :
 
-<!-- ```{r, rightcolor, tidy=FALSE, warning=FALSE, fig.cap="Utilisation correcte de `color`."} -->
-<!-- ggplot(data = alaska_flights, mapping = aes(x = dep_delay, y = arr_delay)) + -->
-<!--   geom_point(color = "blue") -->
-<!-- ``` -->
+```{r}
+ggplot(penguins, aes(x = seq_along(body_mass_g), y = body_mass_g)) +
+  geom_point(shape = 23, fill = "steelblue", color = "black", 
+             size = 3, alpha = 0.5)
+```
 
-<!-- ```{r, wrongcolor, tidy=FALSE, warning=FALSE, fig.cap="Utilisation incorrecte de `color`."} -->
-<!-- ggplot(data = alaska_flights, mapping = aes(x = dep_delay, y = arr_delay)) + -->
-<!--   geom_point(aes(color = "blue")) -->
-<!-- ``` -->
+L'ajout de la transparence permet de régler le problème des points qui se superposent (un phénomène nommé "overplotting").
 
-<!-- Le code qui permet de produire la figure \@ref(sec-fig:rightcolor) fait un usage correct de l'argument `color`. On demande des points de couleur bleue, les points apparaîssent bleus. La figure \@ref(sec-fig:wrongcolor) en revanche ne produit pas le résultat attendu. Puisque nous avons mis l'argument `color` à l'intérieur de la fonction `aes()`, R s'attend à ce que la couleur soit associée à une variable. Puisqu'aucune variable ne s'appelle "blue", R utilise la couleur par défaut. Pour associer la couleur des points à une variable, nous devons fournir un nom de variable valide : -->
+Examinons à présent un exemple de stripchart :
 
-<!-- ```{r, varcolor, tidy=FALSE, warning=FALSE, fig.cap="Association de `color` à une variable catégorielle."} -->
-<!-- ggplot(data = alaska_flights, mapping = aes(x = dep_delay, y = arr_delay)) + -->
-<!--   geom_point(aes(color = factor(month))) -->
-<!-- ``` -->
+```{r}
+ggplot(penguins, aes(x = "", y = body_mass_g)) +
+  geom_jitter()
+```
 
-<!-- Ici, l'utilisation de la couleur est correcte. Elle est associée à une variable catégorielle, et chaque valeur possible du vecteur `month` se voit donc attribuer une couleur différente. -->
+En indiquant `x = ""`, nous créons une unique catégorie pour l'axe des abscisses, qui sera utilisée pour placer les valeurs de tous les individus. Les valeurs de `body_mass_g` sont lues sur l'axe des `y`, comme pour un nuage de point classique. Si les points apparaissent dispersés, c'est en raison de 2 arguments spécifiques de la fonction `geom_jitter()` :
 
-<!-- ```{r, varcolor2, tidy=FALSE, warning=FALSE, fig.cap="Association de `color` à une variable numérique."} -->
-<!-- ggplot(data = alaska_flights, mapping = aes(x = dep_delay, y = arr_delay)) + -->
-<!--   geom_point(aes(color = arr_time)) -->
-<!-- ``` -->
+- `width = ` permet de spécifier l'étendue horizontale du bruit aléatoire qui sera utilisé pour placer les points
+- `height = ` permet de spécifier l'étendue verticale du bruit aléatoire qui sera utilisé pour placer les points
 
-<!-- De la même façon, la couleur des points est ici associée à une variable continue (l'heure d'arrivée des vols). Les points se voient donc attribuer une couleur choisie le long d'un gradient. -->
+Si nous ne renseignons pas nous même ces deux arguments, ils sont fixés automatiquement par le logiciel, ce qui n'est pas souhaitable, notamment pour le bruit vertical. Pour mieux comprendre, voyons ce qui se passe dans 3 situations :
 
-<!-- La même approche peut être utilisée pour spécifier la forme des symboles avec l'argument `shape`. Attention toutefois : une variable continue ne peut pas être associée à `shape` -->
+```{r}
+#| label: fig-jitter
+#| fig-cap: Trois exemples de stripchart
+#| fig-width: 3
+#| fig-subcap: 
+#|   - "Pas de dispersion horizontale, pas de dispersion verticale"
+#|   - "Faible dispersion horizontale, pas de dispersion verticale"
+#|   - "Faible dispersion horizontale, forte dispersion verticale"
+#| layout-ncol: 3
+#| warning: false
 
-<!-- ```{r, shapeplot, tidy=FALSE, warning=FALSE, fig.cap="Association de `shape` à un facteur."} -->
-<!-- ggplot(data = alaska_flights, mapping = aes(x = dep_delay, y = arr_delay)) + -->
-<!--   geom_point(aes(shape = factor(month))) -->
-<!-- ``` -->
+ggplot(penguins, aes(x = "", y = body_mass_g)) +
+  geom_jitter(width = 0, height = 0)
 
-<!-- Vous noterez que seuls les 6 premiers niveaux d'un facteur se voient attribuer une forme automatiquement. Au delà de 6 symboles différents sur un même graphique, le résultat est souvent illisible. Il est possible d'ajouter plus de 6 symboles, mais cela demande de modifier la légende manuellement et concrètement nous n'en aurons jamais besoin. Lorsque plus de 6 séries doivent être distinguées, d'autres solutions bien plus pertinentes (par exemple les `factet`s) devraient être utilisées. -->
+ggplot(penguins, aes(x = "", y = body_mass_g)) +
+  geom_jitter(width = 0.1, height = 0)
 
-<!-- Comme pour la couleur, il est possible d'utiliser l'argument `shape` en tant que paramètre du graphique sans l'associer à une variable. Il faut alors fournir un code compris entre 0 et 24 : -->
+ggplot(penguins, aes(x = "", y = body_mass_g)) +
+  geom_jitter(width = 0.1, height = 2000)
 
-<!-- ```{r, shapeplot2, tidy=FALSE, warning=FALSE, fig.cap="Utilisation de `shape` en tant que paramètre."} -->
-<!-- ggplot(data = alaska_flights, mapping = aes(x = dep_delay, y = arr_delay)) + -->
-<!--   geom_point(shape = 4) -->
-<!-- ``` -->
+```
 
-<!-- Notez qu'ici, `ggplot()` ne crée pas de légende : tous les points ont le même symbole, ce symbole n'est pas associé à une variable, une légende est donc inutile. -->
+- Le premier exemple (sous-figure a) ne présente aucune dispersion, ni horizontale `width = 0`, `height = 0`. Les points apparaissent donc tous alignés, ils ont en effet tous la même valeur sur l'axe des abscisses. Leur position sur l'axe des `y` reflète la masse réellement observée pour chaque individu. Cette façon de représenter les données n'est pas très utile car la superposition des points vient empêcher la visualisation correcte de la distribution : ici, il est impossible de dire quelles sont les masses les plus fréquentes ou les plus rares. 
 
-<!-- Parmi les valeurs possibles pour `shape`, les symboles 21 à 24 sont des symboles dont on peut spécifier séparément la couleur de contour, avec `color` et la couleur de fond avec `fill` : -->
+- Le second exemple (sous-figure b) présente une dispersion horizontale modérée `width = 0.1` et pas de dispersion verticale `height = 0`. Ici, tous les points ne sont plus alignés sur une seule droite. Puisque nous avons fixé `width = 0.1`, la position horizontale des points est choisie aléatoirement par `R` : il ajoute un léger bruit horizontale aléatoire, soit positif, soit négatif, avant de placer les points le long de l'axe des abscisses. Plus la valeur de `width` sera élevée, plus l'étendue du bruit horizontal sera importante. Sur l'axe des `y` en revanche, aucun bruit n'a été ajouté (`height = 0`). La position des points le long de cet axe reflète donc parfaitement la masse de chaque individu telle qu'enregistrées dans le tableau `penguins`. D'ailleurs, on constate que l'axe des ordonnées est strictement identique (même étendue, même graduations...) pour les 2 premiers sous-graphiques. C'est ce type de représentation que nous recherchons. En effet, l'absence de bruit vertical nous permet de visualiser correctement (donc sans distorsion) la variable numérique choisie (ici `body_mass_g`), et le bruit horizontal nous permet d'étaler légèrement les points de part et d'autres d'un axe horizontal virtuel, ce qui a pour effet de réduire l'overplotting, et ce qui nous permet donc de visualiser les zones où les points sont plus nombreux/denses et les zones où les observations sont plus rares. Ici, on observe une majorité de points entre 3000 et 4000 grammes, une densité de points intermédiaire entre 4000 et 5000 grammes, et des points moins nombreux (donc moins d'individus) pour les masses supérieures à 5000 grammes.
 
-<!-- ```{r, shapecolorplot, tidy=FALSE, warning=FALSE, fig.cap="Utilisation de `shape`, `color` et `fill`."} -->
-<!-- ggplot(data = alaska_flights, mapping = aes(x = dep_delay, y = arr_delay)) + -->
-<!--   geom_point(shape = 21, fill = "steelblue", color = "orange", alpha = 0.5) -->
-<!-- ``` -->
+- Le troisième exemple (sous-figure c) présente une dispersion horizontale modérée `width = 0.1` et une importante dispersion verticale `height = 2000`. Cela signifie que la position des points sur l'axe des `y` ne reflète plus les vraies valeurs de masses enregistrées dans le tableau `penguins`, mais des valeurs de masses auxquelles un bruit aléatoire a été ajouté ou retiré. C'est ce qui explique que l'axe des ordonnées ne présente pas la même échelle que pour les 2 autres graphiques. Ce n'est évidemment pas souhaitable, car si nous voulons bel et bien ajouter un bruit horizontal pour éviter la superposition des points, il est essentiel de ne pas modifier la position verticale des points qui nous renseigne sur la variable d'intérêt. Ici, la troisième figure présente un axe des `y` différent des 2 autres figures, et la position verticale des points a été tellement altérée qu'on ne peut plus distinguer la sur-abondance de données entre 3000 et 4000 grammes, ni la sous-représentation des observations au-dessus de 5000 grammes. Il sera donc important à l'avenir de toujours fixer `height = 0` pour faire un stripchart correct.
 
-<!-- N'hésitez pas à zoomer pour bien observer les points et comprendre ce qui se passe. Un conseil, faites des choix raisonnables ! Trop de couleurs n'est pas forcément souhaitable. -->
+:::{.callout-important}
+Sur un stripchart :
 
-<!-- Enfin, on peut ajuster la taille des symboles avec l'argument `size`. Tout comme il n'est pas possible d'associer une variable continue à `shape`, il n'est pas conseillé d'associer une variable catégorielle nominale (c'est-à-dire un facteur non ordonné) à `size`. Associer une variable continue est en ravanche parfois utile : -->
+- la position **verticale** des points ne doit jamais être modifiée. On fixera donc toujours `height = 0`
+- la position **horizontale** des points doit être modifiée afin d'éviter l'overplotting et de visualiser les zones de fortes et faibles densités de points. On choisira donc en général des valeurs de `width` comprises entre `0.1` et `0.4`
 
-<!-- ```{r, sizeplot, tidy=FALSE, warning=FALSE, fig.cap="Association d'une variable continue à la taille des symboles avec l'argument `size`."} -->
-<!-- ggplot(data = alaska_flights, mapping = aes(x = dep_delay, y = arr_delay)) + -->
-<!--   geom_point(aes(size = arr_time), alpha = 0.1) -->
-<!-- ``` -->
+:::
 
-<!-- Si l'over-plotting est ici très important (c'est pourquoi j'ai utilisé `alpha`), on constate néanmoins que les vols avec les retards les plus importants sont presque tous arrivés très tôt dans la journée ("500" signifie 5h00 du matin). Il s'agit probablement de vols qui devaient arriver dans la nuit, avant minuit, et qui sont finalement arrivés en tout début de journée, entre 00h01 et 5h00 du matin. Comme pour les autres arguments, il est possible d'utiliser `size` avec une valeur fixe, la même pour tous les symboles, lorsque cet argument n'est pas associé à une variable. -->
+Enfin, puisqu'un stripchart permet d'afficher des points sur un graphiques, les arguments permettant de modifier l'aspect des points sont les mêmes que pour les nuages de points. Par exemple :
 
-<!-- Enfin un conseil : évitez de trop surcharger vos graphiques. En combinant l'ensemble de ces arguments, il est malheureusement très facile d'obtenir des graphiques peu lisibles, ou contenant tellement d'informations qu'ils en deviennent difficiles à déchiffrer. Faites preuve de modération : -->
+```{r}
+#| fig-width: 5
+#| label: fig-strip
+#| fig-cap: "Un exemple de stripchart"
 
-<!-- ```{r, badplot, tidy=FALSE, warning=FALSE, fig.cap="Sometimes, less is more!"} -->
-<!-- ggplot(data = alaska_flights,  -->
-<!--        mapping = aes(x = dep_delay, y = arr_delay, size = arr_time)) + -->
-<!--   geom_point(alpha = 0.6,  -->
-<!--              shape = 22, -->
-<!--              color = "orange", -->
-<!--              fill = "steelblue", -->
-<!--              stroke = 2) -->
-<!-- ``` -->
+ggplot(penguins, aes(x = "", y = body_mass_g)) +
+  geom_jitter(aes(color = species, shape = species),
+              size = 3, alpha = 0.6, 
+              width = 0.1, height = 0)
+```
 
+Sur cette figure, comme pour le nuage de points réalisé plus haut, j'ai associé la variable `species` à la couleur des points (donc à l'intérieur de `aes()`). J'ai également associé cette variable à la forme des points `shape = species` à l'intérieur de `aes()`. C'est ce qui explique que chacune des 3 espèces apparaît sous la forme de symboles de formes et de couleurs différents. Pour limiter l'overplotting, j'ai spécifié un bruit horizontal, et j'ai fixé le bruit vertical à zéro. Enfin j'ai augmenté la taille des symboles (avec `size = 3`, en dehors de `aes()` car `3` est une constante qui s'appliquera à tous les points du graphique de la même manière) et leur transparence (avec `alpha = 0.6`, toujours en dehors de `aes()` pour la même raison). On constate ici encore que les masses corporelles des manchots Adélie et Chinstrap sont très similaires, et inférieures à celles de l'espèce Gentoo.
 
-<!-- ### Exercices  {#sec-Exo-4} -->
+### Exercices  {#sec-Exo-4}
 
-<!-- 1. À quoi sert l'argument `stroke` ? -->
+1. À quoi sert l'argument `stroke` pour les nuages de points et les stripcharts ?
 
-<!-- 2. Avec le jeu de données `diamonds`, tapez les commandes suivantes pour créer un nouveau tableau `diams` contenant moins de lignes (5000 au lieu de près de 54000) : -->
+2. Créez de nouveaux graphiques (histogramme et diagramme de densité) avec la variable contenant l'information de la longueur des nageoires des manchots `flipper_length_mm`. Décrivez les graphiques obtenus. Vos observations sont-elles cohérentes avec ce que nous savons maintenant des masses individuelles ?
 
-<!-- ```{r tidy = FALSE} -->
-<!-- library(dplyr) -->
-<!-- set.seed(4532) # Afin que tout le monde récupère les mêmes lignes -->
-<!-- diams <- diamonds %>%  -->
-<!--   sample_n(5000) -->
-<!-- ``` -->
+3. Visualisez ces données avec un nuage de points ou un stripchart. Retrouvez-vous les mêmes informations de distribution ?
 
-<!-- 3. Avec ce nouveau tableau `diams`, tapez le code permettant de créer le graphique \@ref(sec-fig:exodiamonds) (Indice : affichez le tableau `diams` dans la console afin de voir quelles sont les variables disponibles). -->
+```{r}
+#| include: false
+ggplot(penguins, aes(x = flipper_length_mm)) +
+  geom_histogram(aes(y = ..density..), bins = 25,
+                 fill = "steelblue", color = "black") +
+  geom_density(color = "orange", size = 1.5) +
+  geom_rug(alpha = 0.3)
+```
 
-<!-- ```{r, exodiamonds, tidy=FALSE, warning=FALSE, echo = FALSE, fig.cap="Prix de 5000 diamants en fonction de leur taille en carats et de leur clarté."} -->
-<!-- ggplot(data = diams, mapping = aes(x = carat, y = price)) + -->
-<!--     geom_point(alpha = 0.5, shape = 4, aes(color = clarity)) -->
-<!-- ``` -->
 
-<!-- 4. Selon vous, à quoi sont dues les bandes verticales que l'on observe sur ce graphique ? -->
+## Une seule variable catégorielle
 
+### Les diagrammes bâtons
 
-<!-- ---- -->
+Comme nous l'avons vu plus haut, les histogrammes permettent de visualiser la distribution d'une **variable numérique continue**. Souvent, on souhaite visualiser la distribution d'une **variable catégorielle**. C'est une tâche relativement aisée puisqu'elle consiste simplement à compter combien d'éléments tombent dans chacune des catégories (ou modalités) de la variable catégorielle. Le meilleur moyen de visualiser de telles données de comptage (*aka* fréquences) est de réaliser un diagramme bâtons, autrement appelé **barplot** ou **barchart**.
 
-<!-- ## Les graphiques en lignes -->
+Une difficulté, toutefois, concerne la façon dont les données sont présentées : est-ce que la variable d'intérêt est "pré-comptée" ou non ? Par exemple, le code ci-dessous crée 2 `data.frame` qui représentent la même collection de fruits : 3 pommes, 2 oranges et 4 bananes :
 
-<!-- ### Un nouveau jeu de données -->
+```{r}
+panier <- tibble(
+  fruit = c("pomme", "pomme", "banane", "pomme", "orange", "banane", "orange", "banane", "banane")
+)
 
-<!-- Les graphiques en ligne, ou "linegraphs" sont généralement utilisés lorsque l'axe des `x` porte une information **temporelle**, et l'axe des `y` une autre variable numérique. Le temps est une variable naturellement ordonnée : les jours, semaines, mois, années, se suivent naturellement. Les graphiques en lignes devraient être évités lorsqu'il n'y a pas une organisation séquentielle évidente de la variable portée par l'axe des `x`. -->
+panier_counted <- tibble(
+  fruit = c("pomme", "orange", "banane"),
+  nombre = c(3, 2, 4)
+)
+```
 
-<!-- Concentrons nous maintenant sur le tableau `weather` du package `nycflights13`. Explorez ce tableau en appliquant les méthodes vues dans le chapitre \@ref(sec-dataset). N'oubliez pas de consultez l'aide de ce jeu de données. -->
+Le tableau `panier` contient des données qui n'ont pas encore été comptées. Le tableau contient donc une unique variable nommée `fruit` :
 
-<!-- ```{r} -->
-<!-- weather -->
-<!-- ``` -->
+```{r}
+panier
+```
 
-<!-- Nous allons nous intéresser à la variable `temp`, qui contient un enregistrement de température pour chaque heure de chaque jour de 2013 pour les 3 aéroports de New York. Cela représente une grande quantité de données, aussi, nous nous limiterons aux températures observées entre le premier et le 15 janvier, pour l'aéroport Newark uniquement. -->
+À l'inverse, le tableau `panier_counted` contient des données qui ont déjà été comptées. Le tableau contient donc 2 variables dans 2 colonnes distinctes : une colonne `fruit` et une colonne `nombre`, mais seulement 3 lignes puisque seulement 3 modalités (les catégories de la variable catégorielle) sont présentes pour la variable `fruit` :
 
-<!-- ```{r tidy=FALSE} -->
-<!-- small_weather <- weather %>%  -->
-<!--   filter(origin == "EWR", -->
-<!--          month == 1, -->
-<!--          day <= 15) -->
-<!-- ``` -->
+```{r}
+panier_counted
+```
 
-<!-- La fonction `filter()` fonctionne sur le même principe que la fonction `subset()` découverte dans les tutoriels de DataCamp. Ici, nous demandons à R de créer un nouveau tableau de données, nommé `small_weather`, qui ne contiendra que les lignes correspondant à `origin == "EWR"`, `month == 1` et `day <= 15`, c'est à dire les données météorologiques de l'aéroport de Newark pour les 15 premiers jours de janvier 2013. -->
+Les deux tableaux `panier` et `panier_counted` représentent exactement les mêmes données, mais sous deux formats différents. Du fait de ces deux formats possibles, deux objets géométriques distincts devront être utilisés pour représenter les données. Le graphique obtenu sera le même, mais à chaque format de tableau son `geom_...()`.
 
 
-<!-- ### Exercice -->
+#### `geom_bar()` et `geom_col()`
 
-<!-- Avec `View()`, consultez le tableau nouvellement créé. Expliquez pourquoi la variable `time_hour` identifie de manière unique le moment ou chaque mesure a été réalisée alors que ce n'est pas le cas de la variable `hour`. -->
+Pour visualiser les données non pré-comptées, on utilise `geom_bar()` :
 
+```{r}
+#| label: fig-barplot
+#| fig-cap: "Barplot pour des données non pré-comptées."
 
-<!-- ### La fonction `geom_line()` -->
+ggplot(panier, aes(x = fruit)) +
+  geom_bar()
+```
 
-<!-- Les line graphs sont produits de la même façon que les nuages de points. Seul l'objet géométrique permettant de visualiser les données change. Au lieu d'utiliser `geom_point()`, on utilisera `geom_line()` : -->
+Pour visualiser les données déjà pré-comptées, on utilise `geom_col()` :
 
-<!-- ```{r linegraph, tidy=FALSE, fig.cap="Températures horaires à l'aéroport de Newark entre le 1er et le 15 janvier 2013."} -->
-<!-- ggplot(data = small_weather, mapping = aes(x = time_hour, y = temp)) + -->
-<!--   geom_line() -->
-<!-- ``` -->
+```{r}
+#| label: fig-barplotcol
+#| fig-cap: "Barplot pour des données pré-comptées."
 
-<!-- Très logiquement, on observe des oscillations plus ou moins régulières qui correspondent à l'alternance jour/nuit. Notez l'échelle de l'axe des ordonnées : les températures sont enregistrées en degrés Farenheit. -->
+ggplot(panier_counted, aes(x = fruit, y = nombre)) +
+  geom_col()
+```
 
-<!-- Nous connaissons maintenant 2 types d'objets `geom`étriques : les points et les lignes. Il est tout à fait possible d'ajouter plusieurs couches à un graphique, chacune d'elle correspondant à un objet `geom`étrique différent (voir figure \@ref(sec-fig:lineplotgraph)) : -->
+Notez que les figures @fig-barplot et @fig-barplotcol sont absolument identiques (à l'exception du titre de l'axe des ordonnées), mais qu'elles ont été créées à partir de 2 tableaux de données différents. En particulier, notez que :
 
-<!-- ```{r lineplotgraph, tidy=FALSE, fig.cap="Températures horaires à l'aéroport de Newark entre le 1er et le 15 janvier 2013."} -->
-<!-- ggplot(data = small_weather, mapping = aes(x = time_hour, y = temp)) + -->
-<!--   geom_line() + -->
-<!--   geom_point() -->
-<!-- ``` -->
+- Le code qui génère la figure @fig-barplot utilise le jeu de données `panier`, et n'associe pas de variable à l'axe des ordonnées : dans la fonction `aes()`, seule la variable associée à `x` est précisée. C'est la fonction `geom_bar()` qui calcule automatiquement les abondances (ou fréquences) pour chaque catégorie de la variable `fruit`. La variable `count` est ainsi générée automatiquement et associée à `y`.
+- Le code qui génère la figure @fig-barplotcol utilise le jeu de données `panier_counted`. Ici, c'est bien l'utilisateur qui associe la variable `nombre` à l'axe des `y` à l'intérieur de la fonction `aes()`. La fonction `geom_col()` a besoin de 2 variables (une variable catégorielle pour l'axe des `x` et une numérique pour l'axe des `y`) pour fonctionner.
 
-<!-- Enfin, comme pour les points, il est possible de spécifier plusieurs caractéristiques esthétiques des lignes, soit en les associant à des variables, au sein de la fonction `aes()`, soit en les utilisant en guise de paramètres pour modifier l'aspect général. Les arguments les plus classiques sont une fois de plus `color` (ou `colour`) pour modifier la couleur des lignes,  `linetype` pour modifier le type de lignes (continues, pointillées, tirets, etc), et `size` pour modifier l'épaisseur des lignes. -->
+Autrement dit, lorsque vous souhaiterez créer un diagramme bâtons, il faudra donc au préalable vérifier de quel type de données vous disposez pour choisir l'objet géométrique approprié :
 
-<!-- Reprenons le jeu de données complet `weather`, et filtrons uniquement les dates comprises entre le premier et le 15 janvier, mais cette fois pour les 3 aéroports de New York : -->
+:::{.callout-important}
+## Diagrammes bâtons
 
-<!-- ```{r tidy=FALSE} -->
-<!-- small_weather_airports <- weather %>%  -->
-<!--   filter(month == 1, -->
-<!--          day <= 15) -->
-<!-- ``` -->
+- Si la variable catégorielle n'est pas pré-comptée dans le tableau de données {{< fa arrow-right >}} `geom_bar()`. La variable catégorielle est associée à l'esthétique `x` du graphique. On ne renseigne pas `y`.
+- Si la variable catégorielle est pré-comptée dans le tableau de données {{< fa arrow-right >}} `geom_col()`. La variable catégorielle est associée à l'esthétique `x` du graphique. On associe explicitement les comptages à l'esthétique `y` du graphique.
+:::
 
-<!-- Nous pouvons maintenant réaliser un "linegraph" sur lequel une courbe apparaîtra pour chaque aéroport. Pour cela, nous devons associer la variable `origin` à un attribut esthétique des lignes. Par exemple (figure \@ref(sec-fig:linecolor)) : -->
+Enfin, notez que l'ordre des modalité (ou catégories) qui apparaissent sur l'axe des abscisses est l'ordre alphabétique : la modalité `banane` apparaît à gauche, puis la modalité `orange` et enfin la modalité `pomme`. Bien souvent, cet ordre alphabétique n'est pas pertinent. Nous verrons plus loin comment faire pour trier les catégories par ordre croissant ou décroissant. C'est en effet une possibilité intéressante qui est impossible pour les histogrammes (car l'axe des `x` porte une variable numérique continue qu'il est impossible de "mélanger"), mais souvent vivement recommandée pour les diagrammes bâtons.
 
-<!-- ```{r linecolor, tidy=FALSE, fig.cap="Températures horaires des 3 aéroports de New York entre le 1er et le 15 janvier 2013."} -->
-<!-- ggplot(data = small_weather_airports,  -->
-<!--        mapping = aes(x = time_hour, y = temp)) + -->
-<!--   geom_line(aes(color = origin)) -->
-<!-- ``` -->
+#### Un exemple concret
 
-<!-- Ou bien (figure \@ref(sec-fig:linetype)) : -->
+Revenons aux manchots. Imaginons que nous souhaitions connaître le nombre d'individus étudiés pour chaque espèce. Dans le jeu de données `penguins`, la variable `species` indique à quelle espèce appartiennent chacun des 344 individus étudiés. Une façon simple de représenter ces données est donc la suivante :
 
-<!-- ```{r linetype, tidy=FALSE, fig.cap="Températures horaires des 3 aéroports de New York entre le 1er et le 15 janvier 2013."} -->
-<!-- ggplot(data = small_weather_airports,  -->
-<!--        mapping = aes(x = time_hour, y = temp)) + -->
-<!--   geom_line(aes(linetype = origin)) -->
-<!-- ``` -->
+```{r}
+#| label: fig-bpspecies
+#| fig-cap: "Effectifs pour les 3 espèces de manchots étudiées"
+ggplot(penguins, aes(x = species)) +
+  geom_bar()
+```
 
-<!-- Ou encore (figure \@ref(sec-fig:linetypecolor)) : -->
+Ici, `geom_bar()` a compté le nombre d'occurrences de chaque espèce dans le tableau `penguins` et a automatiquement associé ce nombre à l'axe des ordonnées.
 
-<!-- ```{r linetypecolor, tidy=FALSE, fig.cap="Températures horaires des 3 aéroports de New York entre le 1er et le 15 janvier 2013."} -->
-<!-- ggplot(data = small_weather_airports,  -->
-<!--        mapping = aes(x = time_hour, y = temp)) + -->
-<!--   geom_line(aes(color = origin, linetype = origin)) -->
-<!-- ``` -->
+Là encore, les modalités sont triées par ordre alphabétique sur l'axe des abscisses. Il est généralement plus utile de trier les catégories par ordre décroissant. Nous pouvons faire cela facilement grâce à la fonction `fct_infreq()` du package `forcats`, qui permet de modifier l'ordre des modalités d'une variable catégorielle (ou facteur). Si vous avez installé le `tidyverse`, le package `forcast` doit être disponible sur votre ordinateur. N'oubliez pas de le charger si besoin :
 
-<!-- ### À quel endroit placer `aes()` et les arguments `color`, `size`, etc. ? -->
+```{r}
+#| warning: false
+#| label: fig-bpspecies-infreq
+#| fig-cap: "Effectifs pour les 3 espèces de manchots étudiées, triés en ordre décroissant"
 
-<!-- Jusqu'à maintenant, pour spécifier les associations entre certaines variables et les caractéristiques esthétiques d'un graphique, nous avons été amenés à utiliser la fonction `aes()` à 2 endroits distincts : -->
+library(forcats)
+ggplot(penguins, aes(x = fct_infreq(species))) +
+  geom_bar()
+```
 
-<!-- 1. au sein de la fonction `ggplot()` -->
-<!-- 2. au sein des fonctions `geom_XXX()` -->
+Ordonner les catégories par ordre décroissant est souvent indispensable afin de faciliter la lecture du graphique et les comparaisons entre catégories.
 
-<!-- Comment choisir l'endroit où renseigner `aes()` ? Pour bien comprendre, reprenons l'exemple du graphique \@ref(sec-fig:lineplotgraph) sur lequel nous avions ajouté 2 couches contenant chacune un objet géométrique différent (afin de gagner de la place, j'omets volontairement le nom des arguments `data` et `mapping` dans la fonction `ggplot()`) : -->
+Si nous souhaitons connaître le nombre précis d'individus de chaque espèce, il nous faut faire appel à plusieurs fonctions du package `dplyr` que nous détaillerons dans le chapitre @sec-wrangling. Ci-dessous, nous créons un nouveau tableau `species_table` contenant le nombre d'individus de chaque espèce et les espèces sont ordonnées par abondance décroissante :
 
-<!-- ```{r lineplotgraph2, tidy=FALSE, fig.cap="Températures horaires à l'aéroport de Newark entre le 1er et le 15 janvier 2013."} -->
-<!-- ggplot(small_weather, aes(x = time_hour, y = temp)) + -->
-<!--   geom_line() + -->
-<!--   geom_point() -->
-<!-- ``` -->
+```{r tidy = FALSE}
+species_table <- penguins %>%   # On prend le tableau penguins, puis...
+  count(species) %>%            # On compte les effectifs de chaque espèce, puis...
+  arrange(desc(n))              # On trie par effectif décroissants ...
+species_table                   # Enfin, on affiche la nouvelle table
+```
 
-<!-- Voyons ce qui se passe si on associe la variable `wind_speed` à l'esthétique `color`, à plusieurs endroits du code ci-dessus. Comparez les trois syntaxes et observez les différences entre les 3 graphiques obtenus : -->
+Ici, la table a été triée par effectifs décroissants. Mais attention, **les niveaux** du facteur `species` n'ont pas été modifiés :
 
-<!-- ```{r wind, tidy=FALSE, fig.cap="Températures horaires et vitesse du vent à l'aéroport de Newark entre le 1er et le 15 janvier 2013. La couleur de la ligne et des points renseigne sur la vitesse du vent."} -->
-<!-- ggplot(small_weather, aes(x = time_hour, y = temp, color = wind_speed)) + -->
-<!--   geom_line() + -->
-<!--   geom_point() -->
-<!-- ``` -->
+```{r}
+factor(species_table$species)
+```
 
-<!-- ```{r wind2, tidy=FALSE, fig.cap="Températures horaires et vitesse du vent à l'aéroport de Newark entre le 1er et le 15 janvier 2013. La couleur de la ligne renseigne sur la vitesse du vent."} -->
-<!-- ggplot(small_weather, aes(x = time_hour, y = temp)) + -->
-<!--   geom_line(aes(color = wind_speed)) + -->
-<!--   geom_point() -->
-<!-- ``` -->
+Le premier niveau est toujours `Adélie`, puis `Chinstrap`, en enfin `Gentoo`, et non pas l'ordre du tableau nouvellement créé (`Adelie`, puis `Gentoo`, puis `Chinstrap`) car les niveaux sont toujours triés par ordre alphabétique. La conséquence est que si nous devions faire un diagramme bâtons avec ces données, la fonction `geom_col()` ne permettrait pas d'ordonner les catégories correctement :
 
-<!-- ```{r wind3, tidy=FALSE, fig.cap="Températures horaires et vitesse du vent à l'aéroport de Newark entre le 1er et le 15 janvier 2013. La couleur des points renseigne sur la vitesse du vent."} -->
-<!-- ggplot(small_weather, aes(x = time_hour, y = temp)) + -->
-<!--   geom_line() + -->
-<!--   geom_point(aes(color = wind_speed)) -->
-<!-- ``` -->
+```{r}
+ggplot(species_table, aes(x = species, y = n)) +
+  geom_col()
+```
 
-<!-- Vous l'aurez compris, lorsque l'on spécifie `aes()` à l'intérieur de la fonction `ggplot()`, les associations de variables et d'esthétiques sont appliquées à tous les objets géométriques, donc à toutes les autres couches. En revanche, quand `aes()` est spécifié dans une couche donnée, les réglages ne s'appliquent qu'à cette couche spécifique. -->
+Si nous souhaitons trier ces catégories par effectif décroissant, la fonction `fct_infreq()` ne nous est ici d'aucune utilité. En effet, le tableau `species_table` contient une seule ligne pour chaque espèce, donc une fréquence de `1` pour chaque espèce. Le critère de la fréquence d'occurrence des modalités dans le tableau de données ne peut donc pas être utilisé. Pour parvenir à nos fins avec ce tableau déjà précompté, il faut cette fois utiliser la fonction `fct_reorder()` pour ordonner correctement les catégories. Cette fonction prends 3 arguments :
 
-<!-- En l'occurence, si le même réglage est spécifié dans la fonction `ggplot()` et dans une fonction `geom_XXX()`, c'est le réglage spécifié dans l'objet géométrique qui l'emporte : -->
+1. La variable catégorielle dont on souhaite réordonner les niveaux (ici, la variable `species` du tableau `species_table`).
+2. Une variable numérique qui permet d'ordonner les catégories (ici, la variable `n` du même tableau).
+3. L'argument optionnel `.desc` qui permet de préciser si le tri doit être fait en ordre croissant (c'est le cas par défaut) ou décroissant.
 
-<!-- ```{r wind4, tidy=FALSE, fig.cap="Températures horaires et vitesse du vent à l'aéroport de Newark entre le 1er et le 15 janvier 2013."} -->
-<!-- ggplot(small_weather, aes(x = time_hour, y = temp, color = wind_speed)) + -->
-<!--   geom_line(color = "orange") + -->
-<!--   geom_point() -->
-<!-- ``` -->
+```{r}
+ggplot(species_table, 
+       aes(x = fct_reorder(species, n, .desc = TRUE), y = n)) +
+  geom_col()
+```
 
-<!-- Il est ainsi possible de spécifier des éléments esthétiques qui s'appliqueront à toutes les couches d'un graphique, et d'autres qui ne s'appliqueront qu'à une couche spécifique, qu'à un objet géométrique particulier. -->
+Vous voyez donc que selon le type de données dont vous disposez (soit un tableau comme `penguins`, avec toutes les observations, soit un tableau beaucoup plus compact comme `species_table`), la démarche permettant de produire un diagramme bâtons, dans lequel les catégories seront triées, sera différente.
 
+Une dernière précision : inverser l'ordre des variables sur les axes du graphiques permet de faire un diagramme bâtons horizontal. C'est parfois très utile lorsque les modalités de la variable catégorielle sont nombreuses et/ou que leur nom est long. Faire apparaître les modalités sur l'axe des `y` au lieu de l'axe des `x` peut rendre leur lecture plus aisée :
 
-<!-- ---- -->
+```{r}
+ggplot(penguins, aes(y = fct_infreq(species))) +
+  geom_bar(fill = "steelblue", color = "black", alpha = 0.7)
 
-<!-- ## Les histogrammes {#sec-histogram} -->
+ggplot(species_table, 
+       aes(y = fct_reorder(species, n, .desc = TRUE), x = n)) +
+  geom_col(fill = "firebrick", color = "black", alpha = 0.7)
+```
 
-<!-- Un histogramme permet de visualiser la distribution **d'une variable** numérique continue. Contrairement aux deux types de graphiques vus précédemment, il sera donc inutile de préciser la variable à associer à l'axe des ordonnées : R la calcule automatiquement pour nous lorsque nous faisons appel à la fonction `geom_histogram()` pour créer un objet géométrique "histogramme". -->
 
-<!-- ### L'objet `geom_histogram()` -->
 
-<!-- Si on reprend le jeu de données `weather`, on peut par exemple s'intéresser à la distribution des températures tout au long de l'année : -->
+#### Exercices {#sec-Exo-6}
 
-<!-- ```{r warning=FALSE, tidy=FALSE, fig.cap="Histogramme des températures enregistrées en 2013 dans les 3 aéroports de New York."} -->
-<!-- ggplot(weather, aes(x = temp)) + -->
-<!--   geom_histogram() -->
-<!-- ``` -->
+1. Quelle est la différence entre un histogramme et un diagramme bâtons ?
+2. Pourquoi les histogrammes sont-ils inadaptés pour visualiser des données catégorielles ?
+3. Pourquoi ne peut-on pas trier un histogramme par ordre croissant ?
+4. Quelle île de l'archipel Palmer a fourni le plus grand nombre de manchots pour cette étude ? 
 
-<!-- On observe plusieurs choses : -->
 
-<!-- 1. La distribution semble globalement bimodale avec un pic autour de 36-37 degrés Farenheit (2 à 3 ºC)  et un autre autour de 65-70 degrés Farenheit (18-21 ºC). -->
-<!-- 2. Les températures ont varié entre 12 degrés Farenheit (-11ºC) et 100 degrés Farenheit (près de 38ºC). -->
-<!-- 3. R nous avertit qu'une valeur non finie n'a pas pu être intégrée. -->
-<!-- 4. R nous indique qu'il a choisi de représenter 30 classes de températures (`bins = 30`). C'est la valeur par défaut. R nous conseille de choisir une valeur plus appropriée. -->
+### Éviter à tout prix les diagrammes circulaires
 
-<!-- Comme pour les nuages de points utilisant les symboles 21 à 24, il est possible de spécifier la couleur de remplissage des barres avec l'argument `fill` et la couleur du contour des barres avec l'argument `color` : -->
+À mon grand désarroi, l'un des graphiques classiquement utilisé pour représenter la distribution d'une variable catégorielle est le diagramme circulaire (ou diagramme camembert, piechart en anglais). C'est presque toujours **la plus mauvaise visualisation possible** pour représenter les effectifs ou pourcentages associés aux modalités d'une variable catégorielle. Je vous demande de l'éviter à tout prix. Notre cerveau n'est en effet pas correctement équipé pour comparer des angles et des surfaces. Ainsi, par exemple, nous avons naturellement tendance à surestimer les angles supérieurs à 90º, et à sous-estimer les angles inférieurs à 90º. En d'autres termes, il est difficile pour les humains de comparer des grandeurs sur des diagrammes circulaires.
 
-<!-- ```{r warning=FALSE, tidy=FALSE, message=FALSE, fig.cap="Utilisation des arguments `fill` et `color` pour modifier l'aspect de l'histogramme."} -->
-<!-- ggplot(weather, aes(x = temp)) + -->
-<!--   geom_histogram(fill = "steelblue", color = "grey80") -->
-<!-- ``` -->
+À titre d'exemple, examinez ce diagramme, qui reprend les mêmes chiffres que précédemment, et tentez de répondre aux questions suivantes :
 
+```{r}
+#| label: fig-pie
+#| fig-cap: "Répartition des effectifs par espèce et par sexe"
+#| echo: false
 
 
+penguins %>%
+  count(species, sex) %>%
+  mutate(cat = paste(species, sex, sep = " - ")) %>% 
+  ggplot(aes(x = factor(1), y = n, fill = factor(cat))) +
+  geom_bar(width = 1, stat = "identity", color = "black") +
+  coord_polar(theta = "y") +
+  labs(fill = "Catégorie") +
+  scale_fill_brewer(palette = "Accent") +
+  scale_y_continuous(NULL, labels = NULL) +
+  scale_x_discrete(NULL, labels = NULL) +
+  theme_bw() +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        axis.ticks.y=element_blank())
+```
 
-<!-- ---- -->
+- Quelle est la catégorie la plus représentée ?
+- De combien de fois la part des Gentoo mâles est-elle supérieure à celle des Chinstrap femelles ? (1,5 fois, 2 fois, 2.5 fois ?...)
+- Quelle est la quatrième catégorie la plus représentée ?
 
-<!-- ## Les `facet`s {#sec-facets} -->
+Il est difficile (voir impossible) de répondre précisément à ces questions avec le diagramme circulaire de la @fig-pie, alors qu'il est très simple d'obtenir des réponses précises avec un diagramme bâtons tel que présenté à la @fig-bpspecies-sex ci-dessous (vérifiez-le !) :
 
-<!-- ### `facet_wrap()` -->
+```{r}
+#| echo: false
+#| label: fig-bpspecies-sex
+#| fig-cap: "Répartition des effectifs par espèce et par sexe"
 
-<!-- Nous l'avons indiqué plus haut, les `facet`s permettent de scinder le jeu de données en plusieurs sous-groupes et de faire un graphique pour chacun des sous-groupes.  -->
+penguins %>%
+  count(species, sex) %>%
+  mutate(cat = paste(species, sex, sep = " - ")) %>% 
+  ggplot(aes(y = fct_reorder(cat, n, .desc = TRUE), x = n, fill = fct_reorder(cat, n, .desc = TRUE))) +
+  geom_col(color = "black", show.legend = FALSE, alpha = 0.5) +
+  scale_fill_brewer() +
+  labs(x = "Effectif", y = "Catégorie") +
+  theme_bw()
+```
 
-<!-- Ainsi, si l'on souhaite connaître la distribution des températures pour chaque mois de l'année 2013, plutôt que de faire ceci : -->
 
-<!-- ```{r warning=FALSE, tidy=FALSE, message=FALSE, fig.cap="Distribution des températures avec visualisation des données mensuelles."} -->
-<!-- ggplot(weather, aes(x = temp, fill = factor(month))) + -->
-<!--   geom_histogram(bins = 20, color = "grey30") -->
-<!-- ``` -->
+## Deux variables numériques
 
-<!-- qui produit un graphique certes assez joli, mais difficile à interpréter, mieux vaut faire ceci :  -->
+La représentation graphique la plus adaptée à la visualisation des relations entre deux variables numériques est aussi l'une des plus simples : il s'agit des nuages de points que nous avons déjà évoqués. Ici dépendant, puisque nous disposons de 2 variables numériques, nous allons en associer une à l'axe des `x` et l'autre à l'axe des `y`. Si l'on pressent que l'une des deux variables pourrait "expliquer" la seconde, ou être en partie responsable de ses variations, on l'appelle **variable explicative** et on la placera alors sur l'axe des `x`. L'autre variable, celle que l'on suppose influencée par la première est appelée **variable expliquée**, et sera associée à l'axe des `y`.
 
-<!-- ```{r wrap, warning=FALSE, tidy=FALSE, message=FALSE, fig.asp=1.2, fig.cap='(ref:wrap)'} -->
-<!-- ggplot(weather, aes(x = temp, fill = factor(month))) + -->
-<!--   geom_histogram(bins = 20, color = "grey30") + -->
-<!--   facet_wrap(~factor(month), ncol = 3) -->
-<!-- ``` -->
+Les nuages de points de 2 variables numériques permettent donc de visualiser les relations (supposées ou réelles) entre deux variables.
 
-<!-- (ref:wrap) Un exemple d'utilisation de `facet_wrap()`. -->
+### Nuage de points
 
-<!-- La couche supplémentaire créée avec `facet_wrap()` permet donc de scinder les données en fonction d'une variable. Attention à la syntaxe : il ne faut pas oublier le symbole "`~`" devant la variable que l'on souhaite utiliser pour scinder les données. Il va sans dire que la variable utilisée doit être catégorielle et non continue, c'est la raison pour laquelle j'utilise la notation `factor(month)` et non simplement `month`. -->
+#### Syntaxe élémentaire
 
-<!-- Avec la fonction `facet_wrap()`, il est possible d'indiquer à R comment les différents graphiques doivent être agencés en spécifiant soit le nombre de colonnes souhaité avec `ncol`, soit le nombre de lignes souhaité avec `nrow`. -->
+Prenons un exemple : nous souhaitons examiner les relations qui existent entre la masse corporelle des individus et la longueur de leur nageoire. Une relation allométrique simple suppose en effet que plus un individu est grand et lourd, plus ses membres seront développés. La nature de la relation allométrique peut toutefois être radicalement différente selon les espèces. Pour l'instant, nous ne nous intéressons pas aux éventuelles différences entre espèces et nous examinerons donc l'ensemble des données, toutes espèces confondues.
 
-<!-- ### `facet_grid()` -->
+```{r}
+ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
+  geom_point()
+```
 
-<!-- Une autre fonction nommée `facet_grid()` permet d'agencer des sous-graphiques selon 2 variables catégorielles. Par exemple : -->
+Ici, j'associe `body_mass_g` à l'axe des `x` car je suppose que c'est la variable explicative. Il est en effet plus logique de considérer que la masse corporelle influence la longueur des nageoires plutôt que le contraire. La variable expliquée, ici `flipper_length_mm` est associée à l'axe des `y`.
 
-<!-- ```{r grid, warning=FALSE, tidy=FALSE, message=FALSE, fig.asp=1.2, fig.cap="(ref:grid)"} -->
-<!-- ggplot(weather, aes(x = temp, fill = factor(month))) + -->
-<!--   geom_histogram(bins = 20, color = "grey30") + -->
-<!--   facet_grid(factor(month) ~ origin) -->
-<!-- ``` -->
+La syntaxe est donc très simple, et le graphique obtenu permet de constater que plus les individus sont lourds, plus leurs nageoires sont longues. 
 
-<!-- (ref:grid) Un exemple d'utilisation de `facet_grid()`. -->
+#### Droite de tendance
 
-<!-- Ici, nous avons utilisé la variable `month` (transformée en facteur) et la variable `origin` pour créer un histogramme pour chaque combinaison des modalités de ces 2 variables. Il est donc possible de comparer facilement des températures inter-mensuelles au sein d'un aéroport donné (en colonnes), ou de comparer des températures enregistrées le même mois dans des aéroports distincts (en lignes).  -->
+Si l'on souhaite visualiser (modéliser !) cette association entre les deux variables, on peut ajouter sur ce graphique une courbe de tendance ou une droite de régression avec l'objet géométrique `geom_smooth()` :
 
-<!-- `facet_grid()` doit elle aussi être utilisée avec le symbole "`~`". Comme pour les indices d'un tableau, on met à gauche du "`~`" la variable qui figurera en lignes, et à droite du `~` celle qui figurera en colonnes. Les arguments `nrow` et `ncol` ne peuvent donc pas être utilisés : c'est le nombre de niveaux de chaque variable catégorielle fournie à `facet_grid()` qui détermine le nombre de lignes et de colonnes du graphique. -->
+```{r}
+ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
 
-<!-- Vous devriez maintenant être convaincus de la puissance de la grammaire des graphiques. En utilisant un langage standardisé et en ajoutant des couches une à une sur un graphique, il est posible d'obtenir rapidement des visualisations très complexes et néanmoins très claires, qui font apparaître des structures intéressantes dans nos données (des tendances, des groupes, des similitudes, des liaisons, des différences, etc.). -->
+L'argument `method = "lm"` indique que nous souhaitons ajouter une droite de régression (`lm` est l'abréviation de "linear model"). L'intervalle grisé autour de la droite représente l'incertitude associée à la régression et indique que la "vraie" droite de régression, dans la population générale (et pas seulement dans notre échantillon de 344 individus) est probablement située dans cette zone grisée. Nous aurons l'occasion de revenir en détail sur la notion de régression linéaire et d'incertitude associée au semestre 6 de la licence SV.
 
+#### Autres caractéristiques esthétiques
 
-<!-- ### Exercices {#sec-Exo-5} -->
+Comme pour tous les graphiques faisant apparaître des points, il est possible de modifier les caractéristiques esthétiques habituelles, soit en les associant à des variables du jeu de données (et en l'indiquant à l'intérieur de `aes()`), soit en les fixant à des valeurs constantes qui s'appliqueront à tous les points (et en l'indiquant alors en dehors de `aes()`). L'exemple ci-dessous illustre ces possibilités :
 
-<!-- Examinez la figure \@ref(sec-fig:grid). -->
+```{r}
+ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm, fill = species)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  geom_smooth(aes(color = species), method = "lm", se = FALSE)
+```
 
-<!-- 1. Quels éléments nouveaux ce graphique nous apprend-il par rapport au graphique \@ref(sec-fig:break) ci-dessus ? Comment le "`facet`ing" nous aide-t'il à visualiser les relations entre 2 (ou 3) variables ? -->
-<!-- 2. À quoi correspondent les numéros 1 à 12 ? -->
-<!-- 3. À quoi correspondent les chiffres 25, 50, 75, 100 ? -->
-<!-- 4. À quoi correspondent les chiffres 0, 100, 200, 300 ? -->
-<!-- 5. Observez les échelles des axes `x` et `y` pour chaque sous graphique. Qu'ont-elles de particulier ? En quoi est-ce utile ? -->
-<!-- 6. La variabilité des températures est-elle plus importante entre les aéroports, entre les mois, ou au sein des mois ? Expliquez votre réflexion. -->
+L'argument `se = FALSE` de la fonction `geom_smooth()` permet de ne pas afficher l'intervalle d'incertitude de la régression linéaire. Ici, j'ai associé la couleur de remplissage des points et la couleur des droites de régression aux espèces (donc à l'intérieur de `aes()`, soit dans `ggplot()` soit dans `geom_smooth()`), et j'ai fixé pour tous les points, le choix du type de symbole (`shape = 21`, voir @fig-pch), la couleur de contour (`color = "black"`) et la transparence `alpha = 0.6`.
 
+Là encore, il ne s'agit plus strictement d'un graphique représentant les relations entre 2 variables numériques, mais bien entre 3 variables : deux variables numériques (`body_mass_g` et `flipper_length_mm`) et une variable catégorielle ou facteur (`species`). Il est finalement très simple d'ajouter d'autres variables sur un graphique bivarié tel qu'un nuage de points.
 
-<!-- ---- -->
 
-<!-- ## Les boîtes à moustaches ou boxplots -->
+### Les graphiques en lignes
 
-<!-- ### Création de boxplots et informations apportées -->
+Les graphiques en lignes, ou "linegraphs" sont généralement utilisés lorsque l'axe des `x` porte une information **temporelle**, et l'axe des `y` une autre variable numérique. Le temps est une variable naturellement ordonnée : les jours, semaines, mois, années, se suivent naturellement. Les graphiques en lignes devraient être évités lorsqu'il n'y a pas une organisation séquentielle évidente de la variable portée par l'axe des `x`. Ainsi, lorsque l'une des 2 variables dont on dispose est une variable numérique temporelle (des dates, des heures, etc.), on la place sur l'axe des `x` et la seconde variable, dont on étudiera les fluctuations au cours du temps, sur l'axe des `y`. On peut alors relier les valeurs grâce à l'objet géométrique `geom_line()` afin de créer une série temporelle. Pour illustrer cela, examinons un autre jeu de données qui contient une variable temporelle :
 
-<!-- Commençons par créer un boxplot pour comparer les températures mensuelles comme nous l'avons fait plus haut avec des histogrammes : -->
+```{r}
+economics
+```
+Le jeu de données `economics` est fourni avec le package `ggplot2`. Puisque vous avez chargé ce package (ou le `tidyverse` qui contient ce package), vous devriez pouvoir accéder à ce tableau sans difficulté. Nous nous intéresserons ici à la variable `date` que nous placerons sur l'axe des `x` et à la variable `uempmed` qui est la durée de chômage médiane dans la population américaine, en nombre de semaines, que nous placerons sur l'axe des `y`. Examinons donc comment la durée médiane du du chômage a évolué au fil du temps :
 
-<!-- ```{r tidy=FALSE, fig.cap="Un boxplot fort peu utile..."} -->
-<!-- ggplot(weather, aes(x = month, y = temp)) + -->
-<!--   geom_boxplot() -->
-<!-- ``` -->
+```{r}
+#| fig-asp: 0.4
+ggplot(economics, aes(x = date, y = uempmed)) +
+  geom_line()
+```
 
-<!-- Comme précédemment, R nous avertit qu'une observation n'a pas été intégrée (en raison d'une donnée manquante). Mais il nous dit aussi que `x` (pour nous, la variable `month`) est continue, et que nous avons probablement oublié de spécifier des groupes. -->
+Notez que puisque la variable `date` du tableau `economics` est comprise par `R` comme étant du type "variable temporelle" (le type indiqué dans le tableau, juste sous le nom de variable, est `<date>`), l'axe des abscisses du graphique, qui est associé à cette variable, est correctement mis en forme : seules les années apparaissent. 
 
-<!-- En effet, les boxplots sont généralement utilisés pour examiner la distribution d'une variable numérique pour chaque niveau d'une variable catégorielle (un facteur). Il nous faut donc, ici encore, transformer `month` en facteur car dans notre tableau de départ, cette variable est considérée comme une variable numérique continue :  -->
+Les graphiques en lignes permettent de visualiser des progressions/évolutions lorsqu'il existe une temporalité entre les données. Sur l'exemple, traité plus haut, du lien entre masse et longueur des nageoire des manchots, relier les points n'aurait absolument aucun sens puisque toutes les observations sont indépendantes : elles correspondent à des individus différents. Soyez donc prudents lorsque vous reliez les points dur un graphique. Cela n'est possible que lorsque les données le permettent. Vous devez donc toujours vous poser la question de la pertinence de vos choix de représentations.
 
-<!-- ```{r tidy=FALSE, warning = FALSE, fig.cap="Boxplot des températures mensuelles."} -->
-<!-- ggplot(weather, aes(x = factor(month), y = temp)) + -->
-<!--   geom_boxplot() -->
-<!-- ``` -->
+Comme pour les autres types de graphiques, il est possible de modifier les caractéristiques esthétiques des lignes sur un graphique, en particulier : 
 
-<!-- Les différents éléments d'un boxplot, sont les suivants : -->
+- `color` : la couleur des lignes
+- `size` : l'épaisseur des lignes
+- `linetype` : le type de ligne (continue, pointillée, tirets, etc. Essayez plusieurs valeurs entières pour comparer les types de lignes)
 
-<!-- - La limite inférieure de la boîte correspond au premier quartile : 25% des données de l'échantillon sont situées au-dessous de cette valeur. -->
-<!-- - La limite supérieure de la boîte correspond au troisième quartile : 25% des données de l'échantillon sont situées au-dessus de cette valeur. -->
-<!-- - Le segment épais à l'intérieur de la boîte correspond au second quartile : c'est la médiane de l'échantillon. 50% des données de l'échantillon sont situées au-dessus de cette valeur, et 50% au-dessous. -->
-<!-- - La hauteur de la boîte correspond à ce que l'on appelle l'étendue inter-quartile ou Inter Quartile Range (IQR) en anglais. On trouve dans cette boîte 50% des observations de l'échantillon. C'est une mesure de la dispersion des 50% des données les plus centrales. Une boîte plus allongée indique donc une plus grande dispersion. -->
-<!-- - Les moustaches correspondent à des valeurs qui sont en dessous du premier quartile (pour la moustache du bas) et au-dessus du troisième quartile (pour la moustache du haut). La règle utilisée dans R est que ces moustaches s'étendent jusqu'aux valeurs minimales et maximales de l'échantillon, mais elles ne peuvent en aucun cas s'étendre au-delà de 1,5 fois la hauteur de la boîte (1,5 fois l'IQR) vers le haut et le bas. Si des points apparaissent au-delà des moustaches (vers le haut ou le bas), ces points sont appelés "outliers". Ce sont des points qui s'éloignent du centre de la distribution de façon importante puisqu'ils sont au-delà de 1,5 fois l'IQR de part et d'autre du premier ou du troisième quartile. Il peut s'agir d'anomalies de mesures, d'anomalies de saisie des données, ou tout simplement, d'enregistrements tout à fait valides mais extrêmes. J'attire votre attention sur le fait que la définition de ces outliers est relativement arbitraire. Nous pourrions faire le choix d'étendre les moustaches jusqu'à 1,8 fois l'IQR (ou 2, ou 2,5). Nous observerions alors beaucoup moins d'outliers. D'une façons générale, la longueur des moustaches renseigne sur la variabilité des données en dehors de la zone centrale. Plus elles sont longues, plus la variabilité est importante. Et dans tous les cas, l'examen attentif des outliers est utile car il nous permet d'en apprendre plus sur le comportement extrême de certaines observations. -->
+```{r}
+#| fig-asp: 0.4
+ggplot(economics, aes(x = date, y = uempmed)) +
+  geom_line(color = "orange", linetype = 2)
+```
+L'argument `linetype` est également utilisable par l'objet géométrique `geom_smooth()` :
 
-<!-- ### L'intervalle de confiance à 95% de la médiane -->
+```{r}
+#| fig-asp: 0.4
+ggplot(economics, aes(x = date, y = uempmed)) +
+  geom_line() +
+  geom_smooth(se = FALSE, linetype = 4, color = "red")
+```
 
-<!-- On peut également aujouter une encoche autour de la valeur de médiane en ajoutant l'argument `notch = TRUE` à la fonction `geom_boxplot()` :  -->
+Globalement, la durée médiane de chômage aux USA varie de façon cyclique. La durée des cycles varie selon les période entre 5 et 10 ans environ. Depuis les années 2000, la durée de chômage a augmenté de façon très importante, pour passer de 5 à 6 semaines en 2001, à plus de 25 semaines en 2011.
 
-<!-- ```{r notchedboxplot, tidy=FALSE, warning = FALSE, fig.cap="(ref:boxplot)"} -->
-<!-- ggplot(weather, aes(x = factor(month), y = temp)) + -->
-<!--   geom_boxplot(notch = TRUE) -->
-<!-- ``` -->
+### Les cartes
 
-<!-- (ref:boxplot) Boxplot des températures mensuelles. Les intervalles de confiance à 95% de la médiane sont affichés. -->
+Les latitudes et longitudes sont un autre type de variable numériques très particulières qui permettent notamment de produire des cartes. Il s'agit ici d'un domaine extrêmement vaste qui dépasse largement le cadre de ce livre et des cours de la licence SV. Retenez simplement qu'il est possible de produire des cartes très informatives avec `ggplot2`, et quelques autres packages spécialisés :
 
-<!-- Comme l'indique la légende de la figure \@ref(sec-fig:notchedboxplot), cette encoche correspond à l'étendue de l'intervalle de confiance à 95% de la médiane. Pour chaque échantillon, nous espérons que la médiane calculée soit le reflet fidèle de la vraie valeur de médiane de la population. Mais il sera toujours impossible d'en avoir la certitude absolue. Le mieux que l'on puisse faire, c'est quantifier l'incertitude. L'intervalle de confiance nous indique qu'il y a de bonnes chances que la vraie valeur de médiane de la population générale (qui restera à jamais inconnue) se trouve dans cet intervalle. Ici, les encoches sont très étroites car les données sont abondantes. Il y a donc peu d'incertitude, ce qui est une bonne chose.   -->
-<!-- Nous reviendrons sur cette notion importante plus tard dans le cursus, car ce type de graphique nous permettra d'anticiper sur les résultats des tests de comparaison de moyennes. -->
+![Exemple de carte produite dans `R` avec les packages `sf`, `marmap` et `ggplot2`.](images/map.png){#fig-map}
+En règle général, les cartes portent un grand nombre de variables, numériques et/ou catégorielles. Mais tout commence toujours par 2 variables numériques, les latitudes et longitude des structures/informations que l'on souhaite représenter (traits de côte, profiles bathymétriques, lieux d'observations diverses, ...).
 
-<!-- ### Une autre façon d'examiner des distributions -->
+## Deux variables catégorielles
 
-<!-- Dernière chose concernant les boxplots : il s'agit d'une représentation graphique très proche de l'histogramme. Pour vous en convaincre, je représente à la figure \@ref(sec-fig:compboxplot) ci-dessous uniquement les températures du mois de novembre, avec 3 types d'objets géométriques différents : un histogramme, un boxplot, et un nuage de points. -->
+Lorsque l'on souhaite examiner les relations entre deux variables catégorielles (ou facteurs), on a en général le choix entre les types de représentations graphiques suivants : 
 
-<!-- ```{r compboxplot, tidy=FALSE, warning = FALSE, message = FALSE, echo=FALSE, fig.cap="Distribution des températures de Novembre 2013."} -->
-<!-- library(gridExtra) -->
+- les diagrammes bâtons empilés 
+- les diagrammes bâtons juxtaposés
+- les diagrammes bâtons "facettés"
+- les graphiques en mosaïque (ou mosaic plots)
 
-<!-- pl1 <- weather %>%  -->
-<!--   filter(month == 11) %>%  -->
-<!--   ggplot(aes(x = temp)) + -->
-<!--     geom_histogram() + -->
-<!--     coord_flip() -->
+Pour toutes ces méthodes, des données qui n'ont pas été comptées au préalable sont requises. Il est en effet beaucoup plus simple de travailler avec le `tidyverse` (donc avec `ggplot2`) lorsque chaque ligne d'un tableau correspond à une observation plutôt qu'à une somme d'observation. C'est le concept de **tableau rangé**, central dans le traitement de données ainsi que pour l'utilisation de tous les packages du `tidyverse`, et qui stipule qu'un tableau de données devrait contenir une unique ligne pour chaque observation, et une unique colonne pour chaque variable. Nous aurons l'occasion (notamment en L3) de voir des tableaux qui ne respectent pas ces règles et que nous devrons donc ré-organiser pour permettre leur analyse et les représentations graphiques.
 
-<!-- pl2 <- weather %>%  -->
-<!--   filter(month == 11) %>%  -->
-<!--   ggplot(aes(x= factor(month), y = temp)) + -->
-<!--     geom_boxplot(notch = TRUE) -->
+Nous allons passer ces différentes possibilités en revue pour examiner les liens entre 2 variables catégorielles du jeu de données `penguins` : `species` et `sex`. La première renseigne sur l'espèce à laquelle un individu étudié appartient. La seconde renseigne sur le sexe de chaque individu. L'étude du sex-ratio est en effet souvent essentielle pour comprendre l'écologie des espèces. Les sexe-ratios sont-ils équilibrés ou non. Et s'ils ne sont pas équilibrés, sont-ils en faveur des mâles ou des femelles ?
 
-<!-- pl3 <- weather %>%  -->
-<!--   filter(month == 11) %>%  -->
-<!--   ggplot(aes(x= factor(month), y = temp)) + -->
-<!--   geom_jitter(width = 0.2, height=1, alpha=0.2) -->
+### Diagrammes bâtons empilés
 
-<!-- grid.arrange(pl3, pl1, pl2, nrow=1) -->
-<!-- ``` -->
+La façon la plus simple (mais rarement la meilleure) de procéder pour visualiser 2 facteurs conjointement est de créer un diagramme bâtons empilés :
 
-<!-- Nous avons donc, à gauche les données brutes, sous la forme d'un nuage de points créé avec `geom_jitter()`, au centre, un histogramme pour les températures de novembre, créé avec `geom_histogram()` (j'ai permuté les axes pour que `y` porte la température pour les 3 graphiques) et à droite, un boxplot pour ces mêmes données, créé avec `geom_boxplot()`. On voit bien que ces 3 représentations graphiques sont similaires. Toutes rendent compte du fait que les températures de Novembre sont majoritairement comprises entre 35 et 52 degrés Farenheit. Au-delà de cette fourchette (au-dessus comme en dessous) les observations sont plus rares. -->
+```{r}
+ggplot(penguins, aes(x = species, fill = sex)) +
+  geom_bar()
+```
+Ici, les espèces sont associées à l'axe des `x` (`x = species`)  et la couleur de remplissage des barres est associée au sexe des individus (`fill = sex`), à l'intérieur de la fonction `aes()`. Comme toujours, on peut modifier certaines caractéristiques esthétiques (couleur de contour des barres, transparence, etc.) et ré-ordonner les espèces sur l'axe des abscisses :
 
-<!-- Le nuage de points affiche toutes les données. C'est donc lui le plus complet mais pas forcément le plus lisible. Les points sont en effet très nombreux et la lecture du graphique peut s'en trouver compliquée. L'histogramme simplifie les données en les regroupant dans des classes. C'est une sorte de résumé des données. On constate cependant toujours la présence de 2 pics qui correspondent aux zones plus denses du nuage de points. Le boxplot enfin synthétise encore plus ces données. Elles sont résumées par 7 valeurs seulement : le minimum, le maximum, les 3 quartiles, et les bornes de l'intervalle de confiance à 95% de la médiane. C'est une représentation très synthétique qui nous permet de comparer beaucoup de catégories côte à côte (voir la figure \@ref(sec-fig:notchedboxplot) un peu plus haut), mais qui est forcément moins précise qu'un histogramme. Vous noterez toutefois que la boîte du boxplot recouvre en grande partie la zone des 2 pics de l'histogramme. En outre, sur la figure \@ref(sec-fig:notchedboxplot), la tendance générale est très visible : il fait plus chaud en été qu'en hiver (étonnant non ?). -->
+```{r}
+ggplot(penguins, aes(x = fct_infreq(species), fill = sex)) +
+  geom_bar(alpha = 0.6, color = "black")
+```
 
-<!-- ### Pour conclure -->
+Ce type de visualisation est utile pour se rendre compte des ordres de grandeur. On voit ici clairement que l'espèce Adélie est la plus représentée dans cette étude, suivie par l'espèce Gentoo, et enfin l'espèce Chinstrap. Pour chacune de ces 3 espèces, le sex-ratio a l'air très équilibré. Toutefois, des différences subtiles de proportions entre mâles et femelles selon les espèces pourraient être masqués par les effectifs inégaux entre espèces. Il peut donc être préférable, pour comparer des proportions, de normaliser les effectifs de toutes les espèces pour ramener chaque barre du graphique à la même hauteur :
 
-<!-- Les boîtes à moustaches permettent donc de comparer et contraster la distribution d'**une variable quantitative** pour plusieurs niveaux d'**une variable catégorielle**. On peut voir où la médiane tombe dans les différents groupes en observant la position de la ligne centrale dans la boîte. Pour avoir une idée de la dispersion de la variable au sein de chaque groupe, regardez à la fois la hauteur de la boîte et la longueur des moustaches. Quand les moustaches s'étendent loin de la boîte mais que la boîte est petite, cela signifie que la variabilité des valeurs proches du centre de la distribution est beaucoup plus faible que la variabilité des valeurs extrêmes. Enfin, les valeurs extrêmes ou aberrantes sont encore plus faciles à détecter avec une boîte à moustaches qu'avec un histogramme. -->
+```{r}
+ggplot(penguins, aes(x = fct_infreq(species), fill = sex)) +
+  geom_bar(alpha = 0.6, color = "black", position = "fill")
+```
+L'argument `position = "fill"` de la fonction `geom_bar()` permet de transformer en proportions les abondances de chaque modalités de la variable portée par l'axe des `x`. L'axe des ordonnées varie maintenant entre 0 et 1 (0% et 100%), ce qui rend les comparaisons plus aisées. Ici, le fait que le sexe de quelques individus n'ait pas pu être déterminé vient gêner la lecture du graphique. On peut supprimer ces valeurs grâce à la fonction `filter()` du packages `dplyr`. Nous verrons dans le #sec-wrangling la signification du code suivant. Pour l'instant retenez simplement qu'il permet d'éliminer les individus dont le sexe est inconnu :
 
+```{r}
+penguins %>% 
+  filter(!is.na(sex)) %>% 
+  ggplot(aes(x = fct_infreq(species), fill = sex)) +
+  geom_bar(alpha = 0.6, color = "black", position = "fill")
+```
+On peut maintenant constater très facilement que le sex-ratio est parfaitement équilibré pour les espèces Adélie et Chinstrap, et qu'il est très légèrement en faveur des mâles pour l'espèce Gentoo.
 
-<!-- ---- -->
+### Diagrammes bâtons juxtaposés {#sec-juxta}
 
-<!-- ## Les diagrammes bâtons -->
+La syntaxe permettant de produire un diagramme bâtons juxtaposé est très similaire à celle décrite ci-dessus :
 
-<!-- Comme nous venons de le voir, les histogrammes et les boîtes à moustaches permettent de visualiser la distribution d'une **variable numérique continue**. Nous aurons aussi souvent besoin de visualiser la distribution d'une **variable catégorielle**. C'est une tâche plus simple qui consiste à compter combien d'éléments tombent dans chacune des catégories de la variable catégorielle. Le meilleur moyen de visualiser de telles données de comptage (*aka* fréquences) est de réaliser un diagramme bâtons, autrement appelé **barplot** ou **barchart**. -->
+```{r}
+ggplot(penguins, aes(x = fct_infreq(species), fill = sex)) +
+  geom_bar(alpha = 0.6, color = "black", position = "dodge")
+```
+La seule chose qui a changé est la valeur prise par l'argument `position`, que l'on fixe ici à `dodge`. L'avantage de cette représentation est qu'elle permet à la fois de visualiser les effectifs de chaque catégorie et sous-catégorie (espèce et sexe), ainsi que de comparer les proportions au sein de chaque espèce. Un inconvénient et que lorsque les catégories n'ont pas toutes le même nombre de sous-catégories, les barres ont des largeurs différentes. Ici, l'espèce Chinstrap, qui n'a que 2 sous catégories (`female` et `male`) présente des barres plus larges que les deux autres espèces qui présentent chacune 3 sous-catégories (`female`, `male` et `NA`). Pour y remédier, on peut :
 
-<!-- Une difficulté, toutefois, concerne la façon dont les données sont présentées : est-ce que la variable d'intérêt est "pré-comptée" ou non ? Par exemple, le code ci-dessous crée 2 `data.frame` qui représentent la même collection de fruits : 3 pommes et 2 oranges : -->
+- soit retirer les données manquantes, comme précédemment :
+```{r}
+penguins %>% 
+  filter(!is.na(sex)) %>% 
+  ggplot(aes(x = fct_infreq(species), fill = sex)) +
+  geom_bar(alpha = 0.6, color = "black", position = "dodge")
+```
+- soit imposer que toutes les sous-catégories apparaissent pour chaque catégorie :
+```{r}
+ggplot(penguins, aes(x = fct_infreq(species), fill = sex)) +
+  geom_bar(alpha = 0.6, color = "black",
+           position = position_dodge(preserve = "single") )
+```
+Ici, l'argument `position` prend une valeur plus complexe puisque nous faisons appel à une fonction nommée `position_dodge()`. C'est l'argument `preserve = "single"` qui permet de s'assurer que toutes les sous-catégories sont bien représentées au sein de chaque catégorie, et donc, que toutes les barres ont bien la même largueur.
 
-<!-- ```{r} -->
-<!-- fruits <- tibble( -->
-<!--   fruit = c("pomme", "pomme", "pomme", "orange", "orange") -->
-<!-- ) -->
-<!-- fruits -->
+Le choix d'une méthode ou de l'autre dépend de ce que l'on souhaite montrer : il n'y a pas une façon de faire meilleure ou moins bonne que l'autre. Tout dépend de l'objectif poursuivi par l'auteur du graphique.
 
-<!-- fruits_counted <- tibble( -->
-<!--   fruit = c("pomme", "orange"), -->
-<!--   nombre = c(3, 2) -->
-<!-- ) -->
-<!-- fruits_counted -->
-<!-- ``` -->
+### Diagrammes bâtons "facettés"
 
+Dans le jargon de `ggplot2`, les `facet`s sont simplement des sous-graphiques. Typiquement, une variable catégorielle peut être utilisée pour représenter un sous-graphique pour chaque modalité de cette variable. Ici, on peut par exemple produire un diagramme bâton pour chaque espèce, et l'axe des `x` de chaque graphique portera la variable `sex` :
 
-<!-- ### Représentation graphique avec `geom_bar` et `geom_col` -->
+```{r}
+ggplot(penguins, aes(x = sex)) +
+  geom_bar() +
+  facet_wrap(~species)
+```
+C'est la fonction `facet_wrap()` qui permet de produire plusieurs sous graphiques. Examinons quelques-une de ces particularités :
 
-<!-- Pour visualiser les données non pré-comptées, on utilise `geom_bar()` : -->
+- sa syntaxe fait appel à la notion de "formule", utilisée pour certaines fonctions spécifiques dans le langage `R`. Nous en verrons des exemples en L3 pour illustrer certains tests statistiques. Le tilde `~` se lit "en fonction de". Ici `~species` signifie "crée des facets en fonction des espèces", autrement dit, produit un sous-graphique par modalité de la variable `species`.
+- par défaut, les axes de tous les sous graphiques sont strictement identiques, en abscisse comme en ordonnée. On peut modifier ce comportement grâce à l'un des arguments suivants : `scales = "free_x"` (pour que les axes des abscisses soient indépendants entre les sous-graphiques), `scales = "free_y"` (pour que les axes des ordonnées soient indépendants entre les sous-graphiques) ou `scales = "free"` (pour quelles deux axes soient indépendants entre les sous-graphiques)
+- l'argument `ncol = ` permet de spécifier le nombre de colonnes souhaité pour l'organisation des sous-graphiques
 
-<!-- ```{r barplot, tidy=FALSE, warning = FALSE, fig.cap="Barplot pour des données non pré-comptées."} -->
-<!-- ggplot(data = fruits, mapping = aes(x = fruit)) + -->
-<!--   geom_bar() -->
-<!-- ``` -->
+Voici un exemple de ces syntaxes :
 
-<!-- Pour visualiser les données déjà pré-comptées, on utilise `geom_col()` : -->
+```{r}
+ggplot(penguins, aes(x = sex)) +
+  geom_bar() +
+  facet_wrap(~species, scales = "free_y", ncol = 2)
+```
+Les 3 sous-graphiques sont maintenant disposés dans 2 colonnes, et si l'axe des `x` est toujours le même pour chaque sous-graphique, les axes des `y` sont différents pour les 3 sous-graphiques.
 
-<!-- ```{r barplotcol, tidy=FALSE, warning = FALSE, fig.cap="Barplot pour des données pré-comptées."} -->
-<!-- ggplot(data = fruits_counted, mapping = aes(x = fruit, y = nombre)) + -->
-<!--   geom_col() -->
-<!-- ``` -->
+Pour égayer un peu ce graphique, ajoutons une couleur de remplissage pour les barres, selon l'espèce :
 
-<!-- Notez que les figures \@ref(sec-fig:barplot) et \@ref(sec-fig:barplotcol) sont absolument identiques (à l'exception du titre de l'axe des ordonnées), mais qu'elles ont été créées à partir de 2 tableaux de données différents. En particulier, notez que : -->
+```{r}
+ggplot(penguins, aes(x = sex, fill = species)) +
+  geom_bar(color = "black", alpha = 0.7) +
+  facet_wrap(~species, scales = "free_y", ncol = 2)
+```
+La légende qui est automatiquement créée à droite est inutile puisque les sous-graphiques indiquent déjà le nom des espèces. Pour retirer une légende inutile, on peut utiliser l'argument `show.legend = FALSE` de la plupart des objets géométriques :
 
-<!-- - Le code qui génère la figure \@ref(sec-fig:barplot) utilise le jeu de données `fruits`, et n'associe pas de variable à l'axe des ordonnées : dans la fonction `aes()`, seule la variable associée à `x` est précisée. C'est la fonction `geom_bar()` qui calcule automatiquement les abondances (ou fréquences) pour chaque catégorie de la variable `fruit`. La variable `count` est ainsi générée automatiquement et associée à `y`. -->
-<!-- - Le code qui génère la figure \@ref(sec-fig:barplotcol) utilise le jeu de données `fruits_counted`. Ici, la variable `nombre` est associée à l'axe des `y` grâce à la fonction `aes()`. La fonction `geom_col()` a besoin de 2 variables (une variable catégorielle pour l'axe des `x` et une numérique pour l'axe des `y`) pour fonctionner. -->
+```{r}
+ggplot(penguins, aes(x = sex, fill = species)) +
+  geom_bar(color = "black", alpha = 0.7, show.legend = FALSE) +
+  facet_wrap(~species, scales = "free_y", ncol = 2)
+```
 
-<!-- Autrement dit, lorsque vous souhaiterez créer un diagramme bâtons, il faudra donc au préalable vérifier de quel type de données vous disposez pour choisir l'objet géométrique approprié : -->
+### Mosaïc plots {#sec-mosa}
 
-<!-- - Si votre variable catégorielle n'est pas pré-comptée dans votre tableau de données, il faut utiliser `geom_bar()` -->
-<!-- - Si votre variable catégorielle est pré-comptée dans votre tableau de données, il faut utiliser `geom_col()` et associer explicitement les comptages à l'aesthétique `y` du graphique. -->
+Les graphiques en mosaïque sont une alternative aux diagrammes bâtons en tous genre. Ils permettent de visualiser à la fois les effectifs et de comparer les proportions. La difficulté de ce genre de graphique est qu'il n'existe pas d'objet géométrique permettant de les représenter simplement dans le package `ggplot2`. Le package `ggmosaic` de @R-ggmosaic est toutefois entièrement dédié à ce type de graphique. Installez ce package puis chargez-le en mémoire :
 
+```{r}
+#| eval: false
 
-<!-- ### Un exemple concret -->
+install.packages("ggmosaic")
+library(ggmosaic)
+```
 
-<!-- Revenons à `nycflights13`. Imaginons que nous souhaitions connaître le nombre de vols affrétés par chaque compagnie aérienne au départ de New York en 2013. Dans le jeu de données `flights`, la variable `carrier` nous indique à quelle compagnie aérienne appartiennent chacun des 336776 vols ayant quitté New York en 2013. Une façon simple de représenter ces données est donc la suivante : -->
+```{r}
+#| include: false
+library(ggmosaic)
+```
 
-<!-- ```{r bpcarrier, tidy=FALSE, warning = FALSE, fig.cap="Nombre de vols par compagnie aérienne au départ de New York en 2013."} -->
-<!-- ggplot(data = flights, mapping = aes(x = carrier)) + -->
-<!--   geom_bar() -->
-<!-- ``` -->
+On peut maintenant accéder à un nouvel objet géométrique, `geom_mosaic()`, dont l'utilisation est un peu différente de celle que nous avons vu jusqu'ici :
 
-<!-- Ici, `geom_bar()` a compté le nombre d'occurences de chaque compagnie aérienne dans le tableau `flights` et a automatiquement associé ce nombre à l'axe des ordonnées. -->
+```{r}
+#| warning: false
+#| message: false
 
-<!-- Il est généralement plus utile de trier les catégories par ordre décroissant. Nous pouvons faire cela facilement grâce à la fonction `fct_infreq()` du package `forcats`. Si vous avez installé le `tidyverse`, le package `forcast` doit être disponible sur votre ordinateur. N'oubliez pas de le charger si besoin : -->
 
-<!-- ```{r bpcarriersorted, tidy=FALSE, warning = FALSE, fig.cap="Nombre de vols par compagnie aérienne au départ de New York en 2013."} -->
-<!-- library(forcats) -->
-<!-- ggplot(data = flights, mapping = aes(x = fct_infreq(carrier))) + -->
-<!--   geom_bar() -->
-<!-- ``` -->
+ggplot(penguins) +
+  geom_mosaic(aes(x = product(species), fill = sex))
+```
 
-<!-- Ordonner les catégories par ordre décroissant est souvent indispensable afin de faciliter la lecture du graphique et les comparaisons entre catégories.  -->
+Il faut obligatoirement :
 
-<!-- Si nous souhaitons connaître le nombre de vols précis de chaque compagnie aérienne, il nous faut faire appel à plusieurs fonctions du package `dplyr` que nous détaillerons dans le chapitre \@ref(sec-wrangling). Ci-dessous, nous créons un nouveau tableau `carrier_table` contenant le nombre de vols de chaque compagnie aérienne et les compagnies sont ordonnées par nombres de vols décroissants : -->
+1. spécifier `aes()` à l'intérieur de `geom_mosaic()` et non à l'intérieur de `ggplot()`
+2. utiliser la fonction `product()` (qui fait elle aussi partie du package `ggmosaic`) pour indiquer quelle variable catégorielle on souhaite associer à l'axe des `x`
+3. Comme pour les diagrammes bâtons, la couleur de remplissage est associée à la seconde variable catégorielle de façon tout à fait classique
 
-<!-- ```{r tidy = FALSE} -->
-<!-- carrier_table <- flights %>%   # On prend flights, puis... -->
-<!--   group_by(carrier) %>%        # On groupe les données par compagnie, puis... -->
-<!--   summarize(nombre = n()) %>%  # On calcule le nb de vols par Cie, puis ... -->
-<!--   arrange(desc(nombre))        # On trie par nb de vols décroissants ... -->
-<!-- carrier_table                  # Enfin, on affiche la nouvelle table -->
-<!-- ``` -->
+Comme pour les diagrammes en bâtons empilés pour lesquels on spécifie `position = "fill"`, toutes les barres d'un graphique en mosaïque ont la même hauteur, ce qui permet de visualiser les proportions de chaque sexe pour chaque espèce, mais pas les effectifs. C'est ici la largueur des barres qui est proportionnelle aux effectifs de chaque espèce. Si on n'accède par directement aux valeurs absolues, on peut néanmoins effectuer des comparaisons d'ordres de grandeur. L'espèce Adélie est ainsi la plus représentée dans nos données, suivie de l'espèce Gentoo puis de l'espèce Chinstrap.
 
-<!-- Ici, la table a été triée par nombres de vols décroissants. Mais attention, **les niveaux** du facteur `carrier` n'ont pas été modifiés : -->
 
-<!-- ```{r} -->
-<!-- factor(carrier_table$carrier) -->
-<!-- ``` -->
+Au final, le choix d'un graphique doit vous permettre de mettre en évidence les relations qui vous paraissent importantes de la façon la plus visuelle et évidente possible pour une personne ne connaissant pas vos données. Votre choix dépendra donc des données disponibles et de votre objectif (p. ex. comparaisons de proportions ou de valeurs absolues, nombreuses modalités ou seulement quelques unes, etc.).
 
-<!-- Le premier niveau est toujours `9E`, puis `AA`, puis `AS`, et non l'ordre du tableau nouvellement créé (`UA`, puis `B6`, puis `EV`...) car les niveaux sont toujours triés par ordre alphabétique. La conséquence est que faire un barplot avec ces données et la fonction `geom_col()` ne permet pas d'ordonner les catégories correctement : -->
+## Une variable de chaque type
 
-<!-- ```{r bpcarriercol, tidy=FALSE, warning = FALSE, fig.cap="Nombre de vols par compagnie aérienne au départ de New York en 2013."} -->
-<!-- ggplot(carrier_table, aes(x = carrier, y = nombre)) + -->
-<!--   geom_col() -->
-<!-- ``` -->
+Les représentations graphiques réalisables et pertinentes lorsque l'on dispose d'une variable numérique et d'un facteur sont souvent des adaptations des graphiques précédents. Globalement, trois choix s'offrent à nous :
 
-<!-- Pour parvenir à nos fins, il faut cette fois avoir recours à la fonction `fct_reorder()` pour ordonner correctement les catégories. Cette fonction prends 3 arguments :  -->
+1. les histogrammes facettés
+2. les stripcharts
+3. les boîtes à moustaches, que nous détaillerons au semestre 4. Nous donnerons ici un simple exemple sans expliquer la signification de tous les éléments de ces graphiques
 
-<!-- 1. La variable catégorielle dont on souhaite réordonner les niveaux (ici, la variable `carrier` du tableau `carrier_table`). -->
-<!-- 2. Une variable numérique qui permet d'ordonner les catégories (ici, la variable `nombre` du même tableau). -->
-<!-- 3. L'argument optionnel `.desc` qui permet de préciser si le tri doit être fait en ordre croissant (c'est le cas par défaut) ou décroissant. -->
+Pour illustrer ces différentes possibilités, intéressons nous maintenant à la relation qui existe entre l'épaisseur du bec des manchots (`bill_depth_mm`, variable numérique) et l'espèce (`species`, variable catogorielle ou facteur)
 
-<!-- ```{r bpcarriersortedcol, tidy=FALSE, warning = FALSE, fig.cap="Nombre de vols par compagnie aérienne au départ de New York en 2013."} -->
-<!-- ggplot(carrier_table, aes(x = fct_reorder(carrier, nombre, .desc = TRUE),  -->
-<!--                           y = nombre)) + -->
-<!--   geom_col() -->
-<!-- ``` -->
 
-<!-- Vous voyez donc que selon le type de données dont vous disposez (soit un tableau comme `flights`, avec toutes les observations, soit un tableau beaucoup plus compact comme `carrier_table`), la démarche permettant de produire un diagramme bâtons, dans lequel les catégories seront triées, sera différente. -->
+### Histogrammes "facettés" {#sec-factorhisto}
 
+La syntaxe est ici tout à fait classique. Pour réaliser un histogramme, on place la variable numérique sur l'axe des abscisses. La variable catégorielle nous servira à créer les sous graphiques, ici, un par espèce. Afin de faciliter les comparaisons, nous placerons les sous-graphiques les uns sous les autres en spécifiant `ncol = 1`. Enfin, l'aspect général sera amélioré en modifiant quelques caractéristiques esthétiques :
 
-<!-- ### Exercices {#sec-Exo-6} -->
+```{r}
+#| fig-asp: 1.2
 
-<!-- 1. Quelle est la différence entre un histogramme et un diagramme bâtons ? -->
-<!-- 2. Pourquoi les histogrammes sont-ils inadaptés pour visualiser des données catégorielles ? -->
-<!-- 3. Quel est le nom de la compagnie pour laquelle le plus grand nombre de vols ont quitté New York en 2013 (je veux connaître son nom, pas juste son code) ? Où se trouve cette information ? -->
-<!-- 4. Quel est le nom de la compagnie pour laquelle le plus petit nombre de vols ont quitté New York en 2013 (je veux connaître son nom, pas juste son code) ? Où se trouve cette information ? -->
+ggplot(penguins, aes(x = bill_depth_mm)) +
+  geom_histogram(fill = "steelblue", color = "black", 
+                 alpha = 0.6, bins = 20) +
+  facet_wrap(~species, ncol = 1)
+```
 
+On peut aussi choisir d'utiliser une couleur pour chaque espèce (mais on n'affichera pas la légende puisque les espèces sont déjà séparées dans les sous graphiques). En outre, puisque les effectifs des Chinstrap sont bien plus faibles que pour les deux autres espèces, on a intérêt à "libérer" l'axe des `y` afin que l'histogramme des Chinstrap soit plus facilement lisible (il apparaît pour l'instant très "écrasé" comparé aux autres).
 
-<!-- ### Éviter à tout prix les diagrammes circulaires -->
 
-<!-- À mon grand désarroi, l'un des graphiques les plus utilisé pour représenter la distribution d'une variable catégorielle est le diagramme circulaire (ou diagramme camembert, piechart en anglais). C'est presque toujours la plus mauvaise visualisation possible. Je vous demande de l'éviter à tout prix. Notre cerveau n'est en effet pas correctement équipé pour comparer des angles. Ainsi, par exemple, nous avons naturellement tendance à surestimer les angles supérieurs à 90º, et à sous-estimer les angles inférieurs à 90º. En d'autres termes, il est difficile pour les humains de comparer des grandeurs sur des diagrammes circulaires. -->
+```{r}
+#| fig-asp: 1.2
 
-<!-- À titre d'exemple, examinez ce diagramme, qui reprend les mêmes chiffres que précédemment, et tentez de répondre aux questions suivantes : -->
+ggplot(penguins, aes(x = bill_depth_mm, fill = species)) +
+  geom_histogram(show.legend = FALSE, color = "black", 
+                 alpha = 0.6, bins = 20) +
+  facet_wrap(~species, ncol = 1, scales = "free_y")
+```
 
-<!-- ```{r piechart, echo=FALSE, fig.cap="Nombre de vols par compagnie aérienne au départ de New York en 2013."} -->
-<!-- flights %>%  -->
-<!--   count(carrier) %>%  -->
-<!--   ggplot(aes(x = factor(1), y = n, fill = factor(carrier))) + -->
-<!--   geom_bar(width = 1, stat = "identity") + -->
-<!--   coord_polar(theta = "y") + -->
-<!--   labs(fill = "Carrier") + -->
-<!--   scale_y_continuous(NULL, labels = NULL) + -->
-<!--   scale_x_discrete(NULL, labels = NULL) + -->
-<!--   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), -->
-<!--         axis.ticks.y=element_blank()) -->
-<!-- ``` -->
+Les Gentoo, qui ont pourtant des masses corporelles supérieures à celle des deux autres espèces (voir @fig-cloud de la @sec-cloud), ont visiblement des becs moins épais (entre 12 et 17 mm) que les deux autres espèces (entre 16 et 22 mm). 
 
-<!-- - Comparez les compagnies ExpressJet Airlines (`EV`) et US Airways (`US`). De combien de fois la part de `EV` est-elle supérieure à celle d'`US` ? (2 fois, 3 fois, 1.2 fois ?...) -->
-<!-- - Quelle est la troisième compagnie aérienne la plus importante en terme de nombre de vols au départ de New York en 2013 ? -->
-<!-- - Combien de compagnies aériennes ont moins de vols que United Airlines (`UA`) ? -->
+:::{.callout-important}
+C'est la position des données le long de l'axe des `x` qui nous permet de faire des comparaisons pertinentes. Il est donc essentiel de présenter les différents histogrammes les uns sous les autres, en conservant la même échelle pour les abscisses de tous les sous-graphiques.
+:::
 
-<!-- Il est difficile (voir impossible) de répondre précisément à ces questions avec le diagramme circulaire de la figure \@ref(sec-fig:piechart), alors qu'il est très simple d'obtenir des réponses précises avec un diagramme bâtons tel que présenté à la figure \@ref(sec-fig:bpcarriersortedcol) (vérifiez-le !). -->
+Ici, on peut donc discuter de la distribution de la variable numérique pour chaque modalité de la variable catégorielle (*i.e.* quelle distribution de l'épaisseur des becs pour chaque espèce), mais on peut en plus faire des comparaisons entre modalités (entre les espèces). Cela est beaucoup plus pertinent que de s'intéresser à la distribution de l'épaisseur des becs toutes espèces confondues.
 
+### Les stripcharts
 
-<!-- ### Comparer 2 variables catégorielles avec un diagramme bâton -->
+Nous avons déjà abordé ce type de graphique dans la @sec-cloud. Contrairement à la situation où nous n'avions qu'une variable numérique et où nous devions fixer `x = ""` pour que toutes les observations se placent au même niveau de l'axe des abscisses (voir @fig-strip), nous allons ici associer la variable catégorielle à l'axe des `x`. La variable numérique sera quant-à-elle toujours associée à l'axe des ordonnées :
 
-<!-- Il y a généralement 3 façons de procéder pour comparer la distribution de 2 variables catégorielles avec un diagramme bâtons : -->
+```{r}
+#| fig-asp: 1
+#| fig-width: 3
+#| label: fig-facstrip
+#| fig-cap: "Un exemple de stripchart"
 
-<!-- 1. Faire un graphique empilé. -->
-<!-- 2. Faire un graphique juxtaposé. -->
-<!-- 3. Utiliser les `facet`s. -->
 
-<!-- Supposons par exemple que nous devions visualiser le nombre de vols de chaque compagnie aérienne, au départ de chacun des 3 aéroports de New York : John F. Kennedy (`JFK`), Newark (`EWR`) et La Guardia (`LGA`). Voyons comment procéder avec chacune des 3 méthodes énoncées ci-dessus. -->
+ggplot(penguins, aes(x = species, y = bill_depth_mm)) +
+  geom_jitter(width = 0.20, height = 0)
+```
 
-<!-- #### Graphique empilé -->
+Notez que la position des points sur l'axe des `y` doit parfaitement correspondre aux valeurs contenues dans le jeu de données pour la variable numérique d'intérêt. Cela signifie que l'argument `height` doit obligatoirement être fixé à 0.
 
-<!-- La méthode la plus simple est celle du graphique empilé : -->
+Comme pour les diagrammes bâtons, il est possible de produire des stripcharts horizontaux. Les modifications à apporter sont alors les suivantes :
 
-<!-- ```{r stacked, tidy=FALSE, warning = FALSE, fig.cap="Nombre de vols par compagnie aérienne au départ des 3 aéroports de New York en 2013."} -->
-<!-- ggplot(flights, aes(x = fct_infreq(carrier), fill = origin)) + -->
-<!--   geom_bar() -->
-<!-- ``` -->
+- la variable numérique est associée à l'axe des `x`
+- la variable catégorielle est associée à l'axe des `y`
+- la dispersion horizontale `width` doit obligatoirement être fixée à 0
+- la dispersion verticale `height` doit être comprise entre 0.1 et 0.4 pour étaler les points de chaque modalité et ainsi éviter l'overplotting
 
-<!-- Notez qu'il s'agit du même code que celui utilisé pour la figure \@ref(sec-fig:bpcarriersorted), à une différence près : l'ajout de `fill = origin` dans la fonction `aes()`, qui permet d'associer l'aéroport d'origine à la couleur de remplissage des barres. `fill` est associé à une variable (ici, elle est catégorielle), il est donc indispensable de faire figurer cet argument à l'intérieur de la fonction `aes()`. Quand on associe une variable à une caractéristique esthétique du graphique, on fait toujours figurer le code à l'intérieur de la fonction `aes()` (comme quand on associe une variable aux axes du graphique par exemple). -->
+```{r}
+#| fig-asp: 0.4
+ggplot(penguins, aes(x = bill_depth_mm, y = species)) +
+  geom_jitter(width = 0, height = 0.20, alpha = 0.6)
+```
 
-<!-- À mon sens, le graphique gagne en lisibilité si on ajoute une couleur pour le contour des barres : -->
 
-<!-- ```{r stacked2, tidy=FALSE, warning = FALSE, fig.cap="Nombre de vols par compagnie aérienne au départ des 3 aéroports de New York en 2013."} -->
-<!-- ggplot(flights, aes(x = fct_infreq(carrier), fill = origin)) + -->
-<!--   geom_bar(color = "black") -->
-<!-- ``` -->
+### Les boîtes à moustaches ou boxplots
 
-<!-- Notez que contrairement à `fill`, cette couleur de countour est un paramètre fixe : elle n'est pas associée à une variable et doit donc être placée en dehors de la fonction `aes()`. -->
 
-<!-- Bien que ces graphiques empilés soient très simples à réaliser, ils sont parfois difficiles à lire. En particulier, il n'est pas toujours aisé de comparer les hauteurs des différentes couleurs (qui correspondent ici aux nombres de vols issus de chaque aéroport) entre barres différentes (qui correspondent ici aux compagnies aériennes). -->
+Voilà à quoi ressemble un graphique de ce type pour les données qui nous intéressent (épaisseur des becs selon l'espèce) :
 
+```{r}
+ggplot(penguins, aes(x = species, y = bill_depth_mm)) +
+  geom_boxplot()
+```
 
-<!-- #### Graphique juxtaposé -->
+Dans la forme, ça ressemble un à un stripchart (comparez par exemple avec la syntaxe et les résultats obtenus à la @fig-facstrip). Néanmoins, ici, au lieu de visualiser tous les points du jeu de données, seules quelques valeurs caractéristiques sont utilisées pour construire le boîte à moustache de chaque espèce. Les différents éléments d'un boxplot, sont les suivants :
 
-<!-- Une variation sur le même thème consiste, non plus à empiler les barres de couleur les unes sur les autres, mais à les juxtaposer : -->
+- La limite inférieure de la boîte correspond au premier quartile : 25% des données de l'échantillon sont situées au-dessous de cette valeur.
+- La limite supérieure de la boîte correspond au troisième quartile : 25% des données de l'échantillon sont situées au-dessus de cette valeur.
+- Le segment épais à l'intérieur de la boîte correspond au second quartile : c'est la médiane de l'échantillon. 50% des données de l'échantillon sont situées au-dessus de cette valeur, et 50% au-dessous.
+- La hauteur de la boîte correspond à ce que l'on appelle l'étendue inter-quartile ou Inter Quartile Range (IQR) en anglais. On trouve dans cette boîte 50% des observations de l'échantillon. C'est une mesure de la dispersion des 50% des données les plus centrales. Une boîte plus allongée indique donc une plus grande dispersion.
+- Les moustaches correspondent à des valeurs qui sont en dessous du premier quartile (pour la moustache du bas) et au-dessus du troisième quartile (pour la moustache du haut). La règle utilisée dans `R` est que ces moustaches s'étendent jusqu'aux valeurs minimales et maximales de l'échantillon, mais elles ne peuvent en aucun cas s'étendre au-delà de 1,5 fois la hauteur de la boîte (1,5 fois l'IQR) vers le haut et le bas. Si des points apparaissent au-delà des moustaches (vers le haut ou le bas), ces points sont appelés "outliers". On peut en observer un pour l'espèce Adélie. Ce sont des points qui s'éloignent du centre de la distribution de façon importante puisqu'ils sont au-delà de 1,5 fois l'IQR de part et d'autre du premier ou du troisième quartile. Il peut s'agir d'anomalies de mesures, d'anomalies de saisie des données, ou tout simplement, d'enregistrements tout à fait valides mais atypiques ou extrêmes. J'attire votre attention sur le fait que la définition de ces outliers est relativement arbitraire. Nous pourrions faire le choix d'étendre les moustaches jusqu'à 1,8 fois l'IQR (ou 2, ou 2,5). Nous observerions alors beaucoup moins d'outliers. D'une façons générale, la longueur des moustaches renseigne sur la variabilité des données en dehors de la zone centrale. Plus elles sont longues, plus la variabilité est importante. Et dans tous les cas, l'examen attentif des outliers est utile car il nous permet d'en apprendre plus sur le comportement extrême de certaines observations.
 
-<!-- ```{r dodge, tidy=FALSE, warning = FALSE, fig.cap="Nombre de vols par compagnie aérienne au départ des 3 aéroports de New York en 2013."} -->
-<!-- ggplot(flights, aes(x = fct_infreq(carrier), fill = origin)) + -->
-<!--   geom_bar(color = "black", position = "dodge") -->
-<!-- ``` -->
+Lorsque les boîtes ont une forme à peu près symétrique de part et d'autre de la médiane (c'est le cas pour notre exemple), cela signifie qu'un histogramme des mêmes données serait symétrique également (on peut le vérifier avec les histogrammes de la @sec-factorhisto).
 
-<!-- Passer d'un graphique empilé à un graphique juxtaposé est donc très simple : il suffit d'ajouter l'argument `position = "dodge"` à la fonction `geom_bar()`. -->
+#### L'intervalle de confiance à 95% de la médiane
 
-<!-- Là encore, la lecture de ces graphiques est souvent difficile car la comparaison des catégories qui figurent sur l'axe des `x` n'est pas immédiate. Elle est en outre rendue plus difficile par le fait que toutes les barres n'ont pas la même largeur. Par exemple, sur la figure \@ref(sec-fig:dodge), les 8 premières compagnies aériennes déservent les 3 aéroports de New York, mais les 2 suivantes (`WN` et `VX`) n'en déservent que 2, et les autres compagnies, qu'un seul. Puisque sur un barplot, seule la hauteur des barres compte, il faut prendre garde à ne pas se laisser influencer par la largeur des barres qui pourraient fausser notre perception. -->
+On peut également ajouter une encoche autour de la valeur de médiane en ajoutant l'argument `notch = TRUE` à la fonction `geom_boxplot()` :
 
+```{r}
+ggplot(penguins, aes(x = species, y = bill_depth_mm)) +
+  geom_boxplot(notch = TRUE)
+```
 
-<!-- #### Utilisation des `facet`s -->
+L'encoche qui apparaît sur chaque boîte à moustache correspond à l'étendue de l'intervalle de confiance à 95% de la médiane. Pour chaque échantillon, nous espérons que la médiane calculée soit le reflet fidèle de la vraie valeur de médiane de la population générale. Mais il sera toujours impossible d'en avoir la certitude absolue. Le mieux que l'on puisse faire, c'est quantifier l'incertitude associée à l'estimation de la médiane à partir des données d'un échantillon. L'intervalle de confiance nous indique qu'il y a de bonnes chances que la vraie valeur de médiane de la population générale (qui restera à jamais inconnue) se trouve dans cet intervalle. 
 
-<!-- La meilleure alternative est probablement l'utilisation de `facet`s que nous avons déjà décrite à la section \@ref(sec-facets) : -->
+Nous reviendrons sur cette notion importante plus tard dans le cursus, car ce type de graphique nous permettra d'anticiper sur les résultats des tests statistiques de comparaison de moyennes.
 
-<!-- ```{r barfacet, fig.asp = 1, tidy=FALSE, warning = FALSE, fig.cap="Nombre de vols par compagnie aérienne au départ des 3 aéroports de New York en 2013."} -->
-<!-- ggplot(flights, aes(x = fct_infreq(carrier), fill = origin)) + -->
-<!--   geom_bar(color = "black") + -->
-<!--   facet_wrap(~origin, ncol = 1) -->
-<!-- ``` -->
+Au final, nous avons 3 moyens d'obtenir des informations de distribution :
 
-<!-- Ici, chaque graphique permet de comparer les compagnies aériennes au sein de l'un des aéroports de New York, et puisque l'ordre des compagnies aériennes est le même sur l'axe des `x` des 3 graphiques, une lecture verticale permet de comparer aisément le nombre de vols qu'une compagnie donnée a affrété dans chacun des 3 aéroports de New York. -->
+- observer l'ensemble des données brutes grâce à un nuage de points ou stripchart
+- regrouper en partie les données brutes dans les classes d'un histogramme. On ne visualise plus l'ensemble des données individuelles, mais un résumé de ces données puisqu'on ne dispose plus que d'une unique valeur pour chaque classe de l'histogramme. L'histogramme peut donc résumer des centaines voire des milliers de points sous la forme d'un petit nombre de classes (entre 10 et 40 en général)
+- regrouper très fortement les données brutes sous la forme d'une boîte à moustache. Les boîtes à moustaches permettent de résumer l'information de centaines ou milliers de points sous la forme d'un résumé statistique composé de 5 valeurs (minimum et maximum, médiane, premier et troisième quartiles), ou 7 si l'on ajoute les encoches des intervalles de confiance à 95% des médianes. On observe alors moins facilement les nuances subtiles de distribution qu'avec un histogramme ou les données brutes, mais l'avantage est qu'on peut comparer facilement les grandes tendances d'un grand nombre de séries de données  (parfois plusieurs dizaines) en plaçant des boîtes à moustaches côte à côte.
 
+La @fig-comboxplot illustre ces 3 possibilités de visualisation de la distribution d'une variable numérique (ici, la distribution des masses corporelles des manchots Adélie) :
 
-<!-- ---- -->
+```{r}
+#| label: fig-comboxplot
+#| fig-cap: "Trois façons de visualiser la distribution des masses des manchots Adélie"
+#| message: false
+#| warning: false
+#| echo: false
 
-<!-- ## De l'exploration à l'exposition -->
+library(patchwork)
 
-<!-- Vous savez maintenant comment produire une grande variété de graphiques, permettant d'explorer vos données, de visualiser le comportement d'une ou plusieurs variables, et de mettre en évidence des tendances, des relations entre variables numériques et/ou catégorielles. Outre les objets géométriques décrits jusqu'ici, `ggplot2` contient de nombreuses possibilités supplémentaires pour créer des graphiques parlants et originaux. Je ne peux donc que vous encourager à explorer par vous même les autres possibilités de ce package. -->
-<!-- Lorsque vous produisez un graphique parlant et permettant de véhiculer un message clair, vous devez ensuite rendre vos graphiques plus présentables afin de les intégrer dans un rapport ou une présentation. Cette section vous permettra de vous familiariser avec quelques fonctions permettant d'annoter correctement vos graphiques et d'en modifier les légendes si nécessaire. -->
+pl1 <- penguins %>%
+  filter(species == "Adelie") %>%
+  ggplot(aes(x = "Adelie", y = body_mass_g)) +
+  geom_jitter(width = 0.2, height = 0, alpha = 0.6)
 
-<!-- ### Les labels -->
+pl2 <- penguins %>%
+  filter(species == "Adelie") %>%
+  ggplot(aes(x = body_mass_g)) +
+    geom_histogram(bins = 15, color = "black", fill = "grey85") +
+    coord_flip()
 
-<!-- Le point de départ le plus évident est d'ajouter des labels de qualité. La fonction `labs()` du package `ggplot2` permet d'ajouter plusieurs types de labels sur vos graphiques : -->
+pl3 <- penguins %>%
+  filter(species == "Adelie") %>%
+  ggplot(aes(x= "Adelie", y = body_mass_g)) +
+    geom_boxplot(notch = TRUE)
 
-<!-- - Un titre : il doit résumer les résultats les plus importants. -->
-<!-- - Un sous-titre : il permet de donner quelques détails supplémentaires. -->
-<!-- - Une légende : souvent utilisée pour présenter la source des données du graphique. -->
-<!-- - Un titre pour chaque axe : permet de préciser les variables portées par les axes et leurs unités. -->
-<!-- - Un titre pour les légendes de couleurs, de forme, de taille, etc. -->
+pl1 + pl2 + pl3
+```
 
-<!-- Reprenons par exemple le graphique de la figure \@ref(sec-fig:varcolor) : -->
+## Trois variables (et plus !)
 
-<!-- ```{r, varcolorlabel, tidy=FALSE, warning=FALSE, fig.cap="Association de `color` à une variable catégorielle."} -->
-<!-- ggplot(alaska_flights,  -->
-<!--        aes(x = dep_delay, y = arr_delay, color = factor(month))) + -->
-<!--   geom_point() -->
-<!-- ``` -->
+Lorsque l'on dispose de 3 variables, les situations possibles commencent à être nombreuses :
 
-<!-- Nous pouvons ajouter sur ce graphique les éléments précisés plus haut en ajoutant la fonction `labs()` sur une nouvelle couche du graphique : -->
+- trois variables numériques
+- deux variables numériques et un facteur
+- une variable numérique et deux facteurs
+- trois facteurs
 
+Pour chacune de ces situations, on peut en générale reprendre les types de graphiques proposés dans les 3 sections précédentes consacrées aux situations où l'on dispose de 2 variables (), et :
 
-<!-- ```{r, varcolorlabel2, tidy=FALSE, warning=FALSE, fig.cap="Exemple d'utilisation de `labs()`."} -->
-<!-- ggplot(alaska_flights,  -->
-<!--        aes(x = dep_delay, y = arr_delay, color = factor(month))) + -->
-<!--   geom_point() + -->
-<!--   labs(title = "Relation linéaire positive entre retard des vols au départ et à l'arrivée", -->
-<!--        subtitle = "Certains retards dépassent 3 heures", -->
-<!--        caption = "Source : nycflights13", -->
-<!--        x = "Retard au départ de New York (minutes)", -->
-<!--        y = "Retard à l'arrivée à destination (minutes)", -->
-<!--        color = "Mois") -->
-<!-- ``` -->
+- soit ajouter une variable sous forme de code couleur (avec `color` ou `fill` à l'intérieur de `aes()`)
+- soit ajouter une variable sous forme de `facets` (avec `facet_wrap()` ou avec `facet_grid()`)
 
-<!-- À partir de maintenant, vous devriez systématiquement légender les axes de vos graphiques en n'oubliant pas de préciser les unités, pour tous les graphiques que vous intégrez dans vos rapports, compte-rendus, mémoires, etc. -->
+Les possibilités sont très nombreuses et il ne sera pas possible d'être exhaustif ici. Je fournis néanmoins quelques exemples ci-dessous afin que vous compreniez bien la logique. Ensuite, ça sera à vous d'expérimenter selon les données dont vous disposez, les questions scientifiques que vous vous posez, et les relations que vous souhaitez explorer/visualiser.
 
+### Trois variables numériques
 
-<!-- ### Les échelles -->
+Dans cette situation, on fait en général un nuage de points qui porte une variable numérique sur chaque axe, et on associe la troisième variable numérique soit à la couleur des points, soit à leur taille (soit aux deux à la fois). Par exemple, pour examiner les relations entre longueur du bec, épaisseur du bec, et masse corporelle, on peut procéder ainsi :
 
-<!-- Tous les détails des graphiques que vous produisez peuvent être édités. C'est notamment le cas des échelles. Qu'il s'agisse de modifier l'étendue des axes, la densité du quadrillage, la position des tirets sur les axes, le nom des catégories figurant sur les axes ou dans les légendes ou encore les couleurs utilisées pour différentes catégories d'objets géométriques, tout est possible dans `ggplot2`. -->
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     size = body_mass_g)) +
+  geom_point(shape = 21, fill = "steelblue", color = "black", alpha = 0.6)
+```
 
-<!-- Nous n'avons pas le temps ici d'aborder toutes ces questions en détail. Je vous encourage donc à consulter l'ouvrage en ligne intitulé [R for data science](http://r4ds.had.co.nz/), et en particulier [son chapitre dédié aux échelles](http://r4ds.had.co.nz/graphics-for-communication.html#scales), si vous avez besoin d'apporter des modifications à vos graphiques et que vous ne trouvez pas comment faire dans cet ouvrage. -->
+C'est ce qu'on appelle un "bubble plot". Ici on constate que les individus qui ont les becs les plus courts, sont aussi ceux qui ont un bec épais (groupe de points en haut à gauche). Ces individus sont parmi les plus légers (symboles de petite taille). À l'inverse, les individus ayant les becs les plus longs ont aussi des becs peu épais (groupes de points situés en bas à droite). Ces individus sont parmi les plus lourds du jeu de données (symboles de grandes taille).
 
-<!-- Je vais ici uniquement détailler la façon de procéder pour modifier les couleurs choisies par défaut par `ggplot2`. Reprenons par exemple la figure \@ref(sec-fig:barfacet), en ajoutant au passage des titres corrects pour nos axes -->
+Une autre façon de visualiser ces mêmes données consiste à associer la masse des individus à la couleur de remplissage des symboles :
 
-<!-- ```{r barfacetbis, fig.asp = 1, tidy=FALSE, warning = FALSE, fig.cap="Nombre de vols par compagnie aérienne au départ des 3 aéroports de New York en 2013."} -->
-<!-- ggplot(flights, aes(x = fct_infreq(carrier), fill = origin)) + -->
-<!--   geom_bar(color = "black") + -->
-<!--   facet_wrap(~origin, ncol = 1) + -->
-<!--   labs(x = "Compagnie aérienne", -->
-<!--        y = "Nombre de vols", -->
-<!--        fill = "Aéroports\nde New York") -->
-<!-- ``` -->
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6, size = 2)
+```
 
-<!-- Notez que le caractère spécial "`\n`" permet de forcer un retour à la ligne. Ici, les 3 couleurs de remplissage (`fill`) utilisées pour différencier les 3 aéroports de New York ont été choisies par défaut par `ggplot2`. Il est possible de modifier ces couleurs de plusieurs façons : -->
+Cette fois, les individus les plus légers apparaissent en bleu très sombre, et les individus les plus lourds en bleu très clair. Ce choix de couleur nous est imposé, mais nous verrons plus loin comment le modifier pour rendre ce type de graphique plus facile à lire. Lorsque nous associons une variable numérique continue à la couleur des points, la légende qui est générée automatiquement pour nous par `R` sera toujours un gradient de couleurs. Si vous revenez en arrière au niveau des graphiques en mosaïques (@sec-mosa), ou au niveau des diagrammes bâtons juxtaposés (@sec-juxta), vous verrez que lorsque la couleur est associée à une variable catégorielle (ou facteur), la légende présente des couleurs distinctes, une pour chaque modalité du facteur considéré. Là encore, `R` choisit les couleurs pour nous. Mais là encore, nous verrons comment imposer des couleurs différentes si les choix par défaut ne nous conviennent pas.
 
-<!-- - En utilisant d'autres palettes de couleurs prédéfinies. -->
-<!-- - En utilisant des couleurs choisies manuellement. -->
+Enfin, il est évidemment possible de jouer à la fois sur la couleur et sur la taille des symboles :
 
-<!-- Toutes les fonctions permettant d'altérer les légendes commencent par `scale_`. Vient ensuite le nom de l'esthétique que l'on souhaite modifier (ici `fill_`) et enfin, le nom d'une fonction à appliquer. Les possibilités sont nombreuses et vous pouvez en avoir un aperçu en tapant le début du nom de la fonction et en parcourant la liste proposée par RStudio sous le curseur. -->
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = body_mass_g, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6)
+```
 
-<!-- Par exemple, pour utiliser des niveaux de gris plutôt que les couleurs, il suffit d'ajouter une couche à notre graphique : -->
+Ici, l'information de masse est donc associée à 2 caractéristiques esthétiques distinctes : la couleur de remplissage des points et leur taille. Cela rend la lecture plus facile dans certaines situations.
 
-<!-- ```{r barfacetgray, fig.asp = 1, tidy=FALSE, warning = FALSE, fig.cap="Nombre de vols par compagnie aérienne au départ des 3 aéroports de New York en 2013."} -->
-<!-- ggplot(flights, aes(x = fct_infreq(carrier), fill = origin)) + -->
-<!--   geom_bar(color = "black") + -->
-<!--   facet_wrap(~origin, ncol = 1) + -->
-<!--   labs(x = "Compagnie aérienne", -->
-<!--        y = "Nombre de vols", -->
-<!--        fill = "Aéroports\nde New York") + -->
-<!--   scale_fill_grey() -->
-<!-- ``` -->
+Au final, nous avons donc associé 3 variables numériques à 4 caractéristiques esthétiques du graphique :
 
-<!-- Le package `RColorBrewer` propose une large gamme de palettes de couleurs (figure \@ref(sec-fig:brew)) : -->
+- `bill_length_mm` est associée à `x`
+- `bill_depth_mm` est associée à `y`
+- `body_mass_g` est associé à `fill`
+- `body_mass_g` est associé à `size`
 
-<!-- ```{r, brew, echo = FALSE, out.width='50%', fig.align='center', fig.cap="Toutes les palettes de couleur du package `RColorBrewer`."} -->
-<!-- knitr::include_graphics('images/brewer.png') -->
-<!-- ``` -->
+Rien ne nous empêche d'ajouter des variables et des caractéristiques esthétiques. C'est ce que nous allons voir tout de suite.
 
-<!-- `ggplot2` permet d'appliquer ces palettes très simplement : -->
+### Cinq variables !
 
-<!-- ```{r barfacetbrewer, fig.asp = 1, tidy=FALSE, warning = FALSE, fig.cap="Nombre de vols par compagnie aérienne au départ des 3 aéroports de New York en 2013."} -->
-<!-- ggplot(flights, aes(x = fct_infreq(carrier), fill = origin)) + -->
-<!--   geom_bar(color = "black") + -->
-<!--   facet_wrap(~origin, ncol = 1) + -->
-<!--   labs(x = "Compagnie aérienne", -->
-<!--        y = "Nombre de vols", -->
-<!--        fill = "Aéroports\nde New York") + -->
-<!--   scale_fill_brewer(palette = "Accent") -->
-<!-- ``` -->
+Pour commencer, essayez de reproduire le graphique suivant :
 
-<!-- De même, le package `viridis` propose une palette de couleurs intéressante qui maximise le contraste et facilite la discrimination des catégories pour les daltoniens. Là encore, `ggplot2` nous donne accès à cette palette : -->
+```{r}
+#| echo: false
 
-<!-- ```{r barfacetviridis, fig.asp = 1, tidy=FALSE, warning = FALSE, fig.cap="Nombre de vols par compagnie aérienne au départ des 3 aéroports de New York en 2013."} -->
-<!-- ggplot(flights, aes(x = fct_infreq(carrier), fill = origin)) + -->
-<!--   geom_bar(color = "black") + -->
-<!--   facet_wrap(~origin, ncol = 1) + -->
-<!--   labs(x = "Compagnie aérienne", -->
-<!--        y = "Nombre de vols", -->
-<!--        fill = "Aéroports\nde New York") + -->
-<!--   scale_fill_viridis_d() -->
-<!-- ``` -->
+ggplot(penguins, aes(x = bill_length_mm, 
+                     y = bill_depth_mm,
+                     color = species, 
+                     size = body_mass_g, 
+                     shape = sex)) +
+  geom_point(alpha = 0.6)
+```
 
-<!-- Enfin, si les palettes de couleurs ne convienent pas, il est toujours possible de spécifier manuellement les couleurs souhaitées. R propose un accès rapide à 657 noms de couleurs. Pour les afficher, il suffit de taper : -->
+Ici, 5 variables du jeu de données (3 numériques et 2 facteurs) sont associées à 5 caractéristiques esthétiques du graphique. Le graphique est donc très riche, on peut voir par exemple :
 
-<!-- ```{r} -->
-<!-- colors() -->
-<!-- ``` -->
+- que les 3 espèces ont des morphologies de bec assez distinctes : les Gentoo ont des becs longs et fins, les Chinstrap ont des becs longs et épais, et les Adélie ont des becs courts et épais.
+- qu'un dimorphisme sexuel est présent au niveau du bec : pour chaque espèce, les mâles ont des becs plus longs et épais que les femelles
+- qu'un dimorphisme sexuel est présent au niveau des masses : pour chaque espèce, les mâles sont plus lourds que les femelles
 
-<!-- Pour savoir à quelle couleur correspond chaque nom, le plus simple est probablement de consulter [ce document pdf](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf) (n'hésitez pas à le sauvegarder si vous pensez en avoir besoin plus tard). -->
+Au final, beaucoup d'informations sont présentées sur ce graphique et c'est presque trop. Même en améliorant l'aspect général du graphique pour le rendre plus lisible (voir ci-dessous), il vaut parfois mieux se limiter à 2 ou 3 variables et faire plusieurs graphiques, plutôt que de tout mettre sur le même. Une bonne solution consiste souvent à mettre 2 ou 3 variables sur un graphique, mais à faire plusieurs sous-graphiques pour chaque modalité d'une 4ème et/ou d'une 5ème variable catégorielle.
 
-<!-- ```{r barfacetmanual, fig.asp = 1, tidy=FALSE, warning = FALSE, fig.cap="Nombre de vols par compagnie aérienne au départ des 3 aéroports de New York en 2013."} -->
-<!-- ggplot(flights, aes(x = fct_infreq(carrier), fill = origin)) + -->
-<!--   geom_bar(color = "black") + -->
-<!--   facet_wrap(~origin, ncol = 1) + -->
-<!--   labs(x = "Compagnie aérienne", -->
-<!--        y = "Nombre de vols", -->
-<!--        fill = "Aéroports\nde New York") + -->
-<!--   scale_fill_manual(values = c("dodgerblue1", "mediumorchid2", "red2")) -->
-<!-- ``` -->
 
-<!-- Outre ces 657 couleurs qui disposent d'un nom spécifique, il est possible de spécifier les couleurs en utilisant des codes hexadécimaux et des codes rgb (red, green, blue). De nombreux sites permettent de choisir n'importe quelle couleur dans une palette qui en compte des millions et d'obtenir de tels codes. [Ce site](https://www.color-hex.com) permet de le faire très simplement : -->
+```{r}
+#| echo: false
+penguins %>% 
+  filter(!is.na(sex)) %>% 
+  ggplot(aes(x = bill_length_mm, 
+             y = bill_depth_mm,
+             fill = species, 
+             size = body_mass_g, 
+             shape = sex)) +
+  geom_point(alpha = 0.6) +
+  scale_shape_manual(labels = c("Femelles", "Mâles"), values = c(21, 24)) +
+  scale_fill_brewer(palette = "Accent", labels = c("Adélie", "Chinstrap", "Gentoo")) +
+  theme_bw() +
+  guides(fill = guide_legend(override.aes = list(size = 3, shape = 21)),
+         shape = guide_legend(override.aes = list(size = 3))) +
+  labs(x = "Longueur du bec (mm)", 
+       y = "Épaisseur du bec (mm)",
+       fill = "Espèce",
+       shape = "Sexe",
+       size = "Masse (g)")
+```
+En particulier, sur ce graphique, il est presque impossible de déterminer la masse des individus mâles. La légende indique en effet des tailles de cercles qui correspondent à des masses spécifiques. Mais nous n'avons aucune indication pour la taille des triangles. Il vaudrait donc mieux procéder ainsi :
 
-<!-- ```{r barfacethex, fig.asp = 1, tidy=FALSE, warning = FALSE, fig.cap="Nombre de vols par compagnie aérienne au départ des 3 aéroports de New York en 2013."} -->
-<!-- ggplot(flights, aes(x = fct_infreq(carrier), fill = origin)) + -->
-<!--   geom_bar(color = "black") + -->
-<!--   facet_wrap(~origin, ncol = 1) + -->
-<!--   labs(x = "Compagnie aérienne", -->
-<!--        y = "Nombre de vols", -->
-<!--        fill = "Aéroports\nde New York") + -->
-<!--   scale_fill_manual(values = c("#6f71f2", "#6ff299", "#f2b86f")) -->
-<!-- ``` -->
+```{r}
+#| label: fig-multivar
+#| fig-cap: "Relation entre la morphologie du bec, la masse et le sexe chez trois espèces de manchots de l'archipel Palmer"
+#| echo: false
 
-<!-- Dernière chose concernant les couleurs : un choix de fonction `scale_XXX_XXX()` inaproprié est la cause d'erreur la plus fréquente ! Par exemple, si on reprend le code des figures \@ref(sec-fig:varcolor) et \@ref(sec-fig:varcolor2) et que l'on modifie les palettes de couleurs, notez que les fonctions utilisées ne sont pas les mêmes : -->
+penguins %>% 
+  filter(!is.na(sex)) %>% 
+  mutate(species = str_replace_all(species, "Adelie", "Adélie")) %>% 
+  ggplot(aes(x = bill_length_mm, 
+             y = bill_depth_mm,
+             fill = sex, 
+             size = body_mass_g)) +
+  geom_point(alpha = 0.6, shape = 21) +
+  facet_wrap(~species, ncol = 3, scales = "free_x") +
+  scale_fill_manual(labels = c("Femelles", "Mâles"), values = c("purple", "orange")) +
+  theme_bw() +
+  labs(x = "Longueur du bec (mm)", 
+       y = "Épaisseur du bec (mm)",
+       fill = "Espèce",
+       shape = "Sexe",
+       size = "Masse (g)")
+```
 
-<!-- ```{r, varcolorviridis, tidy=FALSE, warning=FALSE, fig.cap="Association de `color` à une variable catégorielle."} -->
-<!-- ggplot(data = alaska_flights, mapping = aes(x = dep_delay, y = arr_delay,  -->
-<!--                                             color = factor(month))) + -->
-<!--   geom_point() + -->
-<!--   scale_color_viridis_d() -->
-<!-- ``` -->
+En associant le sexe des individus à la couleur de remplissage plutôt qu'à la forme des points, et en faisant un sous-graphique par espèce, on élimine la difficulté de lecture liée à la taille des symboles triangulaires. L'information concernant la masse des individus est donc plus facile à visualiser. Le dimorphisme sexuel de taille des becs, présent pour chaque espèce, apparaît beaucoup plus clairement qu'avant (les mâles ont des becs plus longs et épais que les femelles). Mais les **différences inter-spécifiques** de morphologie des becs sont moins visibles qu'avant, notamment pour les différences de longueur des becs selon les espèces. On ne peut malheureusement pas gagner sur les tableaux à la fois. C'est la raison pour laquelle les choix de graphiques que vous ferez devront refléter les questions auxquelles vous vous intéressez, et les messages que vous souhaitez faire passer.
 
-<!-- ```{r, varcolorviridis2, tidy=FALSE, warning=FALSE, fig.cap="Association de `color` à une variable numérique."} -->
-<!-- ggplot(data = alaska_flights, mapping = aes(x = dep_delay, y = arr_delay,  -->
-<!--                                             color = arr_time)) + -->
-<!--   geom_point() + -->
-<!--   scale_color_viridis_c() -->
-<!-- ``` -->
 
-<!-- Pour les 2 figures \@ref(sec-fig:varcolorviridis) et \@ref(sec-fig:varcolorviridis2), j'utilise la palette de couleur `viridis`. Pour ces 2 graphiques, c'est la couleur des points qui change. Puisque cette couleur est spécifiée avec l'esthétique `color` et non plus `fill`, la fonction utilisée est `scale_color_XXX()` et non plus `scale_fill_XXX()`.  -->
+### Deux variables numériques et un facteur {#sec-simpson}
 
-<!-- Enfin, pour la figure \@ref(sec-fig:varcolorviridis), c'est une variable catégorielle qui est associée à l'esthétique de couleur (`factor(month)`). La fonction utilisée pour modifier les couleurs doit donc en tenir compte : le `_d` à la fin de `scale_color_viridis_d()` signifie "discrete", c'est-à-dire "discontinue". À l'inverse, pour le graphique \@ref(sec-fig:varcolorviridis2), c'est une variable numérique continue qui est associée à l'esthétique de couleur (`arr_time`). La fonction utilisée pour modifier les couleurs en est le reflet : le `_c` à la fin de `scale_color_viridis_c()` est l'abréviation de "continuous", c'est-à-dire "continue". -->
+L'exemple qui suit est fondamental pour bien comprendre l'importance d'explorer en détail tous les aspects d'un jeu de données pour éviter de dire de grosses bêtises. 
 
-<!-- Si vous ne voulez pas avoir de message d'erreur, attention donc, à choisir la fonction `scale_XXX_XXX()` appropriée. Pour cela, aidez-vous de l'aide que RStudio vous apporte en tapant les premières lettres de la fonction et en parcourant la liste des fonctions proposées dans le menu déroullant qui apparaît sous votre curseur. -->
+Imaginez que dans le jeu de données `penguins`, on souhaite étudier la relation qui existe entre l'épaisseur du bec des individus et la longueur des nageoires. Ces deux variables étant numériques, il semble logique de commencer par faire un nuage de points :
 
+```{r}
+ggplot(penguins, aes(x = bill_depth_mm, y = flipper_length_mm)) +
+  geom_point()
+```
 
-<!-- ### Les thèmes -->
+Nous avons vu plus haut que pour visualiser le relations qui existent entre deux variables numériques, il est possible d'ajouter une courbe ou une droite de tendance avec la fonction `geom_smooth()` :
 
-<!-- L'apparence de tout ce qui ne concerne pas directement les données d'un graphique est sous le contrôle d'un thème. Les thèmes contrôlent l'apparence générale du graphique : quelles polices et tailles de caractères sont utilisées, quel sera l'arrière plan du graphique, faut-il intégrer un quadrillage sous le graphique, et si oui, quelles doivent être ses caractéristiques ? -->
+```{r}
+ggplot(penguins, aes(x = bill_depth_mm, y = flipper_length_mm)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
 
-<!-- Il est possible de spécifier chaque élément manuellement. Nous nous contenterons ici de passer en revue quelques thèmes prédéfinis qui devraient couvrir la plupart de vos besoins.  -->
+Si l'on s'en tient à ça, la relation semble claire : plus le bec des individus est épais, plus leurs nageoires sont courtes, et inversement. En outre, nous avons visiblement deux groupes d'individus qui présentent des caractéristiques distinctes : certains ont des becs fins et des nageoires très longues, quand d'autres ont des becs épais et des nageoires courtes. Et quasiment aucun individu ne présente de caractéristiques intermédiaires (becs d'épaisseur moyenne épais et nageoires moyennes).
 
-<!-- Reprenons par exemple le code de la figure \@ref(sec-fig:barfacetbrewer) et ajoutons un titre : -->
+En réalité, cette vision des choses est totalement trompeuse ! N'oubliez pas que nous avons 3 espèces distinctes dans ce jeu de données, et que ces espèces peuvent présenter des caractéristiques morphologiques très variées. Examiner la relation becs-nageoires tel que nous l'avons fait, sans considérer les espèces, n'a strictement aucun sens ! Pour s'en convaincre, il suffit d'associer la couleur (des points et des lignes) à l'espèce :
 
-<!-- ```{r theme1, fig.asp = 1, tidy=FALSE, warning = FALSE, fig.cap="(ref:gray)"} -->
-<!-- ggplot(flights, aes(x = fct_infreq(carrier), fill = origin)) + -->
-<!--   geom_bar(color = "black") + -->
-<!--   facet_wrap(~origin, ncol = 1) + -->
-<!--   labs(x = "Compagnie aérienne", -->
-<!--        y = "Nombre de vols", -->
-<!--        fill = "Aéroports de\nNew York", -->
-<!--        title = "Couverture inégale des aéroports de New York") + -->
-<!--   scale_fill_brewer(palette = "Accent") -->
-<!-- ``` -->
+```{r}
+ggplot(penguins, aes(x = bill_depth_mm, y = flipper_length_mm,
+                     color = species)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
 
-<!-- (ref:gray) Utilisation du thème par défaut : `theme_gray()`. -->
+Le résultat obtenu ici est à l'opposé de nos conclusions précédentes : la relation entre les deux variables numérique est en fait positive ! Au sein de chaque espèce, les individus possédant les becs les plus épais sont aussi ceux qui possèdent les nageoires les plus longues !
 
-<!-- Le thème utilisé par défaut est `theme_gray()`. Il est notamment responsable de l'arrière plan gris et du quadrillage blanc. Pour changer de thème, il suffit d'ajouter une couche au graphique en donnant le nom du nouveau thème : -->
+En statistiques ce phénomène (observer une relation inverse lorsque plusieurs groupes sont combinés) s'appelle le paradoxe de Simpson, et je vous encourage à consulter [la page wikipédia qui y est consacrée](https://fr.wikipedia.org/wiki/Paradoxe_de_Simpson).
 
-<!-- ```{r themebw, fig.asp = 1, tidy=FALSE, warning = FALSE, fig.cap="(ref:bw)"} -->
-<!-- ggplot(flights, aes(x = fct_infreq(carrier), fill = origin)) + -->
-<!--   geom_bar(color = "black") + -->
-<!--   facet_wrap(~origin, ncol = 1) + -->
-<!--   labs(x = "Compagnie aérienne", -->
-<!--        y = "Nombre de vols", -->
-<!--        fill = "Aéroports de\nNew York", -->
-<!--        title = "Couverture inégale des aéroports de New York") + -->
-<!--   scale_fill_brewer(palette = "Accent") + -->
-<!--   theme_bw() -->
-<!-- ``` -->
+Ici, si la relation entre nos deux variables numériques s'inverse lorsque l'on examine cette relation à l'échelle de chaque modalité de la variable catégorielle. Une façon encore plus nette de mettre la relation positive en évidence est la suivante :
 
-<!-- (ref:bw) Utilisation du thème `theme_bw()`. -->
+```{r}
+ggplot(penguins, aes(x = bill_depth_mm, y = flipper_length_mm,
+                     color = species)) +
+  geom_point(show.legend = FALSE) +
+  geom_smooth(method = "lm", show.legend = FALSE) +
+  facet_wrap(~species, scales = "free")
+```
 
-<!-- Les thèmes complets que vous pouvez utiliser sont les suivants : -->
+Même sans connaître en détail le principe et les limites de la régression linéaire, vous comprenez j'espère à quel point l'exploration rigoureuse d'un jeu de données est importante. Par exemple, nous avons que plus tôt que, pour chaque espèce, les mâles sont plus lourds que les femelles. Est-ce que des différences morphologiques entre les sexes pourraient expliquer la relation que nous observons ici entre épaisseur du bec et longueur des nageoires ? Est-il possible qu'un second effet Simpson se cache dans ces données ? Si on distingue les deux sexes au sein de chaque espèce, la relation existe-t-elle toujours ? Et si oui, est-elle toujours positive ou s'inverse-t-elle à nouveau ? Pour le savoir, on peut utiliser une autre fonction permettant de produire des sous-graphiques, la fonction `facte_grid()`, qui permet de faire un sous graphique pour chaque combinaison de modalités de 2 variables catégorielles :
 
-<!-- - `theme_bw()` : fond blanc et quadrillage. -->
-<!-- - `theme_classic()` : thème classique, avec des axes mais pas de quadrillage. -->
-<!-- - `theme_dark()` : fond sombre pour augmenter le contraste. -->
-<!-- - `theme_gray()` : thème par défaut : fond gris et quadrillage blanc. -->
-<!-- - `theme_light()` : axes et quadrillages discrets. -->
-<!-- - `theme_linedraw()` : uniquement des lignes noires. -->
-<!-- - `theme_minimal()` : pas d'arrière plan, pas d'axes, quadrillage discret. -->
-<!-- - `theme_void()` : theme vide, seuls les objets géométriques restent visibles. -->
+```{r}
+penguins %>% 
+  filter(!is.na(sex)) %>%    # Elimine les individus dont le sexe est inconnu
+  ggplot(aes(x = bill_depth_mm, y = flipper_length_mm,
+                     color = species, shape = sex)) +
+  geom_point(show.legend = FALSE) +
+  geom_smooth(method = "lm", show.legend = FALSE) +
+  facet_grid(sex ~ species, scales = "free")
+```
 
-<!-- ```{r thememinimal, fig.asp = 1, tidy=FALSE, warning = FALSE, fig.cap="Utilisation du thème minimaliste."} -->
-<!-- ggplot(flights, aes(x = fct_infreq(carrier), fill = origin)) + -->
-<!--   geom_bar(color = "black") + -->
-<!--   facet_wrap(~origin, ncol = 1) + -->
-<!--   labs(x = "Compagnie aérienne", -->
-<!--        y = "Nombre de vols", -->
-<!--        fill = "Aéroports de\nNew York", -->
-<!--        title = "Couverture inégale des aéroports de New York") + -->
-<!--   scale_fill_brewer(palette = "Accent") + -->
-<!--   theme_minimal() -->
-<!-- ``` -->
+La syntaxe `sex ~ species` indique que l'on souhaite un sous-graphique pour chaque combinaison des modalités des facteurs `sex` et `species`. Les graphiques correspondant aux différents sexes apparaîtront sur des lignes distinctes, et les espèces sur des colonnes distinctes. On constate ici que si la relation semble toujours positive et assez nette pour les mâles des 3 espèces, la situation est moins tranchée pour les femelles, en particulier pour les espèces Adélie et Chinstrap.
 
-<!-- L'argument `base_family` de chaque thème permet de spécifier une police de caractères différente de celle utilisée par défaut. Évidemment, vous ne pourrez utiliser que des polices qui sont disponibles sur l'ordinateur que vous utilisez. Dans l'exemple de la figure \@ref(sec-fig:themefont) ci-dessous, j'utilise la police "Gill Sans". Si cette police n'est pas disponible sur votre ordinateur, ce code produira une erreur. Si c'est le cas, remplacez-la par une police de votre ordinateur. Attention, son nom exact doit être utilisé. Cela signifie bien sûr le respect des espaces, majuscules, etc. -->
+Nous avons vu dans ce chapitre quelques exemples et des règles à suivre strictement (notamment, quels types de graphiques pour quelles types de variables). Mais les possibilités sont infinies, et je vous encourage donc à poursuivre l'exploration. Toutes les combinaisons des éléments que nous avons décrits sont possibles. Entre les **facets**, qui permettent de faire des sous graphiques pour chaque modalités (ou combinaisons de modalités) d'une ou deux variables catégorielles, les **caractéristiques esthétiques** auxquelles ont peut associer un nombre conséquent de variables numériques et/ou catégorielles, et les nombreux **objets géométriques** existants (nous n'avons fait qu'utiliser les plus courants, mais il en existe *beaucoup d'autres*), les possibilités sont infinies. À vous de faire preuve de curiosité et d'explorer d'autres types de visualisation. L'avantage de `ggplot2` est que tous les graphiques se construisent sur le même modèle :
 
-<!-- ```{r themefont, fig.asp = 1, tidy=FALSE, warning = FALSE, dev='cairo_pdf', fig.cap="Modification de la police de caractères."} -->
-<!-- ggplot(flights, aes(x = fct_infreq(carrier), fill = origin)) + -->
-<!--   geom_bar(color = "black") + -->
-<!--   facet_wrap(~origin, ncol = 1) + -->
-<!--   labs(x = "Compagnie aérienne", -->
-<!--        y = "Nombre de vols", -->
-<!--        fill = "Aéroports de\nNew York", -->
-<!--        title = "Couverture inégale des aéroports de New York") + -->
-<!--   scale_fill_brewer(palette = "Accent") + -->
-<!--   theme_minimal(base_family = "FuturaLT") -->
-<!-- ``` -->
+:::{.callout-important}
+```{r}
+#| eval: false
+ggplot(TABLEAU, aes(x = VAR1, y = VAR2, fill = VAR3, ...)) +
+  geom_XXX() +
+  geom_YYY() +
+  facet_ZZZ()
+```
+:::  
 
-<!-- Le choix d'un thème et d'une police adaptés doivent vous permettre de faire des graphiques originaux et clairs. Rappelez-vous toujours que vos choix en matière de graphiques doivent avoir pour objectif principal de rendre les tendances plus faciles à décrypter pour un lecteur non familier de vos données. C'est un outil de communication au même titre que n'importe quel paragraphe d'un rapport ou compte-rendu. Et comme pour un paragraphe, la première version d'un graphique est rarement la bonne. -->
+Quand on a bien compris ce principe, on peut quasiment tout faire, les réponses aux questions qu'on se posent se trouvant presque toujours dans les fichiers d'aide des fonctions.
 
-<!-- Vous devriez donc maintenant être bien armés pour produire 95% des graphiques dont vous aurez besoin tout au long de votre cursus universitaire. Toutefois, un point important a pour l'instant été omis : l'ajout de barres d'erreurs sur vos graphiques. Nous verrons comment faire cela un peu plus tard, après avoir appris à manipuler efficacement des tableaux de données avec les packages `tidyr` et `dplyr`. -->
+## Peaufiner l'apparence
 
+Jusqu'ici, les morceaux de code que nous avons vus permettent de produire une large gamme de **graphiques exploratoires**. Mais il y a une différence de taille entre des graphiques que l'on fait pour soi, afin de comprendre et explorer des données, et des graphiques que l'on fait pour communiquer à autrui des informations ou le fruit de nos découvertes.
 
-<!-- ---- -->
+Les graphiques que l'on souhaite intégrer à un compte-rendu ou un rapport doivent :
 
-<!-- ## Exercices  {#sec-Exo-7} -->
+- avoir des labels corrects pour les axes (penser à toujours indiquer l'unité des variables portées par les axes)
+- avoir des labels corrects pour les légendes situées à droite de la plupart des graphiques (voir les nombreux exemples décrits plus haut)
+- avoir éventuellement un titre. Il ne sera pas toujours utile de l'intégrer à la figure car la plupart du temps, les titres sont ajoutés manuellement dans le traitement de texte que vous utilisez
+- utiliser des couleurs agréables et faciles à distinguer (y compris pour les personnes atteintes de daltonisme)
+- utiliser des échelles adaptées (ordres de grandeur, échelles logarithmiques, etc.)
+- si possible avoir tous le même thème (mêmes choix de couleurs, de contours, de polices de caractères, etc.)
 
-<!-- Commencez par créer un nouveau jeu de données en exécutant ces commandes : -->
+Donc, lorsqu'on obtient un graphique exploratoire parlant et que l'on souhaite l'intégrer à un rapport ou un compte-rendu, 3 étapes sont nécessaires à sa mise en forme :
 
-<!-- ```{r tidy=FALSE} -->
-<!-- set.seed(1234) -->
-<!-- small_flights <- flights %>%  -->
-<!--   sample_n(1000) %>%  -->
-<!--   filter(!is.na(arr_delay), -->
-<!--          distance < 3000) -->
-<!-- ``` -->
+1. modifier les légendes avec la fonction `labs()`
+2. modifier les échelles avec les nombreuses fonctions `scale_XXX_YYY()`
+3. modifier le thème général avec les fonctions `theme_XX()`
 
-<!-- Ce nouveau jeu de données de petite taille (972 lignes) est nommé `small_flights`. Il contient les mêmes variables que le tableau `flights` mais ne contient qu'une petite fraction de ses lignes. Les lignes retenues ont été choisies au hasard. Vous pouvez visualiser son contenu en tapant son nom dans la console ou en utilisant la fonction `View()`. -->
+### Les légendes ou labels
 
-<!-- En vous appuyant sur les fonctions et les principes de la grammaire des graphiques que vous avez découverts dans ce chapitre \@ref(sec-viz), et en vous servant de ce nouveau jeu de données, tapez les commandes qui permettent de produire le graphique ci-dessous : -->
+Le point de départ le plus évident est d'ajouter des labels de qualité. La fonction `labs()` du package `ggplot2` permet d'ajouter plusieurs types de labels sur vos graphiques :
 
-<!-- ```{r exercice, echo=FALSE, tidy=FALSE, warning = FALSE} -->
-<!-- small_flights %>%  -->
-<!--   ggplot(aes(x = distance, y = air_time, color = origin, shape = origin)) + -->
-<!--     geom_point(alpha = 0.8) + -->
-<!--     scale_color_brewer(palette = "Set1") + -->
-<!--     labs(x = "Distance parcourue en vol (miles)", -->
-<!--          y = "Temps de vol (minutes)", -->
-<!--          title = "Relation entre le temps de vol et la distance parcourue", -->
-<!--          subtitle = "Seuls les vols au départ de JFK et Newark parcourent plus de 1600 miles", -->
-<!--          color = "Aéroport de\nNew York", -->
-<!--          shape = "Aéroport de\nNew York", -->
-<!--          caption = "Données : small_flights") + -->
-<!--     theme_bw() -->
-<!-- ``` -->
+- Un titre (`title =`) : il doit résumer les résultats les plus importants.
+- Un sous-titre (`subtitle =`) : il permet de donner quelques détails supplémentaires.
+- Une légende (`caption =`) : souvent utilisée pour présenter la source des données du graphique.
+- Un titre pour chaque axe (`x =` et `y =`) : permet de préciser les variables portées par les axes et leurs unités.
+- Un titre pour les échelles de couleurs, de forme, de taille, etc.
 
-<!-- Quelques indices :  -->
+Reprenons par exemple le graphique permettant de visualiser la relation entre épaisseur et longueur du bec selon la masse des individus :
 
-<!-- - Les couleurs utilisées sont celles de la palette `Set1` du package `RColorBrewer`. -->
-<!-- - Les variables utilisées sont `origin`, `air_time` et `distance`. -->
-<!-- - La transparence des symboles est fixée à `0.8`. -->
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = body_mass_g, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6)
+```
 
-<!-- Toujours avec ce jeu de données `small-flights`, tapez les commandes permettant de produire le graphique ci-dessous : -->
+Nous préciser les légendes en ajoutant la fonction `labs()` sur une nouvelle couche du graphique :
 
-<!-- ```{r exercice2, fig.asp=1, echo=FALSE, tidy=FALSE, warning = FALSE} -->
-<!-- small_flights %>%  -->
-<!--   ggplot(aes(x = factor(month), fill = origin)) + -->
-<!--     geom_bar() + -->
-<!--     facet_wrap(~fct_infreq(carrier), nrow = 4) + -->
-<!--     scale_fill_brewer(palette = "Accent") + -->
-<!--     labs(x = "Mois de l'année 2013", -->
-<!--          y = "Nombre de vols", -->
-<!--          title = "Évolution mensuelle du trafic aérien New Yorkais en 2013", -->
-<!--          subtitle = "Seules 9 compagnies aériennes sur 14 ont déservi New York toute l'année", -->
-<!--          fill = "Aéroport de\nNew York", -->
-<!--          caption = "Données : small_flights") + -->
-<!--     theme_bw() -->
-<!-- ``` -->
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = body_mass_g, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec de 3 espèces de manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'")
+```
 
-<!-- Quelques indices :  -->
+Pour annoter correctement les légendes situées à droite, il convient d'avoir bien compris ce qui, dans notre code, a permis à `R` de générer automatiquement ces légendes. Le gradient de couleur a été créé parce que nous avons tapé `fill = body_mass_g`. Et l'échelle de taille des symboles a été créée parce que nous avons tapé `size = body_mass_g`. Dans la fonction `labs()`, nous devons donc préciser `fill = "..."` et `size = "..."` pour modifier le titre de ces 2 légendes :
 
-<!-- - Les couleurs utilisées sont celles de la palettes `Accent` du package `RColorBrewer`. -->
-<!-- - Les variables utilisées sont `month`, `carrier` et `origin`. -->
+```{r}
+#| label: fig-label
+#| fig-cap: "Une figure correctement légendée"
+
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = body_mass_g, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec de 3 espèces de manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'",
+       fill = "Masse (g)",
+       size = "Masse (g)")
+```
+
+À partir de maintenant, vous devriez systématiquement légender les axes de vos graphiques et annoter vos légendes correctement, en n'oubliant pas de préciser les unités lorsque c'est pertinent, pour tous les graphiques que vous intégrez dans vos rapports, compte-rendus, mémoires, présentation, etc.
+
+
+
+### Les échelles
+
+Tous les détails des graphiques que vous produisez peuvent être édités. C'est notamment le cas des échelles. Qu'il s'agisse de modifier l'étendue des axes, la densité du quadrillage, la position des tirets sur les axes, le nom des catégories figurant sur les axes ou dans les légendes ou encore les couleurs utilisées pour différentes catégories d'objets géométriques, tout est possible dans `ggplot2`.
+
+Nous n'avons pas le temps ici d'aborder toutes ces questions en détail. Je vous encourage donc à consulter l'ouvrage en ligne intitulé [R for data science](http://r4ds.had.co.nz/), et en particulier [son chapitre dédié aux échelles](http://r4ds.had.co.nz/graphics-for-communication.html#scales), si vous avez besoin d'apporter des modifications à vos graphiques et que vous ne trouvez pas comment faire dans cet ouvrage.
+
+#### La gestion des couleurs
+
+Nous allons néanmoins examiner quelques possibilités, à commencer par la façon de procéder pour modifier les couleurs choisies par défaut par `ggplot2`. Reprenons la figure @fig-label, et changeons le gradient de couleur proposé par défaut par `R`. Il est possible de modifier ces couleurs de plusieurs façons :
+
+- soit en utilisant d'autres palettes de couleurs prédéfinies
+- soit en choisissant manuellement les couleurs
+
+Toutes les fonctions permettant d'altérer les légendes commencent par `scale_`. Vient ensuite le nom de l'esthétique que l'on souhaite modifier (ici `fill_`) et enfin, le nom d'une fonction à appliquer. Les possibilités sont nombreuses et vous pouvez en avoir un aperçu en tapant le début du nom de la fonction et en parcourant la liste proposée par `RStudio` sous le curseur. Il faut toutefois distinguer 2 types d'échelles de couleurs : les échelles continues (c'est notre cas ici) et les échelles discrètes (quand l'esthétique de couleur est associée à une variable catégorielle, nous en verrons un exemple plus loin).
+
+Par exemple, il est possible d'utiliser la palette `viridis`. Selon [ses auteurs](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html) : 
+
+> "Use [this palette] to make plots that are pretty, better represent your data, easier to read by those with colorblindness, and print well in gray scale.
+
+Pour utiliser cette palette, il suffit d'ajouter une couche à notre graphique :
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = body_mass_g, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec de 3 espèces de manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'",
+       fill = "Masse (g)",
+       size = "Masse (g)") +
+  scale_fill_viridis_c()
+```
+
+La palette `viridis` est proposée pour les échelles continues (d'où le `_c` à la fin du nom de fonction), ou pour les échelles discrètes (`scale_fill_viridis_d`). Des fonctions équivalentes existent pour les couleurs de contour (`scale_color_viridis_c` et `scale_color_viridis_d`). Allez lire le fichier d'aide de cette fonction pour en apprendre plus sur son fonctionnement et ses nombreuses options.
+
+Ici, les individus les plus lourds apparaissent en jaune, et les plus légers en bleu sombre. Si on souhaite faire le contraire, c'est possible :
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = body_mass_g, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec de 3 espèces de manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'",
+       fill = "Masse (g)",
+       size = "Masse (g)") +
+  scale_fill_viridis_c(direction = -1)
+```
+
+D'autres palettes de couleurs sont également accessibles grâce à l'argument `option = ` de ces fonctions :
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = body_mass_g, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec de 3 espèces de manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'",
+       fill = "Masse (g)",
+       size = "Masse (g)") +
+  scale_fill_viridis_c(option = "A")
+```
+
+Voici toutes les possibilités :
+
+```{r}
+#| echo: false
+#| fig-height: 7
+#| fig-asp: 3
+#| warning: false
+
+pp <- ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = body_mass_g, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       fill = "Masse (g)",
+       size = "Masse (g)")
+
+p1 <- pp + scale_fill_viridis_c(option = "A") + ggtitle('option = "A" (ou option = "magma")')
+p2 <- pp + scale_fill_viridis_c(option = "B") + ggtitle('option = "B" (ou option = "inferno")')
+p3 <- pp + scale_fill_viridis_c(option = "C") + ggtitle('option = "C" (ou option = "plasma")')
+p4 <- pp + scale_fill_viridis_c(option = "D") + ggtitle('option = "D" (ou option = "viridis")')
+p5 <- pp + scale_fill_viridis_c(option = "E") + ggtitle('option = "E" (ou option = "cividis")')
+
+p1 + p2 + p3 + p4 + p5 + plot_layout(ncol = 1)
+```
+
+Dernière chose concernant `viridis` : la fonction `scale_fill_viridis_b()` discrétise la variable continue pour en faire une échelle discontinue. Il est en effet parfois plus facile de repérer une couleur parmi une palette de 4 ou 5 couleurs distinctes, plutôt qu'au sein d'un gradient. Voilà à quoi cela ressemble :
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = body_mass_g, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec de 3 espèces de manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'",
+       fill = "Masse (g)",
+       size = "Masse (g)") +
+  scale_fill_viridis_b(option = "E")
+```
+
+
+Outre les fonctions d'échelles proposant les palettes `viridis`, les fonctions se terminant par `_gradient()`, `_gradient2()` et `_gradientn()` permettent de spécifier manuellement les couleurs à intégrer dans un dégradé. Avec la fonction `scale_fill_gradient()` on indique simplement les couleurs du début de de la fin du gradient :
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = body_mass_g, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec de 3 espèces de manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'",
+       fill = "Masse (g)",
+       size = "Masse (g)") +
+  scale_fill_gradient(low = "gold", high = "firebrick3")
+```
+
+N'importe quelle nom de couleur valide, ou n'importe que code couleur hexadécimal fonctionne (voir par exemple [ce site]() pour trouver les codes hexadécimaux dont vous avez besoin) :
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = body_mass_g, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec de 3 espèces de manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'",
+       fill = "Masse (g)",
+       size = "Masse (g)") +
+  scale_fill_gradient(low = "#A0F87D", high = "#151197")
+```
+
+Avec la fonction `scale_fill_gradient2()`, nous avons plus de contrôle : on indique une couleur de départ, une couleur d'arrivée, mais aussi, une couleur intermédiaire, et la valeur numérique à laquelle cette couleur doit apparaître :
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = body_mass_g, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec de 3 espèces de manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'",
+       fill = "Masse (g)",
+       size = "Masse (g)") +
+  scale_fill_gradient2(low = "deeppink", high = "gold", mid = "darkslateblue",
+                       midpoint = 4500)
+```
+
+Je vous laisse explorer l'aide de cette fonction ainsi que celle de `scale_fill_gradientn()` pour savoir comment en utiliser toutes les possibilités.
+
+Lorsqu'une variable catégorielle est associée à la couleur, il est évidemment possible aussi d'effectuer les choix de palettes. Voyons en exemple en associant la couleur de remplissage des points à l'espèce plutôt qu'à la masse :
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = species, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec de 3 espèces de manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'",
+       fill = "Espèce",
+       size = "Masse (g)")
+```
+
+La version discrète de `viridis` peut maintenant être appliquée. Les mêmes options que pour la version continue sont disponibles :
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = species, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec de 3 espèces de manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'",
+       fill = "Espèce",
+       size = "Masse (g)") +
+  scale_fill_viridis_d(option = "B")
+```
+
+Les possibilités sont nombreuses, notamment grâce aux fonctions `scale_fill_brewer()` (pour les couleurs de remplissages associées à une variable catégorielle) et `scale_color_brewer()` (pour les couleurs de contour associées à une variable catégorielle). L'utilisation est simple, un précise simplement quelle palette on souhaite utiliser parmi la liste des palettes disponibles :
+
+![](images/brewer.png)
+
+Certaines palettes sont séquentielles (lorsque les catégories se suivent logiquement, pour les variables catégorielles ordinales en particulier), d'autres contiennent des couleurs indépendantes :
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = species, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec de 3 espèces de manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'",
+       fill = "Espèce",
+       size = "Masse (g)") +
+  scale_fill_brewer(palette = "Accent")
+```
+
+Enfin, il est possible de spécifier manuellement la liste des couleurs que l'on souhaite utiliser avec la fonction `scale_fill_manual()`. il faut bien entendu indiquer autant de couleurs que de modalités pour notre variable catégorielle (ici 3 espèces dont 3 couleurs) :
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = species, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec de 3 espèces de manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'",
+       fill = "Espèce",
+       size = "Masse (g)") +
+  scale_fill_manual(values = c("deepskyblue", "darkorchid3", "lightsalmon"))
+```
+
+Dernière chose concernant les couleurs : un choix de fonction `scale_XXX_XXX()` inapproprié est une cause d'erreur très fréquente ! Par exemple, pour la première figure de la partie consacrée au paradoxe de Simpson (@sec-simpson), la couleur des points et des lignes n'est pas spécifiée avec `fill` mais avec `color`. C'est donc bien une fonction qui commence par `scale_color_` qu'il faut utiliser : 
+
+```{r}
+ggplot(penguins, aes(x = bill_depth_mm, y = flipper_length_mm,
+                     color = species)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(x = "Épaisseur du bec (mm)", y = "Longueur des nageoires (mm)",
+       color = "Espèce") +
+  scale_color_brewer(palette = "Set2")
+```
+
+Comme pour les fonctions `geom_XXX()`, les fonctions `scale_color_XXX()` et `scale_fill_XXX()` sont très nombreuses. Je vous encourage donc à explorer les fichiers d'aide et à faire des essais.
+
+#### Les autres échelles
+
+Les deux autres échelles que vous pourrez être couramment appelés à modifier sont les échelles des axes des `x` et des `y`. Les fonctions qui permettent de la faire sont construites comme ces des échelles de couleurs : `scale_x_XXX()` et `scale_y_XXX()`. La dernière partie du nom de la fonction sera, la plupart du temps, soit `discrete` si une variable catégorielle est associée à l'axe, soit `continuous` si une variable numérique y est associée.
+
+Reprenons l'exemple du stripchart suivant :
+
+```{r}
+ggplot(penguins, aes(x = species, y = bill_depth_mm)) +
+  geom_jitter(width = 0.20, height = 0)
+```
+
+On commence par légender les axes avec `labs()` :
+
+```{r}
+ggplot(penguins, aes(x = species, y = bill_depth_mm)) +
+  geom_jitter(width = 0.20, height = 0) +
+  labs(x = "Espèce", y = "Épaisseur du bec (mm)")
+```
+
+Si on souhaite renommer l'espèce `Adelie` en `Adélie` (avec un accent sur le "e" donc), il faut modifier l'échelle de l'axe des `x`, qui porte une variable catégorielle :
+
+```{r}
+ggplot(penguins, aes(x = species, y = bill_depth_mm)) +
+  geom_jitter(width = 0.20, height = 0) +
+  labs(x = "Espèce", y = "Épaisseur du bec (mm)") +
+  scale_x_discrete(label = c("Adélie", "Chinstrap", "Gentoo"))
+```
+
+Pour l'axe des `y`, qui porte une variable continue, on peut avoir besoin de faire apparaître des graduations tous les 2 millimètres (au lieu de tous les 2,5 millimètres) :
+
+```{r}
+ggplot(penguins, aes(x = species, y = bill_depth_mm)) +
+  geom_jitter(width = 0.20, height = 0) +
+  labs(x = "Espèce", y = "Épaisseur du bec (mm)") +
+  scale_x_discrete(label = c("Adélie", "Chinstrap", "Gentoo")) +
+  scale_y_continuous(breaks = seq(from = 12, to = 22, by = 2))
+```
+
+Il est également très fréquent de souhaiter étendre les axes au-delà des seules valeurs observées, pour faire apparaître le 0 par exemple. C'est tellement fréquent qu'une fonction de raccourci très facile à utiliser nous permet d'éviter le recours à une fonction `scale_XXX_XXX()`. Même si dans ce cas précis, ça n'est pas très pertinent, voilà un exemple :
+
+```{r}
+ggplot(penguins, aes(x = species, y = bill_depth_mm)) +
+  geom_jitter(width = 0.20, height = 0) +
+  labs(x = "Espèce", y = "Épaisseur du bec (mm)") +
+  scale_x_discrete(label = c("Adélie", "Chinstrap", "Gentoo")) +
+  expand_limits(y = 0)
+```
+
+Enfin, il arrive que les valeurs prises par une variable numérique recouvrent plusieurs ordres de grandeurs (avec par exemple des valeurs de l'ordre des dizaines, des centaines et des milliers). Utiliser une échelle logarithmique permet, dans cette situation, de mieux visualiser la variabilité des données, notamment parmi les valeurs les plus faibles. Les fonctions `scale_x_log10()` et `scale_y_log10()` permettent d'effectuer ce changement d'échelle tout en conservant des valeurs normales sur les axes.
+
+Outre ces changements d'échelles pour les axes et les couleurs, il est possible de modifier manuellement toutes les échelles générées automatiquement par les fonction `geom_XXX()` (par exemple, l'échelle des tailles, ou les types de symboles utilisés pour distinguer plusieurs catégories de points). Il "suffit" pour cela de trouver la bonne fonction (par exemple `scale_size_continuous()`, `scale_shape_manual()`, ... Il est evidemment impossible de faire le tour de toutes ces fonctions. Mais sachez qu'elles existent et consultez leurs fichiers d'aide le jour où vous en avez besoin.
+
+### Les thèmes
+
+L'apparence de tout ce qui ne concerne pas directement les données d'un graphique est sous le contrôle d'un thème. Les thèmes contrôlent l'apparence générale du graphique : quelles polices et tailles de caractères sont utilisées, quel sera l'arrière plan du graphique, faut-il intégrer un quadrillage sous le graphique, et si oui, quelles doivent être ses caractéristiques ?
+
+Il est possible de spécifier chaque élément manuellement. Nous nous contenterons ici de passer en revue quelques thèmes prédéfinis qui devraient couvrir la plupart de vos besoins.
+
+Reprenons par exemple le code suivant :
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = species, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec de 3 espèces de manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'",
+       fill = "Espèce",
+       size = "Masse (g)") +
+  scale_fill_viridis_d(option = "B")
+```
+
+Le thème utilisé par défaut est `theme_gray()`. Il est notamment responsable de l'arrière plan gris et du quadrillage blanc. Pour changer de thème, il suffit d'ajouter une couche au graphique en donnant le nom du nouveau thème :
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = species, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec de 3 espèces de manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'",
+       fill = "Espèce",
+       size = "Masse (g)") +
+  scale_fill_viridis_d(option = "B") +
+  theme_bw()
+```
+
+Le fond gris a disparu, et le quadrillage a changé de couleur. Les thèmes complets proposés par `ggplot2` que vous pouvez utiliser sont les suivants :
+
+- `theme_bw()` : fond blanc et quadrillage.
+- `theme_classic()` : thème classique, avec des axes mais pas de quadrillage.
+- `theme_dark()` : fond sombre pour augmenter le contraste.
+- `theme_gray()` : thème par défaut : fond gris et quadrillage blanc.
+- `theme_light()` : axes et quadrillages discrets.
+- `theme_linedraw()` : uniquement des lignes noires.
+- `theme_minimal()` : pas d'arrière plan, pas d'axes, quadrillage discret.
+- `theme_void()` : thème vide, seuls les objets géométriques restent visibles.
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = species, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec de 3 espèces de manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'",
+       fill = "Espèce",
+       size = "Masse (g)") +
+  scale_fill_viridis_d(option = "B") +
+  theme_minimal()
+```
+
+Tous les thèmes possèdent la même liste d'argument. L'un d'entre eux est l'argument `base_family`, qui permet de spécifier une police de caractères différente de celle utilisée par défaut. Évidemment, vous ne pourrez utiliser que des polices qui sont disponibles sur l'ordinateur que vous utilisez. Un bon tutoriel expliquant comment indiquer à `R` les polices qui sont disponibles sur votre ordinateur est [disponible ici](https://r-coder.com/custom-fonts-r/). N'hésitez pas à revenir vers moi pour toute question à ce sujet.
+
+Dans l'exemple ci-dessous, j'utilise la police "Gill Sans". Si cette police n'est pas disponible sur votre ordinateur, ce code produira une erreur (ou `R` prendra simplement la police par défaut. Si c'est le cas, remplacez-la par une police de votre ordinateur. Attention, son nom exact doit être utilisé. Cela signifie bien sûr le respect des espaces, majuscules, etc.
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = species, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec de 3 espèces de manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'",
+       fill = "Espèce",
+       size = "Masse (g)") +
+  scale_fill_viridis_d(option = "B") +
+  theme_minimal(base_family = "Gill Sans")
+```
+
+Il est également possible de spécifier la taille de police qui devrait être utilisée par défaut. On spécifie la taille de base avec l'argument `base_size = `, et toutes les autres tailles de polices seront mises à jour pour refléter le changement. Ainsi, les différences de tailles entre titre, sous-titres, légendes des axes, etc, seront maintenues :
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = species, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec des manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'",
+       fill = "Espèce",
+       size = "Masse (g)") +
+  scale_fill_viridis_d(option = "B") +
+  theme_minimal(base_family = "Gill Sans", base_size = 14)
+```
+
+Le choix d'un thème et d'une police adaptés doivent vous permettre de faire des graphiques originaux et clairs. Rappelez-vous toujours que vos choix en matière de graphiques doivent avoir pour objectif principal de rendre les tendances plus faciles à décrypter pour un lecteur non familier de vos données. C'est un outil de communication au même titre que n'importe quel paragraphe d'un rapport ou compte-rendu. Et comme pour un paragraphe, la première version d'un graphique est rarement la bonne.
+
+Vous devriez donc maintenant être bien armés pour produire 95% des graphiques dont vous aurez besoin tout au long de votre cursus universitaire. Toutefois, un point important a pour l'instant été omis : l'ajout de barres d'erreurs sur vos graphiques. Nous verrons comment faire cela au prochain semestre, après avoir appris à manipuler efficacement des tableaux de données avec les packages `tidyr` et `dplyr`.
+
+Quoi qu'il en soit, il est maintenant attendu de vous que vous utilisez `R` et ce que vous avez appris de `ggplot2` pour produire tous les graphiques que vous serez amenés à intégrer à vos comptes-rendus de TP et à vos rapports.
+
+
+## Exercices d'entrainement
+
+1. Avec le jeu de données `diamonds`, du packages `ggplot2`, tapez les commandes suivantes pour créer un nouveau tableau `diams` contenant moins de lignes (3000 au lieu de près de 54000) :
+
+```{r tidy = FALSE}
+library(dplyr)
+set.seed(4532) # Afin que tout le monde récupère les mêmes lignes
+diams <- diamonds %>%
+  sample_n(3000)
+```
+
+2. Avec ce nouveau tableau `diams`, tapez le code permettant de créer le graphique ci-dessous. Indice : affichez le tableau `diams` dans la console afin de voir quelles sont les variables disponibles.
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-cap: "Prix de 3000 diamants en fonction de leur taille en carats et de leur clarté."
+ggplot(data = diams, mapping = aes(x = carat, y = price)) +
+  geom_point(alpha = 0.5, shape = 4, aes(color = clarity)) +
+  labs(x = "Carat", y = "Prix ($US)",
+       color = "Clarté") +
+  theme_bw()
+```
+
+
+3. Selon vous, à quoi sont dues les bandes verticales que l'on observe sur ce graphique ?
+
+4. Installez et chargez en mémoire le package `nycflight13`
+
+5. Examinez le tableau `flights` de ce package, et lisez son fichier d'aide pour comprendre à quoi correspondent ces données
+
+6. Créer un nouveau jeu de données en exécutant ces commandes :
+
+```{r tidy=FALSE}
+set.seed(1234)
+small_flights <- flights %>%
+  filter(!is.na(arr_delay),
+         distance < 3000)  %>%
+  sample_n(1000)
+```
+
+
+7. Ce nouveau jeu de données de petite taille (1000 lignes) est nommé `small_flights`. Il contient les mêmes variables que le tableau `flights` mais ne contient qu'une petite fraction de ses lignes. Les lignes retenues ont été choisies au hasard. Vous pouvez visualiser son contenu en tapant son nom dans la console ou en utilisant la fonction `View()`.
+
+En vous appuyant sur les fonctions et les principes de la grammaire des graphiques que vous avez découverts dans ce chapitre, et en vous servant de ce nouveau jeu de données, tapez les commandes qui permettent de produire le graphique ci-dessous :
+
+```{r}
+#| echo: false
+#| warning: false
+
+small_flights %>%
+  ggplot(aes(x = distance, y = air_time, color = origin, shape = origin)) +
+    geom_point(alpha = 0.8) +
+    scale_color_brewer(palette = "Set1") +
+    labs(x = "Distance parcourue en vol (miles)",
+         y = "Temps de vol (minutes)",
+         title = "Relation entre le temps de vol et la distance parcourue",
+         subtitle = "Seuls les vols au départ de JFK et Newark parcourent plus de 1600 miles",
+         color = "Aéroport de\nNew York",
+         shape = "Aéroport de\nNew York",
+         caption = "Données : small_flights") +
+    theme_bw()
+```
+
+Quelques indices :
+
+- Les couleurs utilisées sont celles de la palette `Set1` du package `RColorBrewer`.
+- Les variables utilisées sont `origin`, `air_time` et `distance`.
+- La transparence des symboles est fixée à `0.8`.
+
+8. Toujours avec ce jeu de données `small-flights`, tapez les commandes permettant de produire le graphique ci-dessous :
+
+```{r}
+#| fig-asp: 1
+#| echo: false
+#| warning: false
+small_flights %>%
+  ggplot(aes(x = factor(month), fill = origin)) +
+    geom_bar() +
+    facet_wrap(~fct_infreq(carrier), nrow = 4) +
+    scale_fill_brewer(palette = "Accent") +
+    labs(x = "Mois de l'année 2013",
+         y = "Nombre de vols",
+         title = "Évolution mensuelle du trafic aérien New Yorkais en 2013",
+         subtitle = "Seules 9 compagnies aériennes sur 14 ont déservi New York toute l'année",
+         fill = "Aéroport de\nNew York",
+         caption = "Données : small_flights") +
+    theme_bw()
+```
+
+Quelques indices :
+
+- Les couleurs utilisées sont celles de la palettes `Accent` du package `RColorBrewer`.
+- Les variables utilisées sont `month`, `carrier` et `origin`.
+- La variable `month` est codée sous forme numérique dans le tableau de données. Il faudra la transformer en factor avec la fonction `factor(month)` au moment de l'associer à un axe du graphique.
+
+<!-- Pour le S4 : penser aux barres d'erreur -->
