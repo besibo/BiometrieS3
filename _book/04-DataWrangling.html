@@ -212,21 +212,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#pré-requis" id="toc-pré-requis" class="nav-link active" data-scroll-target="#pré-requis"> <span class="header-section-number">4.1</span> Pré-requis</a></li>
-  <li><a href="#le-pipe" id="toc-le-pipe" class="nav-link" data-scroll-target="#le-pipe"> <span class="header-section-number">4.2</span> Le pipe <code>%&gt;%</code></a></li>
-  <li><a href="#les-verbes-du-tripatouillage-de-données" id="toc-les-verbes-du-tripatouillage-de-données" class="nav-link" data-scroll-target="#les-verbes-du-tripatouillage-de-données"> <span class="header-section-number">4.3</span> Les verbes du tripatouillage de données</a></li>
-  <li><a href="#filtrer-des-lignes-avec-filter" id="toc-filtrer-des-lignes-avec-filter" class="nav-link" data-scroll-target="#filtrer-des-lignes-avec-filter"> <span class="header-section-number">4.4</span> Filtrer des lignes avec <code>filter()</code></a>
+  <li><a href="#importer-des-données-depuis-un-tableur" id="toc-importer-des-données-depuis-un-tableur" class="nav-link" data-scroll-target="#importer-des-données-depuis-un-tableur"> <span class="header-section-number">4.2</span> Importer des données depuis un tableur</a>
   <ul class="collapse">
-  <li><a href="#principe" id="toc-principe" class="nav-link" data-scroll-target="#principe"> <span class="header-section-number">4.4.1</span> Principe</a></li>
-  <li><a href="#exercice" id="toc-exercice" class="nav-link" data-scroll-target="#exercice"> <span class="header-section-number">4.4.2</span> Exercice</a></li>
-  <li><a href="#les-conditions-logiques" id="toc-les-conditions-logiques" class="nav-link" data-scroll-target="#les-conditions-logiques"> <span class="header-section-number">4.4.3</span> Les conditions logiques</a></li>
+  <li><a href="#les-règles-de-base" id="toc-les-règles-de-base" class="nav-link" data-scroll-target="#les-règles-de-base"> <span class="header-section-number">4.2.1</span> Les règles de base</a></li>
+  <li><a href="#tableur" id="toc-tableur" class="nav-link" data-scroll-target="#tableur"> <span class="header-section-number">4.2.2</span> Fichiers au format tableur (.xls ou .xlsx)</a></li>
+  <li><a href="#plaintext" id="toc-plaintext" class="nav-link" data-scroll-target="#plaintext"> <span class="header-section-number">4.2.3</span> Fichiers au format texte brut (.csv)</a></li>
+  <li><a href="#importproblem" id="toc-importproblem" class="nav-link" data-scroll-target="#importproblem"> <span class="header-section-number">4.2.4</span> En cas de problème…</a></li>
+  <li><a href="#Exo-10" id="toc-Exo-10" class="nav-link" data-scroll-target="#Exo-10"> <span class="header-section-number">4.2.5</span> Exercices</a></li>
   </ul></li>
-  <li><a href="#sélectionner-des-variables-avec-select" id="toc-sélectionner-des-variables-avec-select" class="nav-link" data-scroll-target="#sélectionner-des-variables-avec-select"> <span class="header-section-number">4.5</span> Sélectionner des variables avec <code>select()</code></a></li>
-  <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate"> <span class="header-section-number">4.6</span> Créer de nouvelles variables avec <code>mutate()</code></a>
+  <li><a href="#le-pipe" id="toc-le-pipe" class="nav-link" data-scroll-target="#le-pipe"> <span class="header-section-number">4.3</span> Le pipe <code>%&gt;%</code></a></li>
+  <li><a href="#les-verbes-du-tripatouillage-de-données" id="toc-les-verbes-du-tripatouillage-de-données" class="nav-link" data-scroll-target="#les-verbes-du-tripatouillage-de-données"> <span class="header-section-number">4.4</span> Les verbes du tripatouillage de données</a></li>
+  <li><a href="#filtrer-des-lignes-avec-filter" id="toc-filtrer-des-lignes-avec-filter" class="nav-link" data-scroll-target="#filtrer-des-lignes-avec-filter"> <span class="header-section-number">4.5</span> Filtrer des lignes avec <code>filter()</code></a>
   <ul class="collapse">
-  <li><a href="#principe-1" id="toc-principe-1" class="nav-link" data-scroll-target="#principe-1"> <span class="header-section-number">4.6.1</span> Principe</a></li>
-  <li><a href="#exercices" id="toc-exercices" class="nav-link" data-scroll-target="#exercices"> <span class="header-section-number">4.6.2</span> Exercices</a></li>
+  <li><a href="#principe" id="toc-principe" class="nav-link" data-scroll-target="#principe"> <span class="header-section-number">4.5.1</span> Principe</a></li>
+  <li><a href="#exercice" id="toc-exercice" class="nav-link" data-scroll-target="#exercice"> <span class="header-section-number">4.5.2</span> Exercice</a></li>
+  <li><a href="#les-conditions-logiques" id="toc-les-conditions-logiques" class="nav-link" data-scroll-target="#les-conditions-logiques"> <span class="header-section-number">4.5.3</span> Les conditions logiques</a></li>
   </ul></li>
-  <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange"> <span class="header-section-number">4.7</span> Trier des lignes avec <code>arrange()</code></a></li>
+  <li><a href="#sélectionner-des-variables-avec-select" id="toc-sélectionner-des-variables-avec-select" class="nav-link" data-scroll-target="#sélectionner-des-variables-avec-select"> <span class="header-section-number">4.6</span> Sélectionner des variables avec <code>select()</code></a></li>
+  <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate"> <span class="header-section-number">4.7</span> Créer de nouvelles variables avec <code>mutate()</code></a>
+  <ul class="collapse">
+  <li><a href="#principe-1" id="toc-principe-1" class="nav-link" data-scroll-target="#principe-1"> <span class="header-section-number">4.7.1</span> Principe</a></li>
+  <li><a href="#exercices" id="toc-exercices" class="nav-link" data-scroll-target="#exercices"> <span class="header-section-number">4.7.2</span> Exercices</a></li>
+  </ul></li>
+  <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange"> <span class="header-section-number">4.8</span> Trier des lignes avec <code>arrange()</code></a></li>
   </ul>
 </nav>
     </div>
@@ -257,31 +265,362 @@ Attachement du package : 'dplyr'</code></pre>
     intersect, setdiff, setequal, union</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 </section>
-<section id="le-pipe" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="le-pipe"><span class="header-section-number">4.2</span> Le pipe <code>%&gt;%</code></h2>
+<section id="importer-des-données-depuis-un-tableur" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="importer-des-données-depuis-un-tableur"><span class="header-section-number">4.2</span> Importer des données depuis un tableur</h2>
+<section id="les-règles-de-base" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="les-règles-de-base"><span class="header-section-number">4.2.1</span> Les règles de base</h3>
+<p>Jusqu’à maintenant, nous avons travaillé exclusivement avec des jeux de données déjà disponibles dans <code>R</code>. La plupart du temps, les données sur lesquelles vous devrez travailler devront au préalable être importées dans <code>R</code>, à partir de fichiers issus de tableurs. De tels fichiers se présentent généralement sous l’un des 2 formats suivants :</p>
+<ol type="1">
+<li>Fichiers au format “.csv” : il s’agit d’un format de fichier dit “texte brut”, c’est à dire qu’il peut être ouvert avec n’importe quel éditeur de texte, y compris le bloc notes de Windows. L’extension “.csv” est l’abréviation de “Comma Separated Values”, autrement dit, dans ce type de fichiers, les colonnes sont séparées par des virgules. Cela peut poser problème en France puisque le symbole des décimales est souvent aussi la virgule (et non le point comme dans les pays anglo-saxons). Le séparateur de colonnes utilisé en France dans les fichiers <code>.csv</code> est alors souvent le point-virgule. Il est possible de créer des fichiers <code>.csv</code> à partir de n’importe quel tableur en choisissant <code>Fichier &gt; Exporter...</code> ou <code>Fichier &gt; Enregistrer sous...</code> puis en sélectionnant le format approprié (les dénominations sont variables selon les logiciels : format texte brut, format csv, plain text, etc…).</li>
+<li>Fichiers au format tableur : <code>.xls</code> ou <code>.xlsx</code> pour Excel, <code>.calc</code> pour Open Office.</li>
+</ol>
+<p>Dans les 2 cas, pour que <code>R</code> puisse importer les données contenues dans ces fichiers, un certain nombre de règles doivent être respectées :</p>
+<ol type="1">
+<li>La première chose à laquelle il faut veiller est la présentation des données. Les variables doivent être en colonnes et les observations en lignes.</li>
+<li>Les cases vides qui correspondent à des données manquantes doivent contenir les lettres <code>NA</code> en majuscule. Il est important de bien faire la distinction entre les vrais zéros (<em>i.e.</em> les grandeurs mesurées pour lesquelles un zéro a été obtenu), et les valeurs manquantes, c’est à dire pour lesquelles aucune valeur n’a pu être obtenue (<em>e.g.</em> variable non mesurée pour un individu donné ou à une station donnée).</li>
+<li>Il est généralement conseillé d’utiliser la première ligne du tableau pour stocker le nom des variables</li>
+<li>Ne jamais utiliser de caractères spéciaux tels que #, $, %, ^, &amp;, *, (, ), {, }, [, ], des accents, des cédilles des guillemets ou des apostrophes… Cela pourrait causer des erreurs lors de l’importation dans <code>R</code>. Si votre fichier en contient, faites une recherche (<em>via</em> le menu <code>Edition &gt; Rechercher et remplacer...</code>) pour remplacer chaque instance par un caractère qui ne posera pas de problème.</li>
+<li>Évitez les espaces dans vos noms de variables, d’observations ou de catégories et remplacez-les par des points ou des <code>_</code>.</li>
+<li>Des noms courts pour les variables sont généralement plus faciles à manipuler par la suite.</li>
+<li>La première valeur de votre tableau devrait toujours se trouver dans la cellule A1 du tableur. Autrement dit, il ne devrait jamais y avoir de lignes incomplètes ou de lignes de commentaires au-dessus des données, ou de colonne vide à gauche de votre tableau. D’ailleurs, il ne devrait jamais y avoir de commentaires à droite ou en dessous de vos données non plus.</li>
+</ol>
+</section>
+<section id="tableur" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="tableur"><span class="header-section-number">4.2.2</span> Fichiers au format tableur (.xls ou .xlsx)</h3>
+<p>À titre d’exemple, téléchargez le fichier <a href="data/dauphin.xls">dauphin.xls</a> et placez-le dans votre répertoire de travail. Ce jeu de données contient des résultats de dosages de différents métaux lourds (cadmium, cuivre et mercure) dans différents organes (foie et rein) de plusieurs dauphins communs <em>Delphinus delphis</em>. Les informations de taille, d’âge et de statut reproducteur sont également précisées. Ouvrez ce fichier dans un tableur. Vous constaterez que son format ne permet pas de l’importer tel quel dans <code>R</code> :</p>
+<ul>
+<li>Il contient des lignes vides inutiles au-dessus des données.</li>
+<li>Il contient des commentaires inutiles au-dessus des données.</li>
+<li>Les titres de colonnes sont complexes et contiennent des caractères spéciaux.</li>
+<li>Dans le tableau, les données manquantes sont représentées soit par des “<code>*</code>”, soit par des cellules vides.</li>
+</ul>
+<p>Importer un tel jeu de données dans <code>R</code> par les méthodes classiques (c’est-à-dire sans utiliser RStudio et uniquement grâce aux fonctions de base de <code>R</code>) demanderait donc un gros travail de mise en forme préalable. Heureusement, <code>RStudio</code> et le package <code>readxl</code> facilitent grandement le processus.</p>
+<p>Dans <code>RStudio</code>, localisez l’onglet <code>Files</code> situé dans le panneau en bas à droite de l’interface du logiciel. Dans ce panneau, cliquez sur le nom du fichier <code>Dauphin.xls</code>, puis, dans le menu qui s’affiche, choisissez <code>Import Dataset...</code> :</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/import.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">L’option <code>Import Dataset...</code> dans la fenêtre <code>Files</code> de RStudio</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>La nouvelle fenêtre qui s’ouvre est celle de l’“assistant d’importation” :</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/import2.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">L’assistant d’importation de RStudio</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Cette fenêtre contient plusieurs zones importantes :</p>
+<ol type="1">
+<li><code>File/URL</code> (en haut) : lien vers le fichier contenant les données, sur votre ordinateur ou en ligne.</li>
+<li><code>Data Preview</code> : zone principale affichant les 50 premières lignes du fichier que l’on souhaite importer.</li>
+<li><code>Import Options</code> (en bas à gauche) : zone dans laquelle des options permettant d’importer les données correctement peuvent être spécifiées.</li>
+<li><code>Code Preview</code> (en bas à droite) : les lignes de codes que vous pourrez copier-coller dans votre script une fois les réglages corrects effectués.</li>
+</ol>
+<p>Ici, nous constatons que les données ne sont pas au bon format. La première chose que nous pouvons faire est d’indiquer à <code>R</code> que nous souhaitons ignorer les 9 premières lignes du fichier. Ensuite, nous précisons à <code>RStudio</code> que l’étoile “<code>*</code>” a été utilisée pour indiquer des données manquantes :</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/import3.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Les bons réglages pour ce fichier</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notez qu’à chaque fois que vous modifiez une valeur dans la zone <code>Import Options</code>, 2 choses se produisent simultanément :</p>
+<ol type="1">
+<li>La zone <code>Data Preview</code> est mise à jour. Cela permet de s’assurer que les changements effectués ont bien les effets escomptés.</li>
+<li>La zone <code>Code Preview</code> est mise à jour. Cela permet de copier-coller dans un script les commandes permettant d’importer correctement les données. Ici, voilà le code que nous devons ajouter à notre script :</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dauphin <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/dauphin.xls"</span>, <span class="at">na =</span> <span class="st">"*"</span>, <span class="at">skip =</span> <span class="dv">9</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La commande <code>library(readxl)</code> est inutile puisque nous l’avons déjà saisie au début de ce chapitre. Nous disposons maintenant d’un nouvel objet nommé <code>dauphin</code>. Il est stocké sous la forme d’un <code>tibble</code> :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dauphin</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 93 × 9
+   `N°`      Sexe  Statut repro…¹ Taill…² Age e…³ Cd (m…⁴ Cu (m…⁵ Hg (m…⁶ Organe
+   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; 
+ 1 Numéro 1  f     imm                315       3   29.6     3.24   NA    rein  
+ 2 Numéro 2  f     imm                357       4   55.1     4.42   NA    rein  
+ 3 Numéro 3  f     pnl                439      34  129.      5.01    9.02 rein  
+ 4 Numéro 4  f     imm                316       4   71.2     4.33   NA    rein  
+ 5 Numéro 5  f     l                  435      26  192       5.15   NA    rein  
+ 6 Numéro 6  f     pnl                388       6   NA       4.12    4.53 rein  
+ 7 Numéro 7  f     mat                410      NA   76       5.1    33.9  foie  
+ 8 Numéro 8  m     imm                355      NA   74.4     4.72   13.3  foie  
+ 9 Numéro 9  m     imm                222      NA    0.09    9.5     2.89 foie  
+10 Numéro 10 m     imm                412       9   85.6     5.42   NA    rein  
+# … with 83 more rows, and abbreviated variable names ¹​`Statut reproducteur`,
+#   ²​`Taille en cm`, ³​`Age en années`, ⁴​`Cd (mg.kg-1)`, ⁵​`Cu (mg.kg-1)`,
+#   ⁶​`Hg (mg.kg-1)`</code></pre>
+</div>
+</div>
+<p>Notez toutefois que les noms de colonnes complexes sont toujours présents. Avec de tels noms, les variables ne seront pas faciles à manipuler et les risques d’erreurs de frappes seront nombreux. Nous avons tout intérêt à les modifier à l’aide de la fonction <code>names()</code> :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dauphin) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ID"</span>, <span class="st">"Sexe"</span>, <span class="st">"Statut"</span>, <span class="st">"Taille"</span>,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Age"</span>, <span class="st">"Cd"</span>, <span class="st">"Cu"</span>, <span class="st">"Hg"</span>, <span class="st">"Organe"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>dauphin</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 93 × 9
+   ID        Sexe  Statut Taille   Age     Cd    Cu    Hg Organe
+   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
+ 1 Numéro 1  f     imm       315     3  29.6   3.24 NA    rein  
+ 2 Numéro 2  f     imm       357     4  55.1   4.42 NA    rein  
+ 3 Numéro 3  f     pnl       439    34 129.    5.01  9.02 rein  
+ 4 Numéro 4  f     imm       316     4  71.2   4.33 NA    rein  
+ 5 Numéro 5  f     l         435    26 192     5.15 NA    rein  
+ 6 Numéro 6  f     pnl       388     6  NA     4.12  4.53 rein  
+ 7 Numéro 7  f     mat       410    NA  76     5.1  33.9  foie  
+ 8 Numéro 8  m     imm       355    NA  74.4   4.72 13.3  foie  
+ 9 Numéro 9  m     imm       222    NA   0.09  9.5   2.89 foie  
+10 Numéro 10 m     imm       412     9  85.6   5.42 NA    rein  
+# … with 83 more rows</code></pre>
+</div>
+</div>
+<p>Enfin, vous pouvez égalememnt noter que certaines variables devraient être modifiées :</p>
+<ul>
+<li>Les variables <code>Sexe</code>, <code>Statut</code> (qui contient l’information de statut reproducteur des dauphins) et <code>Organe</code> (qui indique dans quel organe les métaux ont été dosés) sont de type <code>&lt;chr&gt;</code>. L’idéal serait de disposer de facteurs puisqu’ils s’agit de variables catégorielles.</li>
+<li>La variable <code>ID</code> est totalement inutile puisqu’elle est parfaitement redondante avec le numéro de ligne. Nous pourrions donc la supprimer.</li>
+<li>Certaines catégories (ou niveaux) de la variable <code>Statut</code> devraient être ordonnées puisqu’elles reflètent une progression logique : <code>imm</code> (immature), <code>mat</code> (mature), <code>pnl</code> (pregnant non lactating), <code>pl</code> (pregnant lactating), <code>l</code> (lactating), <code>repos</code> (repos somatique).</li>
+</ul>
+<p>Nous verrons dans la partie @ref(wrangling) comment effectuer simplement ces différentes opérations.</p>
+</section>
+<section id="plaintext" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="plaintext"><span class="header-section-number">4.2.3</span> Fichiers au format texte brut (.csv)</h3>
+<p>Nous allons utiliser les mêmes données que précédemment, mais cette fois-ci, elles sont contenues dans un fichier au format <code>.csv</code>. Téléchargez le fichier <a href="data/dauphin.csv">dauphin.csv</a> (pour cela, faites un clic droit sur le lien et choisissez <code>Enregistrez la cible du lien sous...</code> ou une mention équivalente), placez-le dans votre répertoire de travail, et ouvrez-le avec le bloc notes Windows ou tout autre éditeur de texte brut disponible sur votre ordinateur. <strong>Attention</strong> : Microsoft Word n’est pas un éditeur de texte brut. Un fichier au format <code>.doc</code> ou <code>.docx</code> est illisible dans un éditeur de texte brut car outre le texte, ces formats de documents contiennent toutes les informations concernant la mise en forme du texte (polices de caractères, tailles, couleurs et autres attributs, présence de figures, de tableaux dans le document, etc.).</p>
+<p>À l’inverse, les fichiers au format <code>.txt</code>, <code>.csv</code> et même <code>.R</code> (vos scripts !) sont des fichiers au format texte brut. Vous pouvez d’ailleurs essayer d’ouvrir <code>dauphin.csv</code> depuis RStudio, en allant dans la fenêtre <code>Files</code> puis en cliquant sur le nom du fichier et en choisissant <code>View File</code>. RStudio ouvre un nouvel onglet à côté de votre script vous permettant d’inspecter le contenu de ce fichier. Par rapport au fichier Excel, vous pouvez noter un certain nombre de différences :</p>
+<ol type="1">
+<li>Les colonnes sont séparées par des tabulations.</li>
+<li>Les nombres décimaux utilisent la virgule (et non le point comme dans les pays anglo-saxons).</li>
+<li>Les noms de colonnes ont déjà été corrigés/simplifiés par rapport au tableau d’origine.</li>
+<li>Les valeurs manquantes sont toutes codées par des <code>NA</code>s.</li>
+</ol>
+<p>Un travail d’édition du fichier <code>.xls</code> de départ a donc été réalisé en amont de l’enregistrement au format <code>.csv</code>.</p>
+<p>Attention, à ce stade, vous avez ouvert un fichier au format texte brut dans RStudio, mais les données contenues dans ce fichier n’ont pas été importées dans R pour autant. Pour les importer, on procède comme pour les fichiers au format tableur (voir section @ref(tableur) ci-dessus).</p>
+<p>On commence par cliquer sur <code>dauphin.csv</code> dans l’onglet <code>Files</code> de RStudio. On sélectionne ensuite <code>Import Dataset...</code> :</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/importcsv1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption">Importer un fichier <code>.csv</code> depuis l’onglet <code>Files</code> de RStudio</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>La fenêtre qui s’ouvre est en tous points identique à celle obtenue pour l’importation de fichiers tableurs (figure @ref(fig:importcsv2)).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/importcsv2.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Importer un fichier <code>.csv</code> depuis l’onglet <code>Files</code> de RStudio</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Nous voyons ici que par défaut, RStudio considère qu’une unique colonne est présente. En effet, les fichiers <code>.csv</code> utilisent généralement la virgule pour séparer les colonnes. Ce n’est pas le cas ici. Il nous faut donc sélectionner, dans le champ <code>Delimiter</code>, l’option <code>Tab</code> (tabulation) et non <code>Comma</code> (virgule).</p>
+<p>À ce stade, chaque variable est maintenant reconnue comme telle, chaque variable occupe donc une colonne distincte. Mais les colonnes <code>Cd</code>, <code>Cu</code> et <code>Hg</code> ne contiennent pas les bonnes valeurs (vous pouvez le vérifier en consultant l’onglet <code>dauphin.csv</code> que vous avez ouvert un peu plus tôt à côté de votre script). La cause est simple : R s’attend à ce que les nombres décimaux utilisent le point en guise de symbole des décimales. Or, notre fichier <code>.csv</code> utilise la virgule. C’est une convention qui dépend du pays dans lequel vous vous trouvez, et de la langue de votre système d’exploitation (en langage technique, on parle de <code>Locale</code>). Le fichier <code>dauphin.csv</code> ayant été créé sur un ordinateur français, la virgule a été utilisée en guise de symbole des décimales. Pour l’indiquer à R, cliquez sur <code>Locale &gt; Configure...</code>, changez le <code>.</code> en <code>,</code> dans le champ <code>Decimal Mark</code> et validez en cliquant sur <code>Configure</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/importcsv3.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption class="figure-caption">Changement du symbole utilisé pour les décimales</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Les données sont maintenant au bon format, prêtes à être importées dans RStudio. Afin de ne pas écraser l’objet <code>dauphin</code> que nous avons créé à partir du fichier tableur un peu plus tôt, nous stockerons ces nouvelles données dans un objet nommé <code>dauphin2</code>. Pour cela, ajoutez un <code>2</code> au nom <code>dauphin</code> dans le champ <code>Name</code> en bas à gauche :</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/importcsv4.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Les données, dans un format correct permettant l’importation</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Nous n’avons plus qu’à copier-coller dans notre script le code généré automatiquement en bas à droite de la fenêtre (comme précédemment, la ligne <code>library(readr)</code> est inutile : nous avons déjà chargé ce package en début de chapitre).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dauphin2 <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"data/dauphin.csv"</span>, </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">decimal_mark =</span> <span class="st">","</span>), </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 93 Columns: 9
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (3): Sexe, Statut, Organe
+dbl (6): Id, Taille, Age, Cd, Cu, Hg
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>Notez que :</p>
+<ol type="1">
+<li>C’est le package <code>readr</code> et non plus <code>readxl</code> qui est utilisé.</li>
+<li>La fonction <code>read_delim()</code> a remplacé la fonction <code>read_excel()</code>. Il existe beaucoup d’autres fonctions selon le format de vos données (par exemple <code>read_csv()</code> et <code>read_csv2()</code>). Il est inutile de toutes les connaître dans la mesure où généralement, RStudio vous propose automatiquement la plus appropriée.</li>
+<li>R indique de quelle façon les colonnes ont été “parsées”, autrement dit, R indique quelles fonctions ont été utilisées pour reconnaître le type des données présentes dans chaque colonne.</li>
+</ol>
+<p>Toutes les fonctions permettant d’importer des données n’ont pas nécessairement le même comportement. Ainsi, si l’on compare les objets importés depuis le fichier tableur (<code>dauphin</code>) et depuis le fichier texte brut (<code>dauphin2</code>), le type de certaines variables peut être différent :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dauphin</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 93 × 9
+   ID        Sexe  Statut Taille   Age     Cd    Cu    Hg Organe
+   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
+ 1 Numéro 1  f     imm       315     3  29.6   3.24 NA    rein  
+ 2 Numéro 2  f     imm       357     4  55.1   4.42 NA    rein  
+ 3 Numéro 3  f     pnl       439    34 129.    5.01  9.02 rein  
+ 4 Numéro 4  f     imm       316     4  71.2   4.33 NA    rein  
+ 5 Numéro 5  f     l         435    26 192     5.15 NA    rein  
+ 6 Numéro 6  f     pnl       388     6  NA     4.12  4.53 rein  
+ 7 Numéro 7  f     mat       410    NA  76     5.1  33.9  foie  
+ 8 Numéro 8  m     imm       355    NA  74.4   4.72 13.3  foie  
+ 9 Numéro 9  m     imm       222    NA   0.09  9.5   2.89 foie  
+10 Numéro 10 m     imm       412     9  85.6   5.42 NA    rein  
+# … with 83 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dauphin2</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 93 × 9
+      Id Sexe  Statut Taille   Age     Cd    Cu    Hg Organe
+   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
+ 1     1 f     imm       315     3  29.6   3.24 NA    rein  
+ 2     2 f     imm       357     4  55.1   4.42 NA    rein  
+ 3     3 f     pnl       439    34 129.    5.01  9.02 rein  
+ 4     4 f     imm       316     4  71.2   4.33 NA    rein  
+ 5     5 f     l         435    26 192     5.15 NA    rein  
+ 6     6 f     pnl       388     6  NA     4.12  4.53 rein  
+ 7     7 f     mat       410    NA  76     5.1  33.9  foie  
+ 8     8 m     imm       355    NA  74.4   4.72 13.3  foie  
+ 9     9 m     imm       222    NA   0.09  9.5   2.89 foie  
+10    10 m     imm       412     9  85.6   5.42 NA    rein  
+# … with 83 more rows</code></pre>
+</div>
+</div>
+<p>En particulier selon la version des packages que vosu utilisez et les réglages spéifiques de vos systèmes d’exploitation, les variables <code>Taille</code> et <code>Age</code> sont parfois considérées comme réelles dans <code>dauphin</code> mais comme entières dans <code>dauphin2</code> (ce n’est pas le cas ici). Afin d’éviter les confusions dans la suite du document, nous allons supprimer <code>dauphin2</code> en tapant :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(dauphin2)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Taper <code>dauphin2</code> dans la console devrait maintenant produire une erreur :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dauphin2</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): objet 'dauphin2' introuvable</code></pre>
+</div>
+</div>
+</section>
+<section id="importproblem" class="level3" data-number="4.2.4">
+<h3 data-number="4.2.4" class="anchored" data-anchor-id="importproblem"><span class="header-section-number">4.2.4</span> En cas de problème…</h3>
+<p>Il arrive parfois que l’importation de fichiers textes bruts par la méthode décrite ci-dessus échoue en raison d’un bug du package <code>readr</code> qui gère mal la présence de caractères spéciaux (accents, cédilles, etc) dans le chemin des fichiers que l’on tente d’importer. À l’heure où j’écris ces lignes (28 novembre 2018), le bug a été corrigé dans la version de développement du package, mais toujours pas dans la version stable disponible au téléchargement sur les serveurs du CRAN. Il est donc utile de connaître une méthode alternative pour importer de tels fichiers dans R. Cette méthode repose sur “la mère de toutes les fonctions d’importation” : <code>read.table()</code>.</p>
+<p>La fonction <code>read.table()</code> est à la base de la plupart des fonctions d’importation décrites dans ce chapitre. Il est donc important d’en connaître la syntaxe et les arguments les plus importants. Cette fonction requiert en général les arguments suivants :</p>
+<ol type="1">
+<li>Le chemin du fichier texte contenant les données à importer. Si le fichier se trouve dans votre répertoire de travail, il suffit de donner son nom. S’il est dans un sous-dossier de votre répertoire de travail, il faut donner le nom complet : <code>"sous_dossier/nom_du_fichier.csv"</code>.</li>
+<li><code>sep</code> : la spécification du symbole utilisé en guise de séparateur de colonnes dans le fichier texte. Cela peut-être la virgule (<code>sep = ","</code>), le point virgule (<code>sep = ";"</code>) ou encore la tabulation (<code>sep = "\t"</code>) selon les fichiers importés.</li>
+<li><code>dec</code> : la spécification du symbole utilisé en guise de symbole pour les décimales. Il n’est pas nécessaire de spécifier cet argument lorsque le symbole dans le fichier source est le point. Mais si c’est une virgule (comme c’est souvent le cas dans les pays francophones), il faut alors préciser <code>dec = ","</code>.</li>
+<li><code>header</code> : la première ligne du fichier source contient-elle des noms de variables. Si oui, il faut indiquer <code>header = TRUE</code>.</li>
+</ol>
+<p>Ainsi, par exemple, pour le fichier <code>dauphin.csv</code>, on peut taper ceci :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>dauph <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data/dauphin.csv"</span>,</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dec =</span> <span class="st">","</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>dauph <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(dauph)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>dauph</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 93 × 9
+      Id Sexe  Statut Taille   Age     Cd    Cu    Hg Organe
+   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;   &lt;int&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
+ 1     1 f     imm       315     3  29.6   3.24 NA    rein  
+ 2     2 f     imm       357     4  55.1   4.42 NA    rein  
+ 3     3 f     pnl       439    34 129.    5.01  9.02 rein  
+ 4     4 f     imm       316     4  71.2   4.33 NA    rein  
+ 5     5 f     l         435    26 192     5.15 NA    rein  
+ 6     6 f     pnl       388     6  NA     4.12  4.53 rein  
+ 7     7 f     mat       410    NA  76     5.1  33.9  foie  
+ 8     8 m     imm       355    NA  74.4   4.72 13.3  foie  
+ 9     9 m     imm       222    NA   0.09  9.5   2.89 foie  
+10    10 m     imm       412     9  85.6   5.42 NA    rein  
+# … with 83 more rows</code></pre>
+</div>
+</div>
+<p>Puisque la fonction <code>read.table()</code> importe les données sous la forme d’un data.frame, il est nécessaire de transformer le tableau obtenu en <code>tibble</code> grâce à la fonction <code>as_tibble()</code> afin de bénéficier de tous les avantages de ce format d’objet.</p>
+</section>
+<section id="Exo-10" class="level3" data-number="4.2.5">
+<h3 data-number="4.2.5" class="anchored" data-anchor-id="Exo-10"><span class="header-section-number">4.2.5</span> Exercices</h3>
+<ol type="1">
+<li>L’objet <code>dauphin</code> est-il “tidy” (autrement dit, s’agit-il de “données rangées”) ? Justifiez.</li>
+<li>Produisez le graphique ci-dessous :</li>
+</ol>
+<div class="cell" data-fig.asp="1">
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="04-DataWrangling_files/figure-html/exercicedauphin-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Indice : les droites de régression avec les intervalles de confiance sont ajoutés grâce à la fonction <code>geom_smooth(method = "lm")</code>.</p>
+<ol start="3" type="1">
+<li>Importez dans R le jeu de données <a href="data/whoTB.csv">whoTB.csv</a>. Ce jeu de données contient les cas de tuberculose (TB) rapportés par l’Organisation Mondiale de la Santé (OMS, ou WHO en anglais : World Health Organization). Les cas sont répertoriés par année, pays, âge, sexe, type de tuberculose et méthode de diagnostique. Selon vous, ce jeu de données est-il “rangé” ? Pourquoi ?</li>
+<li>Si ce jeu de données n’est pas rangé, rangez-le en utilisant les fonctions du packages <code>tidyr</code> que nous avons découvertes dans ce chapitre : <code>pivot_longer()</code>, <code>pivot_wider()</code>, <code>separate()</code> et <code>unite()</code> (vous n’aurez pas nécessairement besoin d’utiliser ces 4 fonctions, et à l’inverse, certaines devront peut-être être utilisées plusieurs fois).</li>
+</ol>
+<p>Pour vous aider, l’OMS donne la signification des codes utilisés en guise de noms pour la plupart des colonnes. Ainsi :</p>
+<ul>
+<li><code>new</code> indique des nouveaux cas, <code>old</code> des anciens (ici, seuls des nouveaux cas sont rapportés).</li>
+<li>Le type de cas est précisé ensuite :
+<ul>
+<li><code>sp</code> signifie “Smear Positive” (tuberculose pulmonaire à frottis positif).</li>
+<li><code>sn</code> signifie “Smear Negative” (tuberculose pulmonaire à frottis négatif).</li>
+<li><code>rel</code> signifie “relapse” (rechute).</li>
+<li><code>ep</code> signifie “Extra Pulmonary” (tuberculose extra-pulmonaire).</li>
+</ul></li>
+<li>Le sexe est codé par <code>m</code> (male) ou <code>f</code> (female).</li>
+<li>Enfin, les chiffres correspondent à des tranches d’âges : 014 signifie “de 0 à 14 ans”, “1524” signifie “de 15 à 24 ans”, etc.</li>
+</ul>
+<p>Dans ces colonnes aux noms composés, les nombres de cas de tuberculose sont rapportés.</p>
+</section>
+</section>
+<section id="le-pipe" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="le-pipe"><span class="header-section-number">4.3</span> Le pipe <code>%&gt;%</code></h2>
 <p>Avant d’entrer dans le vif du sujet, je souhaite introduire ici la notion de “pipe” (prononcer à l’anglo-saxonne). Le pipe est un opérateur que nous avons déjà vu apparaître à plusieurs reprises dans les chapitres précédents sans expliquer son fonctionnement.</p>
 <p>Le pipe, noté <code>%&gt;%</code>, peut être obtenu en pressant les touches <code>ctrl + shift + M</code> (ou <code>cmd + shift = M</code> sous MacOS) de votre clavier. Il permet d’enchaîner logiquement des actions les unes à la suite des autres. Globalement, le pipe prend l’objet situé à sa gauche, et le transmet à la fonction situé à sa droite. En d’autres termes, les 2 expressions suivantes sont strictement équivalentes :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ici, "f" est une fonction quelconque, "x" et "y" sont 2 objets dont la fonction a besoin.</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Il s'agit d'un exemple fictif : ne tapez pas ceci dans votre script !</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(x, y)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span> <span class="fu">f</span>(y)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ici, "f" est une fonction quelconque, "x" et "y" sont 2 objets dont la fonction a besoin.</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Il s'agit d'un exemple fictif : ne tapez pas ceci dans votre script !</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(x, y)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span> <span class="fu">f</span>(y)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Travailler avec le pipe est très intéressant car toutes les fonctions de <code>dplyr</code> que nous allons décrire ensuite sont construites autour de la même syntaxe : on leur fournit un <code>data.frame</code> (ou encore mieux, un <code>tibble</code>), elles effectuent une opération et renvoient un nouveau <code>data.frame</code> (ou un nouveau <code>tibble</code>). Il est ainsi possible de créer des groupes de commandes cohérentes qui permettent, grâce à l’enchaînement d’étapes simples, d’aboutir à des résultats complexes.</p>
 <p>De la même façon que le <code>+</code> permet d’ajouter une couche supplémentaire à un graphique <code>ggplot2</code>, le pipe <code>%&gt;%</code> permet d’ajouter une opération supplémentaire dans un groupe de commandes.</p>
 <p>Pour reprendre un exemple de la <a href="03-visualization.html#sec-empil"><span>Section&nbsp;3.7.1</span></a> sur les diagrammes bâtons empilés, nous avions utilisé ce code :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(species), <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex)) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(species), <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="04-DataWrangling_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="04-DataWrangling_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Ligne par ligne, voilà la signification de ce code :</p>
@@ -292,37 +631,37 @@ Attachement du package : 'dplyr'</code></pre>
 </ul>
 <p>On aurait pu faire la même chose ainsi :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>penguins_clean <span class="ot">&lt;-</span> <span class="fu">filter</span>(penguins, <span class="sc">!</span><span class="fu">is.na</span>(sex))</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins_clean, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(species), <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>penguins_clean <span class="ot">&lt;-</span> <span class="fu">filter</span>(penguins, <span class="sc">!</span><span class="fu">is.na</span>(sex))</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins_clean, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(species), <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="04-DataWrangling_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<p><img src="04-DataWrangling_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>C’est strictement équivalent. La deuxième méthode à l’inconvénient de nous obliger à créer un objet intermédiaire (que j’ai ici nommé <code>penguins_clean</code>). Lorsque l’on a de nombreuses fonctions à enchaîner, il faut donc créer de nombreux objets intermédiaires dont nous n’avons besoin qu’une seule fois, ce qui peut être source de nombreuses erreurs.</p>
 <p>Une troisième façon de procéder est la suivante :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">filter</span>(penguins, <span class="sc">!</span><span class="fu">is.na</span>(sex)), </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(species), <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">filter</span>(penguins, <span class="sc">!</span><span class="fu">is.na</span>(sex)), </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(species), <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="04-DataWrangling_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<p><img src="04-DataWrangling_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Cette fois, on ne crée plus d’objet intermédiaire, mais on intègre directement la fonction <code>filter()</code> à l’intérieur de la fonction <code>ggplot()</code>. Le code devient un peu moins lisible, et quand ça n’est pas deux fonctions mais 4, 5 ou plus que nous devons enchaîner, procéder ainsi est la garantie que des erreurs seront commises et qu’elles seront très difficiles à corriger.</p>
 <p>On préfère donc toujours utiliser le pipe qui a le mérite de placer chaque fonction sur une nouvelle ligne, et de permettre une lecture plus simple du code, ligne par ligne, étape par étape, et non de façon imbriquée, de l’intérieur d’une commande vers l’extérieur :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex)) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(species), <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex)) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(species), <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Notez bien qu’avec le pipe le premier argument de la fonction des fonctions <code>filter()</code> et <code>ggplot()</code> ont disparu : le pipe a fourni automatiquement à <code>filter()</code> les données du tableau <code>penguins</code>. Il a ensuite fourni automatiquement à <code>ggplot()</code> les données modifiées par la fonction <code>filter()</code>.</p>
 <p>Comme pour le <code>+</code> de <code>ggplot2</code>, il est conseillé de placer un seul pipe par ligne, toujours à la fin, et de revenir à la ligne pour préciser l’étape suivante.</p>
 <p>Toutes les commandes que nous utiliserons à partir de maintenant reposeront sur le pipe puisqu’il permet de rendre le code plus lisible.</p>
 </section>
-<section id="les-verbes-du-tripatouillage-de-données" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="les-verbes-du-tripatouillage-de-données"><span class="header-section-number">4.3</span> Les verbes du tripatouillage de données</h2>
+<section id="les-verbes-du-tripatouillage-de-données" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="les-verbes-du-tripatouillage-de-données"><span class="header-section-number">4.4</span> Les verbes du tripatouillage de données</h2>
 <p>Nous allons ici nous concentrer sur les fonctions les plus couramment utilisées pour manipuler et résumer des données. Nous verrons 4 verbes principaux, chacun correspondant à une fonction précise de <code>dplyr</code>. Chaque section de ce chapitre sera consacrée à la présentation d’un exemple utilisant un ou plusieurs de ces verbes.</p>
 <p>Les 4 verbes sont :</p>
 <ol type="1">
@@ -334,10 +673,10 @@ Attachement du package : 'dplyr'</code></pre>
 <p>Toutes ces fonctions, tous ces verbes, sont utilisés de la même façon : on prend un <code>data.frame</code>, grâce au pipe, on le transmet à l’une de ces fonctions dont on précise les arguments entre parenthèses, la fonction nous renvoie un nouveau tableau modifié. Évidemment, on peut enchaîner les actions pour modifier plusieurs fois le même tableau, c’est tout l’intérêt du pipe.</p>
 <p>Enfin, gardez en tête qu’il existe beaucoup plus de fonctions dans <code>dplyr</code> que les 4 que nous allons détailler ici. Nous verrons parfois quelques variantes, mais globalement, maîtriser ces 4 fonctions simples devrait vous permettre d’aborder sereinement le premier semestre de la L2. Nous verrons d’autres fonctions de <code>dplyr</code> plus avancées, permettant notamment d’associer plusieurs <code>data.frame</code>s et de calculer des résumés numériques des données au semestre prochain, lorsque nous commencerons a nous intéresser à l’analyse statistique des données.</p>
 </section>
-<section id="filtrer-des-lignes-avec-filter" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="filtrer-des-lignes-avec-filter"><span class="header-section-number">4.4</span> Filtrer des lignes avec <code>filter()</code></h2>
-<section id="principe" class="level3" data-number="4.4.1">
-<h3 data-number="4.4.1" class="anchored" data-anchor-id="principe"><span class="header-section-number">4.4.1</span> Principe</h3>
+<section id="filtrer-des-lignes-avec-filter" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="filtrer-des-lignes-avec-filter"><span class="header-section-number">4.5</span> Filtrer des lignes avec <code>filter()</code></h2>
+<section id="principe" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="principe"><span class="header-section-number">4.5.1</span> Principe</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -350,8 +689,8 @@ Attachement du package : 'dplyr'</code></pre>
 </div>
 <p>Comme son nom l’indique, <code>filter()</code> permet de filtrer des lignes en spécifiant un ou des critères de tri portant sur une ou plusieurs variables. Nous pouvons ainsi créer un nouveau tableau ne contenant que les données de l’espèce Adélie :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>peng_adelie <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">"Adelie"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>peng_adelie <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">"Adelie"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>La première ligne de code nous permet :</p>
 <ol type="1">
@@ -361,13 +700,13 @@ Attachement du package : 'dplyr'</code></pre>
 </ol>
 <p>Le premier argument de la fonction <code>filter()</code> doit être le nom d’un <code>data.frame</code> ou d’un <code>tibble</code>. Ici, puisque nous utilisons le pipe, il est inutile de spécifier cet argument : c’est ce qui est placé à gauche du pipe qui est utilisé comme premier argument de la fonction <code>filter()</code>. Les arguments suivants constituent la ou les conditions qui doivent être respectées par les lignes du tableau de départ afin d’être intégrées au nouveau tableau de données. Jetez à nouveau un œil à la <a href="01-R-basics.html#sec-comparaison"><span>Section&nbsp;1.3.4.2</span></a> si vous ne vous rappelez plus des opérateurs de comparaison.</p>
 </section>
-<section id="exercice" class="level3" data-number="4.4.2">
-<h3 data-number="4.4.2" class="anchored" data-anchor-id="exercice"><span class="header-section-number">4.4.2</span> Exercice</h3>
+<section id="exercice" class="level3" data-number="4.5.2">
+<h3 data-number="4.5.2" class="anchored" data-anchor-id="exercice"><span class="header-section-number">4.5.2</span> Exercice</h3>
 <p>Créez un objet nommé <code>adelie_light</code> qui contiendra uniquement les données de l’espèce Adélie, et uniquement pour les individus pesant 3700 grammes ou moins. Indice : relisez la <a href="01-R-basics.html#sec-comparaison"><span>Section&nbsp;1.3.4.2</span></a></p>
 <!-- Vérifiez que cet objet contient bien 81 lignes. -->
 </section>
-<section id="les-conditions-logiques" class="level3" data-number="4.4.3">
-<h3 data-number="4.4.3" class="anchored" data-anchor-id="les-conditions-logiques"><span class="header-section-number">4.4.3</span> Les conditions logiques</h3>
+<section id="les-conditions-logiques" class="level3" data-number="4.5.3">
+<h3 data-number="4.5.3" class="anchored" data-anchor-id="les-conditions-logiques"><span class="header-section-number">4.5.3</span> Les conditions logiques</h3>
 <p>Dans la <span class="citation" data-cites="seq-comparaison">(<a href="references.html#ref-seq-comparaison" role="doc-biblioref"><strong>seq-comparaison?</strong></a>)</span>, nous avons présenté en détail le fonctionnement des opérateurs de comparaison dans <code>R</code>. Relisez cette section si vous ne savez plus de quoi il s’agit. Les opérateurs de comparaison permettent de vérifier l’égalité ou l’inégalité entre des éléments. Ils renvoient <code>TRUE</code> ou <code>FALSE</code> et seront particulièrement utiles pour filtrer des lignes dans un tableau. Comme indiqué dans la <span class="citation" data-cites="seq-comparaison">(<a href="references.html#ref-seq-comparaison" role="doc-biblioref"><strong>seq-comparaison?</strong></a>)</span>, voici la liste des opérateurs de comparaison usuels :</p>
 <ul>
 <li><code>==</code> : égal à</li>
@@ -388,8 +727,8 @@ Attachement du package : 'dplyr'</code></pre>
 <p>Voyons comment utiliser ces opérateurs avec la fonction <code>filter()</code>.</p>
 <p>Dans le tableau <code>penguins</code>, quels sont les individus pour lesquels la masse n’a pas été mesurée ? Une bonne façon de le savoir est de regarder si, pour la variable <code>body_mass_g</code>, des données manquantes sont présentes :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(body_mass_g))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(body_mass_g))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 8
   species island    bill_length_mm bill_depth_mm flipper_l…¹ body_…² sex    year
@@ -402,9 +741,9 @@ Attachement du package : 'dplyr'</code></pre>
 <p>Seules les lignes contenant <code>NA</code> dans la colonne <code>body_mass_g</code> sont retenues. Il y a donc 2 individus dont la masse est inconnue. D’ailleurs, pour ces individu, aucune mesure biométrique n’est disponible. il s’agit d’un manchot Adélie, et d’un manchot Gentoo, tous les deux de sexe inconnu.</p>
 <p>Dans le même ordre d’idée, y a t-il des individus dont on ne connait pas le sexe mais dont on connait les mesures biométriques (au moins la masse) ? Là encore, une façon d’obtenir cette information est de sélectionner les individus dont le sexe est manquant, mais pour lesquels la masse n’est pas manquante :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(sex),</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">is.na</span>(body_mass_g))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(sex),</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">is.na</span>(body_mass_g))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 8
   species island    bill_length_mm bill_depth_mm flipper_l…¹ body_…² sex    year
@@ -423,8 +762,8 @@ Attachement du package : 'dplyr'</code></pre>
 </div>
 <p>Notez l’utilisation du <code>!</code> pour la seconde condition. Nous récupérons ici les lignes pour lesquelles <code>body_mass_g</code> n’est pas <code>NA</code> et pour lesquelles <code>sex</code> est <code>NA</code>. Seules les lignes qui respectent cette double condition sont retenues. Cette syntaxe est équivalente à :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(sex) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(body_mass_g))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(sex) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(body_mass_g))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 8
   species island    bill_length_mm bill_depth_mm flipper_l…¹ body_…² sex    year
@@ -445,11 +784,11 @@ Attachement du package : 'dplyr'</code></pre>
 <!-- Il y a donc 9 individus qui n'ont pas été sexés mais dont on connait les autres caractéristiques morphologiques. -->
 <p>Enfin, pour illustrer l’utilisation de <code>|</code> (le <code>OU</code> logique) et de <code>%in%</code>, imaginons que nous souhaitions extraire les informations des individus de l’espèce Adélie qui vivent soit sur l’île Biscoe, soit sur l’île Dream, et dont le bec mesure moins de 42 mm de longueur :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>adel_small <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">"Adelie"</span>, </span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>         island <span class="sc">==</span> <span class="st">"Biscoe"</span> <span class="sc">|</span> island <span class="sc">==</span> <span class="st">"Dream"</span>, </span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>         bill_length_mm <span class="sc">&lt;</span> <span class="dv">42</span>)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>adel_small</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>adel_small <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">"Adelie"</span>, </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>         island <span class="sc">==</span> <span class="st">"Biscoe"</span> <span class="sc">|</span> island <span class="sc">==</span> <span class="st">"Dream"</span>, </span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>         bill_length_mm <span class="sc">&lt;</span> <span class="dv">42</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>adel_small</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 91 × 8
    species island bill_length_mm bill_depth_mm flipper_len…¹ body_…² sex    year
@@ -471,11 +810,11 @@ Attachement du package : 'dplyr'</code></pre>
 <p>Examinez ce tableau avec <code>View()</code> pour vérifier que la variable <code>island</code> contient bien uniquement les valeur <code>Biscoe</code> et <code>Dream</code> correspondant aux 2 îles qui nous intéressent. Nous avons extrait ici les individus des îles Biscoe <strong>et</strong> Dream, pourtant, il nous a fallu utiliser le <code>OU</code> logique. Car chaque individu n’est issue que d’une unique île, or nous souhaitons récupérer toutes les lignes pour lesquelles l’île est soit <code>Biscoe</code>, soit <code>Dream</code> (l’une <strong>ou</strong> l’autre). Pour chaque ligne, les deux conditions ne peuvent pas être vraies l’une <strong>et</strong> l’autre en même temps. En revanche, on retient chaque ligne qui remplit la première condition <strong>ou</strong> la seconde.</p>
 <p>Une autre solution pour obtenir le même tableau est de remplacer l’expression contenant <code>|</code> par une expression contenant <code>%in%</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>adel_small2 <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">"Adelie"</span>, </span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>         island <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Biscoe"</span>, <span class="st">"Dream"</span>), </span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>         bill_length_mm <span class="sc">&lt;</span> <span class="dv">42</span>)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>adel_small2</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>adel_small2 <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">"Adelie"</span>, </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>         island <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Biscoe"</span>, <span class="st">"Dream"</span>), </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>         bill_length_mm <span class="sc">&lt;</span> <span class="dv">42</span>)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>adel_small2</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 91 × 8
    species island bill_length_mm bill_depth_mm flipper_len…¹ body_…² sex    year
@@ -496,15 +835,15 @@ Attachement du package : 'dplyr'</code></pre>
 </div>
 <p>Ici, toutes les lignes du tableau dont la variable <code>island</code> est égale à un élément du vecteur <code>c("Biscoe", "Dream")</code> sont retenues. L’utilisation du <code>OU</code> logique peut être source d’erreur. Je préfère donc utiliser <code>%in%</code> qui me semble plus parlant. La fonction <code>identical()</code> nous confirme que les deux façons de faire produisent exactement le même résultat, libre à vous de privilégier la méthode qui vous convient le mieux :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(adel_small, adel_small2)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(adel_small, adel_small2)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 </section>
 </section>
-<section id="sélectionner-des-variables-avec-select" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="sélectionner-des-variables-avec-select"><span class="header-section-number">4.5</span> Sélectionner des variables avec <code>select()</code></h2>
+<section id="sélectionner-des-variables-avec-select" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="sélectionner-des-variables-avec-select"><span class="header-section-number">4.6</span> Sélectionner des variables avec <code>select()</code></h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -518,9 +857,9 @@ Attachement du package : 'dplyr'</code></pre>
 <p>Il n’est pas rare de travailler avec des tableaux contenant des centaines, voir des milliers de colonnes. Dans de tels cas, il peut être utile de réduire le jeu de données aux variables qui vous intéressent. Le rôle de la fonction <code>select()</code> est de retenir uniquement les colonnes dont on a spécifié le nom, afin de recentrer l’analyse sur les variables utiles.</p>
 <p><code>select()</code> n’est pas particulièrement utile pour le jeu de données <code>penguins</code> puisqu’il ne contient que 8 variables. Toutefois, on peut malgré tout ces données pour comprendre le fonctionnement général de <code>select()</code>. Ainsi, pour sélectionner uniquement les colonnes <code>species</code>, <code>sex</code> et <code>body_mass_g</code>, on tape :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sélection de variables par leur nom</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, sex, body_mass_g)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sélection de variables par leur nom</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, sex, body_mass_g)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 3
    species sex    body_mass_g
@@ -540,9 +879,9 @@ Attachement du package : 'dplyr'</code></pre>
 </div>
 <p>Pour retenir des colonnes qui sont côte à côte dans le tableau de départ, on peut utiliser l’opérateur <code>:</code> pour les sélectionner :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sélection de toutes les variables entre `island` et `bill_depth_mm` (inclues)</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(island<span class="sc">:</span>bill_depth_mm)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sélection de toutes les variables entre `island` et `bill_depth_mm` (inclues)</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(island<span class="sc">:</span>bill_depth_mm)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 3
    island    bill_length_mm bill_depth_mm
@@ -562,10 +901,10 @@ Attachement du package : 'dplyr'</code></pre>
 </div>
 <p>À l’inverse, si on veut supprimer certaines colonnes, on peut utiliser la notation <code>-</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sélection de toutes les variables de `penguins` à l'exception</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># de celles comprises entre `island` et `bill_depth_mm` (inclues)</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>(island<span class="sc">:</span>bill_depth_mm))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sélection de toutes les variables de `penguins` à l'exception</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co"># de celles comprises entre `island` et `bill_depth_mm` (inclues)</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>(island<span class="sc">:</span>bill_depth_mm))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 5
    species flipper_length_mm body_mass_g sex     year
@@ -592,8 +931,8 @@ Attachement du package : 'dplyr'</code></pre>
 <p>Il en existe beaucoup d’autres. Vous pouvez consulter l’aide de <code>?select()</code> pour en savoir plus.</p>
 <p>Ainsi, il est par exemple possible d’extraire toutes les variables contenant le mot “mm” ainsi :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"mm"</span>))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"mm"</span>))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 3
    bill_length_mm bill_depth_mm flipper_length_mm
@@ -613,15 +952,15 @@ Attachement du package : 'dplyr'</code></pre>
 </div>
 <p>Évidemment, le tableau <code>penguins</code> n’est pas modifié par cette opération : il contient toujours les 8 variables de départ. Pour travailler avec ces tableaux de données contenant moins de variables, il faut les stocker dans un nouvel objet en leur donnant un nom :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>measures <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"mm"</span>))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>measures <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"mm"</span>))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Enfin, on peut utiliser <code>select()</code> pour renommer des variables. Mais ce n’est que rarement utile car <code>select()</code> élimine toutes les variables qui n’ont pas été explicitement nommées :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species<span class="sc">:</span>island,</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">b_length =</span> bill_length_mm,</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">flipper =</span> flipper_length_mm)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species<span class="sc">:</span>island,</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">b_length =</span> bill_length_mm,</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">flipper =</span> flipper_length_mm)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 4
    species island    b_length flipper
@@ -641,9 +980,9 @@ Attachement du package : 'dplyr'</code></pre>
 </div>
 <p>Il est donc généralement préférable d’utiliser <code>rename()</code> pour renommer certaines variables sans en éliminer aucune :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">b_length =</span> bill_length_mm,</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">flipper =</span> flipper_length_mm)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">b_length =</span> bill_length_mm,</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">flipper =</span> flipper_length_mm)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 8
    species island    b_length bill_depth_mm flipper body_mass_g sex     year
@@ -662,10 +1001,10 @@ Attachement du package : 'dplyr'</code></pre>
 </div>
 </div>
 </section>
-<section id="mutate" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="mutate"><span class="header-section-number">4.6</span> Créer de nouvelles variables avec <code>mutate()</code></h2>
-<section id="principe-1" class="level3" data-number="4.6.1">
-<h3 data-number="4.6.1" class="anchored" data-anchor-id="principe-1"><span class="header-section-number">4.6.1</span> Principe</h3>
+<section id="mutate" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="mutate"><span class="header-section-number">4.7</span> Créer de nouvelles variables avec <code>mutate()</code></h2>
+<section id="principe-1" class="level3" data-number="4.7.1">
+<h3 data-number="4.7.1" class="anchored" data-anchor-id="principe-1"><span class="header-section-number">4.7.1</span> Principe</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -683,9 +1022,9 @@ Attachement du package : 'dplyr'</code></pre>
 <li><code>mass_kg</code> : la masse, qui est ici exprimée en grammes sera transformée en kilogrammes par une simple division par 1000</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ratio =</span> bill_length_mm <span class="sc">/</span> bill_depth_mm,</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">mass_kg =</span> body_mass_g <span class="sc">/</span> <span class="dv">1000</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ratio =</span> bill_length_mm <span class="sc">/</span> bill_depth_mm,</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">mass_kg =</span> body_mass_g <span class="sc">/</span> <span class="dv">1000</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 10
    species island    bill_le…¹ bill_…² flipp…³ body_…⁴ sex    year ratio mass_kg
@@ -706,9 +1045,9 @@ Attachement du package : 'dplyr'</code></pre>
 </div>
 <p>Si on souhaite conserver uniquement les variables nouvellement créées par <code>mutate()</code>, on peut utiliser <code>transmute()</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">ratio =</span> bill_length_mm <span class="sc">/</span> bill_depth_mm,</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mass_kg =</span> body_mass_g <span class="sc">/</span> <span class="dv">1000</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">ratio =</span> bill_length_mm <span class="sc">/</span> bill_depth_mm,</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mass_kg =</span> body_mass_g <span class="sc">/</span> <span class="dv">1000</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 2
    ratio mass_kg
@@ -728,13 +1067,13 @@ Attachement du package : 'dplyr'</code></pre>
 </div>
 <p>Et comme toujours, pour pouvoir réutiliser ces données, on leur donne un nom :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>pengu_ratio <span class="ot">&lt;-</span>  penguins <span class="sc">%&gt;%</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">ratio =</span> bill_length_mm <span class="sc">/</span> bill_depth_mm,</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mass_kg =</span> body_mass_g <span class="sc">/</span> <span class="dv">1000</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>pengu_ratio <span class="ot">&lt;-</span>  penguins <span class="sc">%&gt;%</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">ratio =</span> bill_length_mm <span class="sc">/</span> bill_depth_mm,</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mass_kg =</span> body_mass_g <span class="sc">/</span> <span class="dv">1000</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercices" class="level3" data-number="4.6.2">
-<h3 data-number="4.6.2" class="anchored" data-anchor-id="exercices"><span class="header-section-number">4.6.2</span> Exercices</h3>
+<section id="exercices" class="level3" data-number="4.7.2">
+<h3 data-number="4.7.2" class="anchored" data-anchor-id="exercices"><span class="header-section-number">4.7.2</span> Exercices</h3>
 <ol type="1">
 <li><p>Dans <code>ggplot2</code> le jeu de données <code>mpg</code> contient des informations sur 234 modèles de voitures. Examinez ce jeu de données avec la fonction <code>View()</code> et consultez son fichier d’aide pour savoir à quoi correspondent les différentes variables. Quelle(s) variable(s) nous renseignent sur la consommation des véhicules ? À quoi correspond la variable <code>disp</code> ?</p></li>
 <li><p>La consommation est donnée en miles par gallon. Créez une nouvelle variable <code>conso</code> qui contiendra la consommation sur autoroute, exprimée en nombre de litres pour 100 kilomètres.</p></li>
@@ -771,8 +1110,8 @@ Attachement du package : 'dplyr'</code></pre>
 </div>
 </section>
 </section>
-<section id="arrange" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="arrange"><span class="header-section-number">4.7</span> Trier des lignes avec <code>arrange()</code></h2>
+<section id="arrange" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="arrange"><span class="header-section-number">4.8</span> Trier des lignes avec <code>arrange()</code></h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -786,8 +1125,8 @@ Attachement du package : 'dplyr'</code></pre>
 <p>La fonction <code>arrange()</code> permet de trier des tableaux en ordonnant les éléments d’une ou plusieurs colonnes. Les tris peuvent être en ordre croissants (c’est le cas par défaut) ou décroissants (grâce à la fonction <code>desc()</code>, abbréviation de “descending”).</p>
 <p><code>arrange()</code> fonctionne donc comme <code>filter()</code>, mais au lieu de sélectionner des lignes, cette fonction change leur ordre. Il faut lui fournir le nom d’un tableau et au minimum le nom d’une variable selon laquelle le tri doit être réalisé. Si plusieurs variables sont fournies, chaque variable supplémentaire permet de résoudre les égalités. Ainsi, pour ordonner le tableau <code>penguins</code> par ordre croissant d’épaisseur de bec (<code>bill_depth_mm</code>), on tape :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(bill_depth_mm)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(bill_depth_mm)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 8
    species island bill_length_mm bill_depth_mm flipper_len…¹ body_…² sex    year
@@ -808,8 +1147,8 @@ Attachement du package : 'dplyr'</code></pre>
 </div>
 <p>Notez que la variable <code>dbill_depth_mm</code> est maintenant triée en ordre croissant. Notez également que 2 individus ont un bec dont l’épaisseur vaut exactement 13,5 mm. Comparez le tableau précédent avec celui-ci :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(bill_depth_mm, bill_length_mm)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(bill_depth_mm, bill_length_mm)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 8
    species island bill_length_mm bill_depth_mm flipper_len…¹ body_…² sex    year
@@ -831,8 +1170,8 @@ Attachement du package : 'dplyr'</code></pre>
 <p>Les lignes des 2 individus dont l’épaisseur du bec vaut 13,5 mm ont été inversées : la variable <code>bill_length_mm</code> a été utilisée pour ordonner les lignes en cas d’égalité de la variable <code>bill_depth_mm</code>.</p>
 <p>Comme indiqué plus haut, il est possible de trier les données par ordre décroissant :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(bill_depth_mm))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(bill_depth_mm))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 8
    species   island    bill_length_mm bill_depth_mm flippe…¹ body_…² sex    year
@@ -858,9 +1197,9 @@ Attachement du package : 'dplyr'</code></pre>
 <li>trier les données par effectif décroissant.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(species, sex) <span class="sc">%&gt;%</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(species, sex) <span class="sc">%&gt;%</span></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 3
   species   sex        n

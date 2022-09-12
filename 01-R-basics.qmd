@@ -58,7 +58,7 @@ Puisqu'il est beaucoup plus facile d'utiliser `Rstudio` pour interagir avec `R`,
 - `R`, ne pas ouvrir ceci : ![](images/Rlogo.png)
 <br>
 <br>
-- `RStudio`, ouvrir cela : ![](images/RStudio-Ball.png)
+- `RStudio`, ouvrir cela : ![](images/RStudio-Ball.png){fig-width=28%}
 
 À l'université, vous trouverez `RStudio` dans le menu Windows. Quand vous ouvrez RStudio pour la première fois, vous devriez obtenir une fenêtre qui ressemble à ceci :
 
