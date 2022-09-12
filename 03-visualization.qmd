@@ -954,7 +954,7 @@ Pour toutes ces méthodes, des données qui n'ont pas été comptées au préala
 
 Nous allons passer ces différentes possibilités en revue pour examiner les liens entre 2 variables catégorielles du jeu de données `penguins` : `species` et `sex`. La première renseigne sur l'espèce à laquelle un individu étudié appartient. La seconde renseigne sur le sexe de chaque individu. L'étude du sex-ratio est en effet souvent essentielle pour comprendre l'écologie des espèces. Les sexe-ratios sont-ils équilibrés ou non. Et s'ils ne sont pas équilibrés, sont-ils en faveur des mâles ou des femelles ?
 
-### Diagrammes bâtons empilés
+### Diagrammes bâtons empilés {#sec-empil}
 
 La façon la plus simple (mais rarement la meilleure) de procéder pour visualiser 2 facteurs conjointement est de créer un diagramme bâtons empilés :
 

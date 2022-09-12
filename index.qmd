@@ -102,7 +102,7 @@ Je vous laisse donc une grande liberté d'organisation. À vous d'en tirer le ma
 
 ### Utilisation de Slack {-}
 
-Outre les séances de permanence non-obligatoires, nous échangerons aussi sur [l'application Slack](https://slack.com/intl/fr-fr/), qui fonctionne un peu comme un "twitter privé". Slack facilite la communication des équipes et permet de travailler ensemble. Créez-vous un compte en ligne et installez le logiciel sur votre ordinateur (il existe aussi des versions pour tablettes et smartphones). Lorsque vous aurez installé le logiciel, [cliquez sur ce lien](https://join.slack.com/t/l2sv22-23ecoutils/shared_invite/zt-1cy833090-QABT5OhTz_iTCkf38or_rw) pour vous connecter à notre espace de travail commun intitulé `L2 SV 22-23 / EC outils` (ce lien expire régulièrement : faites moi signe s'il n'est plus valide). 
+Outre les séances de permanence non-obligatoires, nous échangerons aussi sur [l'application Slack](https://slack.com/intl/fr-fr/), qui fonctionne un peu comme un "twitter privé". Slack facilite la communication des équipes et permet de travailler ensemble. Créez-vous un compte en ligne et installez le logiciel sur votre ordinateur (il existe aussi des versions pour tablettes et smartphones). Lorsque vous aurez installé le logiciel, [cliquez sur ce lien](https://join.slack.com/t/l2sv22-23ecoutils/shared_invite/zt-1fshw1jt2-PWkiJUHFxGUHnt1ZQMRIAA) pour vous connecter à notre espace de travail commun intitulé `L2 SV 22-23 / EC outils` (ce lien expire régulièrement : faites moi signe s'il n'est plus valide). 
 
 Vous verrez que 2 "chaînes" sont disponibles :
 
@@ -122,11 +122,11 @@ Pour que cet apprentissage soit le moins problématique possible, il convient de
 
 Idéalement, voilà les étapes que vous devriez avoir franchi chaque semaine :
 
-1. La première semaine (37) est consacrée à l'installation des logiciels, à la découverte de l'environnement de travail, des `RProjects`, des packages et des scripts. Avant votre deuxième séance, vous devrez être capables de créer un Rproject et un script, de télécharger et d'installer des packages, d'importer des données dans le logiciel, et vous devrez commencer à connaître les types d'objets principaux (vecteurs, facteurs, data.frames et tibbles). Vous devrez avoir suivi les tutoriels de DataCamp et avoir effectué le premier quizz Moodle (attention, ce quizz est à faire seul !).
+1. La première semaine (37) est consacrée à l'installation des logiciels, à la découverte de l'environnement de travail, des `RProjects`, des packages et des scripts. Avant votre deuxième séance, vous devrez être capables de créer un Rproject et un script, de télécharger et d'installer des packages, et d'exécuter des commandes simples dans votre script. Vous devrez avoir suivi les tutoriels de DataCamp et connaitre les types d'objets suivants : vecteurs, facteurs, data.frames (et tibbles). Vous devrez effectuer le premier quizz Moodle (attention, ce quizz est à faire seul !).
 
-2. La deuxième semaine (38) est consacrée à la découverte des premiers jeux de données et du package `ggplot2`. Avant votre troisième séance, vous devrez avoir compris la syntaxe de base permettant de faire toutes sortes de graphiques avec `ggplot2`. À terme, vous devrez être capables de choisir des graphiques appropriés selon le nombre et la nature des variables dont vous disposez. À ce stade, on ne demande rien de complexe, mais vous devrez, à minima, être capable de faire des barplots, des histogrammes et des nuages de points. Vous devrez effectuer le second quizz Moodle (attention, ce quizz est à faire seul !).
+2. La deuxième semaine (38) est consacrée à la découverte des premiers jeux de données et du package `ggplot2`. Avant votre troisième séance, vous devrez avoir compris comment charger en mémoire les jeux de données disponibles dans un packages, vous devrez connaitre la syntaxe de base permettant de faire toutes sortes de graphiques avec `ggplot2` avec une ou deux variables. À terme, vous devrez être capables de choisir des graphiques appropriés selon le nombre et la nature des variables dont vous disposez. À ce stade, on ne demande rien de complexe, mais vous devrez, à minima, être capable de faire des barplots, des histogrammes et des nuages de points. Vous devrez effectuer le second quizz Moodle (attention, ce quizz est à faire seul !).
 
-3. La troisième semaine (39) est consacrée à l'amélioration de la qualité de vos graphiques. Avant votre dernière séance de TP, vous devrez être capable de faire, outre les graphiques de la semaine précédente, des stripcharts, et des graphiques en lignes. Vous devrez également être capable de faire des sous-graphiques par catégories (`facet()`), de choisir un thème et des palettes de couleurs appropriées, et de légender/annoter correctement vos graphiques. Vous devrez effectuer le troisième quizz Moodle (attention, ce quizz est à faire seul !).
+3. La troisième semaine (39) est consacrée à l'amélioration de la qualité de vos graphiques. Avant votre dernière séance de TP, vous devrez être capable de faire, outre les graphiques de la semaine précédente, des stripcharts, et des graphiques en lignes et des boxplots. Vous devrez également être capable de faire des sous-graphiques par catégories (`facet()`), de choisir un thème et des palettes de couleurs appropriées, et de légender/annoter correctement vos graphiques. Vous devrez effectuer le troisième quizz Moodle (attention, ce quizz est à faire seul !).
 
 4. La quatrième semaine (40) est consacrée à la manipulation des tableaux de données. Avant la fin de cette semaine, vous devrez être capable de sélectionner des colonnes dans un tableau, de filtrer des lignes, et de créer de nouvelles variables. Vous devrez être capables d'enchaîner correctement les étapes suivantes : ouvrir le logiciel > créer un projet > créer un script > mettre en mémoire les packages utiles > importer des données > mettre en forme ces données > faire un ou des graphiques informatifs et correctement mis en forme. Vous devrez effectuer le quatrième et dernier quizz Moodle (attention, ce quizz est à faire seul !).
 
@@ -142,18 +142,3 @@ Les exercices demandés dans ce document en ligne ne seront ni ramassés, ni not
 
 En particulier, je vérifierai que les étapes décrites précédemment sont maîtrisées (ouvrir le logiciel > créer un projet > créer un script > mettre en mémoire les packages utiles > importer des données > mettre en forme ces données > faire un ou des graphiques informatifs et correctement mis en forme) en vous fournissant un jeu de données inconnu que vous devrez importer et mettre en forme dans `RStudio` afin de produire quelques graphiques informatifs. Cette évaluation aura lieu soit en salle informatique, soit dans le cadre d'un compte-rendu de TP que vous devrez rendre pour un collègue. Si cette modalité est mise en place, je vous en dirai plus en temps utile.
 
-<!-- `r fontawesome::fa('lightbulb',height='30px',fill='steelblue')` Afin de mesurer régulièrement votre compréhension, vos progrès, mais aussi, votre assiduité et votre engagement, un quizz vous sera proposé chaque semaine sur Moodle. -->
-
-<!-- :::: {.blackbox} -->
-<!-- ::: {.center} -->
-<!-- **NOTICE!** -->
-<!-- ::: -->
-
-<!-- Thank you for noticing this **new notice**! Your noticing it has -->
-<!-- been noted, and _will be reported to the authorities_! -->
-<!-- :::: -->
-
-
-<!-- Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab). -->
-
-<!-- You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015]. -->

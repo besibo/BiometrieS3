@@ -262,7 +262,7 @@ div.csl-indent {
   </ul></li>
   <li><a href="#deux-variables-catégorielles" id="toc-deux-variables-catégorielles" class="nav-link" data-scroll-target="#deux-variables-catégorielles"> <span class="header-section-number">3.7</span> Deux variables catégorielles</a>
   <ul class="collapse">
-  <li><a href="#diagrammes-bâtons-empilés" id="toc-diagrammes-bâtons-empilés" class="nav-link" data-scroll-target="#diagrammes-bâtons-empilés"> <span class="header-section-number">3.7.1</span> Diagrammes bâtons empilés</a></li>
+  <li><a href="#sec-empil" id="toc-sec-empil" class="nav-link" data-scroll-target="#sec-empil"> <span class="header-section-number">3.7.1</span> Diagrammes bâtons empilés</a></li>
   <li><a href="#sec-juxta" id="toc-sec-juxta" class="nav-link" data-scroll-target="#sec-juxta"> <span class="header-section-number">3.7.2</span> Diagrammes bâtons juxtaposés</a></li>
   <li><a href="#diagrammes-bâtons-facettés" id="toc-diagrammes-bâtons-facettés" class="nav-link" data-scroll-target="#diagrammes-bâtons-facettés"> <span class="header-section-number">3.7.3</span> Diagrammes bâtons “facettés”</a></li>
   <li><a href="#sec-mosa" id="toc-sec-mosa" class="nav-link" data-scroll-target="#sec-mosa"> <span class="header-section-number">3.7.4</span> Mosaïc plots</a></li>
@@ -285,6 +285,7 @@ div.csl-indent {
   <li><a href="#les-échelles" id="toc-les-échelles" class="nav-link" data-scroll-target="#les-échelles"> <span class="header-section-number">3.10.2</span> Les échelles</a></li>
   <li><a href="#les-thèmes" id="toc-les-thèmes" class="nav-link" data-scroll-target="#les-thèmes"> <span class="header-section-number">3.10.3</span> Les thèmes</a></li>
   </ul></li>
+  <li><a href="#exercices-dentrainement" id="toc-exercices-dentrainement" class="nav-link" data-scroll-target="#exercices-dentrainement"> <span class="header-section-number">3.11</span> Exercices d’entrainement</a></li>
   </ul>
 </nav>
     </div>
@@ -1494,8 +1495,8 @@ Levels: Adelie Chinstrap Gentoo</code></pre>
 </ul>
 <p>Pour toutes ces méthodes, des données qui n’ont pas été comptées au préalable sont requises. Il est en effet beaucoup plus simple de travailler avec le <code>tidyverse</code> (donc avec <code>ggplot2</code>) lorsque chaque ligne d’un tableau correspond à une observation plutôt qu’à une somme d’observation. C’est le concept de <strong>tableau rangé</strong>, central dans le traitement de données ainsi que pour l’utilisation de tous les packages du <code>tidyverse</code>, et qui stipule qu’un tableau de données devrait contenir une unique ligne pour chaque observation, et une unique colonne pour chaque variable. Nous aurons l’occasion (notamment en L3) de voir des tableaux qui ne respectent pas ces règles et que nous devrons donc ré-organiser pour permettre leur analyse et les représentations graphiques.</p>
 <p>Nous allons passer ces différentes possibilités en revue pour examiner les liens entre 2 variables catégorielles du jeu de données <code>penguins</code> : <code>species</code> et <code>sex</code>. La première renseigne sur l’espèce à laquelle un individu étudié appartient. La seconde renseigne sur le sexe de chaque individu. L’étude du sex-ratio est en effet souvent essentielle pour comprendre l’écologie des espèces. Les sexe-ratios sont-ils équilibrés ou non. Et s’ils ne sont pas équilibrés, sont-ils en faveur des mâles ou des femelles ?</p>
-<section id="diagrammes-bâtons-empilés" class="level3" data-number="3.7.1">
-<h3 data-number="3.7.1" class="anchored" data-anchor-id="diagrammes-bâtons-empilés"><span class="header-section-number">3.7.1</span> Diagrammes bâtons empilés</h3>
+<section id="sec-empil" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="sec-empil"><span class="header-section-number">3.7.1</span> Diagrammes bâtons empilés</h3>
 <p>La façon la plus simple (mais rarement la meilleure) de procéder pour visualiser 2 facteurs conjointement est de créer un diagramme bâtons empilés :</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
@@ -2528,7 +2529,7 @@ Important
 <div class="sourceCode cell-code" id="cb192"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb192-1"><a href="#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> bill_depth_mm,</span>
 <span id="cb192-2"><a href="#cb192-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">fill =</span> species, <span class="at">size =</span> body_mass_g)) <span class="sc">+</span></span>
 <span id="cb192-3"><a href="#cb192-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb192-4"><a href="#cb192-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Forme du bec de 3 espèces de manchots et relation avec leur masse"</span>,</span>
+<span id="cb192-4"><a href="#cb192-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Forme du bec des manchots et relation avec leur masse"</span>,</span>
 <span id="cb192-5"><a href="#cb192-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Les manchots les plus lourds ont des becs longs et fins"</span>,</span>
 <span id="cb192-6"><a href="#cb192-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Longueur du bec (mm)"</span>,</span>
 <span id="cb192-7"><a href="#cb192-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Épaisseur du bec (mm)"</span>,</span>
@@ -2545,80 +2546,77 @@ Important
 </div>
 </div>
 <p>Le choix d’un thème et d’une police adaptés doivent vous permettre de faire des graphiques originaux et clairs. Rappelez-vous toujours que vos choix en matière de graphiques doivent avoir pour objectif principal de rendre les tendances plus faciles à décrypter pour un lecteur non familier de vos données. C’est un outil de communication au même titre que n’importe quel paragraphe d’un rapport ou compte-rendu. Et comme pour un paragraphe, la première version d’un graphique est rarement la bonne.</p>
-<p>Vous devriez donc maintenant être bien armés pour produire 95% des graphiques dont vous aurez besoin tout au long de votre cursus universitaire. Toutefois, un point important a pour l’instant été omis : l’ajout de barres d’erreurs sur vos graphiques. Nous verrons comment faire cela un peu plus tard, après avoir appris à manipuler efficacement des tableaux de données avec les packages <code>tidyr</code> et <code>dplyr</code>.</p>
+<p>Vous devriez donc maintenant être bien armés pour produire 95% des graphiques dont vous aurez besoin tout au long de votre cursus universitaire. Toutefois, un point important a pour l’instant été omis : l’ajout de barres d’erreurs sur vos graphiques. Nous verrons comment faire cela au prochain semestre, après avoir appris à manipuler efficacement des tableaux de données avec les packages <code>tidyr</code> et <code>dplyr</code>.</p>
+<p>Quoi qu’il en soit, il est maintenant attendu de vous que vous utilisez <code>R</code> et ce que vous avez appris de <code>ggplot2</code> pour produire tous les graphiques que vous serez amenés à intégrer à vos comptes-rendus de TP et à vos rapports.</p>
+</section>
+</section>
+<section id="exercices-dentrainement" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="exercices-dentrainement"><span class="header-section-number">3.11</span> Exercices d’entrainement</h2>
+<ol type="1">
+<li>Avec le jeu de données <code>diamonds</code>, du packages <code>ggplot2</code>, tapez les commandes suivantes pour créer un nouveau tableau <code>diams</code> contenant moins de lignes (3000 au lieu de près de 54000) :</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb194"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb194-1"><a href="#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb194-2"><a href="#cb194-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4532</span>) <span class="co"># Afin que tout le monde récupère les mêmes lignes</span></span>
+<span id="cb194-3"><a href="#cb194-3" aria-hidden="true" tabindex="-1"></a>diams <span class="ot">&lt;-</span> diamonds <span class="sc">%&gt;%</span></span>
+<span id="cb194-4"><a href="#cb194-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">3000</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li>Avec ce nouveau tableau <code>diams</code>, tapez le code permettant de créer le graphique ci-dessous. Indice : affichez le tableau <code>diams</code> dans la console afin de voir quelles sont les variables disponibles.</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="03-visualization_files/figure-html/unnamed-chunk-114-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Prix de 3000 diamants en fonction de leur taille en carats et de leur clarté.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li><p>Selon vous, à quoi sont dues les bandes verticales que l’on observe sur ce graphique ?</p></li>
+<li><p>Installez et chargez en mémoire le package <code>nycflight13</code></p></li>
+<li><p>Examinez le tableau <code>flights</code> de ce package, et lisez son fichier d’aide pour comprendre à quoi correspondent ces données</p></li>
+<li><p>Créer un nouveau jeu de données en exécutant ces commandes :</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb195"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb195-1"><a href="#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb195-2"><a href="#cb195-2" aria-hidden="true" tabindex="-1"></a>small_flights <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span></span>
+<span id="cb195-3"><a href="#cb195-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(arr_delay),</span>
+<span id="cb195-4"><a href="#cb195-4" aria-hidden="true" tabindex="-1"></a>         distance <span class="sc">&lt;</span> <span class="dv">3000</span>)  <span class="sc">%&gt;%</span></span>
+<span id="cb195-5"><a href="#cb195-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">1000</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="7" type="1">
+<li>Ce nouveau jeu de données de petite taille (1000 lignes) est nommé <code>small_flights</code>. Il contient les mêmes variables que le tableau <code>flights</code> mais ne contient qu’une petite fraction de ses lignes. Les lignes retenues ont été choisies au hasard. Vous pouvez visualiser son contenu en tapant son nom dans la console ou en utilisant la fonction <code>View()</code>.</li>
+</ol>
+<p>En vous appuyant sur les fonctions et les principes de la grammaire des graphiques que vous avez découverts dans ce chapitre, et en vous servant de ce nouveau jeu de données, tapez les commandes qui permettent de produire le graphique ci-dessous :</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="03-visualization_files/figure-html/unnamed-chunk-116-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Quelques indices :</p>
+<ul>
+<li>Les couleurs utilisées sont celles de la palette <code>Set1</code> du package <code>RColorBrewer</code>.</li>
+<li>Les variables utilisées sont <code>origin</code>, <code>air_time</code> et <code>distance</code>.</li>
+<li>La transparence des symboles est fixée à <code>0.8</code>.</li>
+</ul>
+<ol start="8" type="1">
+<li>Toujours avec ce jeu de données <code>small-flights</code>, tapez les commandes permettant de produire le graphique ci-dessous :</li>
+</ol>
+<div class="cell" data-fig.asp="1">
+<div class="cell-output-display">
+<p><img src="03-visualization_files/figure-html/unnamed-chunk-117-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Quelques indices :</p>
+<ul>
+<li>Les couleurs utilisées sont celles de la palettes <code>Accent</code> du package <code>RColorBrewer</code>.</li>
+<li>Les variables utilisées sont <code>month</code>, <code>carrier</code> et <code>origin</code>.</li>
+<li>La variable <code>month</code> est codée sous forme numérique dans le tableau de données. Il faudra la transformer en factor avec la fonction <code>factor(month)</code> au moment de l’associer à un axe du graphique.</li>
+</ul>
 <!-- Pour le S4 : penser aux barres d'erreur -->
-
-<!-- 2. Avec le jeu de données `diamonds`, tapez les commandes suivantes pour créer un nouveau tableau `diams` contenant moins de lignes (5000 au lieu de près de 54000) : -->
-<!-- ```{r tidy = FALSE} -->
-<!-- library(dplyr) -->
-<!-- set.seed(4532) # Afin que tout le monde récupère les mêmes lignes -->
-<!-- diams <- diamonds %>% -->
-<!--   sample_n(3000) -->
-<!-- ``` -->
-
-<!-- 3. Avec ce nouveau tableau `diams`, tapez le code permettant de créer le graphique \@ref(sec-fig:exodiamonds) (Indice : affichez le tableau `diams` dans la console afin de voir quelles sont les variables disponibles). -->
-<!-- ```{r, exodiamonds, tidy=FALSE, warning=FALSE, echo = FALSE, fig.cap="Prix de 5000 diamants en fonction de leur taille en carats et de leur clarté."} -->
-<!-- ggplot(data = diams, mapping = aes(x = carat, y = price)) + -->
-<!--     geom_point(alpha = 0.5, shape = 4, aes(color = clarity)) -->
-<!-- ``` -->
-<!-- 4. Selon vous, à quoi sont dues les bandes verticales que l'on observe sur ce graphique ? -->
-<!-- ### Exercices {#sec-Exo-5} -->
-<!-- Examinez la figure \@ref(sec-fig:grid). -->
-<!-- 1. Quels éléments nouveaux ce graphique nous apprend-il par rapport au graphique \@ref(sec-fig:break) ci-dessus ? Comment le "`facet`ing" nous aide-t'il à visualiser les relations entre 2 (ou 3) variables ? -->
-<!-- 2. À quoi correspondent les numéros 1 à 12 ? -->
-<!-- 3. À quoi correspondent les chiffres 25, 50, 75, 100 ? -->
-<!-- 4. À quoi correspondent les chiffres 0, 100, 200, 300 ? -->
-<!-- 5. Observez les échelles des axes `x` et `y` pour chaque sous graphique. Qu'ont-elles de particulier ? En quoi est-ce utile ? -->
-<!-- 6. La variabilité des températures est-elle plus importante entre les aéroports, entre les mois, ou au sein des mois ? Expliquez votre réflexion. -->
-<!-- ---- -->
-<!-- ## Exercices  {#sec-Exo-7} -->
-<!-- Commencez par créer un nouveau jeu de données en exécutant ces commandes : -->
-<!-- ```{r tidy=FALSE} -->
-<!-- set.seed(1234) -->
-<!-- small_flights <- flights %>%  -->
-<!--   sample_n(1000) %>%  -->
-<!--   filter(!is.na(arr_delay), -->
-<!--          distance < 3000) -->
-<!-- ``` -->
-
-<!-- Ce nouveau jeu de données de petite taille (972 lignes) est nommé `small_flights`. Il contient les mêmes variables que le tableau `flights` mais ne contient qu'une petite fraction de ses lignes. Les lignes retenues ont été choisies au hasard. Vous pouvez visualiser son contenu en tapant son nom dans la console ou en utilisant la fonction `View()`. -->
-<!-- En vous appuyant sur les fonctions et les principes de la grammaire des graphiques que vous avez découverts dans ce chapitre \@ref(sec-viz), et en vous servant de ce nouveau jeu de données, tapez les commandes qui permettent de produire le graphique ci-dessous : -->
-<!-- ```{r exercice, echo=FALSE, tidy=FALSE, warning = FALSE} -->
-<!-- small_flights %>%  -->
-<!--   ggplot(aes(x = distance, y = air_time, color = origin, shape = origin)) + -->
-<!--     geom_point(alpha = 0.8) + -->
-<!--     scale_color_brewer(palette = "Set1") + -->
-<!--     labs(x = "Distance parcourue en vol (miles)", -->
-<!--          y = "Temps de vol (minutes)", -->
-<!--          title = "Relation entre le temps de vol et la distance parcourue", -->
-<!--          subtitle = "Seuls les vols au départ de JFK et Newark parcourent plus de 1600 miles", -->
-<!--          color = "Aéroport de\nNew York", -->
-<!--          shape = "Aéroport de\nNew York", -->
-<!--          caption = "Données : small_flights") + -->
-<!--     theme_bw() -->
-<!-- ``` -->
-<!-- Quelques indices :  -->
-<!-- - Les couleurs utilisées sont celles de la palette `Set1` du package `RColorBrewer`. -->
-<!-- - Les variables utilisées sont `origin`, `air_time` et `distance`. -->
-<!-- - La transparence des symboles est fixée à `0.8`. -->
-<!-- Toujours avec ce jeu de données `small-flights`, tapez les commandes permettant de produire le graphique ci-dessous : -->
-<!-- ```{r exercice2, fig.asp=1, echo=FALSE, tidy=FALSE, warning = FALSE} -->
-<!-- small_flights %>%  -->
-<!--   ggplot(aes(x = factor(month), fill = origin)) + -->
-<!--     geom_bar() + -->
-<!--     facet_wrap(~fct_infreq(carrier), nrow = 4) + -->
-<!--     scale_fill_brewer(palette = "Accent") + -->
-<!--     labs(x = "Mois de l'année 2013", -->
-<!--          y = "Nombre de vols", -->
-<!--          title = "Évolution mensuelle du trafic aérien New Yorkais en 2013", -->
-<!--          subtitle = "Seules 9 compagnies aériennes sur 14 ont déservi New York toute l'année", -->
-<!--          fill = "Aéroport de\nNew York", -->
-<!--          caption = "Données : small_flights") + -->
-<!--     theme_bw() -->
-<!-- ``` -->
-<!-- Quelques indices :  -->
-<!-- - Les couleurs utilisées sont celles de la palettes `Accent` du package `RColorBrewer`. -->
-<!-- - Les variables utilisées sont `month`, `carrier` et `origin`. -->
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
@@ -2632,7 +2630,6 @@ Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takaha
 Wilkinson, Leland. 2005. <em>The grammar of graphics</em>. 2nd éd. New-York: Springer-Verlag. <a href="https://www.springer.com/us/book/9780387245447">https://www.springer.com/us/book/9780387245447</a>.
 </div>
 </div>
-</section>
 </section>
 
 </main> <!-- /main -->
