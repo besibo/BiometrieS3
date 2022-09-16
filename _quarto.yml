@@ -2,6 +2,10 @@ project:
   type: book
   output-file: "BiometrieS3"
 
+knitr:
+  opts_chunk: 
+    dev: "ragg_png"
+
 book:
   title: "TP de Biométrie<br> Semestre 3<br>"
   author: "Benoît Simon-Bouhet"

@@ -6,6 +6,9 @@ Nous abordons ici une étape essentielle de toute analyse de données : la manip
 
 Dans ce chapitre, nous aurons besoin des packages suivants :
 ```{r}
+#| message: false
+#| warning: false
+
 library(dplyr)
 library(ggplot2)
 library(palmerpenguins)
@@ -334,8 +337,7 @@ La première ligne de code nous permet :
 2. d'indiquer de quel objet les données doivent être extraites (`penguins`)
 3. de passer cet objet à la fonction suivante avec un pipe `%>%`
 
-Le premier argument de la fonction `filter()` doit être le nom d'un `data.frame` ou d'un `tibble`. Ici, puisque nous utilisons le pipe, il est inutile de spécifier cet argument : c'est ce qui est placé à gauche du pipe qui est utilisé comme premier argument de la fonction `filter()`. Les arguments suivants constituent la ou les conditions qui doivent être respectées par les lignes du tableau de départ afin d'être intégrées au nouveau tableau de données. Jetez à nouveau un œil à la @sec-comparaison si vous ne vous rappelez plus des opérateurs de comparaison.
-
+Le premier argument de la fonction `filter()` doit être le nom d'un `data.frame` ou d'un `tibble`. Ici, puisque nous utilisons le pipe, il est inutile de spécifier cet argument : c'est ce qui est placé à gauche du pipe qui est utilisé comme premier argument de la fonction `filter()`. Les arguments suivants constituent la ou les conditions qui doivent être respectées par les lignes du tableau de départ afin d'être intégrées au nouveau tableau de données. 
 ### Exercice
 
 Créez un objet nommé `adelie_light` qui contiendra uniquement les données de l'espèce Adélie, et uniquement pour les individus pesant 3700 grammes ou moins. Indice : relisez la @sec-comparaison
@@ -352,7 +354,7 @@ adelie_light
 
 ### Les conditions logiques
 
-Dans la @seq-comparaison, nous avons présenté en détail le fonctionnement des opérateurs de comparaison dans `R`. Relisez cette section si vous ne savez plus de quoi il s'agit. Les opérateurs de comparaison permettent de vérifier l'égalité ou l'inégalité entre des éléments. Ils renvoient `TRUE` ou `FALSE` et seront particulièrement utiles pour filtrer des lignes dans un tableau. Comme indiqué dans la @seq-comparaison, voici la liste des opérateurs de comparaison usuels :
+Dans la @sec-comparaison, nous avons présenté en détail le fonctionnement des opérateurs de comparaison dans `R`. Relisez cette section si vous ne savez plus de quoi il s'agit. Les opérateurs de comparaison permettent de vérifier l'égalité ou l'inégalité entre des éléments. Ils renvoient `TRUE` ou `FALSE` et seront particulièrement utiles pour filtrer des lignes dans un tableau. Voici à nouveau la liste des opérateurs de comparaison usuels :
 
 * `==` : égal à
 * `!=` : différent de

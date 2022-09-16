@@ -2004,6 +2004,21 @@ Quelques indices :
 
 - Les couleurs utilisées sont celles de la palettes `Accent` du package `RColorBrewer`.
 - Les variables utilisées sont `month`, `carrier` et `origin`.
-- La variable `month` est codée sous forme numérique dans le tableau de données. Il faudra la transformer en factor avec la fonction `factor(month)` au moment de l'associer à un axe du graphique.
+- La variable `month` est codée sous forme numérique dans le tableau de données. Il faudra la transformer en facteur avec la fonction `factor(month)` au moment de l'associer à un axe du graphique.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- Pour le S4 : penser aux barres d'erreur -->

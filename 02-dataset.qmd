@@ -25,10 +25,10 @@ library(palmerpenguins)
 
 ## Le package `palmerpenguins`
 
-Ce package [@R-palmerpenguins] contient un jeu de données collectées par Kristen Gorman (membre du ``Long Term Ecological Research Network'') et la station de Palmer en Antarctique [@Gorman2014]. Les données contiennent des informations au sujet de 330 individus appartenant à 3 espèces de manchots (voir figure~\ref{ppenguins}) étudiés sur 3 îles de l'archipel de Palmer, an Antarctique. Ces espèces ont fait l'objet de nombreuses études comparatives, notamment afin de déterminer comment elles utilisent le milieu pour acquérir des ressources. Puisque ces 3 espèces sont proches sur le plan phylogénétique et qu'elles occupent le même habitat, la question de la compétition inter-spécifique, pour l'espace et les ressources, se pose tout naturellement.
+Ce package [@R-palmerpenguins] contient un jeu de données collectées par Kristen Gorman (membre du ``Long Term Ecological Research Network'') et la station de Palmer en Antarctique [@Gorman2014]. Les données contiennent des informations au sujet de 330 individus appartenant à 3 espèces de manchots (voir @fig-ppenguins) étudiés sur 3 îles de l'archipel de Palmer, an Antarctique. Ces espèces ont fait l'objet de nombreuses études comparatives, notamment afin de déterminer comment elles utilisent le milieu pour acquérir des ressources. Puisque ces 3 espèces sont proches sur le plan phylogénétique et qu'elles occupent le même habitat, la question de la compétition inter-spécifique, pour l'espace et les ressources, se pose tout naturellement.
 
 
-![Les 3 espèces de manchots de l'archipel de Palmer. Illustration : Allison Horst](images/Penguins.png)
+![Les 3 espèces de manchots de l'archipel de Palmer. Illustration : Allison Horst](images/Penguins.png){#fig-ppenguins}
 
 
 ## Le data frame `penguins`
