@@ -338,6 +338,7 @@ La première ligne de code nous permet :
 3. de passer cet objet à la fonction suivante avec un pipe `%>%`
 
 Le premier argument de la fonction `filter()` doit être le nom d'un `data.frame` ou d'un `tibble`. Ici, puisque nous utilisons le pipe, il est inutile de spécifier cet argument : c'est ce qui est placé à gauche du pipe qui est utilisé comme premier argument de la fonction `filter()`. Les arguments suivants constituent la ou les conditions qui doivent être respectées par les lignes du tableau de départ afin d'être intégrées au nouveau tableau de données. 
+
 ### Exercice
 
 Créez un objet nommé `adelie_light` qui contiendra uniquement les données de l'espèce Adélie, et uniquement pour les individus pesant 3700 grammes ou moins. Indice : relisez la @sec-comparaison
@@ -350,7 +351,7 @@ adelie_light <- penguins %>%
 adelie_light
 ```
 
-<!-- Vérifiez que cet objet contient bien `r nrow(adelie_light)` lignes. -->
+Vérifiez que cet objet contient bien `r nrow(adelie_light)` lignes.
 
 ### Les conditions logiques
 
