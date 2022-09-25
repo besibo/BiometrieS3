@@ -111,7 +111,7 @@ L'opérateur `$` permet d'accéder à une unique variable grâce à son nom. Par
 penguins$species
 ```
 
-Cela nous permet de récupérer les données sous la forme d'un vecteur. Attention toutefois, le tableau `penguins` contient beaucoup de lignes. Récupérer une variable grâce à cet opérateur peut rapidement saturer la console. Nous serons amenés à manipuler des tableaux contenant plusieurs dizaines ou centaines de milliers de lignes. C'est le cas du tableau `diamonds` du package `ggplot2` que vous avez découvert dans les exercice de la @sec-Exo-1.
+Cela nous permet de récupérer les données sous la forme d'un vecteur ou, comme ici, d'un facteur. Attention toutefois, le tableau `penguins` contient beaucoup de lignes. Récupérer une variable grâce à cet opérateur peut rapidement saturer la console. Nous serons amenés à manipuler des tableaux contenant plusieurs dizaines ou centaines de milliers de lignes. C'est le cas du tableau `diamonds` du package `ggplot2` que vous avez découvert dans les exercice de la @sec-Exo-1.
 
 Si, par exemple, vous souhaitez extraire les données relatives à la clarté des diamants (colonne `clarity`) du tableau `diamonds`, vous pouvez taper ceci :
 

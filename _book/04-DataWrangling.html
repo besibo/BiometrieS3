@@ -225,7 +225,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#filtrer-des-lignes-avec-filter" id="toc-filtrer-des-lignes-avec-filter" class="nav-link" data-scroll-target="#filtrer-des-lignes-avec-filter"> <span class="header-section-number">4.5</span> Filtrer des lignes avec <code>filter()</code></a>
   <ul class="collapse">
   <li><a href="#principe" id="toc-principe" class="nav-link" data-scroll-target="#principe"> <span class="header-section-number">4.5.1</span> Principe</a></li>
-  <li><a href="#les-conditions-logiques" id="toc-les-conditions-logiques" class="nav-link" data-scroll-target="#les-conditions-logiques"> <span class="header-section-number">4.5.2</span> Les conditions logiques</a></li>
+  <li><a href="#exercice" id="toc-exercice" class="nav-link" data-scroll-target="#exercice"> <span class="header-section-number">4.5.2</span> Exercice</a></li>
+  <li><a href="#les-conditions-logiques" id="toc-les-conditions-logiques" class="nav-link" data-scroll-target="#les-conditions-logiques"> <span class="header-section-number">4.5.3</span> Les conditions logiques</a></li>
   </ul></li>
   <li><a href="#sélectionner-des-variables-avec-select" id="toc-sélectionner-des-variables-avec-select" class="nav-link" data-scroll-target="#sélectionner-des-variables-avec-select"> <span class="header-section-number">4.6</span> Sélectionner des variables avec <code>select()</code></a></li>
   <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate"> <span class="header-section-number">4.7</span> Créer de nouvelles variables avec <code>mutate()</code></a>
@@ -659,12 +660,15 @@ dbl (6): Id, Taille, Age, Cd, Cu, Hg
 <li>d’indiquer de quel objet les données doivent être extraites (<code>penguins</code>)</li>
 <li>de passer cet objet à la fonction suivante avec un pipe <code>%&gt;%</code></li>
 </ol>
-<p>Le premier argument de la fonction <code>filter()</code> doit être le nom d’un <code>data.frame</code> ou d’un <code>tibble</code>. Ici, puisque nous utilisons le pipe, il est inutile de spécifier cet argument : c’est ce qui est placé à gauche du pipe qui est utilisé comme premier argument de la fonction <code>filter()</code>. Les arguments suivants constituent la ou les conditions qui doivent être respectées par les lignes du tableau de départ afin d’être intégrées au nouveau tableau de données. ### Exercice</p>
-<p>Créez un objet nommé <code>adelie_light</code> qui contiendra uniquement les données de l’espèce Adélie, et uniquement pour les individus pesant 3700 grammes ou moins. Indice : relisez la <a href="01-R-basics.html#sec-comparaison"><span>Section&nbsp;1.3.4.2</span></a></p>
-<!-- Vérifiez que cet objet contient bien 81 lignes. -->
+<p>Le premier argument de la fonction <code>filter()</code> doit être le nom d’un <code>data.frame</code> ou d’un <code>tibble</code>. Ici, puisque nous utilisons le pipe, il est inutile de spécifier cet argument : c’est ce qui est placé à gauche du pipe qui est utilisé comme premier argument de la fonction <code>filter()</code>. Les arguments suivants constituent la ou les conditions qui doivent être respectées par les lignes du tableau de départ afin d’être intégrées au nouveau tableau de données.</p>
 </section>
-<section id="les-conditions-logiques" class="level3" data-number="4.5.2">
-<h3 data-number="4.5.2" class="anchored" data-anchor-id="les-conditions-logiques"><span class="header-section-number">4.5.2</span> Les conditions logiques</h3>
+<section id="exercice" class="level3" data-number="4.5.2">
+<h3 data-number="4.5.2" class="anchored" data-anchor-id="exercice"><span class="header-section-number">4.5.2</span> Exercice</h3>
+<p>Créez un objet nommé <code>adelie_light</code> qui contiendra uniquement les données de l’espèce Adélie, et uniquement pour les individus pesant 3700 grammes ou moins. Indice : relisez la <a href="01-R-basics.html#sec-comparaison"><span>Section&nbsp;1.3.4.2</span></a></p>
+<p>Vérifiez que cet objet contient bien 81 lignes.</p>
+</section>
+<section id="les-conditions-logiques" class="level3" data-number="4.5.3">
+<h3 data-number="4.5.3" class="anchored" data-anchor-id="les-conditions-logiques"><span class="header-section-number">4.5.3</span> Les conditions logiques</h3>
 <p>Dans la <a href="01-R-basics.html#sec-comparaison"><span>Section&nbsp;1.3.4.2</span></a>, nous avons présenté en détail le fonctionnement des opérateurs de comparaison dans <code>R</code>. Relisez cette section si vous ne savez plus de quoi il s’agit. Les opérateurs de comparaison permettent de vérifier l’égalité ou l’inégalité entre des éléments. Ils renvoient <code>TRUE</code> ou <code>FALSE</code> et seront particulièrement utiles pour filtrer des lignes dans un tableau. Voici à nouveau la liste des opérateurs de comparaison usuels :</p>
 <ul>
 <li><code>==</code> : égal à</li>
