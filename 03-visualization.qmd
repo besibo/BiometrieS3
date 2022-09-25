@@ -796,7 +796,7 @@ ggplot(species_table,
 4. Quelle île de l'archipel Palmer a fourni le plus grand nombre de manchots pour cette étude ? 
 
 
-### Éviter à tout prix les diagrammes circulaires
+### Éviter à tout prix les diagrammes circulaires {#sec-pie}
 
 À mon grand désarroi, l'un des graphiques classiquement utilisé pour représenter la distribution d'une variable catégorielle est le diagramme circulaire (ou diagramme camembert, piechart en anglais). C'est presque toujours **la plus mauvaise visualisation possible** pour représenter les effectifs ou pourcentages associés aux modalités d'une variable catégorielle. Je vous demande de l'éviter à tout prix. Notre cerveau n'est en effet pas correctement équipé pour comparer des angles et des surfaces. Ainsi, par exemple, nous avons naturellement tendance à surestimer les angles supérieurs à 90º, et à sous-estimer les angles inférieurs à 90º. En d'autres termes, il est difficile pour les humains de comparer des grandeurs sur des diagrammes circulaires.
 
