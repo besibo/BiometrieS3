@@ -26,7 +26,7 @@ language:
 
 format:
   html:
-    theme: united
+    theme: MyUnited.scss
     highlight-style: solarized
     # code-tools: 
     #   source: false
