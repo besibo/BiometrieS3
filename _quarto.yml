@@ -7,7 +7,6 @@ book:
   author: "Benoît Simon-Bouhet"
   date: today
   search: true
-  downloads: [pdf]
   repo-url: "https://github.com/besibo/BiometrieS3"
   chapters:
     - index.qmd
