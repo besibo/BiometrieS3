@@ -1432,7 +1432,7 @@ ggplot(TABLEAU, aes(x = VAR1, y = VAR2, fill = VAR3, ...)) +
 ```
 :::  
 
-Quand on a bien compris ce principe, on peut quasiment tout faire, les réponses aux questions qu'on se posent se trouvant presque toujours dans les fichiers d'aide des fonctions.
+Quand on a bien compris ce principe, on peut quasiment tout faire, les réponses aux questions qu'on se pose se trouvant presque toujours dans les fichiers d'aide des fonctions.
 
 ## Peaufiner l'apparence
 
