@@ -1355,8 +1355,7 @@ penguins %>%
   theme_bw() +
   labs(x = "Longueur du bec (mm)", 
        y = "Épaisseur du bec (mm)",
-       fill = "Espèce",
-       shape = "Sexe",
+       fill = "Sexe",
        size = "Masse (g)")
 ```
 
