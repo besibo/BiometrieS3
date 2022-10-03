@@ -1962,7 +1962,7 @@ Important
 <p><img src="03-visualization_files/figure-html/unnamed-chunk-84-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Même sans connaître en détail le principe et les limites de la régression linéaire, vous comprenez j’espère à quel point l’exploration rigoureuse d’un jeu de données est importante. Par exemple, nous avons vu que plus tôt que, pour chaque espèce, les mâles sont plus lourds que les femelles. Est-ce que des différences morphologiques entre les sexes pourraient expliquer la relation que nous observons ici entre épaisseur du bec et longueur des nageoires ? Est-il possible qu’un second effet Simpson se cache dans ces données ? Si on distingue les deux sexes au sein de chaque espèce, la relation existe-t-elle toujours ? Et si oui, est-elle toujours positive ou s’inverse-t-elle à nouveau ? Pour le savoir, on peut utiliser une autre fonction permettant de produire des sous-graphiques, la fonction <code>facte_grid()</code>, qui permet de faire un sous graphique pour chaque combinaison de modalités de 2 variables catégorielles :</p>
+<p>Même sans connaître en détail le principe et les limites de la régression linéaire, vous comprenez j’espère à quel point l’exploration rigoureuse d’un jeu de données est importante. Par exemple, nous avons que plus tôt que, pour chaque espèce, les mâles sont plus lourds que les femelles. Est-ce que des différences morphologiques entre les sexes pourraient expliquer la relation que nous observons ici entre épaisseur du bec et longueur des nageoires ? Est-il possible qu’un second effet Simpson se cache dans ces données ? Si on distingue les deux sexes au sein de chaque espèce, la relation existe-t-elle toujours ? Et si oui, est-elle toujours positive ou s’inverse-t-elle à nouveau ? Pour le savoir, on peut utiliser une autre fonction permettant de produire des sous-graphiques, la fonction <code>facte_grid()</code>, qui permet de faire un sous graphique pour chaque combinaison de modalités de 2 variables catégorielles :</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
 <span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex)) <span class="sc">%&gt;%</span>    <span class="co"># Elimine les individus dont le sexe est inconnu</span></span>
@@ -1998,7 +1998,7 @@ Important
 </div>
 </div>
 </div>
-<p>Quand on a bien compris ce principe, on peut quasiment tout faire, les réponses aux questions qu’on se pose se trouvant presque toujours dans les fichiers d’aide des fonctions.</p>
+<p>Quand on a bien compris ce principe, on peut quasiment tout faire, les réponses aux questions qu’on se posent se trouvant presque toujours dans les fichiers d’aide des fonctions.</p>
 </section>
 </section>
 <section id="peaufiner-lapparence" class="level2" data-number="3.10">

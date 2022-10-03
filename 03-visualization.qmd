@@ -1936,7 +1936,7 @@ ggplot(data = diams, mapping = aes(x = carat, y = price)) +
 
 3. Selon vous, à quoi sont dues les bandes verticales que l'on observe sur ce graphique ?
 
-4. Installez et chargez en mémoire le package `nycflight13`
+4. Installez et chargez en mémoire le package `nycflights13`
 
 5. Examinez le tableau `flights` de ce package, et lisez son fichier d'aide pour comprendre à quoi correspondent ces données
 
