@@ -579,7 +579,7 @@ dauphin_clean$Statut
 ```
 Pour les 2 premiers facteurs, les niveaux des facteurs (ou modalités) sont classés par ordre alphabétique. Ainsi, pour le facteur `Sexe`, la catégorie `f` (femelle) apparaît avant `m` (mâles) dans la liste des niveaux (`Levels: ...`). Pour le facteur `Organe`, la modalité `foie` apparaît avant la modalité `rein`. L'ordre des modalités d'un facteur est celui qui sera utilisé par défaut pour ordonner les catégories sur les axes d'un graphique ou dans les légendes. L'ordre alphabétique convient parfaitement pour le `Sexe` ou l'`Organe` puisqu'il n'y a pas, pour ces facteurs, d'ordre dans les modalités.
 
-Pour le facteur `Statut` en revanche, l'ordre importe, car il reflète des stades qui se succèdent logiquement au cours de la vie des individus (et des femelles plus particulièrement). Sur un graphique, on souhaite donc que ces catégories apparaissent dans un ordre bien précis, différent de l'ordre alphabétique. C'est ;a raison pour laquelle, lorsque l'on crée un facteur avec la fonction `factor()`, on peut spécifier explicitement un ordre pour les catégories grâce à l'argument `levels = `. Il suffit ensuite de fournir un vecteur contenant le nom de chaque catégorie, dans l'ordre souhaité.
+Pour le facteur `Statut` en revanche, l'ordre importe, car il reflète des stades qui se succèdent logiquement au cours de la vie des individus (et des femelles plus particulièrement). Sur un graphique, on souhaite donc que ces catégories apparaissent dans un ordre bien précis, différent de l'ordre alphabétique. C'est la raison pour laquelle, lorsque l'on crée un facteur avec la fonction `factor()`, on peut spécifier explicitement un ordre pour les catégories grâce à l'argument `levels = `. Il suffit ensuite de fournir un vecteur contenant le nom de chaque catégorie, dans l'ordre souhaité.
 
 
 ### Exercices
@@ -588,7 +588,7 @@ Pour le facteur `Statut` en revanche, l'ordre importe, car il reflète des stade
 
 2. La consommation est donnée en miles par gallon. Créez une nouvelle variable `conso` qui contiendra la consommation sur autoroute, exprimée en nombre de litres pour 100 kilomètres.
 
-3. Faîtes un graphique présentant la relation entre la cylindrée en litres et la consommation sur autoroute exprimée en nombre de litres pour 100 kilomètres. Vous excluerez les véhicules dont la `class`e est `2seater` de ce graphique (il s'agit de voitures de sports très compactes qu'il est difficile de mesurer aux autres). Sur votre graphique, la couleur devrait représenter le type de véhicule. Vous ajouterez une droite de régression en utilisant `geom_smooth(method = "lm")`. Votre graphique devrait ressembler à ceci :
+3. Faîtes un graphique présentant la relation entre la cylindrée en litres et la consommation sur autoroute exprimée en nombre de litres pour 100 kilomètres. Vous exclurez les véhicules dont la `class`e est `2seater` de ce graphique (il s'agit de voitures de sports très compactes qu'il est difficile de mesurer aux autres). Sur votre graphique, la couleur devrait représenter le type de véhicule. Vous ajouterez une droite de régression en utilisant `geom_smooth(method = "lm")`. Votre graphique devrait ressembler à ceci :
 
 ```{r consommation, tidy=FALSE, warning = FALSE, echo = FALSE, fig.cap = "Consommation en fonction de la cylindrée"}
 mpg %>%
@@ -604,7 +604,7 @@ mpg %>%
   theme_minimal()
 ```
 
-4. Ce graphique présente-t'il correctement l'ensemble des données de ces 2 variables ? Pourquoi ? Comparez le graphique de la question 3 ci-dessus et le graphique présenté ci-dessous. Selon vous, quels arguments et/ou fonctions ont été modifiés pour arriver à ce nouveau graphique ? Quels sont les avantages et les inconvénients de ce graphique par rapport au précédent ?
+4. Ce graphique présente-t-il correctement l'ensemble des données de ces 2 variables ? Pourquoi ? Comparez le graphique de la question 3 ci-dessus et le graphique présenté ci-dessous. Selon vous, quels arguments et/ou fonctions ont été modifiés pour arriver à ce nouveau graphique ? Quels sont les avantages et les inconvénients de ce graphique par rapport au précédent ?
 
 ```{r consommation2, tidy=FALSE, warning = FALSE, echo = FALSE, fig.cap="Consommation en fonction de la cylindrée"}
 mpg %>%
