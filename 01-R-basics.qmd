@@ -45,7 +45,7 @@ Avant tout, vous devez télécharger et installer `R`, **puis** `RStudio`, dans 
 
 1. [Téléchargez et installez `R`](https://cran.r-project.org)
  - Vous devez installer ce logiciel en premier.
- - Cliquez sur le lien de téléchargement qui correspond à votre système d'exploitation, puis, sur "base", si vous êtes sous Windows, sur "`R-4.2.1.pkg`" si vous êtes sous Mac avec processeur Intel, ou sur `R-4.2.1-arm64.pkg` si vous êtes sous Mac avec processeur M1 ou M2 (sous Mac, cliquez sur le Menu , puis sur "À propos de ce Mac" et regardez à la rubrique "Processeur), et suivez les instructions.
+ - Cliquez sur le lien de téléchargement qui correspond à votre système d'exploitation, puis, sur "base", si vous êtes sous Windows, sur "`R-4.2.1.pkg`" si vous êtes sous Mac avec processeur Intel, ou sur `R-4.2.1-arm64.pkg` si vous êtes sous Mac avec processeur M1 ou M2 (sous Mac, cliquez sur le Menu , puis sur "À propos de ce Mac" et regardez à la rubrique "Processeur"), et suivez les instructions.
 2. [Téléchargez et installez `RStudio`](https://www.rstudio.com/products/RStudio/#Desktop)
  - Cliquez sur "RStudio Desktop", puis sur "Download RStudio Desktop".
  - Choisissez la version gratuite et cliquez sur le lien de téléchargement qui correspond à votre système d'exploitation.
@@ -88,7 +88,7 @@ Félicitations, vous venez de taper votre première instruction `R` : vous savez
 Dans la version en ligne de ce livre (en html), à chaque fois que du code `R` sera fourni, il apparaîtra dans un cadre grisé avec une ligne bleue à gauche, comme ci-dessus. Vous pourrez toujours taper dans `RStudio`, les commandes qui figurent dans ces blocs de code, afin d'obtenir vous même les résultats souhaités. Dans ce livre, lorsque les commandes `R` produisent des résultats, ils sont affichés juste en dessous des blocs de code. Enfin, en passant la souris sur les blocs de code, vous verrez apparaître, à droite, une icône de presse-papier qui vous permettra de copier-coller les commandes du livre dans la console de `RStudio` ou, très bientôt, dans vos scripts. 
 
 :::{.callout-warning}
-## Les risques du "copier-coller" [{{< fa clipboard regular >}}]{style="color: orange"}
+## Les risques du "copier-coller" [{{< fa regular clipboard >}}]{style="color: orange"}
 
 Attention : il est fortement conseillé de réserver les copier-coller aux blocs de commandes de (très) grande taille, ou en cas d'erreur de syntaxe inexplicable. L'expérience a en effet montré qu'**on apprend beaucoup mieux [en tapant soi-même les commandes]{style="color: red"}**. Ça n'est que comme cela que l'on peut prendre conscience de toutes les subtilités du langage (par exemple, faut-il mettre une virgule ou un point, une parenthèse ou un crochet, le symbole moins ou un tilde, etc.). Je vous conseille donc de taper vous-même les commandes autant que possible.
 :::
@@ -117,7 +117,7 @@ Les avantages de travailler dans un script sont nombreux :
 Vous pouvez créer un script en cliquant dans le menu "File > New File > R Script". Un nouveau panneau s'ouvre dans l'application. Pensez à sauvegarder immédiatement votre nouveau script en cliquant dans le menu "File > Save" ou "File > Save as...". Il faut pour cela lui donner un nom et choisir un emplacement sur votre disque dur. 
 
 :::{.callout-important}
-## Où sauvegarder vos scripts ? [{{< fa floppy-disk regular >}}]{style="color:red"}
+## Où sauvegarder vos scripts ? [{{< fa regular save >}}]{style="color:red"}
 
 Je vous encourage vivement à créer, sur votre disque dur, un nouveau dossier spécifique, que vous nommerez par exemple `BiometrieS3`. Il est important que le nom de ce dossier de contienne pas de caractères spéciaux (*e.g.* accents, cédilles, apostrophes, espaces, etc.). Ce dossier devrait être facilement accessible : vous y enregistrerez tous vos scripts, vos jeux de données, vos graphiques, etc.
 
@@ -235,7 +235,7 @@ getwd()
 
 
 :::{.callout-important}
-## Pour résumer... {{< fa computer >}}
+## Pour résumer... {{< fa laptop-code >}}
 
 Les `Rprojects` sont un moyen très pratique de travailler efficacement dans `RStudio` car ils permettent de gérer facilement la question du répertoire de travail. Lorsque vous envisagez de travailler sur un nouveau sujet/projet/jeu de données/compte-rendu de TP..., les étapes à suivre, pour vous mettre dans une configuration idéale qui vous évitera bien des problèmes par la suite, sont donc les suivantes :
 
@@ -354,7 +354,7 @@ Ici, `R` renvoie un résultat, accompagné d'un message d'avertissement qui nous
 Ce type de recyclage est très risqué car il est difficile de savoir ce qui a été comparé avec quoi. En travaillant avec des tableaux plutôt qu'avec des vecteurs, le problème est généralement évité puisque toutes les colonnes d'un `data.frame` contiennent le même nombre d'éléments.
 
 :::{.callout-warning}
-## Erreur ou avertissement ? {{< fa bomb >}} ou {{< fa triangle-exclamation >}} ?
+## Erreur ou avertissement ? {{< fa bomb >}} ou {{< fa exclamation-triangle >}} ?
 
 Il ne faut pas confondre message d'erreur et message d'avertissement :
 
@@ -491,7 +491,7 @@ En procédant de l'une ou l'autre façon, installez également les packages suiv
 :::{.callout-note}
 ## Note : `install.packages()`
 
-Un package doit être installé une fois seulement sur un ordinateur, sauf si une version plus récente est disponible et que vous souhaitez mettre à jour ce package. Il n'est donc pas nécessaire de laisser ces commandes dans votre script. Sinon, vous risquez de ré-installer les packages à chaque nouvelle session de travail, ce qui est inutile et consomme inutilement de la bande passante, des ressources numériques, et donc, du carbone... {{< fa temperature-three-quarters >}} {{< fa earth-americas >}}
+Un package doit être installé une fois seulement sur un ordinateur, sauf si une version plus récente est disponible et que vous souhaitez mettre à jour ce package. Il n'est donc pas nécessaire de laisser ces commandes dans votre script. Sinon, vous risquez de ré-installer les packages à chaque nouvelle session de travail, ce qui est inutile et consomme inutilement de la bande passante, des ressources numériques, et donc, du carbone... {{< fa thermometer-three-quarters >}} {{< fa globe-americas >}}
 :::
 
 

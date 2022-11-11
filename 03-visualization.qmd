@@ -49,7 +49,7 @@ Comme nous le verrons, les graphiques nous aident également à repérer les ten
 
 Dans ce chapitre, vous apprendrez à :
 
-1. faire différents types de graphiques exploratoires avec le package `ggplot2` {{< fa chart-line >}} {{< fa chart-gantt >}} {{< fa chart-column >}} {{< fa chart-area >}}
+1. faire différents types de graphiques exploratoires avec le package `ggplot2` {{< fa chart-line >}} {{< fa chart-bar >}} {{< fa chart-area >}}
 2. choisir le ou les graphiques appropriés selon la nature des variables dont vous disposez ou que vous souhaitez mettre en relation
 3. mettre vos graphiques en forme pour les intégrer dans vos rapports ou compte-rendus de TP
 :::
@@ -1871,6 +1871,8 @@ Tous les thèmes possèdent la même liste d'argument. L'un d'entre eux est l'ar
 Dans l'exemple ci-dessous, j'utilise la police "Gill Sans". Si cette police n'est pas disponible sur votre ordinateur, ce code produira une erreur (ou `R` prendra simplement la police par défaut. Si c'est le cas, remplacez-la par une police de votre ordinateur. Attention, son nom exact doit être utilisé. Cela signifie bien sûr le respect des espaces, majuscules, etc.
 
 ```{r}
+#| eval: false
+
 ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
                      fill = species, size = body_mass_g)) +
   geom_point(shape = 21, color = "black", alpha = 0.6) +
@@ -1885,9 +1887,33 @@ ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
   theme_minimal(base_family = "Gill Sans")
 ```
 
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+pplot1 <- ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = species, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec de 3 espèces de manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'",
+       fill = "Espèce",
+       size = "Masse (g)") +
+  scale_fill_viridis_d(option = "B") +
+  theme_minimal(base_family = "Gill Sans")
+
+ggsave(filename = "images/fonts1.pdf", plot = pplot1, device = cairo_pdf, width = 7, height = 5)
+```
+
+![](images/fonts1.pdf)
+
 Il est également possible de spécifier la taille de police qui devrait être utilisée par défaut. On spécifie la taille de base avec l'argument `base_size = `, et toutes les autres tailles de polices seront mises à jour pour refléter le changement. Ainsi, les différences de tailles entre titre, sous-titres, légendes des axes, etc, seront maintenues :
 
 ```{r}
+#| eval: false
 ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
                      fill = species, size = body_mass_g)) +
   geom_point(shape = 21, color = "black", alpha = 0.6) +
@@ -1901,6 +1927,28 @@ ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
   scale_fill_viridis_d(option = "B") +
   theme_minimal(base_family = "Gill Sans", base_size = 14)
 ```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+pplot2 <- ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
+                     fill = species, size = body_mass_g)) +
+  geom_point(shape = 21, color = "black", alpha = 0.6) +
+  labs(title = "Forme du bec des manchots et relation avec leur masse",
+       subtitle = "Les manchots les plus lourds ont des becs longs et fins",
+       x = "Longueur du bec (mm)",
+       y = "Épaisseur du bec (mm)",
+       caption = "Source :  package 'palmerpenguins'",
+       fill = "Espèce",
+       size = "Masse (g)") +
+  scale_fill_viridis_d(option = "B") +
+  theme_minimal(base_family = "Gill Sans", base_size = 14)
+
+ggsave(filename = "images/fonts2.pdf", plot = pplot2, device = cairo_pdf, width = 7, height = 5)
+```
+
+![](images/fonts2.pdf)
 
 Le choix d'un thème et d'une police adaptés doivent vous permettre de faire des graphiques originaux et clairs. Rappelez-vous toujours que vos choix en matière de graphiques doivent avoir pour objectif principal de rendre les tendances plus faciles à décrypter pour un lecteur non familier de vos données. C'est un outil de communication au même titre que n'importe quel paragraphe d'un rapport ou compte-rendu. Et comme pour un paragraphe, la première version d'un graphique est rarement la bonne.
 

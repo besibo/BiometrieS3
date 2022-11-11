@@ -3,10 +3,11 @@ project:
   output-file: "BiometrieS3"
 
 book:
-  title: "TP de Biométrie<br> Semestre 3<br>"
+  title: "TP de Biométrie<br>Semestre 3<br>"
   author: "Benoît Simon-Bouhet"
-  date: today
+  date: now
   search: true
+  downloads: pdf
   repo-url: "https://github.com/besibo/BiometrieS3"
   chapters:
     - index.qmd
@@ -35,9 +36,16 @@ format:
     code-block-border-left: "#31BAE9"
     code-depth: 5
     smooth-scroll: true
-
-  # pdf:
-  #   documentclass: scrreprt
-
+    link-external-icon: true
+    link-external-newwindow: true
+  pdf:
+    documentclass: scrreprt
+    papersize: a4
+    highlight-style: github
+    code-block-bg: false
+    code-block-border-left: "#31BAE9"
+    code-depth: 5
+    colorlinks: true
+    include-in-header: preamble.tex
 
 

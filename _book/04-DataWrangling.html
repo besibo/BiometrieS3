@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>TP de Biométrie Semestre 3 - 4&nbsp; Manipuler des tableaux avec dplyr</title>
+<title>TP de BiométrieSemestre 3 - 4&nbsp; Manipuler des tableaux avec dplyr</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -158,9 +158,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">TP de Biométrie<br> Semestre 3<br></a> 
+      <a href="./">TP de Biométrie<br>Semestre 3<br></a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/besibo/BiometrieS3" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="./TP-de-Biométrie-br-Semestre-3-br-.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -1115,14 +1116,14 @@ Levels: imm mat pnl pl l repos</code></pre>
 </div>
 </div>
 <p>Pour les 2 premiers facteurs, les niveaux des facteurs (ou modalités) sont classés par ordre alphabétique. Ainsi, pour le facteur <code>Sexe</code>, la catégorie <code>f</code> (femelle) apparaît avant <code>m</code> (mâles) dans la liste des niveaux (<code>Levels: ...</code>). Pour le facteur <code>Organe</code>, la modalité <code>foie</code> apparaît avant la modalité <code>rein</code>. L’ordre des modalités d’un facteur est celui qui sera utilisé par défaut pour ordonner les catégories sur les axes d’un graphique ou dans les légendes. L’ordre alphabétique convient parfaitement pour le <code>Sexe</code> ou l’<code>Organe</code> puisqu’il n’y a pas, pour ces facteurs, d’ordre dans les modalités.</p>
-<p>Pour le facteur <code>Statut</code> en revanche, l’ordre importe, car il reflète des stades qui se succèdent logiquement au cours de la vie des individus (et des femelles plus particulièrement). Sur un graphique, on souhaite donc que ces catégories apparaissent dans un ordre bien précis, différent de l’ordre alphabétique. C’est ;a raison pour laquelle, lorsque l’on crée un facteur avec la fonction <code>factor()</code>, on peut spécifier explicitement un ordre pour les catégories grâce à l’argument <code>levels =</code>. Il suffit ensuite de fournir un vecteur contenant le nom de chaque catégorie, dans l’ordre souhaité.</p>
+<p>Pour le facteur <code>Statut</code> en revanche, l’ordre importe, car il reflète des stades qui se succèdent logiquement au cours de la vie des individus (et des femelles plus particulièrement). Sur un graphique, on souhaite donc que ces catégories apparaissent dans un ordre bien précis, différent de l’ordre alphabétique. C’est la raison pour laquelle, lorsque l’on crée un facteur avec la fonction <code>factor()</code>, on peut spécifier explicitement un ordre pour les catégories grâce à l’argument <code>levels =</code>. Il suffit ensuite de fournir un vecteur contenant le nom de chaque catégorie, dans l’ordre souhaité.</p>
 </section>
 <section id="exercices" class="level3" data-number="4.7.2">
 <h3 data-number="4.7.2" class="anchored" data-anchor-id="exercices"><span class="header-section-number">4.7.2</span> Exercices</h3>
 <ol type="1">
 <li><p>Dans <code>ggplot2</code> le jeu de données <code>mpg</code> contient des informations sur 234 modèles de voitures. Examinez ce jeu de données avec la fonction <code>View()</code> et consultez son fichier d’aide pour savoir à quoi correspondent les différentes variables. Quelle(s) variable(s) nous renseignent sur la consommation des véhicules ? À quoi correspond la variable <code>disp</code> ?</p></li>
 <li><p>La consommation est donnée en miles par gallon. Créez une nouvelle variable <code>conso</code> qui contiendra la consommation sur autoroute, exprimée en nombre de litres pour 100 kilomètres.</p></li>
-<li><p>Faîtes un graphique présentant la relation entre la cylindrée en litres et la consommation sur autoroute exprimée en nombre de litres pour 100 kilomètres. Vous excluerez les véhicules dont la <code>class</code>e est <code>2seater</code> de ce graphique (il s’agit de voitures de sports très compactes qu’il est difficile de mesurer aux autres). Sur votre graphique, la couleur devrait représenter le type de véhicule. Vous ajouterez une droite de régression en utilisant <code>geom_smooth(method = "lm")</code>. Votre graphique devrait ressembler à ceci :</p></li>
+<li><p>Faîtes un graphique présentant la relation entre la cylindrée en litres et la consommation sur autoroute exprimée en nombre de litres pour 100 kilomètres. Vous exclurez les véhicules dont la <code>class</code>e est <code>2seater</code> de ce graphique (il s’agit de voitures de sports très compactes qu’il est difficile de mesurer aux autres). Sur votre graphique, la couleur devrait représenter le type de véhicule. Vous ajouterez une droite de régression en utilisant <code>geom_smooth(method = "lm")</code>. Votre graphique devrait ressembler à ceci :</p></li>
 </ol>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
@@ -1138,7 +1139,7 @@ Levels: imm mat pnl pl l repos</code></pre>
 </div>
 </div>
 <ol start="4" type="1">
-<li>Ce graphique présente-t’il correctement l’ensemble des données de ces 2 variables ? Pourquoi ? Comparez le graphique de la question 3 ci-dessus et le graphique présenté ci-dessous. Selon vous, quels arguments et/ou fonctions ont été modifiés pour arriver à ce nouveau graphique ? Quels sont les avantages et les inconvénients de ce graphique par rapport au précédent ?</li>
+<li>Ce graphique présente-t-il correctement l’ensemble des données de ces 2 variables ? Pourquoi ? Comparez le graphique de la question 3 ci-dessus et le graphique présenté ci-dessous. Selon vous, quels arguments et/ou fonctions ont été modifiés pour arriver à ce nouveau graphique ? Quels sont les avantages et les inconvénients de ce graphique par rapport au précédent ?</li>
 </ol>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
@@ -1360,6 +1361,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return popup.innerHTML;
     });
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
 });
 </script>
 <nav class="page-navigation">
