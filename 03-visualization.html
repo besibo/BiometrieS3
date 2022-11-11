@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>TP de Biométrie Semestre 3 - 3&nbsp; Visualiser des données avec ggplot2</title>
+<title>TP de BiométrieSemestre 3 - 3&nbsp; Visualiser des données avec ggplot2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -179,9 +179,10 @@ div.csl-indent {
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">TP de Biométrie<br> Semestre 3<br></a> 
+      <a href="./">TP de Biométrie<br>Semestre 3<br></a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/besibo/BiometrieS3" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="./TP-de-Biométrie-br-Semestre-3-br-.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -339,7 +340,7 @@ Objectifs
 <div class="callout-body-container callout-body">
 <p>Dans ce chapitre, vous apprendrez à :</p>
 <ol type="1">
-<li>faire différents types de graphiques exploratoires avec le package <code>ggplot2</code> <i class="fa-solid fa-chart-line" aria-hidden="true"></i> <i class="fa-solid fa-chart-gantt" aria-hidden="true"></i> <i class="fa-solid fa-chart-column" aria-hidden="true"></i> <i class="fa-solid fa-chart-area" aria-hidden="true"></i></li>
+<li>faire différents types de graphiques exploratoires avec le package <code>ggplot2</code> <i class="fa-solid fa-chart-line" aria-hidden="true"></i> <i class="fa-solid fa-chart-bar" aria-hidden="true"></i> <i class="fa-solid fa-chart-area" aria-hidden="true"></i></li>
 <li>choisir le ou les graphiques appropriés selon la nature des variables dont vous disposez ou que vous souhaitez mettre en relation</li>
 <li>mettre vos graphiques en forme pour les intégrer dans vos rapports ou compte-rendus de TP</li>
 </ol>
@@ -2516,34 +2517,30 @@ Important
 <span id="cb190-10"><a href="#cb190-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="st">"Masse (g)"</span>) <span class="sc">+</span></span>
 <span id="cb190-11"><a href="#cb190-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"B"</span>) <span class="sc">+</span></span>
 <span id="cb190-12"><a href="#cb190-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"Gill Sans"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
 </div>
-<div class="cell-output-display">
-<p><img src="03-visualization_files/figure-html/unnamed-chunk-111-1.png" class="img-fluid" width="672"></p>
+<div class="cell">
+
 </div>
-</div>
+<p><embed src="images/fonts1.pdf" class="img-fluid"></p>
 <p>Il est également possible de spécifier la taille de police qui devrait être utilisée par défaut. On spécifie la taille de base avec l’argument <code>base_size =</code>, et toutes les autres tailles de polices seront mises à jour pour refléter le changement. Ainsi, les différences de tailles entre titre, sous-titres, légendes des axes, etc, seront maintenues :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb192"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb192-1"><a href="#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> bill_depth_mm,</span>
-<span id="cb192-2"><a href="#cb192-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">fill =</span> species, <span class="at">size =</span> body_mass_g)) <span class="sc">+</span></span>
-<span id="cb192-3"><a href="#cb192-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb192-4"><a href="#cb192-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Forme du bec des manchots et relation avec leur masse"</span>,</span>
-<span id="cb192-5"><a href="#cb192-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Les manchots les plus lourds ont des becs longs et fins"</span>,</span>
-<span id="cb192-6"><a href="#cb192-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Longueur du bec (mm)"</span>,</span>
-<span id="cb192-7"><a href="#cb192-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Épaisseur du bec (mm)"</span>,</span>
-<span id="cb192-8"><a href="#cb192-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source :  package 'palmerpenguins'"</span>,</span>
-<span id="cb192-9"><a href="#cb192-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Espèce"</span>,</span>
-<span id="cb192-10"><a href="#cb192-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="st">"Masse (g)"</span>) <span class="sc">+</span></span>
-<span id="cb192-11"><a href="#cb192-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"B"</span>) <span class="sc">+</span></span>
-<span id="cb192-12"><a href="#cb192-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"Gill Sans"</span>, <span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<div class="sourceCode cell-code" id="cb191"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb191-1"><a href="#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> bill_depth_mm,</span>
+<span id="cb191-2"><a href="#cb191-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">fill =</span> species, <span class="at">size =</span> body_mass_g)) <span class="sc">+</span></span>
+<span id="cb191-3"><a href="#cb191-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb191-4"><a href="#cb191-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Forme du bec des manchots et relation avec leur masse"</span>,</span>
+<span id="cb191-5"><a href="#cb191-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Les manchots les plus lourds ont des becs longs et fins"</span>,</span>
+<span id="cb191-6"><a href="#cb191-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Longueur du bec (mm)"</span>,</span>
+<span id="cb191-7"><a href="#cb191-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Épaisseur du bec (mm)"</span>,</span>
+<span id="cb191-8"><a href="#cb191-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source :  package 'palmerpenguins'"</span>,</span>
+<span id="cb191-9"><a href="#cb191-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Espèce"</span>,</span>
+<span id="cb191-10"><a href="#cb191-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="st">"Masse (g)"</span>) <span class="sc">+</span></span>
+<span id="cb191-11"><a href="#cb191-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"B"</span>) <span class="sc">+</span></span>
+<span id="cb191-12"><a href="#cb191-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"Gill Sans"</span>, <span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell-output-display">
-<p><img src="03-visualization_files/figure-html/unnamed-chunk-112-1.png" class="img-fluid" width="672"></p>
+<div class="cell">
+
 </div>
-</div>
+<p><embed src="images/fonts2.pdf" class="img-fluid"></p>
 <p>Le choix d’un thème et d’une police adaptés doivent vous permettre de faire des graphiques originaux et clairs. Rappelez-vous toujours que vos choix en matière de graphiques doivent avoir pour objectif principal de rendre les tendances plus faciles à décrypter pour un lecteur non familier de vos données. C’est un outil de communication au même titre que n’importe quel paragraphe d’un rapport ou compte-rendu. Et comme pour un paragraphe, la première version d’un graphique est rarement la bonne.</p>
 <p>Vous devriez donc maintenant être bien armés pour produire 95% des graphiques dont vous aurez besoin tout au long de votre cursus universitaire. Toutefois, un point important a pour l’instant été omis : l’ajout de barres d’erreurs sur vos graphiques. Nous verrons comment faire cela au prochain semestre, après avoir appris à manipuler efficacement des tableaux de données avec les packages <code>tidyr</code> et <code>dplyr</code>.</p>
 <p>Quoi qu’il en soit, il est maintenant attendu de vous que vous utilisez <code>R</code> et ce que vous avez appris de <code>ggplot2</code> pour produire tous les graphiques que vous serez amenés à intégrer à vos comptes-rendus de TP et à vos rapports.</p>
@@ -2555,10 +2552,10 @@ Important
 <li>Avec le jeu de données <code>diamonds</code>, du packages <code>ggplot2</code>, tapez les commandes suivantes pour créer un nouveau tableau <code>diams</code> contenant moins de lignes (3000 au lieu de près de 54000) :</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb194"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb194-1"><a href="#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb194-2"><a href="#cb194-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4532</span>) <span class="co"># Afin que tout le monde récupère les mêmes lignes</span></span>
-<span id="cb194-3"><a href="#cb194-3" aria-hidden="true" tabindex="-1"></a>diams <span class="ot">&lt;-</span> diamonds <span class="sc">%&gt;%</span></span>
-<span id="cb194-4"><a href="#cb194-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">3000</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb192"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb192-1"><a href="#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb192-2"><a href="#cb192-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4532</span>) <span class="co"># Afin que tout le monde récupère les mêmes lignes</span></span>
+<span id="cb192-3"><a href="#cb192-3" aria-hidden="true" tabindex="-1"></a>diams <span class="ot">&lt;-</span> diamonds <span class="sc">%&gt;%</span></span>
+<span id="cb192-4"><a href="#cb192-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">3000</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
 <li>Avec ce nouveau tableau <code>diams</code>, tapez le code permettant de créer le graphique ci-dessous. Indice : affichez le tableau <code>diams</code> dans la console afin de voir quelles sont les variables disponibles.</li>
@@ -2567,7 +2564,7 @@ Important
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="03-visualization_files/figure-html/unnamed-chunk-114-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="03-visualization_files/figure-html/unnamed-chunk-116-1.png" class="img-fluid figure-img" width="672"></p>
 <p></p><figcaption class="figure-caption">Prix de 3000 diamants en fonction de leur taille en carats et de leur clarté.</figcaption><p></p>
 </figure>
 </div>
@@ -2580,11 +2577,11 @@ Important
 <li><p>Créer un nouveau jeu de données en exécutant ces commandes :</p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb195"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb195-1"><a href="#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb195-2"><a href="#cb195-2" aria-hidden="true" tabindex="-1"></a>small_flights <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span></span>
-<span id="cb195-3"><a href="#cb195-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(arr_delay),</span>
-<span id="cb195-4"><a href="#cb195-4" aria-hidden="true" tabindex="-1"></a>         distance <span class="sc">&lt;</span> <span class="dv">3000</span>)  <span class="sc">%&gt;%</span></span>
-<span id="cb195-5"><a href="#cb195-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">1000</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb193"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb193-1"><a href="#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb193-2"><a href="#cb193-2" aria-hidden="true" tabindex="-1"></a>small_flights <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span></span>
+<span id="cb193-3"><a href="#cb193-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(arr_delay),</span>
+<span id="cb193-4"><a href="#cb193-4" aria-hidden="true" tabindex="-1"></a>         distance <span class="sc">&lt;</span> <span class="dv">3000</span>)  <span class="sc">%&gt;%</span></span>
+<span id="cb193-5"><a href="#cb193-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">1000</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="7" type="1">
 <li>Ce nouveau jeu de données de petite taille (1000 lignes) est nommé <code>small_flights</code>. Il contient les mêmes variables que le tableau <code>flights</code> mais ne contient qu’une petite fraction de ses lignes. Les lignes retenues ont été choisies au hasard. Vous pouvez visualiser son contenu en tapant son nom dans la console ou en utilisant la fonction <code>View()</code>.</li>
@@ -2592,7 +2589,7 @@ Important
 <p>En vous appuyant sur les fonctions et les principes de la grammaire des graphiques que vous avez découverts dans ce chapitre, et en vous servant de ce nouveau jeu de données, tapez les commandes qui permettent de produire le graphique ci-dessous :</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="03-visualization_files/figure-html/unnamed-chunk-116-1.png" class="img-fluid" width="672"></p>
+<p><img src="03-visualization_files/figure-html/unnamed-chunk-118-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Quelques indices :</p>
@@ -2606,7 +2603,7 @@ Important
 </ol>
 <div class="cell" data-fig.asp="1">
 <div class="cell-output-display">
-<p><img src="03-visualization_files/figure-html/unnamed-chunk-117-1.png" class="img-fluid" width="672"></p>
+<p><img src="03-visualization_files/figure-html/unnamed-chunk-119-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Quelques indices :</p>
@@ -2727,6 +2724,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return popup.innerHTML;
     });
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
 });
 </script>
 

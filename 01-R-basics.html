@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>TP de Biométrie Semestre 3 - 1&nbsp; R et RStudio : les bases</title>
+<title>TP de BiométrieSemestre 3 - 1&nbsp; R et RStudio : les bases</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -160,9 +160,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">TP de Biométrie<br> Semestre 3<br></a> 
+      <a href="./">TP de Biométrie<br>Semestre 3<br></a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/besibo/BiometrieS3" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="./TP-de-Biométrie-br-Semestre-3-br-.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -299,7 +300,7 @@ Avertissement
 </ol>
 <ul>
 <li>Vous devez installer ce logiciel en premier.</li>
-<li>Cliquez sur le lien de téléchargement qui correspond à votre système d’exploitation, puis, sur “base”, si vous êtes sous Windows, sur “<code>R-4.2.1.pkg</code>” si vous êtes sous Mac avec processeur Intel, ou sur <code>R-4.2.1-arm64.pkg</code> si vous êtes sous Mac avec processeur M1 ou M2 (sous Mac, cliquez sur le Menu , puis sur “À propos de ce Mac” et regardez à la rubrique “Processeur), et suivez les instructions.</li>
+<li>Cliquez sur le lien de téléchargement qui correspond à votre système d’exploitation, puis, sur “base”, si vous êtes sous Windows, sur “<code>R-4.2.1.pkg</code>” si vous êtes sous Mac avec processeur Intel, ou sur <code>R-4.2.1-arm64.pkg</code> si vous êtes sous Mac avec processeur M1 ou M2 (sous Mac, cliquez sur le Menu , puis sur “À propos de ce Mac” et regardez à la rubrique “Processeur”), et suivez les instructions.</li>
 </ul>
 <ol start="2" type="1">
 <li><a href="https://www.rstudio.com/products/RStudio/#Desktop">Téléchargez et installez <code>RStudio</code></a></li>
@@ -343,7 +344,7 @@ Avertissement
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Les risques du “copier-coller” <span style="color: orange"><i class="fa-clipboard fa-regular" aria-hidden="true"></i></span>
+Les risques du “copier-coller” <span style="color: orange"><i class="fa-regular fa-clipboard" aria-hidden="true"></i></span>
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -385,7 +386,7 @@ Définition importante !
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Où sauvegarder vos scripts ? <span style="color:red"><i class="fa-floppy-disk fa-regular" aria-hidden="true"></i></span>
+Où sauvegarder vos scripts ? <span style="color:red"><i class="fa-regular fa-save" aria-hidden="true"></i></span>
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -515,7 +516,7 @@ Où sauvegarder vos scripts ? <span style="color:red"><i class="fa-floppy-disk f
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Pour résumer… <i class="fa-solid fa-computer" aria-hidden="true"></i>
+Pour résumer… <i class="fa-solid fa-laptop-code" aria-hidden="true"></i>
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -668,7 +669,7 @@ multiple de la taille d'un objet plus court</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Erreur ou avertissement ? <i class="fa-solid fa-bomb" aria-hidden="true"></i> ou <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> ?
+Erreur ou avertissement ? <i class="fa-solid fa-bomb" aria-hidden="true"></i> ou <i class="fa-solid fa-exclamation-triangle" aria-hidden="true"></i> ?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -887,7 +888,7 @@ Note : <code>install.packages()</code>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Un package doit être installé une fois seulement sur un ordinateur, sauf si une version plus récente est disponible et que vous souhaitez mettre à jour ce package. Il n’est donc pas nécessaire de laisser ces commandes dans votre script. Sinon, vous risquez de ré-installer les packages à chaque nouvelle session de travail, ce qui est inutile et consomme inutilement de la bande passante, des ressources numériques, et donc, du carbone… <i class="fa-solid fa-temperature-three-quarters" aria-hidden="true"></i> <i class="fa-solid fa-earth-americas" aria-hidden="true"></i></p>
+<p>Un package doit être installé une fois seulement sur un ordinateur, sauf si une version plus récente est disponible et que vous souhaitez mettre à jour ce package. Il n’est donc pas nécessaire de laisser ces commandes dans votre script. Sinon, vous risquez de ré-installer les packages à chaque nouvelle session de travail, ce qui est inutile et consomme inutilement de la bande passante, des ressources numériques, et donc, du carbone… <i class="fa-solid fa-thermometer-three-quarters" aria-hidden="true"></i> <i class="fa-solid fa-globe-americas" aria-hidden="true"></i></p>
 </div>
 </div>
 </section>
@@ -1032,6 +1033,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return popup.innerHTML;
     });
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
 });
 </script>
 <nav class="page-navigation">
