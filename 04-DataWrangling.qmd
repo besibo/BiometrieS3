@@ -234,7 +234,7 @@ Rappel : les droites de régression avec leurs intervalles de confiance sont ajo
 
 Avant d'entrer dans le vif du sujet, je souhaite introduire ici la notion de "pipe" (prononcer à l'anglo-saxonne). Le pipe est un opérateur que nous avons déjà vu apparaître à plusieurs reprises dans les chapitres précédents sans expliquer son fonctionnement.
 
-Le pipe, noté `%>%`, peut être obtenu en pressant les touches `ctrl + shift + M` (ou `cmd + shift = M` sous MacOS) de votre clavier. Il permet d'enchaîner logiquement des actions les unes à la suite des autres. Globalement, le pipe prend l'objet situé à sa gauche, et le transmet à la fonction situé à sa droite. En d'autres termes, les 2 expressions suivantes sont strictement équivalentes :
+Le pipe, noté `%>%`, peut être obtenu en pressant les touches `ctrl + shift + M` (ou `cmd + shift + M` sous MacOS) de votre clavier. Il permet d'enchaîner logiquement des actions les unes à la suite des autres. Globalement, le pipe prend l'objet situé à sa gauche, et le transmet à la fonction situé à sa droite. En d'autres termes, les 2 expressions suivantes sont strictement équivalentes :
 
 ```{r eval = FALSE}
 # Ici, "f" est une fonction quelconque, "x" et "y" sont 2 objets dont la fonction a besoin.
