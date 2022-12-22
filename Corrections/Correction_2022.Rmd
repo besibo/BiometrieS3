@@ -1,7 +1,8 @@
 ---
 title: "Correction des exercices"
 author: "Benoît Simon-Bouhet"
-date: "Octobre 2022"
+date: now
+lang: fr
 format:
   html:
     theme: MyUnited.scss

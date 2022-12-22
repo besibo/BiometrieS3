@@ -119,7 +119,7 @@ Vous pouvez créer un script en cliquant dans le menu "File > New File > R Scrip
 :::{.callout-important}
 ## Où sauvegarder vos scripts ? [{{< fa regular save >}}]{style="color:red"}
 
-Je vous encourage vivement à créer, sur votre disque dur, un nouveau dossier spécifique, que vous nommerez par exemple `BiometrieS3`. Il est important que le nom de ce dossier de contienne pas de caractères spéciaux (*e.g.* accents, cédilles, apostrophes, espaces, etc.). Ce dossier devrait être facilement accessible : vous y enregistrerez tous vos scripts, vos jeux de données, vos graphiques, etc.
+Je vous encourage vivement à créer, sur votre disque dur, un nouveau dossier spécifique, que vous nommerez par exemple `BiometrieS3`. Il est important que le nom de ce dossier ne contienne pas de caractères spéciaux (*e.g.* accents, cédilles, apostrophes, espaces, etc.). Ce dossier devrait être facilement accessible : vous y enregistrerez tous vos scripts, vos jeux de données, vos graphiques, etc.
 
 Si vous travaillez sur les ordinateurs de l'université, créez [obligatoirement]{style="color:red"} votre dossier sur le disque `W:\`. Il s'agit de votre espace personnel sur le réseau de l'université. Cela vous garantit que vous retrouverez votre script la prochaine fois, même si vous utilisez un ordinateur différent.
 :::
@@ -221,7 +221,7 @@ cliquez sur "Browse...", naviguez jusqu'au dossier que vous avez créé plus tô
 ![Avec `RProject`](images/Après.png)
 :::
 
-3. un nouveau fichier portant l'extension `.rproj` a été créé dans votre dossier de travail. La prochaine fois que vous voudrez travailler dans `RStudio`, il vous suffira de double-cliquer sur ce fichier dans l'explorateur de fichier de Windows ou le Finder de MacOS, pour que `RStudio` s'ouvre, et que vous retrouviez tous vos fichiers et scripts de la fois précédente
+3. un nouveau fichier portant l'extension `.Rproj` a été créé dans votre dossier de travail. La prochaine fois que vous voudrez travailler dans `RStudio`, il vous suffira de double-cliquer sur ce fichier dans l'explorateur de fichier de Windows ou le Finder de MacOS, pour que `RStudio` s'ouvre, et que vous retrouviez tous vos fichiers et scripts de la fois précédente
 
 ![](images/Rproj3.png){width=20% fig-align="center"}
 
