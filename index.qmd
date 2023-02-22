@@ -142,3 +142,23 @@ Les exercices demandés dans ce document en ligne ne seront ni ramassés, ni not
 
 En particulier, je vérifierai que les étapes décrites précédemment sont maîtrisées (ouvrir le logiciel > créer un projet > créer un script > mettre en mémoire les packages utiles > importer des données > mettre en forme ces données > faire un ou des graphiques informatifs et correctement mis en forme) en vous fournissant un jeu de données inconnu que vous devrez importer et mettre en forme dans `RStudio` afin de produire quelques graphiques informatifs. Cette évaluation aura lieu soit en salle informatique, soit dans le cadre d'un compte-rendu de TP que vous devrez rendre pour un collègue. Si cette modalité est mise en place, je vous en dirai plus en temps utile.
 
+
+
+## Licence
+
+Ce livre est ligne est sous licence Creative Commons ([CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.fr))
+
+[![](images/cc_licence.png){fig-align="center"}](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.fr)
+
+Vous êtes autorisé à partager, copier, distribuer et communiquer ce matériel par tous moyens et sous tous formats, tant que les conditions suivantes sont respectées :
+
+<ul class="fa-ul">
+<li><span class="fa-li">{{< fa brands creative-commons-by size=xl >}}</span> **Attribution** : vous devez créditer ce travail (donc citer son auteur), fournir un lien vers ce livre en ligne, intégrer un lien vers la licence Creative Commons et indiquer si des modifications du contenu original ont été effectuées. Vous devez indiquer ces informations par tous les moyens raisonnables, sans toutefois suggérer que l'auteur vous soutient ou soutient la façon dont vous avez utilisé son travail. 
+</li>
+<li><span class="fa-li">{{< fa brands creative-commons-nc-eu size=xl >}}</span> **Pas d’Utilisation Commerciale** : vous n'êtes pas autorisé à faire un usage commercial de cet ouvrage, ni de tout ou partie du matériel le composant. Cela comprend évidemment la diffusion sur des plateformes de partage telles que studocu.com qui tirent profit d'œuvres dont elles ne sont pas propriétaires, souvent à l'insu des auteurs.
+</li>
+<li><span class="fa-li">{{< fa brands creative-commons-nd size=xl >}}</span> **Pas de modifications** : dans le cas où vous effectuez un remix, que vous transformez, ou créez à partir du matériel composant l'ouvrage original, vous n'êtes pas autorisé à distribuer ou mettre à disposition l'ouvrage modifié.
+</li>
+<li><span class="fa-li">{{< fa unlock-keyhole size=xl >}}</span> **Pas de restrictions complémentaires** : vous n'êtes pas autorisé à appliquer des conditions légales ou des mesures techniques qui restreindraient légalement autrui à utiliser cet ouvrage dans les conditions décrites par la licence.
+</li>
+</ul>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.38">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 </style>
 
 
@@ -36,6 +41,8 @@ ul.task-list{list-style: none;}
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -95,9 +102,10 @@ ul.task-list{list-style: none;}
       <div>
       <div class="quarto-title-meta-heading">Dernière Mise à jour</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">25 novembre 2022</p>
+        <p class="date">22 février 2023</p>
       </div>
     </div>
+    
       
     </div>
     
@@ -156,7 +164,7 @@ ul.task-list{list-style: none;}
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table des matières</h2>
    
   <ul>
@@ -171,6 +179,7 @@ ul.task-list{list-style: none;}
   </ul></li>
   <li><a href="#progession-conseillée" id="toc-progession-conseillée" class="nav-link" data-scroll-target="#progession-conseillée">Progession conseillée</a></li>
   <li><a href="#évaluations" id="toc-évaluations" class="nav-link" data-scroll-target="#évaluations">Évaluation(s)</a></li>
+  <li><a href="#licence" id="toc-licence" class="nav-link" data-scroll-target="#licence">Licence</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -266,7 +275,7 @@ Important
 <p>Idéalement, voilà les étapes que vous devriez avoir franchi chaque semaine :</p>
 <ol type="1">
 <li><p>La première semaine (37) est consacrée à l’installation des logiciels, à la découverte de l’environnement de travail, des <code>RProjects</code>, des packages et des scripts. Avant votre deuxième séance, vous devrez avoir terminé le premier chapitre de ce livre, vous devrez être capables de créer un Rproject et un script, de télécharger et d’installer des packages, et d’exécuter des commandes simples dans votre script. Vous devrez avoir suivi les tutoriels de DataCamp et connaitre les types d’objets suivants : vecteurs, facteurs, data.frames (et tibbles). Vous devrez effectuer le premier quizz Moodle (attention, ce quizz est à faire seul !).</p></li>
-<li><p>La deuxième semaine (38) est consacrée à la découverte des premiers jeux de données et du package <code>ggplot2</code>. Avant votre troisième séance, vous devez avoir terminé la <a href="03-visualization.html#sec-pie"><span>Section&nbsp;3.5.2</span></a>, vous devrez avoir compris comment charger en mémoire les jeux de données disponibles dans un packages, vous devrez connaitre la syntaxe de base permettant de faire toutes sortes de graphiques avec <code>ggplot2</code> avec une unique variable numérique ou catégorielle. À terme, vous devrez être capables de choisir des graphiques appropriés selon le nombre et la nature des variables dont vous disposez. À ce stade, on ne demande rien de complexe, mais vous devrez, à minima, être capable de faire des barplots et des histogrammes et vous devriez être capable de les distinguer. Vous devrez effectuer le second quizz Moodle (attention, ce quizz est à faire seul !).</p></li>
+<li><p>La deuxième semaine (38) est consacrée à la découverte des premiers jeux de données et du package <code>ggplot2</code>. Avant votre troisième séance, vous devez avoir terminé la <span class="quarto-unresolved-ref">?sec-pie</span>, vous devrez avoir compris comment charger en mémoire les jeux de données disponibles dans un packages, vous devrez connaitre la syntaxe de base permettant de faire toutes sortes de graphiques avec <code>ggplot2</code> avec une unique variable numérique ou catégorielle. À terme, vous devrez être capables de choisir des graphiques appropriés selon le nombre et la nature des variables dont vous disposez. À ce stade, on ne demande rien de complexe, mais vous devrez, à minima, être capable de faire des barplots et des histogrammes et vous devriez être capable de les distinguer. Vous devrez effectuer le second quizz Moodle (attention, ce quizz est à faire seul !).</p></li>
 <li><p>La troisième semaine (39) est consacrée à la découverte de graphiques permettant de visualiser les relations entre plusieurs variables : 2, 3 ou plus. Vous verrez également comment améliorer de la qualité de vos graphiques en vue de leur intégration dans un compte-rendu, un rapport ou une présentation. Avant votre dernière séance de TP, vous devrez avoir terminé le chapitre 3, vous devrez donc être capable de faire, outre les graphiques de la semaine précédente, des nuages de points, des stripcharts, des graphiques en lignes et des boxplots. Vous devrez également être capable de faire des sous-graphiques par catégories (<code>facet()</code>), de choisir un thème et des palettes de couleurs appropriées, et de légender/annoter correctement vos graphiques. Vous devrez effectuer le troisième quizz Moodle (attention, ce quizz est à faire seul !).</p></li>
 <li><p>La quatrième semaine (40) est consacrée à la manipulation des tableaux de données. Avant la fin de cette semaine, vous devrez être capable de sélectionner des colonnes dans un tableau, de filtrer des lignes, et de créer de nouvelles variables. Vous devrez être capables d’enchaîner correctement les étapes suivantes : ouvrir le logiciel &gt; créer un projet &gt; créer un script &gt; mettre en mémoire les packages utiles &gt; importer des données &gt; mettre en forme ces données &gt; faire un ou des graphiques informatifs et correctement mis en forme. Vous devrez effectuer le quatrième et dernier quizz Moodle (attention, ce quizz est à faire seul !).</p></li>
 </ol>
@@ -281,6 +290,30 @@ Important
 </ol>
 <p>Les exercices demandés dans ce document en ligne ne seront ni ramassés, ni notés : ils sont proposés pour que vous puissiez mettre en application les notions récemment apprises et afin d’évaluer votre propre progression et vos apprentissages. Mais tout ce que nous voyons en TP et TEA devra être acquis à la fin des TP.</p>
 <p>En particulier, je vérifierai que les étapes décrites précédemment sont maîtrisées (ouvrir le logiciel &gt; créer un projet &gt; créer un script &gt; mettre en mémoire les packages utiles &gt; importer des données &gt; mettre en forme ces données &gt; faire un ou des graphiques informatifs et correctement mis en forme) en vous fournissant un jeu de données inconnu que vous devrez importer et mettre en forme dans <code>RStudio</code> afin de produire quelques graphiques informatifs. Cette évaluation aura lieu soit en salle informatique, soit dans le cadre d’un compte-rendu de TP que vous devrez rendre pour un collègue. Si cette modalité est mise en place, je vous en dirai plus en temps utile.</p>
+</section>
+<section id="licence" class="level2">
+<h2 class="anchored" data-anchor-id="licence">Licence</h2>
+<p>Ce livre est ligne est sous licence Creative Commons (<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.fr">CC BY-NC-ND 4.0</a>)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.fr"><img src="images/cc_licence.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<p>Vous êtes autorisé à partager, copier, distribuer et communiquer ce matériel par tous moyens et sous tous formats, tant que les conditions suivantes sont respectées :</p>
+<ul class="fa-ul">
+<li>
+<span class="fa-li"><i class="fa-brands fa-creative-commons-by fa-xl" aria-hidden="true"></i></span> <strong>Attribution</strong> : vous devez créditer ce travail (donc citer son auteur), fournir un lien vers ce livre en ligne, intégrer un lien vers la licence Creative Commons et indiquer si des modifications du contenu original ont été effectuées. Vous devez indiquer ces informations par tous les moyens raisonnables, sans toutefois suggérer que l’auteur vous soutient ou soutient la façon dont vous avez utilisé son travail.
+</li>
+<li>
+<span class="fa-li"><i class="fa-brands fa-creative-commons-nc-eu fa-xl" aria-hidden="true"></i></span> <strong>Pas d’Utilisation Commerciale</strong> : vous n’êtes pas autorisé à faire un usage commercial de cet ouvrage, ni de tout ou partie du matériel le composant. Cela comprend évidemment la diffusion sur des plateformes de partage telles que studocu.com qui tirent profit d’œuvres dont elles ne sont pas propriétaires, souvent à l’insu des auteurs.
+</li>
+<li>
+<span class="fa-li"><i class="fa-brands fa-creative-commons-nd fa-xl" aria-hidden="true"></i></span> <strong>Pas de modifications</strong> : dans le cas où vous effectuez un remix, que vous transformez, ou créez à partir du matériel composant l’ouvrage original, vous n’êtes pas autorisé à distribuer ou mettre à disposition l’ouvrage modifié.
+</li>
+<li>
+<span class="fa-li"><i class="fa-solid fa-unlock-keyhole fa-xl" aria-hidden="true"></i></span> <strong>Pas de restrictions complémentaires</strong> : vous n’êtes pas autorisé à appliquer des conditions légales ou des mesures techniques qui restreindraient légalement autrui à utiliser cet ouvrage dans les conditions décrites par la licence.
+</li>
+</ul>
 
 
 </section>
@@ -328,7 +361,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copié");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copié");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -356,31 +406,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -388,7 +457,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
-    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

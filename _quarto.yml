@@ -1,6 +1,5 @@
 project:
   type: book
-  output-file: "BiometrieS3"
 
 book:
   title: "TP de Biométrie<br>Semestre 3<br>"
