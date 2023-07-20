@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.38">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,16 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -41,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -117,7 +93,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "correspondances de plus dans ce document",
     "search-clear-button-title": "Effacer",
     "search-detached-cancel-button-title": "Annuler",
-    "search-submit-button-title": "Envoyer"
+    "search-submit-button-title": "Envoyer",
+    "search-label": "Recherche"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -130,11 +107,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R et RStudio : les bases</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-R-basics.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R et RStudio : les bases</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -143,7 +125,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title"><span id="sec-bases" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R et RStudio : les bases</span></span></h1>
+      <h1 class="title"><span id="sec-basics" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R et RStudio : les bases</span></span></h1>
                       </div>
   </div>
     
@@ -151,87 +133,95 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <div class="quarto-title-meta">
 
       
+    
       
     </div>
     
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">TP de Biométrie<br>Semestre 3<br></a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/besibo/BiometrieS3" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-    <a href="./TP-de-Biométrie-br-Semestre-3-br-.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+    <a href="https://github.com/besibo/BiometrieS3" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./TP-de-Biométrie-br-Semestre-3-br-.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="Recherche"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-R-basics.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R et RStudio : les bases</span></a>
+  <a href="./01-R-basics.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R et RStudio : les bases</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-dataset.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Explorez votre premier jeu de données</span></a>
+  <a href="./02-dataset.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Explorez votre premier jeu de données</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visualiser des données avec <code>ggplot2</code></span></a>
+  <a href="./03-visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visualiser des données avec <code>ggplot2</code></span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-DataWrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manipuler des tableaux avec <code>dplyr</code></span></a>
+  <a href="./04-DataWrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manipuler des tableaux avec <code>dplyr</code></span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">Références</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Références</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table des matières</h2>
    
   <ul>
-  <li><a href="#préambule" id="toc-préambule" class="nav-link active" data-scroll-target="#préambule"> <span class="header-section-number">1.1</span> Préambule</a></li>
-  <li><a href="#que-sont-r-et-rstudio" id="toc-que-sont-r-et-rstudio" class="nav-link" data-scroll-target="#que-sont-r-et-rstudio"> <span class="header-section-number">1.2</span> Que sont <code>R</code> et <code>RStudio</code> ?</a>
+  <li><a href="#préambule" id="toc-préambule" class="nav-link active" data-scroll-target="#préambule"><span class="header-section-number">1.1</span> Préambule</a></li>
+  <li><a href="#que-sont-r-et-rstudio" id="toc-que-sont-r-et-rstudio" class="nav-link" data-scroll-target="#que-sont-r-et-rstudio"><span class="header-section-number">1.2</span> Que sont <code>R</code> et <code>RStudio</code> ?</a>
   <ul class="collapse">
-  <li><a href="#sec-install" id="toc-sec-install" class="nav-link" data-scroll-target="#sec-install"> <span class="header-section-number">1.2.1</span> Installation</a></li>
-  <li><a href="#utiliser-r-depuis-rstudio" id="toc-utiliser-r-depuis-rstudio" class="nav-link" data-scroll-target="#utiliser-r-depuis-rstudio"> <span class="header-section-number">1.2.2</span> Utiliser <code>R</code> depuis <code>RStudio</code></a></li>
+  <li><a href="#sec-install" id="toc-sec-install" class="nav-link" data-scroll-target="#sec-install"><span class="header-section-number">1.2.1</span> Installation</a></li>
+  <li><a href="#utiliser-r-depuis-rstudio" id="toc-utiliser-r-depuis-rstudio" class="nav-link" data-scroll-target="#utiliser-r-depuis-rstudio"><span class="header-section-number">1.2.2</span> Utiliser <code>R</code> depuis <code>RStudio</code></a></li>
   </ul></li>
-  <li><a href="#sec-code" id="toc-sec-code" class="nav-link" data-scroll-target="#sec-code"> <span class="header-section-number">1.3</span> Comment exécuter du code <code>R</code> ?</a>
+  <li><a href="#sec-code" id="toc-sec-code" class="nav-link" data-scroll-target="#sec-code"><span class="header-section-number">1.3</span> Comment exécuter du code <code>R</code> ?</a>
   <ul class="collapse">
-  <li><a href="#la-console" id="toc-la-console" class="nav-link" data-scroll-target="#la-console"> <span class="header-section-number">1.3.1</span> La console</a></li>
-  <li><a href="#sec-script" id="toc-sec-script" class="nav-link" data-scroll-target="#sec-script"> <span class="header-section-number">1.3.2</span> Les scripts</a></li>
-  <li><a href="#les-projets-ou-rprojects" id="toc-les-projets-ou-rprojects" class="nav-link" data-scroll-target="#les-projets-ou-rprojects"> <span class="header-section-number">1.3.3</span> Les projets, ou <code>Rprojects</code></a></li>
-  <li><a href="#concepts-de-base-en-programmation-et-terminologie" id="toc-concepts-de-base-en-programmation-et-terminologie" class="nav-link" data-scroll-target="#concepts-de-base-en-programmation-et-terminologie"> <span class="header-section-number">1.3.4</span> Concepts de base en programmation et terminologie</a></li>
+  <li><a href="#la-console" id="toc-la-console" class="nav-link" data-scroll-target="#la-console"><span class="header-section-number">1.3.1</span> La console</a></li>
+  <li><a href="#sec-script" id="toc-sec-script" class="nav-link" data-scroll-target="#sec-script"><span class="header-section-number">1.3.2</span> Les scripts</a></li>
+  <li><a href="#les-projets-ou-rprojects" id="toc-les-projets-ou-rprojects" class="nav-link" data-scroll-target="#les-projets-ou-rprojects"><span class="header-section-number">1.3.3</span> Les projets, ou <code>Rprojects</code></a></li>
+  <li><a href="#concepts-de-base-en-programmation-et-terminologie" id="toc-concepts-de-base-en-programmation-et-terminologie" class="nav-link" data-scroll-target="#concepts-de-base-en-programmation-et-terminologie"><span class="header-section-number">1.3.4</span> Concepts de base en programmation et terminologie</a></li>
   </ul></li>
-  <li><a href="#sec-packages" id="toc-sec-packages" class="nav-link" data-scroll-target="#sec-packages"> <span class="header-section-number">1.4</span> Les packages additionels</a>
+  <li><a href="#sec-packages" id="toc-sec-packages" class="nav-link" data-scroll-target="#sec-packages"><span class="header-section-number">1.4</span> Les packages additionels</a>
   <ul class="collapse">
-  <li><a href="#installation-dun-package" id="toc-installation-dun-package" class="nav-link" data-scroll-target="#installation-dun-package"> <span class="header-section-number">1.4.1</span> Installation d’un package</a></li>
-  <li><a href="#charger-un-package-en-mémoire" id="toc-charger-un-package-en-mémoire" class="nav-link" data-scroll-target="#charger-un-package-en-mémoire"> <span class="header-section-number">1.4.2</span> Charger un package en mémoire</a></li>
+  <li><a href="#installation-dun-package" id="toc-installation-dun-package" class="nav-link" data-scroll-target="#installation-dun-package"><span class="header-section-number">1.4.1</span> Installation d’un package</a></li>
+  <li><a href="#charger-un-package-en-mémoire" id="toc-charger-un-package-en-mémoire" class="nav-link" data-scroll-target="#charger-un-package-en-mémoire"><span class="header-section-number">1.4.2</span> Charger un package en mémoire</a></li>
   </ul></li>
-  <li><a href="#sec-Exo-1" id="toc-sec-Exo-1" class="nav-link" data-scroll-target="#sec-Exo-1"> <span class="header-section-number">1.5</span> Exercice</a></li>
+  <li><a href="#sec-Exo-1" id="toc-sec-Exo-1" class="nav-link" data-scroll-target="#sec-Exo-1"><span class="header-section-number">1.5</span> Exercice</a></li>
   </ul>
 </nav>
     </div>
@@ -256,12 +246,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>L’ouvrage intitulé <a href="https://ismayc.github.io/rbasics-book/">Getting used to R, RStudio, and R Markdown</a> de Chester Ismay, comprend des podcasts (en anglais toujours) que vous pouvez suivre en apprenant.</li>
 <li>Les tutoriels en ligne de <a href="https://datacamp.com/">DataCamp</a>. DataCamp est une plateforme de e-learning accessible depuis n’importe quel navigateur internet et dont la priorité est l’enseignement des “data sciences”. Leurs tutoriels vous aideront à apprendre certains des concepts de développés dans ce livre.</li>
 </ol>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -281,12 +271,12 @@ Important
 <p>En l’occurrence, <code>R</code> est un langage de programmation capable de produire des graphiques et de réaliser des analyses statistiques, des plus simples aux plus complexes. <code>RStudio</code> est un “emballage” qui rend l’utilisation de <code>R</code> plus aisée. <code>RStudio</code> est ce qu’on appelle un IDE ou “Integrated Development Environment”. On peut utiliser <code>R</code> sans <code>RStudio</code>, mais c’est nettement plus compliqué, nettement moins pratique.</p>
 <section id="sec-install" class="level3" data-number="1.2.1">
 <h3 data-number="1.2.1" class="anchored" data-anchor-id="sec-install"><span class="header-section-number">1.2.1</span> Installation</h3>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Avertissement
 </div>
 </div>
@@ -338,12 +328,12 @@ Avertissement
 </div>
 <p>Félicitations, vous venez de taper votre première instruction <code>R</code> : vous savez maintenant faire des additions !</p>
 <p>Dans la version en ligne de ce livre (en html), à chaque fois que du code <code>R</code> sera fourni, il apparaîtra dans un cadre grisé avec une ligne bleue à gauche, comme ci-dessus. Vous pourrez toujours taper dans <code>RStudio</code>, les commandes qui figurent dans ces blocs de code, afin d’obtenir vous même les résultats souhaités. Dans ce livre, lorsque les commandes <code>R</code> produisent des résultats, ils sont affichés juste en dessous des blocs de code. Enfin, en passant la souris sur les blocs de code, vous verrez apparaître, à droite, une icône de presse-papier qui vous permettra de copier-coller les commandes du livre dans la console de <code>RStudio</code> ou, très bientôt, dans vos scripts.</p>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Les risques du “copier-coller” <span style="color: orange"><i class="fa-regular fa-clipboard" aria-hidden="true"></i></span>
 </div>
 </div>
@@ -355,12 +345,12 @@ Les risques du “copier-coller” <span style="color: orange"><i class="fa-regu
 <section id="sec-script" class="level3" data-number="1.3.2">
 <h3 data-number="1.3.2" class="anchored" data-anchor-id="sec-script"><span class="header-section-number">1.3.2</span> Les scripts</h3>
 <p>Taper du code directement dans la console est probablement la pire façon de travailler dans <code>RStudio</code>. Cela est parfois utile pour faire un rapide calcul, ou pour vérifier qu’une commande fonctionne correctement. Mais la plupart du temps, <strong>vous devriez taper vos commandes dans un script</strong>.</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Définition importante !
 </div>
 </div>
@@ -380,12 +370,12 @@ Définition importante !
 <li>Un script bien structuré, bien indenté (avec les bons retours à la ligne, des sauts de lignes, des espaces, bref, de l’air) et clair permet de rendre vos analyses répétables. Si vous passez 15 heures à analyser un tableau de données précis, il vous suffira de quelques secondes pour analyser un nouveau jeu de données similaire : vous n’aurez que quelques lignes à modifier dans votre script original pour l’appliquer à de nouvelles données.</li>
 </ol>
 <p>Vous pouvez créer un script en cliquant dans le menu “File &gt; New File &gt; R Script”. Un nouveau panneau s’ouvre dans l’application. Pensez à sauvegarder immédiatement votre nouveau script en cliquant dans le menu “File &gt; Save” ou “File &gt; Save as…”. Il faut pour cela lui donner un nom et choisir un emplacement sur votre disque dur.</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Où sauvegarder vos scripts ? <span style="color:red"><i class="fa-regular fa-save" aria-hidden="true"></i></span>
 </div>
 </div>
@@ -483,7 +473,7 @@ Où sauvegarder vos scripts ? <span style="color:red"><i class="fa-regular fa-sa
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Avant.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Sans <code>Rproject</code></figcaption><p></p>
+<figcaption class="figure-caption">Sans <code>Rproject</code></figcaption>
 </figure>
 </div>
 </div>
@@ -491,7 +481,7 @@ Où sauvegarder vos scripts ? <span style="color:red"><i class="fa-regular fa-sa
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Après.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Avec <code>RProject</code></figcaption><p></p>
+<figcaption class="figure-caption">Avec <code>RProject</code></figcaption>
 </figure>
 </div>
 </div>
@@ -510,12 +500,12 @@ Où sauvegarder vos scripts ? <span style="color:red"><i class="fa-regular fa-sa
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>RStudio</code> doit vous afficher, dans la console, le chemin jusqu’à votre <span style="color:red">répertoire de travail</span> ou “Working Directory” en anglais (<code>getwd()</code> est l’abréviation de “GET Working Directory”). Si tout s’est bien passé, ce chemin doit être celui du dossier qui contient votre script et le fichier <code>.Rproj</code> que vous venez de créer. Si ce n’est pas le cas, reprenez calmement toutes les étapes décrites depuis le début de la <a href="#sec-script"><span>Section&nbsp;1.3.2</span></a>. Si ça ne fonctionne toujours pas, contactez-moi sur Slack.</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Pour résumer… <i class="fa-solid fa-laptop-code" aria-hidden="true"></i>
 </div>
 </div>
@@ -540,7 +530,7 @@ Pour résumer… <i class="fa-solid fa-laptop-code" aria-hidden="true"></i>
 <p>Après ces considérations techniques sur l’utilisation et les réglages de <code>RStudio</code>, nous entrons maintenant dans le vif du sujet avec la découverte des premiers éléments de syntaxe du langage <code>R</code>.</p>
 <section id="sec-objects" class="level4" data-number="1.3.4.1">
 <h4 data-number="1.3.4.1" class="anchored" data-anchor-id="sec-objects"><span class="header-section-number">1.3.4.1</span> Objets, types, vecteurs, facteurs et tableaux de données</h4>
-<p>Pour vous présenter les concepts de base et la terminologie de la programmation dont nous aurons besoin, vous allez suivre des tutoriels en ligne sur le site de DataCamp. Pour cette première prise en main, tout va maintenant se passer dans votre navigateur internet, et vous pouvez donc mettre de côté <code>RStudio</code> pour l’instant. Vous allez voir que l’interface de DataCamp ressemble à une version simplifiée de l’éditeur de script et de la console de <code>RStudio</code> : vous n’aurez pas à vous soucier des réglages, de <code>Rprojects</code> ou de sauvegarder quoi que ce soit. Si vous avez correctement créé votre compte gratuit DataCamp comme indiqué au tout début de la <a href="#sec-bases"><span>Chapitre&nbsp;1</span></a>, votre progression sera sauvegardée automatiquement. Il vous suffit de cliquer sur les liens direct ci-dessous pour démarrer les tutoriels en ligne.</p>
+<p>Pour vous présenter les concepts de base et la terminologie de la programmation dont nous aurons besoin, vous allez suivre des tutoriels en ligne sur le site de DataCamp. Pour cette première prise en main, tout va maintenant se passer dans votre navigateur internet, et vous pouvez donc mettre de côté <code>RStudio</code> pour l’instant. Vous allez voir que l’interface de DataCamp ressemble à une version simplifiée de l’éditeur de script et de la console de <code>RStudio</code> : vous n’aurez pas à vous soucier des réglages, de <code>Rprojects</code> ou de sauvegarder quoi que ce soit. Si vous avez correctement créé votre compte gratuit DataCamp comme indiqué au tout début de la <a href="#sec-basics"><span>Chapitre&nbsp;1</span></a>, votre progression sera sauvegardée automatiquement. Il vous suffit de cliquer sur les liens direct ci-dessous pour démarrer les tutoriels en ligne.</p>
 <p>Avant de démarrer, quelques précisions :</p>
 <ul>
 <li>pour chaque tutoriel que je vous demande de suivre, j’indique ci-dessous une liste des concepts de programmation qui sont couverts. N’hésitez pas à vous y référer (et à y revenir) tout au long du semestre si vous avez oublié certaines choses</li>
@@ -654,8 +644,8 @@ Pour résumer… <i class="fa-solid fa-laptop-code" aria-hidden="true"></i>
 </div>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>tailles_pop3 <span class="sc">&gt;</span> tailles_pop1</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning in tailles_pop3 &gt; tailles_pop1: la taille d'un objet plus long n'est pas
-multiple de la taille d'un objet plus court</code></pre>
+<pre><code>Warning in tailles_pop3 &gt; tailles_pop1: la taille d'un objet plus long n'est
+pas multiple de la taille d'un objet plus court</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE  TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE</code></pre>
@@ -663,12 +653,12 @@ multiple de la taille d'un objet plus court</code></pre>
 </div>
 <p>Ici, <code>R</code> renvoie un résultat, accompagné d’un message d’avertissement qui nous indique que tout ne s’est probablement pas déroulé comme on le pensait. Dans un cas comme celui là, <code>R</code> va en effet <em>recycler</em> l’objet le plus court, ici <code>tailles_pop3</code> pour qu’une comparaison puisse être faite avec chaque élément de l’objet le plus long (ici, <code>tailles_pop1</code>). Ainsi, 43 est comparé à 112, 56 est comparé à 28 et 92 est comparé à 86. Puisque <code>tailles_pop3</code> ne contient plus d’éléments, ils sont recyclés, dans le même ordre : 43 est comparé à 14, 56 est comparé à 154, et ainsi de suite jusqu’à ce que tous les éléments de <code>tailles_pop1</code> aient été passés en revue.</p>
 <p>Ce type de recyclage est très risqué car il est difficile de savoir ce qui a été comparé avec quoi. En travaillant avec des tableaux plutôt qu’avec des vecteurs, le problème est généralement évité puisque toutes les colonnes d’un <code>data.frame</code> contiennent le même nombre d’éléments.</p>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Erreur ou avertissement ? <i class="fa-solid fa-bomb" aria-hidden="true"></i> ou <i class="fa-solid fa-exclamation-triangle" aria-hidden="true"></i> ?
 </div>
 </div>
@@ -878,12 +868,12 @@ Erreur ou avertissement ? <i class="fa-solid fa-bomb" aria-hidden="true"></i> ou
 <li><strong>Métode alternative</strong> : Dans la console, tapez <code>install.packages("ggplot2")</code> (vous devez inclure les guillemets).</li>
 </ol>
 <p>En procédant de l’une ou l’autre façon, installez également les packages suivants : <code>tidyverse</code> et <code>palmerpenguins</code>. Le <code>tidyverse</code> est un “méta-package”, qui permet en fait d’installer de nombreux packages en une seule commande, dont <code>ggplot2</code>, <code>tidyr</code>, <code>dplyr</code>, <code>magrittr</code> et bien d’autres. Le package <code>palmerpenguins</code> contient un jeu de données dont nous nous servirons copieusement dans les chapitres suivants.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note : <code>install.packages()</code>
 </div>
 </div>
@@ -906,12 +896,12 @@ Note : <code>install.packages()</code>
 <p>Quand vous exécutez une commande, si vous voyez un message d’erreur commençant par :</p>
 <pre><code>Error: could not find function...</code></pre>
 <p>c’est probablement parce que vous tentez d’utiliser une fonction qui fait partie d’un package que vous n’avez pas chargé. Pour corriger l’erreur, il suffit donc de charger le package approprié avec la commande <code>library()</code>.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note : <code>library()</code>
 </div>
 </div>
@@ -965,9 +955,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -979,7 +983,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copié");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copié");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -1007,31 +1028,136 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1039,7 +1165,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
-    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

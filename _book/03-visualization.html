@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.38">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,16 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -41,48 +47,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -96,8 +73,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -136,7 +112,8 @@ div.csl-indent {
     "search-more-matches-text": "correspondances de plus dans ce document",
     "search-clear-button-title": "Effacer",
     "search-detached-cancel-button-title": "Annuler",
-    "search-submit-button-title": "Envoyer"
+    "search-submit-button-title": "Envoyer",
+    "search-label": "Recherche"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -149,11 +126,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visualiser des données avec <code>ggplot2</code></span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-visualization.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visualiser des données avec `ggplot2`</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -162,7 +144,7 @@ div.csl-indent {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title"><span id="sec-viz" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visualiser des données avec <code>ggplot2</code></span></span></h1>
+      <h1 class="title"><span id="sec-viz" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visualiser des données avec <code>ggplot2</code></span></span></h1>
                       </div>
   </div>
     
@@ -170,122 +152,130 @@ div.csl-indent {
   <div class="quarto-title-meta">
 
       
+    
       
     </div>
     
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">TP de Biométrie<br>Semestre 3<br></a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/besibo/BiometrieS3" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-    <a href="./TP-de-Biométrie-br-Semestre-3-br-.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+    <a href="https://github.com/besibo/BiometrieS3" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./TP-de-Biométrie-br-Semestre-3-br-.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="Recherche"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-R-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R et RStudio : les bases</span></a>
+  <a href="./01-R-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R et RStudio : les bases</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-dataset.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Explorez votre premier jeu de données</span></a>
+  <a href="./02-dataset.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Explorez votre premier jeu de données</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-visualization.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visualiser des données avec <code>ggplot2</code></span></a>
+  <a href="./03-visualization.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visualiser des données avec <code>ggplot2</code></span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-DataWrangling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manipuler des tableaux avec <code>dplyr</code></span></a>
+  <a href="./04-DataWrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manipuler des tableaux avec <code>dplyr</code></span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">Références</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Références</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table des matières</h2>
    
   <ul>
-  <li><a href="#préambule" id="toc-préambule" class="nav-link active" data-scroll-target="#préambule"> <span class="header-section-number">3.1</span> Préambule</a></li>
-  <li><a href="#sec-gggraph" id="toc-sec-gggraph" class="nav-link" data-scroll-target="#sec-gggraph"> <span class="header-section-number">3.2</span> La grammaire des graphiques</a>
+  <li><a href="#préambule" id="toc-préambule" class="nav-link active" data-scroll-target="#préambule"><span class="header-section-number">3.1</span> Préambule</a></li>
+  <li><a href="#sec-gggraph" id="toc-sec-gggraph" class="nav-link" data-scroll-target="#sec-gggraph"><span class="header-section-number">3.2</span> La grammaire des graphiques</a>
   <ul class="collapse">
-  <li><a href="#éléments-de-la-grammaire" id="toc-éléments-de-la-grammaire" class="nav-link" data-scroll-target="#éléments-de-la-grammaire"> <span class="header-section-number">3.2.1</span> Éléments de la grammaire</a></li>
-  <li><a href="#gapminder" id="toc-gapminder" class="nav-link" data-scroll-target="#gapminder"> <span class="header-section-number">3.2.2</span> Gapminder</a></li>
-  <li><a href="#autres-éléments-de-la-grammaire-des-graphiques" id="toc-autres-éléments-de-la-grammaire-des-graphiques" class="nav-link" data-scroll-target="#autres-éléments-de-la-grammaire-des-graphiques"> <span class="header-section-number">3.2.3</span> Autres éléments de la grammaire des graphiques</a></li>
-  <li><a href="#le-package-ggplot2" id="toc-le-package-ggplot2" class="nav-link" data-scroll-target="#le-package-ggplot2"> <span class="header-section-number">3.2.4</span> Le package <code>ggplot2</code></a></li>
-  <li><a href="#votre-premier-graphique" id="toc-votre-premier-graphique" class="nav-link" data-scroll-target="#votre-premier-graphique"> <span class="header-section-number">3.2.5</span> Votre premier graphique</a></li>
-  <li><a href="#sec-Exo-3" id="toc-sec-Exo-3" class="nav-link" data-scroll-target="#sec-Exo-3"> <span class="header-section-number">3.2.6</span> Exercices</a></li>
+  <li><a href="#éléments-de-la-grammaire" id="toc-éléments-de-la-grammaire" class="nav-link" data-scroll-target="#éléments-de-la-grammaire"><span class="header-section-number">3.2.1</span> Éléments de la grammaire</a></li>
+  <li><a href="#gapminder" id="toc-gapminder" class="nav-link" data-scroll-target="#gapminder"><span class="header-section-number">3.2.2</span> Gapminder</a></li>
+  <li><a href="#autres-éléments-de-la-grammaire-des-graphiques" id="toc-autres-éléments-de-la-grammaire-des-graphiques" class="nav-link" data-scroll-target="#autres-éléments-de-la-grammaire-des-graphiques"><span class="header-section-number">3.2.3</span> Autres éléments de la grammaire des graphiques</a></li>
+  <li><a href="#le-package-ggplot2" id="toc-le-package-ggplot2" class="nav-link" data-scroll-target="#le-package-ggplot2"><span class="header-section-number">3.2.4</span> Le package <code>ggplot2</code></a></li>
+  <li><a href="#votre-premier-graphique" id="toc-votre-premier-graphique" class="nav-link" data-scroll-target="#votre-premier-graphique"><span class="header-section-number">3.2.5</span> Votre premier graphique</a></li>
+  <li><a href="#sec-Exo-3" id="toc-sec-Exo-3" class="nav-link" data-scroll-target="#sec-Exo-3"><span class="header-section-number">3.2.6</span> Exercices</a></li>
   </ul></li>
-  <li><a href="#quel-graphique-dans-quelle-situation" id="toc-quel-graphique-dans-quelle-situation" class="nav-link" data-scroll-target="#quel-graphique-dans-quelle-situation"> <span class="header-section-number">3.3</span> Quel graphique dans quelle situation ?</a></li>
-  <li><a href="#une-seule-variable-numérique" id="toc-une-seule-variable-numérique" class="nav-link" data-scroll-target="#une-seule-variable-numérique"> <span class="header-section-number">3.4</span> Une seule variable numérique</a>
+  <li><a href="#quel-graphique-dans-quelle-situation" id="toc-quel-graphique-dans-quelle-situation" class="nav-link" data-scroll-target="#quel-graphique-dans-quelle-situation"><span class="header-section-number">3.3</span> Quel graphique dans quelle situation ?</a></li>
+  <li><a href="#une-seule-variable-numérique" id="toc-une-seule-variable-numérique" class="nav-link" data-scroll-target="#une-seule-variable-numérique"><span class="header-section-number">3.4</span> Une seule variable numérique</a>
   <ul class="collapse">
-  <li><a href="#les-histogrammes" id="toc-les-histogrammes" class="nav-link" data-scroll-target="#les-histogrammes"> <span class="header-section-number">3.4.1</span> Les histogrammes</a></li>
-  <li><a href="#sec-cloud" id="toc-sec-cloud" class="nav-link" data-scroll-target="#sec-cloud"> <span class="header-section-number">3.4.2</span> Les nuages de points et stripcharts</a></li>
-  <li><a href="#sec-Exo-4" id="toc-sec-Exo-4" class="nav-link" data-scroll-target="#sec-Exo-4"> <span class="header-section-number">3.4.3</span> Exercices</a></li>
+  <li><a href="#les-histogrammes" id="toc-les-histogrammes" class="nav-link" data-scroll-target="#les-histogrammes"><span class="header-section-number">3.4.1</span> Les histogrammes</a></li>
+  <li><a href="#sec-cloud" id="toc-sec-cloud" class="nav-link" data-scroll-target="#sec-cloud"><span class="header-section-number">3.4.2</span> Les nuages de points et stripcharts</a></li>
+  <li><a href="#sec-Exo-4" id="toc-sec-Exo-4" class="nav-link" data-scroll-target="#sec-Exo-4"><span class="header-section-number">3.4.3</span> Exercices</a></li>
   </ul></li>
-  <li><a href="#une-seule-variable-catégorielle" id="toc-une-seule-variable-catégorielle" class="nav-link" data-scroll-target="#une-seule-variable-catégorielle"> <span class="header-section-number">3.5</span> Une seule variable catégorielle</a>
+  <li><a href="#une-seule-variable-catégorielle" id="toc-une-seule-variable-catégorielle" class="nav-link" data-scroll-target="#une-seule-variable-catégorielle"><span class="header-section-number">3.5</span> Une seule variable catégorielle</a>
   <ul class="collapse">
-  <li><a href="#les-diagrammes-bâtons" id="toc-les-diagrammes-bâtons" class="nav-link" data-scroll-target="#les-diagrammes-bâtons"> <span class="header-section-number">3.5.1</span> Les diagrammes bâtons</a></li>
-  <li><a href="#sec-pie" id="toc-sec-pie" class="nav-link" data-scroll-target="#sec-pie"> <span class="header-section-number">3.5.2</span> Éviter à tout prix les diagrammes circulaires</a></li>
+  <li><a href="#les-diagrammes-bâtons" id="toc-les-diagrammes-bâtons" class="nav-link" data-scroll-target="#les-diagrammes-bâtons"><span class="header-section-number">3.5.1</span> Les diagrammes bâtons</a></li>
+  <li><a href="#sec-pie" id="toc-sec-pie" class="nav-link" data-scroll-target="#sec-pie"><span class="header-section-number">3.5.2</span> Éviter à tout prix les diagrammes circulaires</a></li>
   </ul></li>
-  <li><a href="#deux-variables-numériques" id="toc-deux-variables-numériques" class="nav-link" data-scroll-target="#deux-variables-numériques"> <span class="header-section-number">3.6</span> Deux variables numériques</a>
+  <li><a href="#deux-variables-numériques" id="toc-deux-variables-numériques" class="nav-link" data-scroll-target="#deux-variables-numériques"><span class="header-section-number">3.6</span> Deux variables numériques</a>
   <ul class="collapse">
-  <li><a href="#nuage-de-points" id="toc-nuage-de-points" class="nav-link" data-scroll-target="#nuage-de-points"> <span class="header-section-number">3.6.1</span> Nuage de points</a></li>
-  <li><a href="#les-graphiques-en-lignes" id="toc-les-graphiques-en-lignes" class="nav-link" data-scroll-target="#les-graphiques-en-lignes"> <span class="header-section-number">3.6.2</span> Les graphiques en lignes</a></li>
-  <li><a href="#les-cartes" id="toc-les-cartes" class="nav-link" data-scroll-target="#les-cartes"> <span class="header-section-number">3.6.3</span> Les cartes</a></li>
+  <li><a href="#nuage-de-points" id="toc-nuage-de-points" class="nav-link" data-scroll-target="#nuage-de-points"><span class="header-section-number">3.6.1</span> Nuage de points</a></li>
+  <li><a href="#les-graphiques-en-lignes" id="toc-les-graphiques-en-lignes" class="nav-link" data-scroll-target="#les-graphiques-en-lignes"><span class="header-section-number">3.6.2</span> Les graphiques en lignes</a></li>
+  <li><a href="#les-cartes" id="toc-les-cartes" class="nav-link" data-scroll-target="#les-cartes"><span class="header-section-number">3.6.3</span> Les cartes</a></li>
   </ul></li>
-  <li><a href="#deux-variables-catégorielles" id="toc-deux-variables-catégorielles" class="nav-link" data-scroll-target="#deux-variables-catégorielles"> <span class="header-section-number">3.7</span> Deux variables catégorielles</a>
+  <li><a href="#deux-variables-catégorielles" id="toc-deux-variables-catégorielles" class="nav-link" data-scroll-target="#deux-variables-catégorielles"><span class="header-section-number">3.7</span> Deux variables catégorielles</a>
   <ul class="collapse">
-  <li><a href="#sec-empil" id="toc-sec-empil" class="nav-link" data-scroll-target="#sec-empil"> <span class="header-section-number">3.7.1</span> Diagrammes bâtons empilés</a></li>
-  <li><a href="#sec-juxta" id="toc-sec-juxta" class="nav-link" data-scroll-target="#sec-juxta"> <span class="header-section-number">3.7.2</span> Diagrammes bâtons juxtaposés</a></li>
-  <li><a href="#diagrammes-bâtons-facettés" id="toc-diagrammes-bâtons-facettés" class="nav-link" data-scroll-target="#diagrammes-bâtons-facettés"> <span class="header-section-number">3.7.3</span> Diagrammes bâtons “facettés”</a></li>
-  <li><a href="#sec-mosa" id="toc-sec-mosa" class="nav-link" data-scroll-target="#sec-mosa"> <span class="header-section-number">3.7.4</span> Mosaïc plots</a></li>
+  <li><a href="#sec-empil" id="toc-sec-empil" class="nav-link" data-scroll-target="#sec-empil"><span class="header-section-number">3.7.1</span> Diagrammes bâtons empilés</a></li>
+  <li><a href="#sec-juxta" id="toc-sec-juxta" class="nav-link" data-scroll-target="#sec-juxta"><span class="header-section-number">3.7.2</span> Diagrammes bâtons juxtaposés</a></li>
+  <li><a href="#diagrammes-bâtons-facettés" id="toc-diagrammes-bâtons-facettés" class="nav-link" data-scroll-target="#diagrammes-bâtons-facettés"><span class="header-section-number">3.7.3</span> Diagrammes bâtons “facettés”</a></li>
+  <li><a href="#sec-mosa" id="toc-sec-mosa" class="nav-link" data-scroll-target="#sec-mosa"><span class="header-section-number">3.7.4</span> Mosaïc plots</a></li>
   </ul></li>
-  <li><a href="#une-variable-de-chaque-type" id="toc-une-variable-de-chaque-type" class="nav-link" data-scroll-target="#une-variable-de-chaque-type"> <span class="header-section-number">3.8</span> Une variable de chaque type</a>
+  <li><a href="#une-variable-de-chaque-type" id="toc-une-variable-de-chaque-type" class="nav-link" data-scroll-target="#une-variable-de-chaque-type"><span class="header-section-number">3.8</span> Une variable de chaque type</a>
   <ul class="collapse">
-  <li><a href="#sec-factorhisto" id="toc-sec-factorhisto" class="nav-link" data-scroll-target="#sec-factorhisto"> <span class="header-section-number">3.8.1</span> Histogrammes “facettés”</a></li>
-  <li><a href="#les-stripcharts" id="toc-les-stripcharts" class="nav-link" data-scroll-target="#les-stripcharts"> <span class="header-section-number">3.8.2</span> Les stripcharts</a></li>
-  <li><a href="#les-boîtes-à-moustaches-ou-boxplots" id="toc-les-boîtes-à-moustaches-ou-boxplots" class="nav-link" data-scroll-target="#les-boîtes-à-moustaches-ou-boxplots"> <span class="header-section-number">3.8.3</span> Les boîtes à moustaches ou boxplots</a></li>
+  <li><a href="#sec-factorhisto" id="toc-sec-factorhisto" class="nav-link" data-scroll-target="#sec-factorhisto"><span class="header-section-number">3.8.1</span> Histogrammes “facettés”</a></li>
+  <li><a href="#les-stripcharts" id="toc-les-stripcharts" class="nav-link" data-scroll-target="#les-stripcharts"><span class="header-section-number">3.8.2</span> Les stripcharts</a></li>
+  <li><a href="#les-boîtes-à-moustaches-ou-boxplots" id="toc-les-boîtes-à-moustaches-ou-boxplots" class="nav-link" data-scroll-target="#les-boîtes-à-moustaches-ou-boxplots"><span class="header-section-number">3.8.3</span> Les boîtes à moustaches ou boxplots</a></li>
   </ul></li>
-  <li><a href="#trois-variables-et-plus" id="toc-trois-variables-et-plus" class="nav-link" data-scroll-target="#trois-variables-et-plus"> <span class="header-section-number">3.9</span> Trois variables (et plus !)</a>
+  <li><a href="#trois-variables-et-plus" id="toc-trois-variables-et-plus" class="nav-link" data-scroll-target="#trois-variables-et-plus"><span class="header-section-number">3.9</span> Trois variables (et plus !)</a>
   <ul class="collapse">
-  <li><a href="#trois-variables-numériques" id="toc-trois-variables-numériques" class="nav-link" data-scroll-target="#trois-variables-numériques"> <span class="header-section-number">3.9.1</span> Trois variables numériques</a></li>
-  <li><a href="#cinq-variables" id="toc-cinq-variables" class="nav-link" data-scroll-target="#cinq-variables"> <span class="header-section-number">3.9.2</span> Cinq variables !</a></li>
-  <li><a href="#sec-simpson" id="toc-sec-simpson" class="nav-link" data-scroll-target="#sec-simpson"> <span class="header-section-number">3.9.3</span> Deux variables numériques et un facteur</a></li>
+  <li><a href="#trois-variables-numériques" id="toc-trois-variables-numériques" class="nav-link" data-scroll-target="#trois-variables-numériques"><span class="header-section-number">3.9.1</span> Trois variables numériques</a></li>
+  <li><a href="#cinq-variables" id="toc-cinq-variables" class="nav-link" data-scroll-target="#cinq-variables"><span class="header-section-number">3.9.2</span> Cinq variables !</a></li>
+  <li><a href="#sec-simpson" id="toc-sec-simpson" class="nav-link" data-scroll-target="#sec-simpson"><span class="header-section-number">3.9.3</span> Deux variables numériques et un facteur</a></li>
   </ul></li>
-  <li><a href="#peaufiner-lapparence" id="toc-peaufiner-lapparence" class="nav-link" data-scroll-target="#peaufiner-lapparence"> <span class="header-section-number">3.10</span> Peaufiner l’apparence</a>
+  <li><a href="#peaufiner-lapparence" id="toc-peaufiner-lapparence" class="nav-link" data-scroll-target="#peaufiner-lapparence"><span class="header-section-number">3.10</span> Peaufiner l’apparence</a>
   <ul class="collapse">
-  <li><a href="#les-légendes-ou-labels" id="toc-les-légendes-ou-labels" class="nav-link" data-scroll-target="#les-légendes-ou-labels"> <span class="header-section-number">3.10.1</span> Les légendes ou labels</a></li>
-  <li><a href="#les-échelles" id="toc-les-échelles" class="nav-link" data-scroll-target="#les-échelles"> <span class="header-section-number">3.10.2</span> Les échelles</a></li>
-  <li><a href="#les-thèmes" id="toc-les-thèmes" class="nav-link" data-scroll-target="#les-thèmes"> <span class="header-section-number">3.10.3</span> Les thèmes</a></li>
+  <li><a href="#les-légendes-ou-labels" id="toc-les-légendes-ou-labels" class="nav-link" data-scroll-target="#les-légendes-ou-labels"><span class="header-section-number">3.10.1</span> Les légendes ou labels</a></li>
+  <li><a href="#les-échelles" id="toc-les-échelles" class="nav-link" data-scroll-target="#les-échelles"><span class="header-section-number">3.10.2</span> Les échelles</a></li>
+  <li><a href="#les-thèmes" id="toc-les-thèmes" class="nav-link" data-scroll-target="#les-thèmes"><span class="header-section-number">3.10.3</span> Les thèmes</a></li>
   </ul></li>
-  <li><a href="#exercices-dentrainement" id="toc-exercices-dentrainement" class="nav-link" data-scroll-target="#exercices-dentrainement"> <span class="header-section-number">3.11</span> Exercices d’entrainement</a></li>
+  <li><a href="#exercices-dentrainement" id="toc-exercices-dentrainement" class="nav-link" data-scroll-target="#exercices-dentrainement"><span class="header-section-number">3.11</span> Exercices d’entrainement</a></li>
   </ul>
 </nav>
     </div>
@@ -299,12 +289,12 @@ div.csl-indent {
 <h2 data-number="3.1" class="anchored" data-anchor-id="préambule"><span class="header-section-number">3.1</span> Préambule</h2>
 <p>Dans le <a href="01-R-basics.html"><span>Chapitre&nbsp;1</span></a> et le <a href="02-dataset.html"><span>Chapitre&nbsp;2</span></a>, vous avez découvert les concepts essentiels qu’il est important de maîtriser avant de commencer à explorer en détail des données dans <code>R</code>. Les éléments de syntaxe abordés dans la <a href="01-R-basics.html#sec-code"><span>Section&nbsp;1.3</span></a> sont nombreux et vous n’avez probablement pas tout retenu. C’est pourquoi je vous conseille de garder les tutoriels de DataCamp à portée de main afin de pouvoir refaire les parties que vous maîtrisez le moins. Ce n’est qu’en répétant plusieurs fois ces tutoriels que les choses seront vraiment comprises et que vous les retiendrez. Ainsi, si des éléments de code présentés ci-dessous vous semblent obscurs, revenez en arrière : toutes les réponses à vos questions se trouvent probablement dans les chapitres précédents.</p>
 <p>Après la découverte des bases du langage <code>R</code>, nous abordons maintenant les parties de ce livre qui concernent la “science des données” (ou “Data Science” pour nos amis anglo-saxons). Nous allons voir dans ce chapitre qu’outre les fonctions <code>View()</code> et <code>glimpse()</code>, l’exploration visuelle <em>via</em> la représentation graphique des données est un moyen indispensable et très puissant pour comprendre ce qui se passe dans un jeu de données.</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -322,18 +312,15 @@ Important
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-
-</div>
 <p>Si ce n’est pas déjà fait, pensez à les installer avant de les charger en mémoire.</p>
 <p>Au niveau le plus élémentaire, les graphiques permettent de comprendre comment les variables se comparent en termes de tendance centrale (à quel endroit les valeurs ont tendance à être localisées, regroupées) et leur dispersion (comment les données varient autour du centre). La chose la plus importante à savoir sur les graphiques est qu’ils doivent être créés pour que votre public (le professeur qui vous évalue, le collègue avec qui vous collaborez, votre futur employeur, etc.) comprenne bien les résultats et les informations que vous souhaitez transmettre. Il s’agit d’un exercice d’équilibriste : d’une part, vous voulez mettre en évidence autant de relations significatives et de résultats intéressants que possible, mais de l’autre, vous ne voulez pas trop en inclure, afin d’éviter de rendre votre graphique illisible ou de submerger votre public. Tout comme n’importe quel paragraphe de document écrit, un graphique doit permettre de <strong>communiquer un message</strong> (une idée forte, un résultat marquant, une hypothèse nouvelle, etc).</p>
 <p>Comme nous le verrons, les graphiques nous aident également à repérer les tendances extrêmes et les valeurs aberrantes dans nos données. Nous verrons aussi qu’une façon de faire, assez classique, consiste à comparer la distribution d’une variable quantitative pour les différents niveaux d’une variable catégorielle.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Objectifs
 </div>
 </div>
@@ -370,7 +357,7 @@ Objectifs
 <p>Pour l’année 2007, le jeu de données contient des informations pour 142 pays. Examinons les premières lignes de ce jeu de données :</p>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <caption>Les 6 premières lignes du jeu de données <code>gapminder</code> pour l’année 2007.</caption>
 <thead>
 <tr class="header">
@@ -442,7 +429,7 @@ Objectifs
 <div id="fig-gapminder" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-visualization_files/figure-html/fig-gapminder-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure 3.1: Espérance de vie en fonction du PIB par habitant en 2007.</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.1: Espérance de vie en fonction du PIB par habitant en 2007.</figcaption>
 </figure>
 </div>
 </div>
@@ -468,7 +455,7 @@ Objectifs
 </section>
 <section id="le-package-ggplot2" class="level3" data-number="3.2.4">
 <h3 data-number="3.2.4" class="anchored" data-anchor-id="le-package-ggplot2"><span class="header-section-number">3.2.4</span> Le package <code>ggplot2</code></h3>
-<p>Comme indiqué plus haut, le package <code>ggplot2</code> <span class="citation" data-cites="R-ggplot2">(<a href="references.html#ref-R-ggplot2" role="doc-biblioref">Wickham et al. 2022</a>)</span> permet de réaliser des graphiques dans <code>R</code> en respectant les principes de la grammaire des graphiques. Vous avez probablement remarqué que depuis le début de la section <a href="#sec-gggraph"><span>Section&nbsp;3.2</span></a>, beaucoup de termes sont écrits dans la police réservée au <code>code</code> informatique. C’est parce que les éléments de la grammaire des graphiques sont tous précisés dans la fonction <code>ggplot()</code> qui demande, au grand minimum, que les éléments suivants soient spécifiés :</p>
+<p>Comme indiqué plus haut, le package <code>ggplot2</code> <span class="citation" data-cites="R-ggplot2">(<a href="references.html#ref-R-ggplot2" role="doc-biblioref">Wickham et al. 2023</a>)</span> permet de réaliser des graphiques dans <code>R</code> en respectant les principes de la grammaire des graphiques. Vous avez probablement remarqué que depuis le début de la section <a href="#sec-gggraph"><span>Section&nbsp;3.2</span></a>, beaucoup de termes sont écrits dans la police réservée au <code>code</code> informatique. C’est parce que les éléments de la grammaire des graphiques sont tous précisés dans la fonction <code>ggplot()</code> qui demande, au grand minimum, que les éléments suivants soient spécifiés :</p>
 <ul>
 <li>le nom du <code>data.frame</code> contenant les variables qui seront utilisées pour le graphique. Ce nom correspond à l’argument <code>data</code> de la fonction <code>ggplot()</code>.</li>
 <li>l’association des variables à des attributs esthétiques. Cela se fait grâce à l’argument <code>mapping</code> et la fonction <code>aes()</code></li>
@@ -490,27 +477,27 @@ Objectifs
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>penguins</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 8
-   species island    bill_length_mm bill_depth_mm flipper_…¹ body_…² sex    year
-   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;      &lt;int&gt;   &lt;int&gt; &lt;fct&gt; &lt;int&gt;
- 1 Adelie  Torgersen           39.1          18.7        181    3750 male   2007
- 2 Adelie  Torgersen           39.5          17.4        186    3800 fema…  2007
- 3 Adelie  Torgersen           40.3          18          195    3250 fema…  2007
- 4 Adelie  Torgersen           NA            NA           NA      NA &lt;NA&gt;   2007
- 5 Adelie  Torgersen           36.7          19.3        193    3450 fema…  2007
- 6 Adelie  Torgersen           39.3          20.6        190    3650 male   2007
- 7 Adelie  Torgersen           38.9          17.8        181    3625 fema…  2007
- 8 Adelie  Torgersen           39.2          19.6        195    4675 male   2007
- 9 Adelie  Torgersen           34.1          18.1        193    3475 &lt;NA&gt;   2007
-10 Adelie  Torgersen           42            20.2        190    4250 &lt;NA&gt;   2007
-# … with 334 more rows, and abbreviated variable names ¹​flipper_length_mm,
-#   ²​body_mass_g</code></pre>
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+ 1 Adelie  Torgersen           39.1          18.7               181        3750
+ 2 Adelie  Torgersen           39.5          17.4               186        3800
+ 3 Adelie  Torgersen           40.3          18                 195        3250
+ 4 Adelie  Torgersen           NA            NA                  NA          NA
+ 5 Adelie  Torgersen           36.7          19.3               193        3450
+ 6 Adelie  Torgersen           39.3          20.6               190        3650
+ 7 Adelie  Torgersen           38.9          17.8               181        3625
+ 8 Adelie  Torgersen           39.2          19.6               195        4675
+ 9 Adelie  Torgersen           34.1          18.1               193        3475
+10 Adelie  Torgersen           42            20.2               190        4250
+# ℹ 334 more rows
+# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 </div>
 </div>
 <p>Comme évoqué plus haut, il s’agit d’un <code>tibble</code>. Plusieurs de ses variables concernent la biométrie des manchots, en particulier de son bec (voir <a href="#fig-morpho">Figure&nbsp;<span>3.2</span></a>).</p>
 <div id="fig-morpho" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/culmen_depth.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Figure 3.2: Morphométrie du bec des manchots. Illustration de Allison Horst</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.2: Morphométrie du bec des manchots. Illustration de Allison Horst</figcaption>
 </figure>
 </div>
 <p>Supposons qu’on cherche à déterminer si la longueur du bec des manchots est proportionnelle à leur masse. Pour produire un graphique permettant de le déterminer, nous avons besoin des éléments suivants :</p>
@@ -543,19 +530,19 @@ Objectifs
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="03-visualization_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Relation entre masse corporelle et longueur du bec chez les manchots de l’archipel de Palmer</figcaption><p></p>
+<figcaption class="figure-caption">Relation entre masse corporelle et longueur du bec chez les manchots de l’archipel de Palmer</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>Au moment de produire ce graphique, <code>R</code> nous indique que 2 lignes du tableau <code>penguins</code> ne figurent pas sur ce graphique car elles possèdent des données manquantes (<code>NA</code>), pour l’une et/ou l’autre des variables que nous avons sélectionnées. La fonction <code>geom-point()</code> est donc incapable de les placer sur le graphique.</p>
 <p>Vous avez donc ici un premier exemple de graphique très simple. Il est loin d’être parfait (à minima, le titre des axes devrait être modifié), mais il a le mérite de vous présenter la syntaxe que vous devrez utiliser pour produire presque tous les graphiques qui vous seront utiles avec <code>ggplot2</code>. En outre, on peut percevoir qu’il semble exister une relation positive (mais imparfaite) entre longueur des becs et masse des individus. Il faut toutefois être prudent car nous avons ici utilisé toutes les données disponibles (donc les données des 3 espèces à la fois), ce qui est loin d’être pertinent.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 En résumé
 </div>
 </div>
@@ -603,12 +590,12 @@ En résumé
 <section id="quel-graphique-dans-quelle-situation" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="quel-graphique-dans-quelle-situation"><span class="header-section-number">3.3</span> Quel graphique dans quelle situation ?</h2>
 <p>Il n’est pas possible de faire n’importe quel type de graphique dans n’importe quelle situation. Selon le nombre de variables dont on dispose ou que l’on souhaite examiner, et selon la nature de ces variables (numériques et/ou catégorielles), le choix des types de graphiques possibles sera limité. Par exemple, les diagrammes bâtons sont réservés aux variables catégorielles, alors que les histogrammes sont possibles uniquement avec les variables numériques continues. Néanmoins, dans certaines situations, plusieurs choix de graphiques seront possibles, et vous aurez donc une certaine liberté. Vos choix seront alors guidés par les objectifs que vous souhaiterez atteindre grâce aux graphiques, ainsi que par vos préférences.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Objectifs
 </div>
 </div>
@@ -684,12 +671,12 @@ Objectifs
 <section id="à-lintérieur-ou-à-lextérieur-de-aes" class="level4" data-number="3.4.1.3">
 <h4 data-number="3.4.1.3" class="anchored" data-anchor-id="à-lintérieur-ou-à-lextérieur-de-aes"><span class="header-section-number">3.4.1.3</span> À l’intérieur ou à l’extérieur de <code>aes()</code> ?</h4>
 <p>Les couleurs de remplissage et de contour des barres d’un histogramme font partie des caractéristiques esthétiques du graphique. Pourtant, elles ne sont pas précisées à l’intérieur de la fonction <code>aes()</code>. La raison est simple mais importante :</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -815,7 +802,7 @@ Important
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="03-visualization_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Un exemple d’utilisation de l’argument <code>breaks</code></figcaption><p></p>
+<figcaption class="figure-caption">Un exemple d’utilisation de l’argument <code>breaks</code></figcaption>
 </figure>
 </div>
 </div>
@@ -912,12 +899,12 @@ Important
 <span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color =</span> <span class="st">"purple"</span>, <span class="at">size =</span> <span class="dv">2</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>L’explication est relativement simple, mais importante :</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -984,7 +971,7 @@ Important
 <div id="fig-cloud" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-visualization_files/figure-html/fig-cloud-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure 3.3: Nuage de points des masses corporelles des 3 espèces de manchots</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.3: Nuage de points des masses corporelles des 3 espèces de manchots</figcaption>
 </figure>
 </div>
 </div>
@@ -1001,7 +988,7 @@ Important
 <div id="fig-pch" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/pch.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">Figure 3.4: Liste des symboles et codes correspondants pour les graphiques faisant apparaître des points. Pour les symboles 21 à 25, il sera possible de spécifier une couleur de remplissage <code>fill</code> et une couleur de contour <code>color</code>. Pour tous les autres symboles, les changements de couleurs se feront avec l’argument <code>color</code>.</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.4: Liste des symboles et codes correspondants pour les graphiques faisant apparaître des points. Pour les symboles 21 à 25, il sera possible de spécifier une couleur de remplissage <code>fill</code> et une couleur de contour <code>color</code>. Pour tous les autres symboles, les changements de couleurs se feront avec l’argument <code>color</code>.</figcaption>
 </figure>
 </div>
 <p>Chacune de ces caractéristiques esthétiques peut être associée à une variable d’un tableau (il faut alors le spécifier à l’intérieur de <code>aes()</code>), ou à une valeur unique, constante et identique pour tous les points du graphique (il faut alors le spécifier à l’extérieur de <code>aes()</code>). Par exemple :</p>
@@ -1050,7 +1037,7 @@ Important
 <div id="fig-jitter-1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-visualization_files/figure-html/fig-jitter-1.png" class="img-fluid figure-img" data-ref-parent="fig-jitter" width="288"></p>
-<p></p><figcaption class="figure-caption">(a) Pas de dispersion horizontale, pas de dispersion verticale</figcaption><p></p>
+<figcaption class="figure-caption">(a) Pas de dispersion horizontale, pas de dispersion verticale</figcaption>
 </figure>
 </div>
 </div>
@@ -1058,7 +1045,7 @@ Important
 <div id="fig-jitter-2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-visualization_files/figure-html/fig-jitter-2.png" class="img-fluid figure-img" data-ref-parent="fig-jitter" width="288"></p>
-<p></p><figcaption class="figure-caption">(b) Faible dispersion horizontale, pas de dispersion verticale</figcaption><p></p>
+<figcaption class="figure-caption">(b) Faible dispersion horizontale, pas de dispersion verticale</figcaption>
 </figure>
 </div>
 </div>
@@ -1066,12 +1053,12 @@ Important
 <div id="fig-jitter-3" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-visualization_files/figure-html/fig-jitter-3.png" class="img-fluid figure-img" data-ref-parent="fig-jitter" width="288"></p>
-<p></p><figcaption class="figure-caption">(c) Faible dispersion horizontale, forte dispersion verticale</figcaption><p></p>
+<figcaption class="figure-caption">(c) Faible dispersion horizontale, forte dispersion verticale</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure 3.5: Trois exemples de stripchart</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.5: Trois exemples de stripchart</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -1080,12 +1067,12 @@ Important
 <li><p>Le second exemple (sous-figure b) présente une dispersion horizontale modérée <code>width = 0.1</code> et pas de dispersion verticale <code>height = 0</code>. Ici, tous les points ne sont plus alignés sur une seule droite. Puisque nous avons fixé <code>width = 0.1</code>, la position horizontale des points est choisie aléatoirement par <code>R</code> : il ajoute un léger bruit horizontale aléatoire, soit positif, soit négatif, avant de placer les points le long de l’axe des abscisses. Plus la valeur de <code>width</code> sera élevée, plus l’étendue du bruit horizontal sera importante. Sur l’axe des <code>y</code> en revanche, aucun bruit n’a été ajouté (<code>height = 0</code>). La position des points le long de cet axe reflète donc parfaitement la masse de chaque individu telle qu’enregistrées dans le tableau <code>penguins</code>. D’ailleurs, on constate que l’axe des ordonnées est strictement identique (même étendue, même graduations…) pour les 2 premiers sous-graphiques. C’est ce type de représentation que nous recherchons. En effet, l’absence de bruit vertical nous permet de visualiser correctement (donc sans distorsion) la variable numérique choisie (ici <code>body_mass_g</code>), et le bruit horizontal nous permet d’étaler légèrement les points de part et d’autres d’un axe horizontal virtuel, ce qui a pour effet de réduire l’overplotting, et ce qui nous permet donc de visualiser les zones où les points sont plus nombreux/denses et les zones où les observations sont plus rares. Ici, on observe une majorité de points entre 3000 et 4000 grammes, une densité de points intermédiaire entre 4000 et 5000 grammes, et des points moins nombreux (donc moins d’individus) pour les masses supérieures à 5000 grammes.</p></li>
 <li><p>Le troisième exemple (sous-figure c) présente une dispersion horizontale modérée <code>width = 0.1</code> et une importante dispersion verticale <code>height = 2000</code>. Cela signifie que la position des points sur l’axe des <code>y</code> ne reflète plus les vraies valeurs de masses enregistrées dans le tableau <code>penguins</code>, mais des valeurs de masses auxquelles un bruit aléatoire a été ajouté ou retiré. C’est ce qui explique que l’axe des ordonnées ne présente pas la même échelle que pour les 2 autres graphiques. Ce n’est évidemment pas souhaitable, car si nous voulons bel et bien ajouter un bruit horizontal pour éviter la superposition des points, il est essentiel de ne pas modifier la position verticale des points qui nous renseigne sur la variable d’intérêt. Ici, la troisième figure présente un axe des <code>y</code> différent des 2 autres figures, et la position verticale des points a été tellement altérée qu’on ne peut plus distinguer la sur-abondance de données entre 3000 et 4000 grammes, ni la sous-représentation des observations au-dessus de 5000 grammes. Il sera donc important à l’avenir de toujours fixer <code>height = 0</code> pour faire un stripchart correct.</p></li>
 </ul>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -1110,7 +1097,7 @@ Important
 <div id="fig-strip" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-visualization_files/figure-html/fig-strip-1.png" class="img-fluid figure-img" width="480"></p>
-<p></p><figcaption class="figure-caption">Figure 3.6: Un exemple de stripchart</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.6: Un exemple de stripchart</figcaption>
 </figure>
 </div>
 </div>
@@ -1183,7 +1170,7 @@ Important
 <div id="fig-barplot" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-visualization_files/figure-html/fig-barplot-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure 3.7: Barplot pour des données non pré-comptées.</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.7: Barplot pour des données non pré-comptées.</figcaption>
 </figure>
 </div>
 </div>
@@ -1196,7 +1183,7 @@ Important
 <div id="fig-barplotcol" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-visualization_files/figure-html/fig-barplotcol-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure 3.8: Barplot pour des données pré-comptées.</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.8: Barplot pour des données pré-comptées.</figcaption>
 </figure>
 </div>
 </div>
@@ -1207,12 +1194,12 @@ Important
 <li>Le code qui génère la figure <a href="#fig-barplotcol">Figure&nbsp;<span>3.8</span></a> utilise le jeu de données <code>panier_counted</code>. Ici, c’est bien l’utilisateur qui associe la variable <code>nombre</code> à l’axe des <code>y</code> à l’intérieur de la fonction <code>aes()</code>. La fonction <code>geom_col()</code> a besoin de 2 variables (une variable catégorielle pour l’axe des <code>x</code> et une numérique pour l’axe des <code>y</code>) pour fonctionner.</li>
 </ul>
 <p>Autrement dit, lorsque vous souhaiterez créer un diagramme bâtons, il faudra donc au préalable vérifier de quel type de données vous disposez pour choisir l’objet géométrique approprié :</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Diagrammes bâtons
 </div>
 </div>
@@ -1235,7 +1222,7 @@ Diagrammes bâtons
 <div id="fig-bpspecies" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-visualization_files/figure-html/fig-bpspecies-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure 3.9: Effectifs pour les 3 espèces de manchots étudiées</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.9: Effectifs pour les 3 espèces de manchots étudiées</figcaption>
 </figure>
 </div>
 </div>
@@ -1250,7 +1237,7 @@ Diagrammes bâtons
 <div id="fig-bpspecies-infreq" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-visualization_files/figure-html/fig-bpspecies-infreq-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure 3.10: Effectifs pour les 3 espèces de manchots étudiées, triés en ordre décroissant</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.10: Effectifs pour les 3 espèces de manchots étudiées, triés en ordre décroissant</figcaption>
 </figure>
 </div>
 </div>
@@ -1336,7 +1323,7 @@ Levels: Adelie Chinstrap Gentoo</code></pre>
 <div id="fig-pie" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-visualization_files/figure-html/fig-pie-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure 3.11: Répartition des effectifs par espèce et par sexe</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.11: Répartition des effectifs par espèce et par sexe</figcaption>
 </figure>
 </div>
 </div>
@@ -1352,7 +1339,7 @@ Levels: Adelie Chinstrap Gentoo</code></pre>
 <div id="fig-bpspecies-sex" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-visualization_files/figure-html/fig-bpspecies-sex-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure 3.12: Répartition des effectifs par espèce et par sexe</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.12: Répartition des effectifs par espèce et par sexe</figcaption>
 </figure>
 </div>
 </div>
@@ -1446,7 +1433,7 @@ Levels: Adelie Chinstrap Gentoo</code></pre>
  8 1968-02-01  534. 199920    12.3     4.5     3001
  9 1968-03-01  544. 200056    11.7     4.1     2877
 10 1968-04-01  544  200208    12.3     4.6     2709
-# … with 564 more rows</code></pre>
+# ℹ 564 more rows</code></pre>
 </div>
 </div>
 <p>Le jeu de données <code>economics</code> est fourni avec le package <code>ggplot2</code>. Puisque vous avez chargé ce package (ou le <code>tidyverse</code> qui contient ce package), vous devriez pouvoir accéder à ce tableau sans difficulté. Nous nous intéresserons ici à la variable <code>date</code> que nous placerons sur l’axe des <code>x</code> et à la variable <code>uempmed</code> qui est la durée de chômage médiane dans la population américaine, en nombre de semaines, que nous placerons sur l’axe des <code>y</code>. Examinons donc comment la durée médiane du du chômage a évolué au fil du temps :</p>
@@ -1687,12 +1674,12 @@ Levels: Adelie Chinstrap Gentoo</code></pre>
 </div>
 </div>
 <p>Les Gentoo, qui ont pourtant des masses corporelles supérieures à celle des deux autres espèces (voir <a href="#fig-cloud">Figure&nbsp;<span>3.3</span></a> de la <a href="#sec-cloud"><span>Section&nbsp;3.4.2</span></a>), ont visiblement des becs moins épais (entre 12 et 17 mm) que les deux autres espèces (entre 16 et 22 mm).</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -1715,7 +1702,7 @@ Important
 <div id="fig-facstrip" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-visualization_files/figure-html/fig-facstrip-1.png" class="img-fluid figure-img" width="288"></p>
-<p></p><figcaption class="figure-caption">Figure 3.13: Un exemple de stripchart</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.13: Un exemple de stripchart</figcaption>
 </figure>
 </div>
 </div>
@@ -1788,7 +1775,7 @@ Important
 <div id="fig-comboxplot" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-visualization_files/figure-html/fig-comboxplot-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure 3.14: Trois façons de visualiser la distribution des masses des manchots Adélie</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.14: Trois façons de visualiser la distribution des masses des manchots Adélie</figcaption>
 </figure>
 </div>
 </div>
@@ -1890,7 +1877,7 @@ Important
 <div id="fig-multivar" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-visualization_files/figure-html/fig-multivar-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure 3.15: Relation entre la morphologie du bec, la masse et le sexe chez trois espèces de manchots de l’archipel Palmer</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.15: Relation entre la morphologie du bec, la masse et le sexe chez trois espèces de manchots de l’archipel Palmer</figcaption>
 </figure>
 </div>
 </div>
@@ -1989,12 +1976,12 @@ Important
 </div>
 <p>La syntaxe <code>sex ~ species</code> indique que l’on souhaite un sous-graphique pour chaque combinaison des modalités des facteurs <code>sex</code> et <code>species</code>. Les graphiques correspondant aux différents sexes apparaîtront sur des lignes distinctes, et les espèces sur des colonnes distinctes. On constate ici que si la relation semble toujours positive et assez nette pour les mâles des 3 espèces, la situation est moins tranchée pour les femelles, en particulier pour les espèces Adélie et Chinstrap.</p>
 <p>Nous avons vu dans ce chapitre quelques exemples et des règles à suivre strictement (notamment, quels types de graphiques pour quelles types de variables). Mais les possibilités sont infinies, et je vous encourage donc à poursuivre l’exploration. Toutes les combinaisons des éléments que nous avons décrits sont possibles. Entre les <strong>facets</strong>, qui permettent de faire des sous graphiques pour chaque modalités (ou combinaisons de modalités) d’une ou deux variables catégorielles, les <strong>caractéristiques esthétiques</strong> auxquelles ont peut associer un nombre conséquent de variables numériques et/ou catégorielles, et les nombreux <strong>objets géométriques</strong> existants (nous n’avons fait qu’utiliser les plus courants, mais il en existe <em>beaucoup d’autres</em>), les possibilités sont infinies. À vous de faire preuve de curiosité et d’explorer d’autres types de visualisation. L’avantage de <code>ggplot2</code> est que tous les graphiques se construisent sur le même modèle :</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -2086,7 +2073,7 @@ Important
 <div id="fig-label" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03-visualization_files/figure-html/fig-label-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure 3.16: Une figure correctement légendée</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3.16: Une figure correctement légendée</figcaption>
 </figure>
 </div>
 </div>
@@ -2526,9 +2513,6 @@ Important
 <span id="cb192-11"><a href="#cb192-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"B"</span>) <span class="sc">+</span></span>
 <span id="cb192-12"><a href="#cb192-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"Gill Sans"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-
-</div>
 <p><embed src="images/fonts1.pdf" class="img-fluid"></p>
 <p>Il est également possible de spécifier la taille de police qui devrait être utilisée par défaut. On spécifie la taille de base avec l’argument <code>base_size =</code>, et toutes les autres tailles de polices seront mises à jour pour refléter le changement. Ainsi, les différences de tailles entre titre, sous-titres, légendes des axes, etc, seront maintenues :</p>
 <div class="cell">
@@ -2544,9 +2528,6 @@ Important
 <span id="cb193-10"><a href="#cb193-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="st">"Masse (g)"</span>) <span class="sc">+</span></span>
 <span id="cb193-11"><a href="#cb193-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"B"</span>) <span class="sc">+</span></span>
 <span id="cb193-12"><a href="#cb193-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"Gill Sans"</span>, <span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-
 </div>
 <p><embed src="images/fonts2.pdf" class="img-fluid"></p>
 <p>Le choix d’un thème et d’une police adaptés doivent vous permettre de faire des graphiques originaux et clairs. Rappelez-vous toujours que vos choix en matière de graphiques doivent avoir pour objectif principal de rendre les tendances plus faciles à décrypter pour un lecteur non familier de vos données. C’est un outil de communication au même titre que n’importe quel paragraphe d’un rapport ou compte-rendu. Et comme pour un paragraphe, la première version d’un graphique est rarement la bonne.</p>
@@ -2573,7 +2554,7 @@ Important
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="03-visualization_files/figure-html/unnamed-chunk-116-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Prix de 3000 diamants en fonction de leur taille en carats et de leur clarté.</figcaption><p></p>
+<figcaption class="figure-caption">Prix de 3000 diamants en fonction de leur taille en carats et de leur clarté.</figcaption>
 </figure>
 </div>
 </div>
@@ -2623,14 +2604,14 @@ Important
 <!-- Pour le S4 : penser aux barres d'erreur -->
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-R-ggmosaic" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-R-ggmosaic" class="csl-entry" role="listitem">
 Jeppson, Haley, Heike Hofmann, et Di Cook. 2021. <em>ggmosaic: Mosaic Plots in the ggplot2 Framework</em>. <a href="https://github.com/haleyjeppson/ggmosaic">https://github.com/haleyjeppson/ggmosaic</a>.
 </div>
-<div id="ref-R-ggplot2" class="csl-entry" role="doc-biblioentry">
-Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, et Dewey Dunnington. 2022. <em>ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2">https://CRAN.R-project.org/package=ggplot2</a>.
+<div id="ref-R-ggplot2" class="csl-entry" role="listitem">
+Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, et Dewey Dunnington. 2023. <em>ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2">https://CRAN.R-project.org/package=ggplot2</a>.
 </div>
-<div id="ref-wilkinson2005" class="csl-entry" role="doc-biblioentry">
+<div id="ref-wilkinson2005" class="csl-entry" role="listitem">
 Wilkinson, Leland. 2005. <em>The grammar of graphics</em>. 2nd éd. New-York: Springer-Verlag. <a href="https://www.springer.com/us/book/9780387245447">https://www.springer.com/us/book/9780387245447</a>.
 </div>
 </div>
@@ -2664,9 +2645,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -2678,7 +2673,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copié");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copié");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -2706,31 +2718,136 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -2738,7 +2855,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
-    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

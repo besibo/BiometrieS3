@@ -1,4 +1,4 @@
-# R et RStudio : les bases {#sec-bases}
+# R et RStudio : les bases {#sec-basics}
 
 
 ## Préambule
@@ -18,7 +18,7 @@ Ce chapitre est en grande partie basé sur les 3 ressources suivantes que je vou
 3. Les tutoriels en ligne de [DataCamp](https://datacamp.com/). DataCamp est une plateforme de e-learning accessible depuis n'importe quel navigateur internet et dont la priorité est l'enseignement des "data sciences". Leurs tutoriels vous aideront à apprendre certains des concepts de développés dans ce livre. 
 
 :::{.callout-important}
-Avant d'aller plus loin, rendez-vous sur [le site de DataCamp](https://www.datacamp.com/) et créez-vous un compte gratuit.
+Avant d'aller plus loin, rendez-vous sur [le site de DataCamp](https://www.datacamp.com/), créez-vous un compte gratuit, et reprenez la lecture de ce livre.
 :::
 
 
@@ -259,7 +259,7 @@ Après ces considérations techniques sur l'utilisation et les réglages de `RSt
 
 #### Objets, types, vecteurs, facteurs et tableaux de données {#sec-objects}
 
-Pour vous présenter les concepts de base et la terminologie de la programmation dont nous aurons besoin, vous allez suivre des tutoriels en ligne sur le site de DataCamp. Pour cette première prise en main, tout va maintenant se passer dans votre navigateur internet, et vous pouvez donc mettre de côté `RStudio` pour l'instant. Vous allez voir que l'interface de DataCamp ressemble à une version simplifiée de l'éditeur de script et de la console de `RStudio` : vous n'aurez pas à vous soucier des réglages, de `Rprojects` ou de sauvegarder quoi que ce soit. Si vous avez correctement créé votre compte gratuit DataCamp comme indiqué au tout début de la @sec-bases, votre progression sera sauvegardée automatiquement. Il vous suffit de cliquer sur les liens direct ci-dessous pour démarrer les tutoriels en ligne. 
+Pour vous présenter les concepts de base et la terminologie de la programmation dont nous aurons besoin, vous allez suivre des tutoriels en ligne sur le site de DataCamp. Pour cette première prise en main, tout va maintenant se passer dans votre navigateur internet, et vous pouvez donc mettre de côté `RStudio` pour l'instant. Vous allez voir que l'interface de DataCamp ressemble à une version simplifiée de l'éditeur de script et de la console de `RStudio` : vous n'aurez pas à vous soucier des réglages, de `Rprojects` ou de sauvegarder quoi que ce soit. Si vous avez correctement créé votre compte gratuit DataCamp comme indiqué au tout début de la @sec-basics, votre progression sera sauvegardée automatiquement. Il vous suffit de cliquer sur les liens direct ci-dessous pour démarrer les tutoriels en ligne. 
 
 Avant de démarrer, quelques précisions :
 
