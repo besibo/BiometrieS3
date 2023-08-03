@@ -1,5 +1,6 @@
 project:
   type: book
+  output-dir: docs
 
 book:
   title: "TP de Biométrie<br>Semestre 3<br>"
