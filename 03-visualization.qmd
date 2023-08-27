@@ -455,15 +455,15 @@ On obtient une sorte d'histogramme lissé qui fait bien apparaître les 3 taille
 
 Notez également que si l'histogramme présentait des valeurs d'abondance sur l'axe des `y` (des nombres d'individus), le graphique de densité présente, comme son nom l'indique, l'information de densité des observations. Cela signifie que la surface totale sous la courbe (en bleu) vaut 1. Cela peut s'avérer utile pour comparer plusieurs distributions pour lesquelles on disposes de tailles d'échantillons très différentes. 
 
-Enfin, on peut créer un graphique qui présentera à la fois l'histogramme (avec `geom_histogram()`), les données individuelles (avec `geom_rug()`) et la courbe de densité (avec `geom_density()`). Mais pour que tout s'affiche correctement, il faut indiquer à `geom_histogram` que l'axe des `y` doit porter les densités et non les abondances. On fait cela en précisant `y = ..density..`. Les deux points avant et après `density` sont importants. Cela indique à `R` que la variable `density` ne figure pas dans le tableau `penguins`, mais qu'elle est calculée par la fonction `geom_histogram()` :
+Enfin, on peut créer un graphique qui présentera à la fois l'histogramme (avec `geom_histogram()`), les données individuelles (avec `geom_rug()`) et la courbe de densité (avec `geom_density()`). Mais pour que tout s'affiche correctement, il faut indiquer à `geom_histogram` que l'axe des `y` doit porter les densités et non les abondances. On fait cela en précisant `y = after_stat(density)`, cela indique à `R` que la variable `density` ne figure pas dans le tableau `penguins`, mais qu'elle est calculée par la fonction `geom_histogram()` :
 
 ```{r}
 ggplot(penguins, aes(x = body_mass_g)) +
-  geom_histogram(aes(y = ..density..),
+  geom_histogram(aes(y = after_stat(density)),
                  fill = "steelblue", color = "black",
                  bins = 25, alpha = 0.7) +
   geom_rug(alpha = 0.3) +
-  geom_density(color = "purple", size = 2)
+  geom_density(color = "purple", linewidth = 2)
 ```
 
 Notez l'utilisation des arguments `alpha`, `color` et `size`, pour modifier l'aspect de différents éléments du graphique. Assurez-vous d'avoir compris comment on les utilise, et faites vos propres expériences.
@@ -474,11 +474,11 @@ Sur le dernier exemple, vous constatez que la fonction `aes()` apparaît une foi
 
 ```{r}
 #| eval: false
-ggplot(penguins, aes(x = body_mass_g, y = ..density..)) +
+ggplot(penguins, aes(x = body_mass_g, y = after_stat(density))) +
   geom_histogram(fill = "steelblue", color = "black",
                  bins = 25, alpha = 0.7) +
   geom_rug(alpha = 0.3) +
-  geom_density(color = "purple", size = 2)
+  geom_density(color = "purple", linewidth = 2)
 ```
 
 L'explication est relativement simple, mais importante :
@@ -489,17 +489,17 @@ Ce qui est spécifié dans la fonction `ggplot()` s'applique à toutes les couch
 Ce qui est spécifié dans une fonction `geom_...()` ne s'applique qu'à cette couche géométrique particulière.
 :::
 
-Ainsi, ajouter `y = ..density..` à l'intérieur de `ggplot()` renvoie donc un message d'erreur, car seule la fonction `geom_histogram()` calcule la variable `..density..`, seule la fonction `geom_histogram()` sait quoi faire de cette variable. Dans notre exemple, il est en revanche logique d'ajouter `aes(x = body_mass_g)` dans la fonction `ggplot()`, car nos trois couches géométriques ont besoin de cet argument, et pour les 3 couches géométriques, on associe bien cette variable `body_mass_g` à l'axe des `x`. Toutefois, rien ne nous empêche d'écrire ceci à la place :
+Ainsi, ajouter `y = after_stat(density)` à l'intérieur de `ggplot()` renvoie donc un message d'erreur, car seule la fonction `geom_histogram()` calcule la variable `density`, seule la fonction `geom_histogram()` sait quoi faire de cette variable. Dans notre exemple, il est en revanche logique d'ajouter `aes(x = body_mass_g)` dans la fonction `ggplot()`, car nos trois couches géométriques ont besoin de cet argument, et pour les 3 couches géométriques, on associe bien cette variable `body_mass_g` à l'axe des `x`. Toutefois, rien ne nous empêche d'écrire ceci à la place :
 
 ```{r}
 ggplot(data = penguins) +
-  geom_histogram(aes(x = body_mass_g, y = ..density..),
+  geom_histogram(aes(x = body_mass_g, y = after_stat(density)),
                  fill = "steelblue", color = "black",
                  bins = 25, alpha = 0.7) +
   geom_rug(aes(x = body_mass_g),
            alpha = 0.3) +
   geom_density(aes(x = body_mass_g),
-               color = "purple", size = 2)
+               color = "purple", linewidth = 2)
 ```
 
 C'est plus long, mais c'est tout à fait correct et ça produit exactement le même résultat qu'auparavant.
@@ -1957,7 +1957,7 @@ Vous devriez donc maintenant être bien armés pour produire 95% des graphiques 
 Quoi qu'il en soit, il est maintenant attendu de vous que vous utilisez `R` et ce que vous avez appris de `ggplot2` pour produire tous les graphiques que vous serez amenés à intégrer à vos comptes-rendus de TP et à vos rapports.
 
 
-## Exercices d'entrainement
+## Exercices d'entraînement
 
 1. Avec le jeu de données `diamonds`, du packages `ggplot2`, tapez les commandes suivantes pour créer un nouveau tableau `diams` contenant moins de lignes (3000 au lieu de près de 54000) :
 
