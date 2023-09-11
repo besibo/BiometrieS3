@@ -16,7 +16,6 @@ library(palmerpenguins)
 ```
 
 
-----
 
 ## Le package `palmerpenguins`
 
@@ -106,7 +105,7 @@ L'opérateur `$` permet d'accéder à une unique variable grâce à son nom. Par
 penguins$species
 ```
 
-Cela nous permet de récupérer les données sous la forme d'un vecteur ou, comme ici, d'un facteur. Attention toutefois, le tableau `penguins` contient beaucoup de lignes. Récupérer une variable grâce à cet opérateur peut rapidement saturer la console. Nous serons amenés à manipuler des tableaux contenant plusieurs dizaines ou centaines de milliers de lignes. C'est le cas du tableau `diamonds` du package `ggplot2` que vous avez découvert dans les exercice de la @sec-Exo-1.
+Cela nous permet de récupérer les données sous la forme d'un vecteur ou, comme ici, d'un facteur. Attention toutefois, le tableau `penguins` contient beaucoup de lignes. Récupérer une variable grâce à cet opérateur peut rapidement saturer la console. Nous serons amenés à manipuler des tableaux contenant plusieurs dizaines ou centaines de milliers de lignes. C'est le cas du tableau `diamonds` du package `ggplot2` que vous avez découvert dans les exercice de la @sec-exo-1.
 
 Si, par exemple, vous souhaitez extraire les données relatives à la clarté des diamants (colonne `clarity`) du tableau `diamonds`, vous pouvez taper ceci :
 
@@ -166,7 +165,7 @@ Vous devriez absolument prendre l'habitude d'examiner les fichiers d'aide des fo
 Prenez le temps d'examiner le fichier d'aide du jeu de données `penguins`. Avant de passer à la suite, assurez-vous d'avoir compris à quoi correspondent chacune des 8 variables de ce tableau.
 
 
-## Exercices {#sec-Exo-2}
+## Exercice {#sec-exo-2}
 
 Consultez l'aide du jeu de données `diamonds` du package `ggplot2`.
 

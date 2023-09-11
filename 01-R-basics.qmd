@@ -18,7 +18,7 @@ Ce chapitre est en grande partie basé sur les 3 ressources suivantes que je vou
 3. Les tutoriels en ligne de [DataCamp](https://datacamp.com/). DataCamp est une plateforme de e-learning accessible depuis n'importe quel navigateur internet et dont la priorité est l'enseignement des "data sciences". Leurs tutoriels vous aideront à apprendre certains des concepts de développés dans ce livre. 
 
 :::{.callout-important}
-Avant d'aller plus loin, rendez-vous sur [le site de DataCamp](https://www.datacamp.com/), créez-vous un compte gratuit, et reprenez la lecture de ce livre.
+Avant d'aller plus loin, rendez-vous sur [le site de DataCamp](https://www.datacamp.com/) et créez-vous un compte gratuit.
 :::
 
 
@@ -525,7 +525,7 @@ Vous devrez charger à nouveau chaque package que vous souhaitez utiliser **à c
 :::
 
 
-## Exercice {#sec-Exo-1}
+## Exercice {#sec-exo-1}
 
 Dans votre dossier de travail, créez un nouveau script que vous nommerez `ExoDiamonds.R`. Vous prendrez soin d'ajouter autant de commentaires que nécessaire dans votre script afin de le structurer correctement.
 

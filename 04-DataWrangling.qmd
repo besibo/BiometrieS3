@@ -195,27 +195,31 @@ La fonction `read.table()` est à la base de la plupart des fonctions d'importat
 3. `dec` : la spécification du symbole utilisé en guise de symbole pour les décimales. Il n'est pas nécessaire de spécifier cet argument lorsque le symbole dans le fichier source est le point. Mais si c'est une virgule (comme c'est souvent le cas dans les pays francophones), il faut alors préciser `dec = ","`.
 4. `header` : la première ligne du fichier source contient-elle des noms de variables. Si oui, il faut indiquer `header = TRUE`.
 
-Ainsi, par exemple, pour le fichier `dauphin.csv` que j'ai placé dans un sous-dossier de mon repertoire de travail nommé `data`, on peut taper ceci :
+Ainsi, par exemple, pour le fichier `dauphin.csv` que j'ai placé dans un sous-dossier de mon répertoire de travail nommé `data`, on peut taper ceci :
 
 ```{r}
 dauph <- read.table("data/dauphin.csv",
                     sep = "\t",
                     dec = ",",
                     header = TRUE)
+dauph
+```
+
+Puisque la fonction `read.table()` importe les données sous la forme d'un `data.frame`, il est nécessaire de transformer le tableau obtenu en `tibble` grâce à la fonction `as_tibble()` afin de bénéficier de tous les avantages de ce format d'objet.
+
+```{r}
 dauph <- as_tibble(dauph)
 dauph
 ```
 
-Puisque la fonction `read.table()` importe les données sous la forme d'un data.frame, il est nécessaire de transformer le tableau obtenu en `tibble` grâce à la fonction `as_tibble()` afin de bénéficier de tous les avantages de ce format d'objet.
 
-
-### Exercices {#Exo-10}
+### Exercices {#sec-exo-10}
 
 Avec l'objet `dauphin`, produisez le graphique ci-dessous :
 ```{r}
 #| echo: false
 #| warning: false
-dauphin %>% 
+dauphin |> 
   ggplot(aes(x = Age, y = Hg, color = Sexe)) +
     geom_smooth(method = "lm") +
     geom_point() +
@@ -230,30 +234,30 @@ dauphin %>%
 Rappel : les droites de régression avec leurs intervalles de confiance sont ajoutés grâce à la fonction `geom_smooth(method = "lm")`.
 
 
-## Le pipe `%>%`
+## Le pipe `|>`
 
 Avant d'entrer dans le vif du sujet, je souhaite introduire ici la notion de "pipe" (prononcer à l'anglo-saxonne). Le pipe est un opérateur que nous avons déjà vu apparaître à plusieurs reprises dans les chapitres précédents sans expliquer son fonctionnement.
 
-Le pipe, noté `%>%`, peut être obtenu en pressant les touches `ctrl + shift + M` (ou `cmd + shift + M` sous MacOS) de votre clavier. Il permet d'enchaîner logiquement des actions les unes à la suite des autres. Globalement, le pipe prend l'objet situé à sa gauche, et le transmet à la fonction situé à sa droite. En d'autres termes, les 2 expressions suivantes sont strictement équivalentes :
+Le pipe, noté `|>`, peut être obtenu en pressant les touches `ctrl + shift + M` (ou `cmd + shift + M` sous MacOS) de votre clavier. Il permet d'enchaîner logiquement des actions les unes à la suite des autres. Globalement, le pipe prend l'objet situé à sa gauche, et le transmet à la fonction situé à sa droite. En d'autres termes, les 2 expressions suivantes sont strictement équivalentes :
 
 ```{r eval = FALSE}
 # Ici, "f" est une fonction quelconque, "x" et "y" sont 2 objets dont la fonction a besoin.
 
 # Il s'agit d'un exemple fictif : ne tapez pas ceci dans votre script !
 f(x, y)
-x %>% f(y)
+x |> f(y)
 ```
 
 
 Travailler avec le pipe est très intéressant car toutes les fonctions de `dplyr` que nous allons décrire ensuite sont construites autour de la même syntaxe : on leur fournit un `data.frame` (ou encore mieux, un `tibble`), elles effectuent une opération et renvoient un nouveau `data.frame` (ou un nouveau `tibble`). Il est ainsi possible de créer des groupes de commandes cohérentes qui permettent, grâce à l'enchaînement d'étapes simples, d'aboutir à des résultats complexes.
 
-De la même façon que le `+` permet d'ajouter une couche supplémentaire à un graphique `ggplot2`, le pipe `%>%` permet d'ajouter une opération supplémentaire dans un groupe de commandes.
+De la même façon que le `+` permet d'ajouter une couche supplémentaire à un graphique `ggplot2`, le pipe `|>` permet d'ajouter une opération supplémentaire dans un groupe de commandes.
 
 Pour reprendre un exemple de la @sec-empil sur les diagrammes bâtons empilés, nous avions utilisé ce code :
 
 ```{r}
-penguins %>% 
-  filter(!is.na(sex)) %>% 
+penguins |> 
+  filter(!is.na(sex)) |> 
   ggplot(aes(x = fct_infreq(species), fill = sex)) +
   geom_bar(alpha = 0.6, color = "black", position = "fill")
 ```
@@ -286,8 +290,8 @@ On préfère donc toujours utiliser le pipe qui a le mérite de placer chaque fo
 
 ```{r}
 #| eval: false
-penguins %>% 
-  filter(!is.na(sex)) %>% 
+penguins |> 
+  filter(!is.na(sex)) |> 
   ggplot(aes(x = fct_infreq(species), fill = sex)) +
   geom_bar(alpha = 0.6, color = "black", position = "fill")
 ```
@@ -327,7 +331,7 @@ knitr::include_graphics('images/filter.png')
 Comme son nom l'indique, `filter()` permet de filtrer des lignes en spécifiant un ou des critères de tri portant sur une ou plusieurs variables. Nous pouvons ainsi créer un nouveau tableau ne contenant que les données de l'espèce Adélie :
 
 ```{r tidy = FALSE, eval = FALSE}
-peng_adelie <- penguins %>% 
+peng_adelie <- penguins |> 
   filter(species == "Adelie")
 ```
 
@@ -335,7 +339,7 @@ La première ligne de code nous permet :
 
 1. d'indiquer le nom du nouvel objet dans lequel les données modifiées seront stockées (ici, `peng_adelie`)
 2. d'indiquer de quel objet les données doivent être extraites (`penguins`)
-3. de passer cet objet à la fonction suivante avec un pipe `%>%`
+3. de passer cet objet à la fonction suivante avec un pipe `|>`
 
 Le premier argument de la fonction `filter()` doit être le nom d'un `data.frame` ou d'un `tibble`. Ici, puisque nous utilisons le pipe, il est inutile de spécifier cet argument : c'est ce qui est placé à gauche du pipe qui est utilisé comme premier argument de la fonction `filter()`. Les arguments suivants constituent la ou les conditions qui doivent être respectées par les lignes du tableau de départ afin d'être intégrées au nouveau tableau de données. 
 
@@ -344,7 +348,7 @@ Le premier argument de la fonction `filter()` doit être le nom d'un `data.frame
 Créez un objet nommé `adelie_light` qui contiendra uniquement les données de l'espèce Adélie, et uniquement pour les individus pesant 3700 grammes ou moins. Indice : relisez la @sec-comparaison
 
 ```{r include=FALSE}
-adelie_light <- penguins %>% 
+adelie_light <- penguins |> 
   filter(species == "Adelie",
          body_mass_g <= 3700)
 
@@ -377,7 +381,7 @@ Voyons comment utiliser ces opérateurs avec la fonction `filter()`.
 Dans le tableau `penguins`, quels sont les individus pour lesquels la masse n'a pas été mesurée ? Une bonne façon de le savoir est de regarder si, pour la variable `body_mass_g`, des données manquantes sont présentes :
 
 ```{r, tidy=FALSE}
-penguins %>% 
+penguins |> 
   filter(is.na(body_mass_g))
 ```
 
@@ -387,7 +391,7 @@ Seules les lignes contenant `NA` dans la colonne `body_mass_g` sont retenues. Il
 Dans le même ordre d'idée, y a t-il des individus dont on ne connait pas le sexe mais dont on connait les mesures biométriques (au moins la masse) ? Là encore, une façon d'obtenir cette information est de sélectionner les individus dont le sexe est manquant, mais pour lesquels la masse n'est pas manquante :
 
 ```{r, tidy=FALSE}
-penguins %>% 
+penguins |> 
   filter(is.na(sex),
          !is.na(body_mass_g))
 ```
@@ -395,12 +399,12 @@ penguins %>%
 Notez l'utilisation du `!` pour la seconde condition. Nous récupérons ici les lignes pour lesquelles `body_mass_g` n'est pas `NA` et pour lesquelles `sex` est `NA`. Seules les lignes qui respectent cette double condition sont retenues. Cette syntaxe est équivalente à :
 
 ```{r, tidy=FALSE}
-penguins %>% 
+penguins |> 
   filter(is.na(sex) & !is.na(body_mass_g))
 ```
 
 ```{r, tidy=FALSE, include=FALSE}
-missing_sex <- penguins %>% 
+missing_sex <- penguins |> 
   filter(is.na(sex) & !is.na(body_mass_g))
 ```
 
@@ -411,26 +415,26 @@ Dans la fonction `filter()`, séparer plusieurs conditions par des virgules sign
 Enfin, pour illustrer l'utilisation de `|` (le `OU` logique) et de `%in%`, imaginons que nous souhaitions extraire les informations des individus de l'espèce Adélie qui vivent soit sur l'île Biscoe, soit sur l'île Dream, et dont le bec mesure moins de 42 mm de longueur :
 
 ```{r, tidy = FALSE}
-adel_small <- penguins %>% 
+adel_small <- penguins |> 
   filter(species == "Adelie", 
          island == "Biscoe" | island == "Dream", 
          bill_length_mm < 42)
 adel_small
 ```
 
-Examinez ce tableau avec `View()` pour vérifier que la variable `island` contient bien uniquement les valeur `Biscoe` et `Dream` correspondant aux 2 îles qui nous intéressent. Nous avons extrait ici les individus des îles Biscoe **et** Dream, pourtant, il nous a fallu utiliser le `OU` logique. Car chaque individu n'est issue que d'une unique île, or nous souhaitons récupérer toutes les lignes pour lesquelles l'île est soit `Biscoe`, soit `Dream` (l'une **ou** l'autre). Pour chaque ligne, les deux conditions ne peuvent pas être vraies l'une **et** l'autre en même temps. En revanche, on retient chaque ligne qui remplit la première condition **ou** la seconde.
+Examinez ce tableau avec `View()` pour vérifier que la variable `island` contient bien uniquement les valeurs `Biscoe` et `Dream` correspondant aux 2 îles qui nous intéressent. Nous avons extrait ici les individus des îles Biscoe **et** Dream, pourtant, il nous a fallu utiliser le `OU` logique. Car chaque individu n'est issu que d'une unique île, or nous souhaitons récupérer toutes les lignes pour lesquelles l'île est soit `Biscoe`, soit `Dream` (l'une **ou** l'autre). Pour chaque ligne, les deux conditions ne peuvent pas être vraies l'une **et** l'autre en même temps. En revanche, on retient chaque ligne qui remplit la première condition **ou** la seconde.
 
 Une autre solution pour obtenir le même tableau est de remplacer l'expression contenant `|` par une expression contenant `%in%` :
 
 ```{r, tidy = FALSE}
-adel_small2 <- penguins %>% 
+adel_small2 <- penguins |> 
   filter(species == "Adelie", 
          island %in% c("Biscoe", "Dream"), 
          bill_length_mm < 42)
 adel_small2
 ```
 
-Ici, toutes les lignes du tableau dont la variable `island` est égale à un élément du vecteur `c("Biscoe", "Dream")` sont retenues. L'utilisation du `OU` logique peut être source d'erreur. Je préfère donc utiliser `%in%` qui me semble plus parlant. La fonction `identical()` nous confirme que les deux façons de faire produisent exactement le même résultat, libre à vous de privilégier la méthode qui vous convient le mieux :
+Ici, toutes les lignes du tableau dont la variable `island` est égale à un élément du vecteur `c("Biscoe", "Dream")` sont retenues. L'utilisation du `OU` logique peut être source d'erreur. Je préfère donc utiliser `%in%` qui me semble plus parlant. La fonction `identical()` nous confirme que les deux façons de faire produisent exactement le même résultat. Libre à vous de privilégier la méthode qui vous convient le mieux :
 
 ```{r}
 identical(adel_small, adel_small2)
@@ -451,7 +455,7 @@ Il n'est pas rare de travailler avec des tableaux contenant des centaines, voir 
 
 ```{r, tidy = FALSE}
 # Sélection de variables par leur nom
-penguins %>%
+penguins |>
   select(species, sex, body_mass_g)
 ```
 
@@ -459,7 +463,7 @@ Pour retenir des colonnes qui sont côte à côte dans le tableau de départ, on
 
 ```{r, tidy = FALSE}
 # Sélection de toutes les variables entre `island` et `bill_depth_mm` (inclues)
-penguins %>%
+penguins |>
   select(island:bill_depth_mm)
 ```
 
@@ -468,7 +472,7 @@ penguins %>%
 ```{r, tidy = FALSE}
 # Sélection de toutes les variables de `penguins` à l'exception
 # de celles comprises entre `island` et `bill_depth_mm` (inclues)
-penguins %>%
+penguins |>
   select(-(island:bill_depth_mm))
 ```
 
@@ -483,21 +487,21 @@ Il en existe beaucoup d'autres. Vous pouvez consulter l'aide de `?select()` pour
 Ainsi, il est par exemple possible d'extraire toutes les variables contenant le mot "mm" ainsi :
 
 ```{r, tidy=FALSE}
-penguins %>%
+penguins |>
   select(contains("mm"))
 ```
 
 Évidemment, le tableau `penguins` n'est pas modifié par cette opération : il contient toujours les 8 variables de départ. Pour travailler avec ces tableaux de données contenant moins de variables, il faut les stocker dans un nouvel objet en leur donnant un nom :
 
 ```{r, tidy=FALSE}
-measures <- penguins %>%
+measures <- penguins |>
   select(contains("mm"))
 ```
 
 Enfin, on peut utiliser `select()` pour renommer des variables. Mais ce n'est que rarement utile car `select()` élimine toutes les variables qui n'ont pas été explicitement nommées :
 
 ```{r, tidy=FALSE}
-penguins %>%
+penguins |>
   select(species:island,
          b_length = bill_length_mm,
          flipper = flipper_length_mm)
@@ -506,7 +510,7 @@ penguins %>%
 Il est donc généralement préférable d'utiliser `rename()` pour renommer certaines variables sans en éliminer aucune :
 
 ```{r, tidy=FALSE}
-penguins %>%
+penguins |>
   rename(b_length = bill_length_mm,
          flipper = flipper_length_mm)
 ```
@@ -528,7 +532,7 @@ Voyons un exemple. À partir de `penguins`, nous allons calculer 1 nouvelles var
 2. `mass_kg` : la masse, qui est ici exprimée en grammes sera transformée en kilogrammes par une simple division par 1000
 
 ```{r, tidy=FALSE}
-penguins %>%
+penguins |>
   mutate(ratio = bill_length_mm / bill_depth_mm,
          mass_kg = body_mass_g / 1000)
 ```
@@ -536,7 +540,7 @@ penguins %>%
 Si on souhaite conserver uniquement les variables nouvellement créées par `mutate()`, on peut utiliser `transmute()` :
 
 ```{r, tidy=FALSE}
-penguins %>%
+penguins |>
   transmute(ratio = bill_length_mm / bill_depth_mm,
             mass_kg = body_mass_g / 1000)
 ```
@@ -544,10 +548,12 @@ penguins %>%
 Et comme toujours, pour pouvoir réutiliser ces données, on leur donne un nom :
 
 ```{r, tidy=FALSE}
-pengu_ratio <-  penguins %>%
+pengu_ratio <-  penguins |>
   transmute(ratio = bill_length_mm / bill_depth_mm,
             mass_kg = body_mass_g / 1000)
 ```
+
+### Transformer des variables en facteurs
 
 Une autre opération fréquente possible grâce à la fonction `mutate()` est la transformation d'une ou plusieurs variables d'un tableau en facteur avec la fonction `factor()`. Plusieurs variables du tableau `dauphin`, importé plus tôt, devrait être transformées en facteur :
 
@@ -557,8 +563,8 @@ dauphin
 C'est le cas des variables `Sexe`, `Statut` et `Organe`. Par ailleurs, la variable `ID` pourrait être supprimée puisqu'elle n'apporte aucune information est est parfaitement redondante avec les numéros de ligne du tableau. Voyons comment réaliser toutes ces actions :
 
 ```{r}
-dauphin_clean <- dauphin %>% 
-  select(-ID) %>%                 # Suppression de la colonne ID, puis
+dauphin_clean <- dauphin |> 
+  select(-ID) |>                 # Suppression de la colonne ID, puis
   mutate(Sexe = factor(Sexe),     # Transformation de Sexe en facteur
          Organe = factor(Organe), # Transformation d'Organe en facteur
          Statut = factor(Statut,  # Transformation de Statut en facteur
@@ -591,9 +597,9 @@ Pour le facteur `Statut` en revanche, l'ordre importe, car il reflète des stade
 3. Faîtes un graphique présentant la relation entre la cylindrée en litres et la consommation sur autoroute exprimée en nombre de litres pour 100 kilomètres. Vous exclurez les véhicules dont la `class`e est `2seater` de ce graphique (il s'agit de voitures de sports très compactes qu'il est difficile de mesurer aux autres). Sur votre graphique, la couleur devrait représenter le type de véhicule. Vous ajouterez une droite de régression en utilisant `geom_smooth(method = "lm")`. Votre graphique devrait ressembler à ceci :
 
 ```{r consommation, tidy=FALSE, warning = FALSE, echo = FALSE, fig.cap = "Consommation en fonction de la cylindrée"}
-mpg %>%
-  filter(class != "2seater") %>%
-  mutate(conso = 235.215 / hwy) %>%
+mpg |>
+  filter(class != "2seater") |>
+  mutate(conso = 235.215 / hwy) |>
   ggplot(aes(x = displ, y = conso)) +
   geom_point(aes(color = class)) +
   geom_smooth(method = "lm") +
@@ -607,9 +613,9 @@ mpg %>%
 4. Ce graphique présente-t-il correctement l'ensemble des données de ces 2 variables ? Pourquoi ? Comparez le graphique de la question 3 ci-dessus et le graphique présenté ci-dessous. Selon vous, quels arguments et/ou fonctions ont été modifiés pour arriver à ce nouveau graphique ? Quels sont les avantages et les inconvénients de ce graphique par rapport au précédent ?
 
 ```{r consommation2, tidy=FALSE, warning = FALSE, echo = FALSE, fig.cap="Consommation en fonction de la cylindrée"}
-mpg %>%
-  filter(class != "2seater") %>%
-  mutate(conso = 235.215 / hwy) %>%
+mpg |>
+  filter(class != "2seater") |>
+  mutate(conso = 235.215 / hwy) |>
   ggplot(aes(x = displ, y = conso)) +
   geom_jitter(aes(fill = class), shape=21, width=0.05, height=0.05, alpha = 0.7) +
   geom_smooth(method = "lm") +
@@ -627,19 +633,19 @@ mpg %>%
 knitr::include_graphics('images/arrange.png')
 ```
 
-La fonction `arrange()` permet de trier des tableaux en ordonnant les éléments d'une ou plusieurs colonnes. Les tris peuvent être en ordre croissants (c'est le cas par défaut) ou décroissants (grâce à la fonction `desc()`, abbréviation de "descending").
+La fonction `arrange()` permet de trier des tableaux en ordonnant les éléments d'une ou plusieurs colonnes. Les tris peuvent être en ordre croissants (c'est le cas par défaut) ou décroissants (grâce à la fonction `desc()`, abréviation de "descending").
 
 `arrange()` fonctionne donc comme `filter()`, mais au lieu de sélectionner des lignes, cette fonction change leur ordre. Il faut lui fournir le nom d'un tableau et au minimum le nom d'une variable selon laquelle le tri doit être réalisé. Si plusieurs variables sont fournies, chaque variable supplémentaire permet de résoudre les égalités. Ainsi, pour ordonner le tableau `penguins` par ordre croissant d'épaisseur de bec (`bill_depth_mm`), on tape :
 
 ```{r, tidy = FALSE}
-penguins %>%
+penguins |>
   arrange(bill_depth_mm)
 ```
 
 Notez que la variable `dbill_depth_mm` est maintenant triée en ordre croissant. Notez également que 2 individus ont un bec dont l'épaisseur vaut exactement 13,5 mm. Comparez le tableau précédent avec celui-ci :
 
 ```{r, tidy = FALSE}
-penguins %>%
+penguins |>
   arrange(bill_depth_mm, bill_length_mm)
 ```
 
@@ -648,7 +654,7 @@ Les lignes des 2 individus dont l'épaisseur du bec vaut 13,5 mm ont été inver
 Comme indiqué plus haut, il est possible de trier les données par ordre décroissant :
 
 ```{r, tidy = FALSE}
-penguins %>%
+penguins |>
   arrange(desc(bill_depth_mm))
 ```
 
@@ -659,8 +665,8 @@ Cela est particulièrement utile après l'obtention de résumés groupés (obten
 3. trier les données par effectif décroissant.
 
 ```{r, tidy=FALSE}
-penguins %>%
-  count(species, sex) %>%
+penguins |>
+  count(species, sex) |>
   arrange(desc(n))
 ```
 

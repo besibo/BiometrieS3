@@ -16,7 +16,7 @@ Toutefois, la visualisation seule ne suffit généralement pas. Il est en effet 
 
 Ce n'est qu'en combinant les transformations de données et représentations graphiques d'une part, avec votre curiosité et votre esprit critique d'autre part, que vous serez véritablement en mesure de réaliser une analyse exploratoire de vos données à la fois utile et pertinente. C'est la seule façon d'identifier des questions intéressantes sur vos données, afin de tenter d'y répondre par les analyses statistiques et la modélisation qui seront abordées lors des prochains semestres.
 
-----
+## Prérequis
 
 Dans ce chapitre, nous aurons besoin des packages suivants :
 
@@ -24,19 +24,12 @@ Dans ce chapitre, nous aurons besoin des packages suivants :
 #| message: false
 #| warning: false
 
-library(ggplot2)
-library(dplyr)
+library(tidyverse)
 library(palmerpenguins)
-```
-
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-
 library(nycflights13)
+library(gapminder)
+library(scales)
 ```
-
 
 Si ce n'est pas déjà fait, pensez à les installer avant de les charger en mémoire.
 
@@ -80,19 +73,23 @@ En février 2006, un statisticien du nom de Hans Rosling a donné un TED Talk in
 
 Pour l'année 2007, le jeu de données contient des informations pour 142 pays. Examinons les premières lignes de ce jeu de données :
 
-```{r echo=FALSE, fig.pos="!h", message=FALSE, warning=FALSE}
+```{r}
+#| echo: false
+#| fig-pos: '!h'
+#| message: false
+#| warning: false
+
 library(gapminder)
-library(tidyverse)
-gapminder_2007 <- gapminder %>% 
-  filter(year == 2007) %>% 
-  select(-year) %>% 
-  rename_all(str_to_title) %>% 
+gapminder_2007 <- gapminder |> 
+  filter(year == 2007) |> 
+  select(-year) |> 
+  rename_all(str_to_title) |> 
   rename(`Life Expectancy` = Lifeexp,
          `GDP per Capita` = Gdppercap,
          Population = Pop)
 
-gapminder_2007 %>% 
-  head() %>% 
+gapminder_2007 |> 
+  head() |> 
   knitr::kable(caption = "Les 6 premières lignes du jeu de données `gapminder` pour l'année 2007.", booktabs = TRUE, longtable = TRUE)
 ```
 
@@ -106,7 +103,7 @@ Pour chaque ligne, les variables suivantes sont décrites :
 
 Examinons maintenant la @fig-gapminder qui représente ces variables pour chacun des 142 pays de ce jeu de données (notez l'utilisation de la notation scientifique dans la légende, et de l'échelle logarithmique de l'axe des abscisses).
 
-```{r gapmind}
+```{r}
 #| echo: false
 #| fig-cap: "Espérance de vie en fonction du PIB par habitant en 2007."
 #| label: fig-gapminder
@@ -116,7 +113,7 @@ Examinons maintenant la @fig-gapminder qui représente ces variables pour chacun
 
 library(scales)
 
-gapminder_2007 %>% 
+gapminder_2007 |> 
   ggplot(aes(x = `GDP per Capita`, y = `Life Expectancy`, fill = Continent, 
              size = Population)) + 
   geom_point(color = "grey35", shape = 21) +
@@ -237,7 +234,7 @@ ggplot(penguins, aes(x = body_mass_g, y = bill_length_mm)) +
 ```
 
 
-### Exercices {#sec-Exo-3}
+### Exercices {#sec-exo-3}
 
 1. Donnez une raison pratique expliquant pourquoi les variables `body_mass_g` et `bill_length_mm` ont une relation positive
 2. Quelles variables (pas nécessairement dans le tableau `penguins`) pourraient avoir une corrélation négative (relation négative) avec `body_mass_g` ? Pourquoi ? Rappelez-vous que nous étudions ici des variables numériques.
@@ -259,10 +256,10 @@ Pour chaque situation, un ou des exemples seront fournis à partir des données 
 
 ## Une seule variable numérique
 
-Lorsque l'on souhaite examiner une unique variable numérique, deux types de représentations graphiques sont en général possible :
+Lorsque l'on souhaite examiner une unique variable numérique, deux types de représentations graphiques sont en général possibles :
 
 1. les histogrammes : la variable d'intérêt est placée sur l'axe des `x` du graphique. Les valeurs utilisées sur l'axe des `y` est calculée automatiquement par le logiciel.
-2. les nuages de points : la variable d'intérêt est placée sur l'axe des `y`. L'axe des `x` porte soit un simple numéro d'indice pour chaque observation, soit une unique valeur sans importance.
+2. les nuages de points : la variable d'intérêt est placée sur l'axe des `y`. L'axe des `x` porte soit un simple numéro d'indice pour chaque observation, soit une unique valeur sans importance, la même pour toutes les observations.
 
 Les syntaxes et options pour ces 2 types de graphiques sont présentées ci-dessous.
 
@@ -622,7 +619,7 @@ ggplot(penguins, aes(x = "", y = body_mass_g)) +
 
 Sur cette figure, comme pour le nuage de points réalisé plus haut, j'ai associé la variable `species` à la couleur des points (donc à l'intérieur de `aes()`). J'ai également associé cette variable à la forme des points `shape = species` à l'intérieur de `aes()`. C'est ce qui explique que chacune des 3 espèces apparaît sous la forme de symboles de formes et de couleurs différents. Pour limiter l'overplotting, j'ai spécifié un bruit horizontal, et j'ai fixé le bruit vertical à zéro. Enfin j'ai augmenté la taille des symboles (avec `size = 3`, en dehors de `aes()` car `3` est une constante qui s'appliquera à tous les points du graphique de la même manière) et leur transparence (avec `alpha = 0.6`, toujours en dehors de `aes()` pour la même raison). On constate ici encore que les masses corporelles des manchots Adélie et Chinstrap sont très similaires, et inférieures à celles de l'espèce Gentoo.
 
-### Exercices  {#sec-Exo-4}
+### Exercices  {#sec-exo-4}
 
 1. À quoi sert l'argument `stroke` pour les nuages de points et les stripcharts ?
 
@@ -742,8 +739,8 @@ Ordonner les catégories par ordre décroissant est souvent indispensable afin d
 Si nous souhaitons connaître le nombre précis d'individus de chaque espèce, il nous faut faire appel à plusieurs fonctions du package `dplyr` que nous détaillerons dans le chapitre @sec-wrangling. Ci-dessous, nous créons un nouveau tableau `species_table` contenant le nombre d'individus de chaque espèce et les espèces sont ordonnées par abondance décroissante :
 
 ```{r tidy = FALSE}
-species_table <- penguins %>%   # On prend le tableau penguins, puis...
-  count(species) %>%            # On compte les effectifs de chaque espèce, puis...
+species_table <- penguins |>   # On prend le tableau penguins, puis...
+  count(species) |>            # On compte les effectifs de chaque espèce, puis...
   arrange(desc(n))              # On trie par effectif décroissants ...
 species_table                   # Enfin, on affiche la nouvelle table
 ```
@@ -788,7 +785,7 @@ ggplot(species_table,
 
 
 
-#### Exercices {#sec-Exo-6}
+#### Exercices {#sec-exo-6}
 
 1. Quelle est la différence entre un histogramme et un diagramme bâtons ?
 2. Pourquoi les histogrammes sont-ils inadaptés pour visualiser des données catégorielles ?
@@ -808,9 +805,9 @@ ggplot(species_table,
 #| echo: false
 
 
-penguins %>%
-  count(species, sex) %>%
-  mutate(cat = paste(species, sex, sep = " - ")) %>% 
+penguins |>
+  count(species, sex) |>
+  mutate(cat = paste(species, sex, sep = " - ")) |> 
   ggplot(aes(x = factor(1), y = n, fill = factor(cat))) +
   geom_bar(width = 1, stat = "identity", color = "black") +
   coord_polar(theta = "y") +
@@ -834,9 +831,9 @@ Il est difficile (voir impossible) de répondre précisément à ces questions a
 #| label: fig-bpspecies-sex
 #| fig-cap: "Répartition des effectifs par espèce et par sexe"
 
-penguins %>%
-  count(species, sex) %>%
-  mutate(cat = paste(species, sex, sep = " - ")) %>% 
+penguins |>
+  count(species, sex) |>
+  mutate(cat = paste(species, sex, sep = " - ")) |> 
   ggplot(aes(y = fct_reorder(cat, n, .desc = TRUE), x = n, fill = fct_reorder(cat, n, .desc = TRUE))) +
   geom_col(color = "black", show.legend = FALSE, alpha = 0.5) +
   scale_fill_brewer() +
@@ -978,8 +975,8 @@ ggplot(penguins, aes(x = fct_infreq(species), fill = sex)) +
 L'argument `position = "fill"` de la fonction `geom_bar()` permet de transformer en proportions les abondances de chaque modalités de la variable portée par l'axe des `x`. L'axe des ordonnées varie maintenant entre 0 et 1 (0% et 100%), ce qui rend les comparaisons plus aisées. Ici, le fait que le sexe de quelques individus n'ait pas pu être déterminé vient gêner la lecture du graphique. On peut supprimer ces valeurs grâce à la fonction `filter()` du packages `dplyr`. Nous verrons dans le #sec-wrangling la signification du code suivant. Pour l'instant retenez simplement qu'il permet d'éliminer les individus dont le sexe est inconnu :
 
 ```{r}
-penguins %>% 
-  filter(!is.na(sex)) %>% 
+penguins |> 
+  filter(!is.na(sex)) |> 
   ggplot(aes(x = fct_infreq(species), fill = sex)) +
   geom_bar(alpha = 0.6, color = "black", position = "fill")
 ```
@@ -997,8 +994,8 @@ La seule chose qui a changé est la valeur prise par l'argument `position`, que 
 
 - soit retirer les données manquantes, comme précédemment :
 ```{r}
-penguins %>% 
-  filter(!is.na(sex)) %>% 
+penguins |> 
+  filter(!is.na(sex)) |> 
   ggplot(aes(x = fct_infreq(species), fill = sex)) +
   geom_bar(alpha = 0.6, color = "black", position = "dodge")
 ```
@@ -1214,19 +1211,19 @@ La @fig-comboxplot illustre ces 3 possibilités de visualisation de la distribut
 
 library(patchwork)
 
-pl1 <- penguins %>%
-  filter(species == "Adelie") %>%
+pl1 <- penguins |>
+  filter(species == "Adelie") |>
   ggplot(aes(x = "Adelie", y = body_mass_g)) +
   geom_jitter(width = 0.2, height = 0, alpha = 0.6)
 
-pl2 <- penguins %>%
-  filter(species == "Adelie") %>%
+pl2 <- penguins |>
+  filter(species == "Adelie") |>
   ggplot(aes(x = body_mass_g)) +
     geom_histogram(bins = 15, color = "black", fill = "grey85") +
     coord_flip()
 
-pl3 <- penguins %>%
-  filter(species == "Adelie") %>%
+pl3 <- penguins |>
+  filter(species == "Adelie") |>
   ggplot(aes(x= "Adelie", y = body_mass_g)) +
     geom_boxplot(notch = TRUE)
 
@@ -1316,8 +1313,8 @@ Au final, beaucoup d'informations sont présentées sur ce graphique et c'est pr
 
 ```{r}
 #| echo: false
-penguins %>% 
-  filter(!is.na(sex)) %>% 
+penguins |> 
+  filter(!is.na(sex)) |> 
   ggplot(aes(x = bill_length_mm, 
              y = bill_depth_mm,
              fill = species, 
@@ -1342,9 +1339,9 @@ En particulier, sur ce graphique, il est presque impossible de déterminer la ma
 #| fig-cap: "Relation entre la morphologie du bec, la masse et le sexe chez trois espèces de manchots de l'archipel Palmer"
 #| echo: false
 
-penguins %>% 
-  filter(!is.na(sex)) %>% 
-  mutate(species = str_replace_all(species, "Adelie", "Adélie")) %>% 
+penguins |> 
+  filter(!is.na(sex)) |> 
+  mutate(species = str_replace_all(species, "Adelie", "Adélie")) |> 
   ggplot(aes(x = bill_length_mm, 
              y = bill_depth_mm,
              fill = sex, 
@@ -1409,8 +1406,8 @@ ggplot(penguins, aes(x = bill_depth_mm, y = flipper_length_mm,
 Même sans connaître en détail le principe et les limites de la régression linéaire, vous comprenez j'espère à quel point l'exploration rigoureuse d'un jeu de données est importante. Par exemple, nous avons vu que plus tôt que, pour chaque espèce, les mâles sont plus lourds que les femelles. Est-ce que des différences morphologiques entre les sexes pourraient expliquer la relation que nous observons ici entre épaisseur du bec et longueur des nageoires ? Est-il possible qu'un second effet Simpson se cache dans ces données ? Si on distingue les deux sexes au sein de chaque espèce, la relation existe-t-elle toujours ? Et si oui, est-elle toujours positive ou s'inverse-t-elle à nouveau ? Pour le savoir, on peut utiliser une autre fonction permettant de produire des sous-graphiques, la fonction `facte_grid()`, qui permet de faire un sous graphique pour chaque combinaison de modalités de 2 variables catégorielles :
 
 ```{r}
-penguins %>% 
-  filter(!is.na(sex)) %>%    # Elimine les individus dont le sexe est inconnu
+penguins |> 
+  filter(!is.na(sex)) |>    # Elimine les individus dont le sexe est inconnu
   ggplot(aes(x = bill_depth_mm, y = flipper_length_mm,
                      color = species, shape = sex)) +
   geom_point(show.legend = FALSE) +
@@ -1957,14 +1954,14 @@ Vous devriez donc maintenant être bien armés pour produire 95% des graphiques 
 Quoi qu'il en soit, il est maintenant attendu de vous que vous utilisez `R` et ce que vous avez appris de `ggplot2` pour produire tous les graphiques que vous serez amenés à intégrer à vos comptes-rendus de TP et à vos rapports.
 
 
-## Exercices d'entraînement
+## Exercices
 
 1. Avec le jeu de données `diamonds`, du packages `ggplot2`, tapez les commandes suivantes pour créer un nouveau tableau `diams` contenant moins de lignes (3000 au lieu de près de 54000) :
 
 ```{r tidy = FALSE}
 library(dplyr)
 set.seed(4532) # Afin que tout le monde récupère les mêmes lignes
-diams <- diamonds %>%
+diams <- diamonds |>
   sample_n(3000)
 ```
 
@@ -1992,9 +1989,9 @@ ggplot(data = diams, mapping = aes(x = carat, y = price)) +
 
 ```{r tidy=FALSE}
 set.seed(1234)
-small_flights <- flights %>%
+small_flights <- flights |>
   filter(!is.na(arr_delay),
-         distance < 3000)  %>%
+         distance < 3000)  |>
   sample_n(1000)
 ```
 
@@ -2007,7 +2004,7 @@ En vous appuyant sur les fonctions et les principes de la grammaire des graphiqu
 #| echo: false
 #| warning: false
 
-small_flights %>%
+small_flights |>
   ggplot(aes(x = distance, y = air_time, color = origin, shape = origin)) +
     geom_point(alpha = 0.8) +
     scale_color_brewer(palette = "Set1") +
@@ -2033,7 +2030,7 @@ Quelques indices :
 #| fig-asp: 1
 #| echo: false
 #| warning: false
-small_flights %>%
+small_flights |>
   ggplot(aes(x = factor(month), fill = origin)) +
     geom_bar() +
     facet_wrap(~fct_infreq(carrier), nrow = 4) +
