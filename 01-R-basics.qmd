@@ -269,7 +269,7 @@ Avant de démarrer, quelques précisions :
 
 Il est important de noter que, bien que ces tutoriels sont d'excellentes introductions, une lecture seule, même attentive, est insuffisante pour un apprentissage en profondeur et une rétention à long terme. Il faut pour cela **pratiquer** et **répéter**. Outre les exercices demandés dans DataCamp, que vous devez effectuer directement dans votre navigateur, je vous encourage à prendre des notes, à multiplier les essais, directement dans la console de `RStudio`, ou, de préférence, dans un script que vous annoterez, pour vous assurer que vous avez bien compris chaque partie.
 
-Allez maintenant découvrir [le cours d'introduction à R](https://www.datacamp.com/community/open-courses/introduction-a-r) sur DataCamp, et cliquez sur les liens des chapitres ci-dessous. Au fur et à mesure de votre travail, notez les termes importants et ce à quoi ils font référence.
+Allez maintenant découvrir [le cours d'introduction à R](https://app.datacamp.com/learn/courses/introduction-a-r) sur DataCamp, et cliquez sur les liens des chapitres ci-dessous. Au fur et à mesure de votre travail, notez les termes importants et ce à quoi ils font référence.
 
 - [Chapitre 1 : introduction](https://campus.datacamp.com/courses/introduction-a-r/chapitre-1-introduction?ex=1)
     - La console : l'endroit où vous tapez des commandes
