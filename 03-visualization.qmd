@@ -972,7 +972,7 @@ Ce type de visualisation est utile pour se rendre compte des ordres de grandeur.
 ggplot(penguins, aes(x = fct_infreq(species), fill = sex)) +
   geom_bar(alpha = 0.6, color = "black", position = "fill")
 ```
-L'argument `position = "fill"` de la fonction `geom_bar()` permet de transformer en proportions les abondances de chaque modalités de la variable portée par l'axe des `x`. L'axe des ordonnées varie maintenant entre 0 et 1 (0% et 100%), ce qui rend les comparaisons plus aisées. Ici, le fait que le sexe de quelques individus n'ait pas pu être déterminé vient gêner la lecture du graphique. On peut supprimer ces valeurs grâce à la fonction `filter()` du packages `dplyr`. Nous verrons dans le #sec-wrangling la signification du code suivant. Pour l'instant retenez simplement qu'il permet d'éliminer les individus dont le sexe est inconnu :
+L'argument `position = "fill"` de la fonction `geom_bar()` permet de transformer en proportions les abondances de chaque modalités de la variable portée par l'axe des `x`. L'axe des ordonnées varie maintenant entre 0 et 1 (0% et 100%), ce qui rend les comparaisons plus aisées. Ici, le fait que le sexe de quelques individus n'ait pas pu être déterminé vient gêner la lecture du graphique. On peut supprimer ces valeurs grâce à la fonction `filter()` du packages `dplyr`. Nous verrons dans le @sec-wrangling la signification du code suivant. Pour l'instant retenez simplement qu'il permet d'éliminer les individus dont le sexe est inconnu :
 
 ```{r}
 penguins |> 
