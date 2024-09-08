@@ -6,7 +6,7 @@ book:
   title: "TP de Biométrie<br>Semestre 3<br>"
   author: "Benoît Simon-Bouhet"
   date: now
-  date-format: "dddd D MMMM YYYY"
+  date-format: "D MMMM YYYY"
   search: true
   downloads: pdf
   repo-url: "https://github.com/besibo/BiometrieS3"
