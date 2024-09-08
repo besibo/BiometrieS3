@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -81,7 +81,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "Pas de résultats",
     "search-matching-documents-text": "documents trouvés",
@@ -90,6 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "correspondance de plus dans ce document",
     "search-more-matches-text": "correspondances de plus dans ce document",
     "search-clear-button-title": "Effacer",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Annuler",
     "search-submit-button-title": "Envoyer",
     "search-label": "Recherche"
@@ -102,17 +109,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <body class="nav-sidebar floating">
 
-
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-DataWrangling.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manipuler des tableaux avec `dplyr`</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-DataWrangling.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Manipuler des tableaux avec <code>dplyr</code></span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -138,13 +144,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">TP de Biométrie<br>Semestre 3<br></a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/besibo/BiometrieS3" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./TP-de-Biométrie-br-Semestre-3-br-.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="https://github.com/besibo/BiometrieS3" title="Code source" class="quarto-navigation-tool px-1" aria-label="Code source"><i class="bi bi-github"></i></a>
+    <a href="./TP-de-Biométrie-br-Semestre-3-br-.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -194,7 +200,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -231,6 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
+
 
 
 
@@ -283,7 +290,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/import.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">L’option <code>Import Dataset...</code> dans la fenêtre <code>Files</code> de RStudio</figcaption>
+<figcaption>L’option <code>Import Dataset...</code> dans la fenêtre <code>Files</code> de RStudio</figcaption>
 </figure>
 </div>
 </div>
@@ -294,7 +301,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/import2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">L’assistant d’importation de RStudio</figcaption>
+<figcaption>L’assistant d’importation de RStudio</figcaption>
 </figure>
 </div>
 </div>
@@ -312,7 +319,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/import3.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Les bons réglages pour ce fichier</figcaption>
+<figcaption>Les bons réglages pour ce fichier</figcaption>
 </figure>
 </div>
 </div>
@@ -395,7 +402,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/importcsv1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption class="figure-caption">Importer un fichier <code>.csv</code> depuis l’onglet <code>Files</code> de RStudio</figcaption>
+<figcaption>Importer un fichier <code>.csv</code> depuis l’onglet <code>Files</code> de RStudio</figcaption>
 </figure>
 </div>
 </div>
@@ -406,7 +413,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/importcsv2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Importer un fichier <code>.csv</code> depuis l’onglet <code>Files</code> de RStudio</figcaption>
+<figcaption>Importer un fichier <code>.csv</code> depuis l’onglet <code>Files</code> de RStudio</figcaption>
 </figure>
 </div>
 </div>
@@ -418,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/importcsv3.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<figcaption class="figure-caption">Changement du symbole utilisé pour les décimales</figcaption>
+<figcaption>Changement du symbole utilisé pour les décimales</figcaption>
 </figure>
 </div>
 </div>
@@ -429,7 +436,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/importcsv4.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Les données, dans un format correct permettant l’importation</figcaption>
+<figcaption>Les données, dans un format correct permettant l’importation</figcaption>
 </figure>
 </div>
 </div>
@@ -646,7 +653,11 @@ dbl (6): Id, Taille, Age, Cd, Cu, Hg
 <p>Avec l’objet <code>dauphin</code>, produisez le graphique ci-dessous :</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="04-DataWrangling_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="04-DataWrangling_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Rappel : les droites de régression avec leurs intervalles de confiance sont ajoutés grâce à la fonction <code>geom_smooth(method = "lm")</code>.</p>
@@ -665,14 +676,18 @@ dbl (6): Id, Taille, Age, Cd, Cu, Hg
 </div>
 <p>Travailler avec le pipe est très intéressant car toutes les fonctions de <code>dplyr</code> que nous allons décrire ensuite sont construites autour de la même syntaxe : on leur fournit un <code>data.frame</code> (ou encore mieux, un <code>tibble</code>), elles effectuent une opération et renvoient un nouveau <code>data.frame</code> (ou un nouveau <code>tibble</code>). Il est ainsi possible de créer des groupes de commandes cohérentes qui permettent, grâce à l’enchaînement d’étapes simples, d’aboutir à des résultats complexes.</p>
 <p>De la même façon que le <code>+</code> permet d’ajouter une couche supplémentaire à un graphique <code>ggplot2</code>, le pipe <code>|&gt;</code> permet d’ajouter une opération supplémentaire dans un groupe de commandes.</p>
-<p>Pour reprendre un exemple de la <a href="03-visualization.html#sec-empil"><span>Section&nbsp;3.8.1</span></a> sur les diagrammes bâtons empilés, nous avions utilisé ce code :</p>
+<p>Pour reprendre un exemple de la <a href="03-visualization.html#sec-empil" class="quarto-xref"><span>Section 3.8.1</span></a> sur les diagrammes bâtons empilés, nous avions utilisé ce code :</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex)) <span class="sc">|&gt;</span> </span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(species), <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="04-DataWrangling_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="04-DataWrangling_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Ligne par ligne, voilà la signification de ce code :</p>
@@ -687,7 +702,11 @@ dbl (6): Id, Taille, Age, Cd, Cu, Hg
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins_clean, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(species), <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="04-DataWrangling_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="04-DataWrangling_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>C’est strictement équivalent. La deuxième méthode à l’inconvénient de nous obliger à créer un objet intermédiaire (que j’ai ici nommé <code>penguins_clean</code>). Lorsque l’on a de nombreuses fonctions à enchaîner, il faut donc créer de nombreux objets intermédiaires dont nous n’avons besoin qu’une seule fois, ce qui peut être source de nombreuses erreurs.</p>
@@ -697,7 +716,11 @@ dbl (6): Id, Taille, Age, Cd, Cu, Hg
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(species), <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="04-DataWrangling_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="04-DataWrangling_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Cette fois, on ne crée plus d’objet intermédiaire, mais on intègre directement la fonction <code>filter()</code> à l’intérieur de la fonction <code>ggplot()</code>. Le code devient un peu moins lisible, et quand ça n’est pas deux fonctions mais 4, 5 ou plus que nous devons enchaîner, procéder ainsi est la garantie que des erreurs seront commises et qu’elles seront très difficiles à corriger.</p>
@@ -734,7 +757,7 @@ dbl (6): Id, Taille, Age, Cd, Cu, Hg
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/filter.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<figcaption class="figure-caption">Schéma de la fonction <code>filter()</code> tiré de la ‘cheatsheet’ de <code>dplyr</code> et <code>tidyr</code></figcaption>
+<figcaption>Schéma de la fonction <code>filter()</code> tiré de la ‘cheatsheet’ de <code>dplyr</code> et <code>tidyr</code></figcaption>
 </figure>
 </div>
 </div>
@@ -754,12 +777,12 @@ dbl (6): Id, Taille, Age, Cd, Cu, Hg
 </section>
 <section id="exercice" class="level3" data-number="4.5.2">
 <h3 data-number="4.5.2" class="anchored" data-anchor-id="exercice"><span class="header-section-number">4.5.2</span> Exercice</h3>
-<p>Créez un objet nommé <code>adelie_light</code> qui contiendra uniquement les données de l’espèce Adélie, et uniquement pour les individus pesant 3700 grammes ou moins. Indice : relisez la <a href="01-R-basics.html#sec-comparaison"><span>Section&nbsp;1.3.4.2</span></a></p>
+<p>Créez un objet nommé <code>adelie_light</code> qui contiendra uniquement les données de l’espèce Adélie, et uniquement pour les individus pesant 3700 grammes ou moins. Indice : relisez la <a href="01-R-basics.html#sec-comparaison" class="quarto-xref"><span>Section 1.3.4.2</span></a></p>
 <p>Vérifiez que cet objet contient bien 81 lignes.</p>
 </section>
 <section id="les-conditions-logiques" class="level3" data-number="4.5.3">
 <h3 data-number="4.5.3" class="anchored" data-anchor-id="les-conditions-logiques"><span class="header-section-number">4.5.3</span> Les conditions logiques</h3>
-<p>Dans la <a href="01-R-basics.html#sec-comparaison"><span>Section&nbsp;1.3.4.2</span></a>, nous avons présenté en détail le fonctionnement des opérateurs de comparaison dans <code>R</code>. Relisez cette section si vous ne savez plus de quoi il s’agit. Les opérateurs de comparaison permettent de vérifier l’égalité ou l’inégalité entre des éléments. Ils renvoient <code>TRUE</code> ou <code>FALSE</code> et seront particulièrement utiles pour filtrer des lignes dans un tableau. Voici à nouveau la liste des opérateurs de comparaison usuels :</p>
+<p>Dans la <a href="01-R-basics.html#sec-comparaison" class="quarto-xref"><span>Section 1.3.4.2</span></a>, nous avons présenté en détail le fonctionnement des opérateurs de comparaison dans <code>R</code>. Relisez cette section si vous ne savez plus de quoi il s’agit. Les opérateurs de comparaison permettent de vérifier l’égalité ou l’inégalité entre des éléments. Ils renvoient <code>TRUE</code> ou <code>FALSE</code> et seront particulièrement utiles pour filtrer des lignes dans un tableau. Voici à nouveau la liste des opérateurs de comparaison usuels :</p>
 <ul>
 <li><code>==</code> : égal à</li>
 <li><code>!=</code> : différent de</li>
@@ -901,7 +924,7 @@ dbl (6): Id, Taille, Age, Cd, Cu, Hg
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/select.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<figcaption class="figure-caption">Schéma de la fonction <code>select()</code> tiré de la ‘cheatsheet’ de <code>dplyr</code> et <code>tidyr</code></figcaption>
+<figcaption>Schéma de la fonction <code>select()</code> tiré de la ‘cheatsheet’ de <code>dplyr</code> et <code>tidyr</code></figcaption>
 </figure>
 </div>
 </div>
@@ -1062,7 +1085,7 @@ dbl (6): Id, Taille, Age, Cd, Cu, Hg
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/mutate.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<figcaption class="figure-caption">Schéma de la fonction <code>mutate()</code> tiré de la ‘cheatsheet’ de <code>dplyr</code> et <code>tidyr</code></figcaption>
+<figcaption>Schéma de la fonction <code>mutate()</code> tiré de la ‘cheatsheet’ de <code>dplyr</code> et <code>tidyr</code></figcaption>
 </figure>
 </div>
 </div>
@@ -1226,7 +1249,7 @@ Levels: imm mat pnl pl l repos</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="04-DataWrangling_files/figure-html/consommation-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Consommation en fonction de la cylindrée</figcaption>
+<figcaption>Consommation en fonction de la cylindrée</figcaption>
 </figure>
 </div>
 </div>
@@ -1242,7 +1265,7 @@ Levels: imm mat pnl pl l repos</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="04-DataWrangling_files/figure-html/consommation2-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Consommation en fonction de la cylindrée</figcaption>
+<figcaption>Consommation en fonction de la cylindrée</figcaption>
 </figure>
 </div>
 </div>
@@ -1256,7 +1279,7 @@ Levels: imm mat pnl pl l repos</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/arrange.png" class="img-fluid figure-img" style="width:40.0%"></p>
-<figcaption class="figure-caption">Schéma de la fonction <code>arrange()</code> tiré de la ‘cheatsheet’ de <code>dplyr</code> et <code>tidyr</code></figcaption>
+<figcaption>Schéma de la fonction <code>arrange()</code> tiré de la ‘cheatsheet’ de <code>dplyr</code> et <code>tidyr</code></figcaption>
 </figure>
 </div>
 </div>
@@ -1438,10 +1461,34 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1451,8 +1498,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1464,7 +1520,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1508,6 +1687,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1533,6 +1713,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1590,37 +1796,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          // default icon
-          link.classList.add("external");
-      }
-    }
 });
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./03-visualization.html" class="pagination-link">
+      <a href="./03-visualization.html" class="pagination-link" aria-label="Visualiser des données avec `ggplot2`">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visualiser des données avec <code>ggplot2</code></span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link">
+      <a href="./references.html" class="pagination-link" aria-label="Références">
         <span class="nav-page-text">Références</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 
