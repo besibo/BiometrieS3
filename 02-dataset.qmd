@@ -1,0 +1,183 @@
+# Explorez votre premier jeu de données {#sec-dataset}
+
+## Préambule
+
+Mettons en pratique tout ce que nous avons appris pour commencer à explorer un jeu de données réel. Les données nous parviennent sous différents formats, des images au texte en passant par des tableaux de chiffres. Tout au long de ce document, nous nous concentrerons sur les ensembles de données qui peuvent être stockés dans une feuille de calcul, car il s'agit de la manière la plus courante de collecter des données dans de nombreux domaines. N'oubliez pas ce que nous avons appris dans la @sec-objects : ces ensembles de données de type "tableurs" sont appelés `data.frame` dans `R`, et nous nous concentrerons sur l'utilisation de ces objets tout au long de ce livre. S'il est évidemment possible d'importer dans `R` des données stockées dans des fichiers Excel ou des fichiers textes, nous allons dans un premier temps faire plus simple : nous travaillerons avec des données déjà disponibles dans un packages que nous avons installé dans la @sec-packages.
+
+Ainsi, commençons par charger les packages nécessaires pour ce chapitre (cela suppose que vous les ayez déjà installés ; relisez la @sec-packages pour plus d'informations sur l'installation et le chargement des packages `R` si vous ne l'avez pas déjà fait). Au début de chaque chapitre, nous aurons systématiquement besoin de charger quelques packages. Donc n'oubliez pas de les installer au préalable si besoin.
+
+```{r}
+#| message: false
+#| warning: false
+
+# Pensez à installer ces packages avant de les charger si besoin 
+library(dplyr)
+library(palmerpenguins)
+```
+
+
+
+## Le package `palmerpenguins`
+
+Ce package [@R-palmerpenguins] contient un jeu de données collectées par Kristen Gorman (membre du ``Long Term Ecological Research Network'') et la station de Palmer en Antarctique [@Gorman2014]. Les données contiennent des informations au sujet de 330 individus appartenant à 3 espèces de manchots (voir @fig-ppenguins) étudiés sur 3 îles de l'archipel de Palmer, an Antarctique. Ces espèces ont fait l'objet de nombreuses études comparatives, notamment afin de déterminer comment elles utilisent le milieu pour acquérir des ressources. Puisque ces 3 espèces sont proches sur le plan phylogénétique et qu'elles occupent le même habitat, la question de la compétition inter-spécifique, pour l'espace et les ressources, se pose tout naturellement.
+
+
+![Les 3 espèces de manchots de l'archipel de Palmer. Illustration : Allison Horst](images/Penguins.png){#fig-ppenguins}
+
+
+## Le data frame `penguins`
+
+Nous allons commencer par explorer le jeu de données `penguins` qui est inclus avec le package `palmerpenguins` afin de nous faire une idée de sa structure. Dans votre script, tapez la commande suivante et exécutez la dans la console (selon les réglages de `RStudio` et *la largeur de votre console*, l'affichage peut varier légèrement) :
+
+```{r}
+penguins
+```
+
+Essayons de décrypter cet affichage :
+
+- `A tibble: 344 x 8` : un tibble est un `data.frame` amélioré. Il a toutes les caractéristiques d'un `data.frame`, (tapez `class(penguins)` pour vous en convaincre), mais en plus, il a quelques propriétés intéressantes sur lesquelles nous reviendrons plus tard. Ce `tibble` possède donc :
+    - 344 lignes
+    - 8 colonnes, qui correspondent aux variables. Dans un `tibble`, les observations sont toujours en lignes et les variables en colonnes
+- `species`, `island`, `bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`... sont les noms des colonnes, c'est à dire les variables de ce jeu de données
+- Nous avons ensuite les 10 premières lignes du tableau
+- `... with 334 more rows, and abbreviated variable names...`, nous indique que 334 lignes ne logent pas à l'écran et que le nom de certains variables a été abrégé afin de permettre un affichage plus clair. Ces données font toutefois partie intégrante du tableau `penguins`
+- les noms complets de toutes les variables abrégées sont également indiqués
+
+Cette façon d'afficher les tableaux est spécifique des `tibble`s. Vous noterez que le type de chaque variable est indiqué entre `<...>`, juste sous les noms de colonnes. Voici certains des types de données que vous pourrez rencontrer :
+
+- `<int>` : nombres entiers ("integers")
+- `<dbl>` : nombres réels ("doubles")
+- `<chr>` : caractères ("characters")
+- `<fct>` : facteurs ("factors")
+- `<ord>` : facteurs ordonnés ("ordinals")
+- `<lgl>` : logiques (colonne de vrais/faux : "logical")
+- `<date>` : dates
+- `<time>` : heures
+- `<dttm>` : combinaison de date et d'heure ("date time")
+
+Cette façon d'afficher le contenu d'un tableau permet d'y voir (beaucoup) plus clair que l'affichage classique d'un `data.frame`. Malheureusement, ce n'est pas toujours suffisant. Voyons quelles sont les autres méthodes permettant d'explorer un `data.frame`.
+
+
+
+## Explorer un `data.frame`
+
+Parmi les nombreuses façons d'avoir une idée des données contenues dans un `data.frame` tel que `penguins`, on présente ici 3 fonctions qui prennent le nom du `data.frame` en guise d'argument, et un opérateur :
+
+- la fonction `View()` intégrée à `RStudio`. C'est celle que vous utiliserez le plus souvent. Attention, elle s'écrit avec un "V" majuscule
+- la fonction `glimpse()` chargée avec le package `dplyr`. Elle est très similaire à la fonction `str()` découverte dans les tutoriels de DataCamp
+- l'opérateur `$` permet d'accéder à une unique variable d'un `data.frame`
+- la fonction `skim()` du package `skimr` permet d'obtenir un résumé complet mais très synthétique et visuel des variables d'un `data.frame`
+
+### `View()` {#sec-View}
+
+Tapez `View(penguins)` dans votre script et exécutez la commande. Un nouvel onglet contenant ce qui ressemble à un tableur doit s'ouvrir.
+
+:::{.callout-tip}
+## Quizz : à quoi correspondent chacune des lignes de ce tableau ?
+
+a. aux données d'une espèce
+a. aux données d'une île
+a. aux données d'un individu
+a. aux données d'une population (plusieurs manchots à la fois)
+:::
+
+Ici, vous pouvez donc explorer la totalité du tableau, passer chaque variable en revue, et même appliquer des filtres pour ne visualiser qu'une partie des données. Par exemple, essayez de déterminer combien d'individus sont issus de l'île "Biscoe". 
+
+Ce tableau n'est pas facile à manipuler. Il est impossible de corriger des valeurs, et lorsque l'on applique des filtres, il est impossible de récupérer uniquement les données filtrées. Nous verrons plus tard comment les obtenir en tapant des commandes simples dans un script. La seule utilité de ce tableau est donc l'exploration visuelle des données.
+
+
+### `glimpse()`
+
+La seconde façon d'explorer les données contenues dans un tableau est d'utiliser la fonction `glimpse()` après avoir chargé le package `dplyr` :
+
+```{r}
+glimpse(penguins)
+```
+
+Ici, les premières observations sont présentées en lignes pour chaque variable du jeu de données. Là encore, le type de chaque variable est précisé. Essayez d'identifier 3 variables catégorielles. À quoi correspondent-elles ? En quoi sont-elles différentes des variables numériques ?
+
+
+### L'opérateur `$`
+
+L'opérateur `$` permet d'accéder à une unique variable grâce à son nom. Par exemple on peut accéder à toutes les données concernant les noms d'espèces (variable `species` du tableau `penguins`) en tapant :
+
+```{r}
+penguins$species
+```
+
+Cela nous permet de récupérer les données sous la forme d'un vecteur ou, comme ici, d'un facteur. Attention toutefois, le tableau `penguins` contient beaucoup de lignes. Récupérer une variable grâce à cet opérateur peut rapidement saturer la console. Nous serons amenés à manipuler des tableaux contenant plusieurs dizaines ou centaines de milliers de lignes. C'est le cas du tableau `diamonds` du package `ggplot2` que vous avez découvert dans les exercice de la @sec-exo-1.
+
+Si, par exemple, vous souhaitez extraire les données relatives à la clarté des diamants (colonne `clarity`) du tableau `diamonds`, vous pouvez taper ceci :
+
+```{r eval=FALSE}
+library(ggplot2)
+diamonds$clarity
+```
+
+Le résultat est pour le moins indigeste ! Lorsqu'un tableau contient de nombreuses lignes, c'est rarement une bonne idée de transformer l'une de ses colonnes en vecteur. Dans la mesure du possible, les données d'un tableau doivent rester dans le tableau.
+
+
+### `skim()`
+
+Pour utiliser la fonction `skim()`, vous devez au préalable installer le package `skimr` :
+
+```{r eval=FALSE}
+install.packages("skimr")
+```
+
+Ce package est un peu "expérimental" et il se peut que l'installation pose problème. Si un message d'erreur apparaît lors de l'installation, procédez comme suit :
+
+1. Quittez `RStudio` (sans oublier de sauvegarder votre travail au préalable)
+2. Relancez `RStudio` et dans la console, tapez ceci :
+
+```{r eval=FALSE}
+install.packages("rlang")
+```
+
+3. Tentez d'installer `skimr` à nouveau.
+4. Exécutez à nouveau tout votre script afin de retrouver votre travail dans l'état où il était avant de quitter `RStudio`.
+
+Si l'installation de `skimr` s'est bien passée, vous pouvez maintenant taper ceci :
+
+```{r}
+#| results: asis
+
+library(skimr)
+skim(penguins)
+```
+
+Nous aurons l'occasion de revenir en détail sur la signification de tous ces indices au semestre prochain. À ce stade, retenez que cette fonction `skim()` permet d'accéder à un résumé très détaillé de chaque variable d'un jeu de données. Par exemple, on apprend ici que la masse corporelle moyenne des manchots de l'ensemble du jeu de données vaut 4201.75 grammes (ligne `body_mass_g`, colonne `mean`), avec un écart-type de 0.82 grammes (colonne `sd`), et que la masse de 2 individus est manquante (colonne `n_missing`). Cette fonction nous sera donc très utile au semestre prochain lorsque nous aborderons la question des statistiques descriptives.
+
+
+
+### Les fichiers d'aide
+
+Une fonctionnalité particulièrement utile de `R` est son système d'aide. On peut obtenir de l'aide au sujet de n'importe quelle fonction et de n'importe quel jeu de données en tapant un "`?`" immédiatement suivi du nom de la fonction ou de l'objet.
+
+Par exemple, examinez l'aide du jeu de données `penguins` :
+
+```{r eval=FALSE, tidy=FALSE}
+?penguins
+```
+
+Vous devriez absolument prendre l'habitude d'examiner les fichiers d'aide des fonctions ou jeux de données pour lesquels vous avez des questions. Ces fichiers sont très complets, et même s'il peuvent paraître impressionnants au premier abord, ils sont tous structurés sur le même modèle et vous aideront à comprendre comment utiliser les fonctions, quels sont les arguments possibles, à quoi ils servent et comment les utiliser.
+
+Prenez le temps d'examiner le fichier d'aide du jeu de données `penguins`. Avant de passer à la suite, assurez-vous d'avoir compris à quoi correspondent chacune des 8 variables de ce tableau.
+
+
+## Exercice {#sec-exo-2}
+
+Consultez l'aide du jeu de données `diamonds` du package `ggplot2`.
+
+- Quel est le code de la couleur la plus prisée ?
+- Quel est le code de la moins bonne clarté ?
+- À quoi correspond la variable `z` ?
+- En quoi la variable `depth` est-elle différente de la variable `z` ?
+
+
+<!-- Consultez l'aide du package `nycflights13` en tapant `help(package="nycflights13")`. -->
+
+<!-- - Consultez l'aide des 5 jeux de données de ce package.  -->
+<!-- - À quoi correspond la variable `visib` ?  -->
+<!-- - Dans quel tableau se trouve-t'elle ?  -->
+<!-- - Combien de lignes possède ce tableau ? -->

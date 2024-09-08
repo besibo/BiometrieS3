@@ -1,0 +1,569 @@
+---
+title: "Correction des exercices"
+author: "Benoît Simon-Bouhet"
+date: now
+lang: fr
+format:
+  html:
+    theme: MyUnited.scss
+    highlight-style: solarized
+    # code-tools: 
+    #   source: false
+    #   toggle: true
+    # code-fold: show
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
+    code-depth: 5
+    smooth-scroll: true
+    self-contained: true
+---
+
+
+# Chapitre 1
+
+## Exercice 1.5
+
+*Dans votre dossier de travail, créez un nouveau script que vous nommerez `ExoDiamonds.R`. Vous prendrez soin d'ajouter autant de commentaires que nécessaire dans votre script afin de le structurer correctement.*
+
+1. *Téléchargez (si besoin) et chargez le package `ggplot2`*
+
+```{r}
+# Pour installer ggplot2 dé-commenter la ligne ci-dessous, si nécéssaire seulement
+# install.packages("ggplot2")
+
+# chargement du package
+library(ggplot2)
+```
+
+2. *Chargez le jeu de données `diamonds` grâce à la commande `data(diamonds)`*
+
+```{r}
+# chargement des données
+data(diamonds)
+```
+
+3. *Déterminez le nombre de lignes et de colonnes de ce tableau nommé `diamonds`*
+
+```{r}
+# Nombre de lignes et de colonnes du tableau diamonds
+str(diamonds)
+
+# ou
+dim(diamonds)
+
+# ou
+nrow(diamonds)  # Nombre de lignes
+ncol(diamonds)  # Nombre de colonnes
+
+# Ou, puisque c'est un tibble, on l'affiche simplement dans la console
+diamonds
+```
+
+4. *Créez un nouveau tableau que vous nommerez `diamants_chers` qui contiendra uniquement les informations des diamants dont le prix est supérieur ou égal à $15000.*
+
+```{r}
+# Nouveau tableau contenant uniquement les diamants de plus de 15000$
+diamants_chers <- subset(diamonds, price > 15000)
+```
+
+5. *Combien de diamants coûtent $15000 ou plus ?*
+
+```{r}
+# Combien de diamants valent plus de 15000$ ?
+# C'est la même question qu'à la question 3 ci-dessus, mais avec le tableau diamants_chers
+nrow(diamants_chers)
+diamants_chers
+
+# On peut aussi faire ceci, à partir du tableau de départ
+sum(diamonds$price > 15000, na.rm = TRUE)
+```
+
+6. *Cela représente quelle proportion du jeu de données de départ ?*
+
+```{r}
+# Proportion des diamants de depart qui valent plus de 15000$
+nrow(diamants_chers) / nrow(diamonds)
+
+# Ou
+mean(diamonds$price > 15000, na.rm = TRUE)
+```
+
+7. *Triez ce tableau par ordre de prix décroissants et affichez les informations des 20 diamants les plus chers.*
+
+
+```{r}
+# Identification des permutations à effectuer pour trier diamants_chers par ordre
+# de prix décroissants
+permut <- order(diamants_chers$price, decreasing = TRUE)
+
+# Tableau diamants_chers ré-ordonné par ordre de prix décroissant
+diam_tri <- diamants_chers[permut, ]
+
+# Attention a ne pas oublier la virgule à la fin entre les crochets: 
+# On réordonne les lignes (permut est placé avant la virgule) et on 
+# récupère toutes les colonnes (on ne met rien après la virgule)
+
+# Affichage des infos sur les 20 diamants les plus chers
+diam_tri[1:20,]
+
+# Ou
+head(diam_tri, n = 20)
+```
+
+
+# Chapitre 2
+
+## Exercice 2.5
+
+*Consultez l'aide du jeu de données `diamonds` du package `ggplot2`.*
+
+```{r}
+# Le jeu de donnée diamonds fait partie du package ggplot2, il faut donc 
+# charger le package en mémoire
+library(ggplot2) 
+
+# Chargement du jeu de données
+data(diamonds)
+
+# Consultation de l'aide du jeu de données
+?diamonds
+```
+
+Il suffit maintenant de lire les informations du fichier d'aide
+
+- *Quel est le code de la couleur la plus prisée ?*
+
+La couleur la plus prisée porte le code "D"
+
+- *Quel est le code de la moins bonne clarté ?*
+
+La moins bonne clarté porte le code "I1"
+
+- *À quoi correspond la variable `z` ?*
+
+`z` correspond à la hauteur/profondeur des diamants en millimètres
+
+- *En quoi la variable `depth` est-elle différente de la variable z ?*
+
+`depth` correspond au rapport (en %) entre la profondeur et les autres dimensions (hauteur et largeur) du diamant : `depth = (2 * z) / (x + y)`. Cette variable renseigne donc sur la forme des diamants, plus que sur leur taille.
+
+
+# Chapitre 3
+
+## Exercice 3.2.6
+
+1. *Donnez une raison pratique expliquant pourquoi les variables `body_mass_g` et `bill_length_mm` ont une relation positive*
+
+```{r}
+#| fig-align: center
+
+# installation des packages (si besoin)
+# install.packages("ggplot2")
+# install.packages("dplyr")
+# install.packages("palmerpenguins")
+
+# chargement des packages
+library(ggplot2)
+library(dplyr)
+library(palmerpenguins)
+
+# Visualisation de la relation entre masse et longueur du bec
+ggplot(data = penguins, mapping = aes(x = body_mass_g, y = bill_length_mm)) +
+  geom_point()
+```
+
+Notion d'allométrie : un manchot "plus grand" va avoir tendance à peser plus lourd, mais aussi à avoir un plus grand bec, de plus grandes nageoires, etc. Ces variations peuvent s'observer entre espèces ou entre individus d'une même espèce!
+
+2. *Quelles variables (pas nécessairement dans le tableau `penguins`) pourraient avoir une corrélation négative (relation négative) avec `body_mass_g` ? Pourquoi ? Rappelez-vous que nous étudions ici des variables numériques.*
+
+La température moyenne de l'environnement où ils vivent (règle de Bergmann : les individus qui vivent dans des environnements plus froids ont tendance à être plus gros).
+
+Si des données sur le comportement étaient disponibles, le temps passé à jeûner au nid en attendant le retour du partenaire pourrait aussi corréler négativement avec la masse corporelle
+
+3. *Citez les éléments de ce graphique/de ces données qui vous sautent le plus aux yeux ?*
+
+- On note, comme attendu une relation à peu près linéaire et positive
+- La masse est très variable entre 3 et 6.5kg, avec toutes les valeurs intermédiaires possibles
+- Idem pour la longueur du bec, entre 30 et 60mm
+- Pour les manchots les plus légers, il semble y avoir 2 groupes de points : un groupe avec des becs de faible longueur, un groupe avec des becs plus longs. Il nous faudrait plus d'informations pour savoir d'où provient cette variabilité : est-elle liée au sexe ? Aux espèces ?
+
+
+4. *Créez un nouveau nuage de points en utilisant d'autres variables du jeu de données `penguins`*
+
+
+```{r}
+#| fig-align: center
+
+# Pour tester l'hypothèse d'allométrie, on regarde le lien entre la taille de
+# deux autres parties du corps : Hauteur du bec et longueur des ailerons
+ggplot(data = penguins, mapping = aes(x = bill_depth_mm, y = flipper_length_mm)) +
+  geom_point()
+
+# Dans cette relation on remarque une forte bimodalité : le nuage de points 
+# se scinde en deux groupes bien distincts, avec une relation positive dans 
+# chacun de ces sous-groupes. Celà semble confirmer l'hypothèse d'allométrie 
+# (relation positive générale) mais pointe à des hétérogénéités fortes dans
+# le jeu de données, qu'il va falloir comprendre.
+
+# On peut aussi mettre en relation la longueur et l'épaisseur du bec des manchots
+ggplot(data = penguins, mapping = aes(x = bill_depth_mm, y = bill_length_mm)) +
+  geom_point()
+
+# La relation entre ces 2 variables est ici moins évidente. Il semble toutefois 
+# y avoir plusieurs groupes de points (à gauche, en bas à droite, en haut à droite)
+# Là encore, il nous faudrait plus d'informations pour savoir si ces groupes
+# correspondent à des différences d'espèces, à des différences entre sexes
+# où à toute autre chose.
+```
+
+
+## Exercice 3.4.3
+
+1. *À quoi sert l'argument `stroke` pour les nuages de points et les stripcharts ?*
+
+```{r}
+# installation des packages (si besoins)
+# install.packages("ggplot2")
+# install.packages("dplyr")
+# install.packages("palmerpenguins")
+
+# chargement des packages
+library(ggplot2)
+library(dplyr)
+library(palmerpenguins)
+```
+
+On sait que les nuages de points sont appelés par la fonction `geom_point()` ou par `geom_jitter()`. On peut donc commencer par consulter l'aide de `geom_point()` :
+
+```{r}
+#| eval: false
+?geom_point
+```
+
+L'argument `stroke` est mentionné dans le paragraphe `Aesthetics` de l'aide, sans plus d'explication, mais dans la rubrique `Examples`, on trouve ceci :
+
+```{r}
+#| fig-align: center
+
+# For shapes that have a border (like 21), you can colour the inside and
+# outside separately. Use the stroke aesthetic to modify the width of the
+# border
+ggplot(mtcars, aes(wt, mpg)) +
+  geom_point(shape = 21, colour = "black", fill = "white", size = 5, stroke = 5)
+```
+
+L'argument `stroke` sert donc à modifier l'épaisseur du contour de certains symboles, en particulier ceux dont on peut spécifier la couleur de fond et la couleur de contour (symboles 21 à 25 de la figure 3.4).
+
+2. *Créez de nouveaux graphiques (histogramme et diagramme de densité) avec la variable contenant l'information de la longueur des nageoires des manchots `flipper_length_mm`. Décrivez les graphiques obtenus. Vos observations sont-elles cohérentes avec ce que nous savons maintenant des masses individuelles ?*
+
+```{r}
+#| fig-align: center
+
+ggplot(penguins, aes(x = flipper_length_mm)) +
+  geom_histogram(aes(y = ..density..), bins = 25,
+                 fill = "steelblue", color = "black") +
+  geom_density(color = "orange", size = 1.5) +
+  geom_rug(alpha = 0.3)
+```
+
+On retrouve bien une distribution bimodale, avec un pic à 190mm et un autre à 215mm. Les valeurs de rug semblent très concentrées sur quelques valeurs: les mesures sont précises au millimètre près, pas en dessous. Cette distribution correspond à peu près à celle de la masse corporelle
+
+3. *Visualisez ces données avec un nuage de points ou un stripchart. Retrouvez-vous les mêmes informations de distribution ?*
+
+```{r}
+#| fig-asp: 1.5
+#| fig-width: 3
+#| fig-align: center
+
+ggplot(penguins, aes(x = "", y = flipper_length_mm)) +
+  geom_jitter(width = 0.1, height = 0)
+```
+
+On constate là encore 2 groupes de points : l'un centré autour de longueur de nageoires de 190 millimètres environ, et l'autre autour de 220 millimètres environ. L'étendue des valeurs est lisible également (environ 170 à 230 millimètres). Au final, on retrouve à peu près les mêmes informations qu'avec l'histogramme, même si la bimodalité est plus difficile à détecter. On peut néanmoins aller plus loin :
+
+```{r}
+#| fig-asp: 1.5
+#| fig-width: 3
+#| fig-align: center
+
+ggplot(penguins, aes(x = "", y = flipper_length_mm, color = species)) +
+  geom_jitter(width = 0.1, height = 0)
+```
+
+On voit ici que l'espèce Gentoo a des longueurs de nageoires supérieures aux deux autres espèces. Adélie et Chinstrap présentent des valeurs comparables, même si Chinstrap semble présenter des longueurs de nageoires légèrement plus importantes.
+
+
+## Exercice 3.5.1.3
+
+1. *Quelle est la différence entre un histogramme et un diagramme bâtons ?*
+
+Les deux présentent des "barres de comptage" (un des axes présente un nombre d'observations par catégories ou par classe, en général l'axe des ordonnées). la différence tient à la nature des données utilisées pour les catégories :
+
+- sur un diagramme bâtons on utilise une variable catégorielle (par exemple l'espèce, ou le sexe). En général, il s'agit de facteurs (`factor` dans `RStudio`).
+- sur un histogramme on utilise une variable continue, qu'on découpe en classes plus ou moins arbitrairement (par exemple avec les arguments `bins`, `binwidth` ou `breaks` de la fonction `geom_histogram()`)
+ 
+On peut remarquer cette différence sur les graphiques :
+- sur un diagramme bâtons ce n'est pas un problème de réordonner les barres, ni d'espacer les barres les unes des autres : les trous entre les barres n'apportent pas d'information
+- sur un histogramme on ne peut pas réordonner les barres, et elles sont collées les unes aux autres : un "espace" indique une absence d'observations de cette gamme de valeurs
+
+2. *Pourquoi les histogrammes sont-ils inadaptés pour visualiser des données catégorielles ?*
+
+Parce que les histogrammes sont fait pour catégoriser arbitrairement des données continues. On peut faire varier manuellement (ou laisser `RStudio` déterminer automatiquement) la largeur des catégories. Par ailleurs, les barres d'un histogramme sont collées les unes aux autres ce qui donne une impression visuelle de continuité. Enfin, les barres ne peuvent pas être ré-ordonnées, ce qui est souvent nécessaire pour une variable catégorielle.
+
+3. *Pourquoi ne peut-on pas trier un histogramme par ordre croissant ?*
+
+L'ordre des catégories de l'axe des abscisses d'un histogramme est déterminé par les valeurs d'une variable numérique. En ré-ordonnant les classes, on casserait la fonction première de l'histogramme, qui montre comment les observations se répartissent pour des valeurs croissantes de la variable numérique portée par l'axe des abscisses.
+
+4. *Quelle île de l'archipel Palmer a fourni le plus grand nombre de manchots pour cette étude ? *
+
+On souhaite compter le nombre d'individus pour chaque île étudiée. La variable qui sera portée par l'axe des `x` est donc catégorielle (colonne `island` du tableau `penguins`), on fait donc un diagramme bâtons :
+
+```{r}
+# Installation des packages (si besoin)
+# install.packages("ggplot2")
+# install.packages("dplyr")
+# install.packages("palmerpenguins")
+
+# chargement des packages
+library(ggplot2)
+library(forcats)
+library(palmerpenguins)
+
+ggplot(penguins, aes(x = fct_infreq(island))) +
+  geom_bar(fill = "steelblue")
+```
+Ici, on utilise `geom_bar()` (et non `geom_col()`), car on ne dispose pas d'un tableau qui répertorie déjà dans une colonne le nombre de manchots par îles. Les données ne sont pas déjà pré-comptées.
+
+
+## Exercice 3.11
+
+```{r}
+# installation des packages (si pas déjà installés)
+# install.packages("ggplot2")
+# install.packages("dplyr")
+
+library(ggplot2)
+```
+
+*Question 1* 
+
+```{r}
+library(dplyr)
+set.seed(4532) # Afin que tout le monde récupère les mêmes lignes
+diams <- diamonds %>%
+  sample_n(3000)
+```
+
+
+*Question 2*
+
+```{r}
+# Affichage des données
+diams
+
+# Graphique
+ggplot(diams, aes(x = carat, y = price, colour = clarity)) +
+  geom_point(shape = 4) +
+  labs(x = "Carat",
+       y = "Prix ($US)",
+       colour = "Clarté") +
+  theme_bw()
+```
+
+*Question 3* 
+
+Elles sont dues au fait que de nombreuses valeurs de carats sont arrondies. C'est ici dû à une tendance à arrondir au carat "rond" immédiatement supérieur (2 au lieu de 1.98, 1.7 au lieu de 1.69, etc), car la valeur marchande dépend du carat, et un diamant de 2 carats peut être vendu bien plus cher qu'un diamant de 1.98 carat.
+
+
+*Question 4*
+
+```{r}
+# install.packages("nycflights13")
+
+library(nycflights13)
+```
+
+*Question 5*
+
+```{r}
+#| eval: false
+# Afficher le tableau flights
+flights
+
+# Afficher l'aide du tableau flights
+help(flights)
+
+# ou
+?flights
+```
+
+
+*Question 6*
+
+```{r}
+# Nouveau jeu de données
+set.seed(1234)
+small_flights <- flights %>%
+  filter(!is.na(arr_delay),
+         distance < 3000)  %>%
+  sample_n(1000)
+```
+
+
+*Question 7*
+```{r}
+# Visualisation du jeu de données réduit
+View(small_flights)
+
+# code pour reproduire le graphique indiqué
+ggplot(small_flights, 
+       aes(x = distance, y = air_time, colour = origin, shape = origin)) +
+  geom_point( alpha = 0.8) +
+  scale_colour_brewer(palette = "Set1") +
+  labs(title = "Relation entre le temps de vol et la distance parcourue",
+       subtitle = "Seuls les vols au départ de JFK et Newark parcourent plus de 1600 miles",
+       x = "Distance parcourue en vol (miles)",
+       y = "Temps de vol (minutes)",
+       caption = "Données : small_flights",
+       colour = "Aéroport de\nNew York",
+       shape = "Aéroport de\nNew York") +
+  theme_bw()
+```
+
+
+*Question 8*
+
+```{r}
+#| fig-asp: 1
+
+# install.packages("forcats")
+library(forcats)
+
+ggplot(small_flights, aes(x = factor(month), fill = origin)) +
+  geom_bar() +
+  facet_wrap(~fct_infreq(carrier)) +
+  scale_fill_brewer(palette = "Accent") +
+  labs(title = "Évolution mensuelle du trafic aérien New Yorkais en 2013",
+       subtitle = "Seules 9 compagnies aériennes sur 14 ont déservi New York toute l'année",
+       x = "Mois de l'année 2013",
+       y = "Nombre de vols",
+       caption = "Données : small_flights",
+       fill = "Aéroport de\nNew York") +
+  theme_bw()
+```
+
+# Chapitre 4
+
+On commence par charger les packages en mémoire si besoin, puis par importer les données.
+
+```{r}
+# Mise en mémoire des packages
+library(dplyr)
+library(ggplot2)
+library(readxl)
+library(palmerpenguins)
+
+# Importation des données
+dauphin <- read_excel("dauphin.xls", na = "*", skip = 9)
+
+# Modification des noms de variables
+names(dauphin) <- c("ID", "Sexe", "Statut", "Taille",
+                    "Age", "Cd", "Cu", "Hg", "Organe")
+```
+
+
+## Exercice 4.2.5
+
+```{r}
+ggplot(dauphin, aes(Age, Hg, colour = Sexe)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(~ Organe, ncol = 1, scales = "free_y") +
+  labs(title = "Évolution de la concentration en Hg avec l'âge chez Delphinus delphis",
+       x = "Âge (années)",
+       y = "Concentration en mercure (mg/kg)",
+       caption = "Donn?es : dauphin.xls") +
+  theme_bw()
+```
+
+
+## Exercice 4.5.2
+
+```{r}
+adelie_light <- penguins %>%
+  filter(species == "Adelie",
+         body_mass_g <= 3700)
+
+adelie_light
+```
+
+## Exercice 4.7.2
+
+*Question 1* :
+
+```{r}
+library(ggplot2)
+View(mpg)
+help(mpg)
+```
+
+Les variables `cty` ("city miles per gallon") et `hwy` ("highway miles per gallon") nous renseignent sur la consommation des véhicules. La variable `displ` représente la cylindrée (volume du moteur), en litres ("engine displacement, in litres")
+
+*Question 2* :
+
+En considérant qu'il s'agit de gallons américains (1 gallon = 3,78541 litres), et que 1 mile = 1,60934 km :
+
+```{r}
+mpg <- mpg %>%
+  mutate(conso = (3.78541 / 1.60934 * 100) / hwy)
+
+mpg
+```
+
+*Question 3* :
+
+```{r}
+mpg %>%
+  filter(class != "2seater") %>%
+  ggplot(aes(x = displ, y = conso)) +
+  geom_point(aes(colour = class)) +
+  geom_smooth(method = "lm") +
+  labs(title = "Relation positive entre cylindrée et consommation",
+       x = "Cylindrée (volume du moteur en litres)",
+       y = "Consommation (litres pour 100 kilomètres)",
+       colour = "Type de\nvéhicule") +
+  theme_minimal()
+```
+
+*Question 4* :
+
+Ce graphique masque les données répétées : s'il y a deux points avec les mêmes valeurs pour x et pour y, on ne peut pas le voir. Il faut remplacer `geom_point()` par `geom_jitter()` pour que les points qui se superposent apparaissent côte à côte. On peut en outre changer la forme des points en ajoutant `shape = 21`, et utiliser `fill = class` au lieu de `colour = class`, car c'est maintenant l'intérieur des points qui est coloré et non leur contour (la symbole 21 permet de distinguer couleur de remplissage et couleur de contour).
+
+Cela donne le code ci-dessous :
+
+```{r}
+mpg %>%
+  filter(class != "2seater") %>%
+  ggplot(aes(displ, conso)) +
+  geom_jitter(aes(fill = class), shape = 21) +
+  geom_smooth(method = "lm") +
+  labs(title = "Relation positive entre cylindrée et consommation",
+       x = "Cylindrée (volume du moteur en litres)",
+       y = "Consommation (litres pour 100 kilomètres)",
+       fill = "Type de\nvéhicule") +
+  theme_minimal()
+
+```
+
+L'avantage de ce nouveau graphique est qu'il permet de voir tous les points. L'inconvénient est que pour voir tous les points, il a fallu modifier légèrement toutes les valeurs pour les 2 variables (cylindrée et consommation).
+
+
+
+
+
+
+
+
+
+
+

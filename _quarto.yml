@@ -1,0 +1,54 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "TP de Biométrie<br>Semestre 3<br>"
+  author: "Benoît Simon-Bouhet"
+  date: now
+  date-format: "dddd D MMMM YYYY"
+  search: true
+  downloads: pdf
+  repo-url: "https://github.com/besibo/BiometrieS3"
+  chapters:
+    - index.qmd
+    - 01-R-basics.qmd
+    - 02-dataset.qmd
+    - 03-visualization.qmd
+    - 04-DataWrangling.qmd
+    - references.qmd
+
+bibliography: all.bib
+lang: fr
+title-block-banner: true
+reference-location: margin
+
+language: 
+  title-block-author-single: "Auteur"
+  title-block-published: "Dernière Mise à jour"
+
+format:
+  html:
+    theme: MyUnited.scss
+    highlight-style: solarized
+    # code-tools: 
+    #   source: false
+    #   toggle: true
+    # code-fold: show
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
+    code-depth: 5
+    smooth-scroll: true
+    link-external-icon: true
+    link-external-newwindow: true
+  pdf:
+    documentclass: scrreprt
+    papersize: a4
+    highlight-style: github
+    code-block-bg: false
+    code-block-border-left: "#31BAE9"
+    code-depth: 5
+    colorlinks: true
+    include-in-header: preamble.tex
+
+
