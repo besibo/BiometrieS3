@@ -39,14 +39,14 @@ Ce livre contient l'ensemble du matériel (contenus, exemples, exercices...) né
 
 Les 4 grands chapitres de ce livre correspondent aux 3 objectifs principaux de ces séances de TP et TEA :
 
-1. **Vous faire découvrir les logiciels [R](https://cran.r-project.org) et [Rstudio](https://www.rstudio.com)** (@sec-basics et @sec-dataset) dans lesquels vous allez passer beaucoup de temps en licence puis en master. Si vous choisissez une spécialité de master qui implique de traiter des données (c'est-à-dire à peu près toutes les spécialités des Sciences de la Vie !) et/ou de communiquer des résultats d'analyses statistiques, alors `R` et `RStudio` devraient être les logiciels vers lesquels vous vous tournerez naturellement.
+1. **Vous faire découvrir les logiciels [R](https://cran.r-project.org) et [Rstudio](https://www.rstudio.com)** (chapitres @sec-basics et @sec-dataset) dans lesquels vous allez passer beaucoup de temps en licence puis en master. Si vous choisissez une spécialité de master qui implique de traiter des données (c'est-à-dire à peu près toutes les spécialités des Sciences de la Vie !) et/ou de communiquer des résultats d'analyses statistiques, alors `R` et `RStudio` devraient être les logiciels vers lesquels vous vous tournerez naturellement.
 
-2. **Vous apprendre à faire des graphiques de qualités** dans `RStudio` et **vous faire prendre conscience de l'importance des visualisations graphiques** (@sec-viz : attention, ce chapitre est très long, ne vous laissez pas surprendre !) :
+2. **Vous apprendre à faire des graphiques de qualités** dans `RStudio` et **vous faire prendre conscience de l'importance des visualisations graphiques** (chapitre @sec-viz : attention, ce chapitre est très long, ne vous laissez pas surprendre !) :
   - d'une part, pour explorer des données inconnues et vous faire une première idée des informations qu'elles contiennent,
   - d'autre part, pour vous permettre de formuler des hypothèses pertinentes et intéressantes concernant les systèmes que vous étudiez, 
   - et enfin, pour communiquer efficacement vos trouvailles à un public qui ne connaît pas vos données aussi bien que vous (cela inclut évidemment vos enseignants à l'issue de vos stages). 
 
-3. **Vous apprendre à manipuler efficacement des tableaux de données de grande taille** (@sec-wrangling). Cela signifie que vous devriez être en mesure de sélectionner des variables (colonnes) d'un tableau, d'en créer de nouvelles en modifiant et/ou combinant des variables existantes, de filtrer des lignes spécifiques, etc.
+3. **Vous apprendre à manipuler efficacement des tableaux de données de grande taille** (chapitre @sec-wrangling). Cela signifie que vous devriez être en mesure de sélectionner des variables (colonnes) d'un tableau, d'en créer de nouvelles en modifiant et/ou combinant des variables existantes, de filtrer des lignes spécifiques, etc.
 
 
 À l'issue de ces TP et TEA, vous devriez donc être suffisamment à l'aise avec le logiciel `RStudio` pour y importer des données issues de tableurs, les manipuler pour les mettre dans un format permettant les représentations graphiques, et pour produire des graphiques pertinents, adaptés aux données dont vous disposez, et d'une qualité vous permettant de les intégrer sans honte à vos compte-rendus de TP et rapports de stages.
@@ -67,12 +67,84 @@ D'ailleurs, les données que vous serez amenés à traiter lors de vos stages, o
 
 ### Volume de travail {-}
 
-Les travaux pratiques et TEA de biométrie auront lieu entre le 9 septembre et le 21 novembre 2024, à raison d'une séance de TP de 90 minutes toutes les 2 semaines environ. Les deux premières séances de TP seront suivies d'une séances de TEA de 90 minutes.
+Les travaux pratiques et TEA de biométrie auront lieu entre le 9 septembre et le 11 octobre 2024. Chaque groupe aura 4 séances de TP de 90 minutes et 3 séances de TEA de 90 minutes selon le calendrier suivant :
 
-**Tous les TP ont lieu en salle MSI 217. Tous les TEA sont à distance.**
+::::{.columns}
 
-Au total, chaque groupe aura donc 4 séances de TP et 2 séances de TEA. C'est très peu pour atteindre les objectifs fixés et il y aura donc évidemment du travail personnel à fournir en dehors de ces séances. Pour chaque TP ou TEA prévu à l'emploi du temps, j'estime qu'une à deux heures de travail personnel est nécessaire (soit 9 à 15 heures au total, selon votre degré d'aisance).
-Attention donc : pensez bien à prévoir du temps dans vos plannings **en dehors des heurs prévues dans vos EDT** car le travail personnel est essentiel pour progresser dans cette matière. J'insiste sur l'importance de faire l'effort dès maintenant : vous allez en effet avoir des enseignements qui reposent sur l'utilisation de ces logiciels à chaque semestre de la licence, du S3 au S6. C'est maintenant qu'il faut acquérir des automatismes, cela vous fera gagner énormément de temps ensuite.
+:::{.column width="50%}
+
+Groupe 1
+
+1. 17 sept, 13:15 - 14:45, MSI217
+1. 23 sept, 18:30 - 20:00, MSI217
+1. 3 oct, 09:45 - 11:15, PCM-INFO TRANS2
+1. 8 oct, 09:45 - 11:15, PCM-SC5
+
+Groupe 2
+
+1. 17 sept, 18:30 - 20:00, MSI217
+1. 23 sept, 16:45 - 18:15, MSI217
+1. 30 sept, 18:30 - 20:00, MSI217
+1. 8 oct, 08:00 - 09:30, PCM-SC5
+
+Groupe 3
+
+1. 9 sept, 18:30 - 20:00, MSI217
+1. 18 sept, 18:30 - 20:00, MSI217
+1. 2 oct, 18:30 - 20:00, MSI217
+1. 7 oct, 08:00 - 09:30, PCM-SC6
+
+Groupe 4
+
+1. 9 sept, 16:45 - 18:15, MSI217
+1. 17 sept, 09:45 - 11:15, MSI217
+1. 1 oct, 18:30 - 20:00, MSI217
+1. 8 oct, 16:45 - 18:15, MSI217
+	
+:::
+
+:::{.column width="50%}
+
+Groupe 5
+
+1. 17 sept, 16:45 - 18:15, MSI217
+1. 24 sept, 18:30 - 20:00, MSI217
+1. 3 oct, 11:30 - 13:00, PCM-INFO TRANS2
+1. 9 oct, 15:00 - 16:30, PCM-INFO TRANS2
+
+Groupe 6
+
+1. 18 sept, 16:45 - 18:15, MSI217
+1. 24 sept, 16:45 - 18:15, MSI217
+1. 30 sept, 09:45 - 11:15, MSI217
+1. 11 oct, 08:00 - 09:30, MSI217
+
+Groupe 7
+
+1. 16 sept, 16:45 - 18:15, MSI217
+1. 25 sept, 18:30 - 20:00, MSI217
+1. 1 oct, 16:45 - 18:15, MSI217
+1. 7 oct, 09:45 - 11:15, PCM-SC6
+
+Groupe 8
+
+1. 10 sept, 16:45 - 18:15, MSI217
+1. 25 sept, 16:45 - 18:15, MSI217
+1. 30 sept, 16:45 - 18:15, MSI217
+1. 7 oct, 16:45 - 18:15, MSI217
+	
+:::
+
+::::
+
+Les TEA, ont tous lieu en distanciel synchrone, pour toute la promotion à la fois :
+
+1. 21 sept, 09:45 - 11:15
+1. 5 oct, 09:45 - 11:15
+1. 7 oct, 18:30 - 20:00
+
+Au total, chaque groupe aura donc 10h30 de TP et TEA. C'est très peu pour atteindre les objectifs fixés et il y aura donc évidemment du travail personnel à fournir en dehors de ces séances. **Pour chaque TP ou TEA** prévu à l'emploi du temps, j'estime qu'**une à deux heures de travail personnel est nécessaire** (soit 10 à 20 heures de travail personnel selon votre degré d'aisance, en plus des 10h30 prévues à votre emploi du temps au total).
+Attention donc : pensez bien à prévoir du temps dans vos plannings **en dehors des heurs prévues dans vos EDT** car le travail personnel est essentiel pour progresser dans cette matière. J'insiste sur l'importance de faire l'effort dès maintenant : vous allez en effet avoir des enseignements qui reposent sur l'utilisation de ces logiciels à chaque semestre de la licence, du S3 au S6. C'est maintenant qu'il faut acquérir des automatismes.
 
 :::{.callout-warning}
 ## Travaillez régulièrement !
@@ -84,7 +156,7 @@ J'insiste sur l'importance de travailler cette matière **régulièrement**. Vou
 
 ### Modalités d'enseignement {-}
 
-Pour suivre cet enseignement vous pourrez utiliser les ordinateurs de l'université, mais je ne peux que vous encourager à utiliser vos propres ordinateurs, sous Windows, Linux ou MacOS. Lors de vos futurs stages et pour rédiger vos comptes-rendus de TP, vous utiliserez le plus souvent vos propres ordinateurs, autant prendre dès maintenant de bonnes habitudes en installant les logiciels dont vous aurez besoin tout au long de votre licence. Si vous ne possédez pas d'ordinateur, manifestez vous rapidement auprès de moi car des solutions existent (prêt par l'université, travail sur tablette via [RStudio cloud](https://rstudio.cloud)...).
+Pour suivre cet enseignement vous pourrez utiliser les ordinateurs de l'université, mais je ne peux que vous encourager à utiliser vos propres ordinateurs, sous Windows, Linux ou MacOS. Lors de vos futurs stages et pour rédiger vos comptes-rendus de TP, vous utiliserez le plus souvent vos propres ordinateurs, autant prendre dès maintenant de bonnes habitudes en installant les logiciels dont vous aurez besoin tout au long de votre licence. Si vous ne possédez pas d'ordinateur, manifestez vous rapidement auprès de moi car des solutions existent (prêt par l'université, travail sur tablette via [Posit cloud](https://posit.cloud)...).
 
 :::{.callout-important}
 L'essentiel du contenu de cet enseignement peut être abordé en autonomie, à distance, grâce à ce livre en ligne, aux ressources mises à disposition sur Moodle et à votre ordinateur personnel. Cela signifie que **la présence physique lors de ces séances de TP n'est pas obligatoire**. 
@@ -94,21 +166,28 @@ Plus que des séances de TP classiques, considérez plutôt qu'il s'agit de **pe
 
 De même, si vous n'avez pas de difficulté de compréhension et que vous n'avez pas de problème avec les exercices de ce livre en ligne, votre présence n'est pas requise. Si vous souhaitez malgré tout venir en salle de TP, pas de problème, vous y serez toujours les bienvenus. D'ailleurs, vous pouvez aussi venir aux séances de permanences des autres groupes de TP (à supposer que vous soyez disponibles) si vous avez une question pressante ou si vous estimez que vous commencez à prendre du retard.
 
+:::{.callout-important}
+Attention, c'est bien la présence en salle de TP qui n'est pas obligatoire. **Faire le travail demandé dans le temps imparti reste bel et bien obligatoire !** Que vous fassiez le choix de venir ou non aux séances de TP, vous devez obligatoirement travailler cette matière lors des créneaux de TP et de TEA prévus dans votre emploi du temps !
+Si vous considérez que ça n'est pas important puisque votre présence en salle de TP n'est pas requise, ou que vous avez plus urgent à faire dans l'immédiat, la chute sera brutale et le réveil douloureux...
+:::
+
+
 Ce fonctionnement très souple a de nombreux avantages :
 
-- vous vous organisez comme vous le souhaitez
+- vous disposez de plus de liberté et d'autonomie et vous avancez à votre rythme
 - vous ne venez que lorsque vous en avez vraiment besoin
 - celles et ceux qui se déplacent reçoivent une aide personnalisée "sur mesure"
+- celles et ceux qui ne se déplacent pas reçoivent une aide à distance (voir plus bas)
 - vous travaillez sur vos ordinateurs
-- les effectifs étant réduits, les conditions de travail sont idéales
+- les effectifs étant réduits en salle, les conditions de travail sont idéales
 
-Toutefois, pour que cette organisation fonctionne, cela demande de la rigueur de votre part, en particulier sur la régularité du travail que vous devez fournir. Si la présence en salle de TP n'est pas requise, le travail demandé est bel et bien obligatoire ! Si vous venez en salle de TP sans avoir travaillé en amont, votre venue sera totalement inutile puisque vous n'aurez pas de question à poser et que vous passerez votre séance à lire ce livre en ligne. Vous perdrez donc votre temps, celui de vos collègues, et le mien. De même, si vous attendez la 4e semaine pour vous y mettre, vous irez droit dans le mur. Je le répète, outre les 9h de TP/TEA prévus dans vos emplois du temps, vous devez prévoir entre 9 et 15 heures de travail personnel supplémentaire.
+Toutefois, pour que cette organisation fonctionne, cela demande de la rigueur de votre part, en particulier sur la régularité du travail que vous devez fournir. J'insiste sur le fait que si la présence en salle de TP n'est pas requise, le travail demandé est bel et bien obligatoire ! Si vous venez en salle de TP sans avoir travaillé en amont, sans avoir expérimenté et sans avoir de question à poser, ces séances ne seront pas plus utiles qu'un TP classique où vous passerez votre séance à lire ce livre en ligne. Vous perdrez donc en partie votre temps. De même, si vous attendez la 4e séance pour vous y mettre sérieusement, vous irez droit dans le mur. Je le répète, outre les 10h30 de TP/TEA prévus dans vos emplois du temps, vous devez prévoir entre 10 et 20 heures de travail personnel supplémentaire.
 
-Je vous laisse donc une grande liberté d'organisation. À vous d'en tirer le maximum et de faire preuve de la maturité et du sérieux nécessaires. Le rythme auquel vous devriez avancer est présenté plus bas dans la section intitulée "Progression conseillée".
+Je vous laisse donc une grande liberté d'organisation. À vous d'en tirer le maximum et de faire preuve de la maturité et du sérieux nécessaires. Le rythme auquel vous devriez avancer est présenté séance par séance, dans la section intitulée "Progression conseillée" un peu plus bas.
 
 ### Utilisation de Slack {-}
 
-Outre les séances de permanences non-obligatoires, nous échangerons aussi sur [l'application Slack](https://slack.com/intl/fr-fr/), qui fonctionne un peu comme un "Twitter privé". Slack facilite la communication des équipes et permet de travailler ensemble. Créez-vous un compte en ligne et installez le logiciel sur votre ordinateur (il existe aussi des versions pour tablettes et smartphones). Lorsque vous aurez installé le logiciel, [cliquez sur ce lien](https://join.slack.com/t/slack-rkw3184/shared_invite/zt-236anjbv5-rE5lQU0A33lcj_oCGoCAgA) pour vous connecter à notre espace de travail commun intitulé `L2 SV 23-24 / EC outils` (ce lien expire au bout d'un mois, donc suivez-le d`ès aujourd'hui et faites moi signe s'il n'est plus valide). 
+Outre les séances de permanences non-obligatoires, nous échangerons aussi sur [l'application Slack](https://slack.com/intl/fr-fr/), qui fonctionne un peu comme un chat privé. Slack facilite la communication des équipes et permet de travailler ensemble. Créez-vous un compte en ligne et installez le logiciel sur votre ordinateur dès maintenant (il existe aussi des versions pour tablettes et smartphones). Lorsque vous aurez installé le logiciel, revenez ici et [cliquez sur ce lien](https://join.slack.com/t/slack-yky3543/shared_invite/zt-2qdxev3hd-l9bA9LWXroLzP2xwr5FVhw) pour vous connecter à notre espace de travail commun intitulé `L2 SV 24-25 / EC outils` (ce lien expire au bout d'un mois, donc suivez-le dès aujourd'hui et faites moi signe s'il n'est plus valide). 
 
 Vous verrez que 2 "chaînes" sont disponibles :
 
@@ -130,9 +209,9 @@ Idéalement, voilà les étapes que vous devriez avoir franchies chaque semaine 
 
 1. La première séance est consacrée à l'installation des logiciels, à la découverte de l'environnement de travail, des `RProjects`, des packages et des scripts. Avant votre deuxième séance, vous devrez avoir terminé le premier chapitre de ce livre, vous devrez être capables de créer un `Rproject` et un script, de télécharger et d'installer des packages, et d'exécuter des commandes simples dans votre script. **Vous devrez aussi avoir suivi les tutoriels de `DataCamp`** et connaitre les types d'objets suivants : vecteurs, facteurs, data.frames (et tibbles). Vous devrez effectuer le premier quizz Moodle (attention, ce quizz est à faire seul !).
 
-2. La deuxième séance est consacrée à la découverte des premiers jeux de données et du package `ggplot2`. Avant votre troisième séance, vous devrez avoir terminé la @sec-pie, vous devrez avoir compris comment charger en mémoire les jeux de données disponibles dans un packages, vous devrez connaitre la syntaxe de base permettant de faire toutes sortes de graphiques avec `ggplot2` avec une unique variable numérique ou catégorielle. À terme, vous devrez être capables de choisir des graphiques appropriés selon le nombre et la nature des variables dont vous disposez. À ce stade, on ne demande rien de complexe, mais vous devrez, à minima, être capable de faire des barplots et des histogrammes et vous devriez être capable de les distinguer. Vous devrez effectuer le second quizz Moodle (attention, ce quizz est à faire seul !).
+2. La deuxième séance est consacrée à la découverte des premiers jeux de données et du package `ggplot2`. Avant votre troisième séance, vous devrez avoir terminé la section @sec-pie, vous devrez avoir compris comment charger en mémoire les jeux de données disponibles dans un packages, vous devrez connaitre la syntaxe de base permettant de faire toutes sortes de graphiques avec `ggplot2` avec une unique variable numérique ou catégorielle. À terme, vous devrez être capables de choisir des graphiques appropriés selon le nombre et la nature des variables dont vous disposez. À ce stade, on ne demande rien de complexe, mais vous devrez, à minima, être capable de faire des barplots et des histogrammes et vous devriez être capable de les distinguer. Vous devrez effectuer le second quizz Moodle (attention, ce quizz est à faire seul !).
 
-3. La troisième séance est consacrée à la découverte de graphiques permettant de visualiser les relations entre plusieurs variables : 2, 3 ou plus. Vous verrez également comment améliorer la qualité de vos graphiques en vue de leur intégration dans un compte-rendu, un rapport ou une présentation. Avant votre dernière séance de TP, vous devrez avoir terminé le @sec-viz, vous devrez donc être capable de faire, outre les graphiques de la semaine précédente, des nuages de points, des stripcharts, des graphiques en lignes et des boxplots. Vous devrez également être capable de faire des sous-graphiques par catégories (`facet()`), de choisir un thème et des palettes de couleurs appropriées, et de légender/annoter correctement vos graphiques. Attention, ce chapitre est long ! Vous devrez enfin effectuer le troisième quizz Moodle (attention, ce quizz est à faire seul !).
+3. La troisième séance est consacrée à la découverte de graphiques permettant de visualiser les relations entre plusieurs variables : 2, 3 ou plus. Vous verrez également comment améliorer la qualité de vos graphiques en vue de leur intégration dans un compte-rendu, un rapport ou une présentation. Avant votre dernière séance de TP, vous devrez avoir terminé le chapitre @sec-viz, vous devrez donc être capable de faire, outre les graphiques de la semaine précédente, des nuages de points, des stripcharts, des graphiques en lignes et des boxplots. Vous devrez également être capable de faire des sous-graphiques par catégories (`facet()`), de choisir un thème et des palettes de couleurs appropriées, et de légender/annoter correctement vos graphiques. Attention, ce chapitre est long ! Vous devrez enfin effectuer le troisième quizz Moodle (attention, ce quizz est à faire seul !).
 
 4. La quatrième et dernière séance est consacrée à la manipulation des tableaux de données. À l'issue de cette séance, vous devrez être capable de sélectionner des colonnes dans un tableau, de filtrer des lignes, et de créer de nouvelles variables. Vous devrez être capables d'enchaîner correctement les étapes suivantes : ouvrir le logiciel > créer un `Rproject` > créer un script > mettre en mémoire les packages utiles > importer des données > mettre en forme ces données > faire un ou des graphiques informatifs et correctement mis en forme. Vous devrez effectuer le quatrième et dernier quizz Moodle (attention, ce quizz est à faire seul !).
 
@@ -145,16 +224,13 @@ Relisez régulièrement cette section (chaque semaine !) pour savoir si les obje
 
 ## Évaluation(s) {-}
 
-Vous serez évalués à 3 niveaux :
+L'évaluation de la biométrie du semestre 3 sera assurée par Benoît Lebreton. Vous êtes susceptibles d'être interrogés sur tout ce qui est décrit dans ce livre en ligne. 
 
-1. Votre participation sur Slack
-2. Les quizz Moodle
-3. Une évaluation plus classique, sur table ou à la maison
+Les exercices de ce livre en ligne ne seront ni ramassés, ni notés : ils sont proposés pour que vous puissiez mettre en application les notions récemment apprises et afin d'évaluer votre propre progression et vos apprentissages. Ils doivent vous aider à mettre le doigt sur les choses que vous n'avez pas comprises afin que vous puissiez me poser des questions sur Slack ou lors des séances de permanences. Tout ce que nous voyons en TP et TEA devra être acquis à la fin des TP. Les TP de biométrie du semestre 4 (et des 2 semestres de L3) supposent en effet que les notions abordées ici soient parfaitement acquises. En particulier, les étapes décrites précédemment doivent être maîtrisées (ouvrir le logiciel > créer un projet > créer un script > mettre en mémoire les packages utiles > importer des données > mettre en forme ces données > faire un ou des graphiques informatifs et correctement mis en forme).
 
-Les exercices demandés dans ce document en ligne ne seront ni ramassés, ni notés : ils sont proposés pour que vous puissiez mettre en application les notions récemment apprises et afin d'évaluer votre propre progression et vos apprentissages. Ils doivent vous aider à mettre le doigt sur les choses que vous n'avez pas comprises afin que vous puissiez me poser des questions sur Slack ou lors des séances de permanences. Tout ce que nous voyons en TP et TEA devra être acquis à la fin des TP. 
+La grille critériée suivante sera utilisée pour l'évaluation :
 
-En particulier, je vérifierai que les étapes décrites précédemment sont maîtrisées (ouvrir le logiciel > créer un projet > créer un script > mettre en mémoire les packages utiles > importer des données > mettre en forme ces données > faire un ou des graphiques informatifs et correctement mis en forme) en vous fournissant un jeu de données inconnu que vous devrez importer et mettre en forme dans `RStudio` afin de produire quelques graphiques informatifs. Cette évaluation aura lieu soit en salle informatique, soit lors d'un examen sur table.
-
+![](images/Grille.png)
 
 ## Licence
 
