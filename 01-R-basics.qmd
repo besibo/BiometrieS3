@@ -46,7 +46,7 @@ Avant tout, vous devez télécharger et installer `R`, **puis** `RStudio`, dans 
 1. [Téléchargez et installez `R`](https://cran.r-project.org)
  - Vous devez installer ce logiciel en premier.
  - Cliquez sur le lien de téléchargement qui correspond à votre système d'exploitation, puis, sur "base", si vous êtes sous Windows, sur "`R-4.2.1.pkg`" si vous êtes sous Mac avec processeur Intel, ou sur `R-4.2.1-arm64.pkg` si vous êtes sous Mac avec processeur M1 ou M2 (sous Mac, cliquez sur le Menu , puis sur "À propos de ce Mac" et regardez à la rubrique "Processeur"), et suivez les instructions.
-2. [Téléchargez et installez `RStudio`](https://www.rstudio.com/products/RStudio/#Desktop)
+2. [Téléchargez et installez `RStudio`](https://posit.co/download/rstudio-desktop/)
  - Cliquez sur "RStudio Desktop", puis sur "Download RStudio Desktop".
  - Choisissez la version gratuite et cliquez sur le lien de téléchargement qui correspond à votre système d'exploitation.
  
