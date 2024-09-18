@@ -146,7 +146,7 @@ library(skimr)
 skim(penguins)
 ```
 
-Nous aurons l'occasion de revenir en détail sur la signification de tous ces indices au semestre prochain. À ce stade, retenez que cette fonction `skim()` permet d'accéder à un résumé très détaillé de chaque variable d'un jeu de données. Par exemple, on apprend ici que la masse corporelle moyenne des manchots de l'ensemble du jeu de données vaut 4201.75 grammes (ligne `body_mass_g`, colonne `mean`), avec un écart-type de 801.9 grammes (colonne `sd`), et que la masse de 2 individus est manquante (colonne `n_missing`). Cette fonction nous sera donc très utile au semestre prochain lorsque nous aborderons la question des statistiques descriptives.
+Nous aurons l'occasion de revenir en détail sur la signification de tous ces indices au semestre prochain. À ce stade, retenez que cette fonction `skim()` permet d'accéder à un résumé très détaillé de chaque variable d'un jeu de données. Par exemple, on apprend ici que la masse corporelle moyenne des manchots de l'ensemble du jeu de données vaut 4201.75 grammes (ligne `body_mass_g`, colonne `mean`), avec un écart-type de 801.95 grammes (colonne `sd`), et que la masse de 2 individus est manquante (colonne `n_missing`). Cette fonction nous sera donc très utile au semestre prochain lorsque nous aborderons la question des statistiques descriptives.
 
 
 
