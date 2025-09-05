@@ -67,7 +67,7 @@ D'ailleurs, les données que vous serez amenés à traiter lors de vos stages, o
 
 ### Volume de travail {-}
 
-Les travaux pratiques et TEA de biométrie auront lieu entre le 9 septembre et le 11 octobre 2024. Chaque groupe aura 4 séances de TP de 90 minutes et 3 séances de TEA de 90 minutes selon le calendrier suivant :
+Les travaux pratiques et TEA de biométrie auront lieu entre le 8 septembre et le 04 octobre 2025. Chaque groupe aura 4 séances de TP de 90 minutes et 4 séances de TEA de 90 minutes selon le calendrier suivant :
 
 ::::{.columns}
 
@@ -75,75 +75,64 @@ Les travaux pratiques et TEA de biométrie auront lieu entre le 9 septembre et l
 
 Groupe 1
 
-1. 17 sept, 13:15 - 14:45, MSI217
-1. 23 sept, 18:30 - 20:00, MSI217
-1. 3 oct, 09:45 - 11:15, PCM-INFO TRANS2
-1. 8 oct, 09:45 - 11:15, PCM-SC5
+1. 08 sept, 13:15 - 14:45, MSI217
+1. 19 sept, 15:00 - 16:30, PCM-SC1
+1. 24 sept, 08:00 - 09:30, PCM-SC1
+1. 03 oct, 09:45 - 11:15, MSI217
 
 Groupe 2
 
-1. 17 sept, 18:30 - 20:00, MSI217
-1. 23 sept, 16:45 - 18:15, MSI217
-1. 30 sept, 18:30 - 20:00, MSI217
-1. 8 oct, 08:00 - 09:30, PCM-SC5
+1. 08 sept, 15:00 - 16:30, MSI217
+1. 17 sept, 08:00 - 09:30, PCM-SC1
+1. 26 sept, 16:45 - 18:15, MSI217
+1. 01 oct, 08:00 - 09:30, PCM-SC1
 
 Groupe 3
 
-1. 9 sept, 18:30 - 20:00, MSI217
-1. 18 sept, 18:30 - 20:00, MSI217
-1. 2 oct, 18:30 - 20:00, MSI217
-1. 7 oct, 08:00 - 09:30, PCM-SC6
+1. 08 sept, 16:45 - 18:15, MSI217
+1. 16 sept, 09:45 - 11:15, PCM-SC1
+1. 23 sept, 09:45 - 11:15, MSI217
+1. 01 oct, 15:00 - 16:30, MSI217
 
-Groupe 4
 
-1. 9 sept, 16:45 - 18:15, MSI217
-1. 17 sept, 09:45 - 11:15, MSI217
-1. 1 oct, 18:30 - 20:00, MSI217
-1. 8 oct, 16:45 - 18:15, MSI217
-	
 :::
 
 :::{.column width="50%}
 
+Groupe 4
+
+1. 12 sept, 15:00 - 16:30, MSI217
+1. 19 sept, 11:30 - 13:00, MSI217
+1. 26 sept, 15:00 - 16:30, MSI217
+1. 03 oct, 15:00 - 16:30, MSI217
+
 Groupe 5
 
-1. 17 sept, 16:45 - 18:15, MSI217
+1. 10 sept, 15:00 - 16:30, MSI217
+1. 19 sept, 09:45 - 11:15, MSI217
 1. 24 sept, 18:30 - 20:00, MSI217
-1. 3 oct, 11:30 - 13:00, PCM-INFO TRANS2
-1. 9 oct, 15:00 - 16:30, PCM-INFO TRANS2
+1. 03 oct, 11:30 - 13:00, MSI217
 
 Groupe 6
 
-1. 18 sept, 16:45 - 18:15, MSI217
-1. 24 sept, 16:45 - 18:15, MSI217
-1. 30 sept, 09:45 - 11:15, MSI217
-1. 11 oct, 08:00 - 09:30, MSI217
-
-Groupe 7
-
-1. 16 sept, 16:45 - 18:15, MSI217
-1. 25 sept, 18:30 - 20:00, MSI217
-1. 1 oct, 16:45 - 18:15, MSI217
-1. 7 oct, 09:45 - 11:15, PCM-SC6
-
-Groupe 8
-
 1. 10 sept, 16:45 - 18:15, MSI217
-1. 25 sept, 16:45 - 18:15, MSI217
-1. 30 sept, 16:45 - 18:15, MSI217
-1. 7 oct, 16:45 - 18:15, MSI217
-	
+1. 17 sept, 15:00 - 16:30, MSI217
+1. 24 sept, 16:45 - 18:15, MSI217
+1. 01 oct, 16:45 - 18:15, MSI217
+
+
 :::
 
 ::::
 
 Les TEA, ont tous lieu en distanciel synchrone, pour toute la promotion à la fois :
 
-1. 21 sept, 09:45 - 11:15
-1. 5 oct, 09:45 - 11:15
-1. 7 oct, 18:30 - 20:00
+1. 13 sept, 08:00 - 09:30
+1. 20 sept, 08:00 - 09:30
+1. 27 sept, 08:00 - 09:30
+1. 04 oct, 08:00 - 09:30
 
-Au total, chaque groupe aura donc 10h30 de TP et TEA. C'est très peu pour atteindre les objectifs fixés et il y aura donc évidemment du travail personnel à fournir en dehors de ces séances. **Pour chaque TP ou TEA** prévu à l'emploi du temps, j'estime qu'**une à deux heures de travail personnel est nécessaire** (soit 10 à 20 heures de travail personnel selon votre degré d'aisance, en plus des 10h30 prévues à votre emploi du temps au total).
+Au total, chaque groupe aura donc 12h00 de TP et TEA. C'est très peu pour atteindre les objectifs fixés et il y aura donc évidemment du travail personnel à fournir en dehors de ces séances. **Pour chaque TP ou TEA** prévu à l'emploi du temps, j'estime qu'**une à deux heures de travail personnel est nécessaire** (soit 12 à 24 heures de travail personnel selon votre degré d'aisance, en plus des 12h00 prévues à votre emploi du temps au total).
 Attention donc : pensez bien à prévoir du temps dans vos plannings **en dehors des heurs prévues dans vos EDT** car le travail personnel est essentiel pour progresser dans cette matière. J'insiste sur l'importance de faire l'effort dès maintenant : vous allez en effet avoir des enseignements qui reposent sur l'utilisation de ces logiciels à chaque semestre de la licence, du S3 au S6. C'est maintenant qu'il faut acquérir des automatismes.
 
 :::{.callout-warning}
@@ -181,27 +170,25 @@ Ce fonctionnement très souple a de nombreux avantages :
 - vous travaillez sur vos ordinateurs
 - les effectifs étant réduits en salle, les conditions de travail sont idéales
 
-Toutefois, pour que cette organisation fonctionne, cela demande de la rigueur de votre part, en particulier sur la régularité du travail que vous devez fournir. J'insiste sur le fait que si la présence en salle de TP n'est pas requise, le travail demandé est bel et bien obligatoire ! Si vous venez en salle de TP sans avoir travaillé en amont, sans avoir expérimenté et sans avoir de question à poser, ces séances ne seront pas plus utiles qu'un TP classique où vous passerez votre séance à lire ce livre en ligne. Vous perdrez donc en partie votre temps. De même, si vous attendez la 4e séance pour vous y mettre sérieusement, vous irez droit dans le mur. Je le répète, outre les 10h30 de TP/TEA prévus dans vos emplois du temps, vous devez prévoir entre 10 et 20 heures de travail personnel supplémentaire.
+Toutefois, pour que cette organisation fonctionne, cela demande de la rigueur de votre part, en particulier sur la régularité du travail que vous devez fournir. J'insiste sur le fait que si la présence en salle de TP n'est pas requise, le travail demandé est bel et bien obligatoire ! Des créneaux sont prévus dnas vos emplois du temps : vous devez les mettre à profit pour travailler ces contenus ! Par ailleurs, si vous venez en salle de TP sans avoir travaillé en amont, sans avoir expérimenté et sans avoir de question à poser, ces séances ne seront pas plus utiles qu'un TP classique où vous passerez votre séance à lire ce livre en ligne. Vous perdrez donc une occasion de tirer profit de ma présence. De même, si vous attendez la 4e séance pour vous y mettre sérieusement, vous irez droit dans le mur. Je le répète, outre les 12h00 de TP/TEA prévus dans vos emplois du temps, vous devez prévoir entre 12 et 24 heures de travail personnel supplémentaire. 
 
-Je vous laisse donc une grande liberté d'organisation. À vous d'en tirer le maximum et de faire preuve de la maturité et du sérieux nécessaires. Le rythme auquel vous devriez avancer est présenté séance par séance, dans la section intitulée "Progression conseillée" un peu plus bas.
+Je vous laisse donc une grande liberté, à vous de faire preuve de maturité, de rigueur, et d'un bon sens de l'organisation. Le rythme auquel vous devriez avancer est présenté séance par séance, dans la section intitulée "Progression conseillée" un peu plus bas.
 
 ### Utilisation de Slack {-}
 
-Outre les séances de permanences non-obligatoires, nous échangerons aussi sur [l'application Slack](https://slack.com/intl/fr-fr/), qui fonctionne un peu comme un chat privé. Slack facilite la communication des équipes et permet de travailler ensemble. Créez-vous un compte en ligne et installez le logiciel sur votre ordinateur dès maintenant (il existe aussi des versions pour tablettes et smartphones). Lorsque vous aurez installé le logiciel, revenez ici et [cliquez sur ce lien](https://join.slack.com/t/slack-yky3543/shared_invite/zt-2qdxev3hd-l9bA9LWXroLzP2xwr5FVhw) pour vous connecter à notre espace de travail commun intitulé `L2 SV 24-25 / EC outils` (ce lien expire au bout d'un mois, donc suivez-le dès aujourd'hui et faites moi signe s'il n'est plus valide). 
+Outre les séances de permanences non-obligatoires, nous échangerons aussi sur [l'application Slack](https://slack.com/intl/fr-fr/), qui fonctionne un peu comme un chat privé. Slack facilite la communication des équipes et permet de travailler ensemble. Créez-vous un compte en ligne et installez le logiciel sur votre ordinateur dès maintenant (il existe aussi des versions pour tablettes et smartphones). Lorsque vous aurez installé le logiciel, revenez ici et [cliquez sur ce lien](https://join.slack.com/t/l2sv2526/shared_invite/zt-3cxxup04x-TlzjxqHOPczTMrNLD6uLoA) pour vous connecter à notre espace de travail commun intitulé `L2 SV 25-26` (ce lien expire au bout d'un mois, donc suivez-le dès aujourd'hui et faites moi signe s'il n'est plus valide). 
 
-Vous verrez que 2 "chaînes" sont disponibles :
+Vous verrez que cet espace ne contient qu'un seul canal intitulé `#questions_tp_biométrie` : c'est là que vous pourrez poser toutes vos questions, qu'elles soient liées à l'organisation générale du cours, des TP, des TEA (organisation des séances, permanences, évaluations, etc.) ou à l'utilisation de `R` et `RStudio`. Que vous rencontriez des problèmes de syntaxe, des problèmes liés à l'interface, à l'installation des packages ou à l'utilisation des fonctions, à la création des graphiques, à la manipulation des tableaux... Tout peut être abordé ici. Vous êtes libres de poser des questions, de poster des captures d'écran, des morceaux de code, des messages d'erreur. Et **vous êtes bien entendus vivement encouragés à vous entraider et à répondre aux questions de vos collègues.**. Le fonctionnement est celui d'un forum de discussion instantané. Vous en tirerez le plus grand bénéfice en participant et en n'ayant pas peur de poser des questions, même si elles vous paraissent idiotes. Rappelez-vous toujours que si vous vous posez une question, d'autres se la posent aussi probablement.
 
-- `#général` : c'est là que les questions liées à l'organisation générale du cours, des TP, des TEA et des évaluations doivent être posées. C'est également ici que je posterai les annonces importantes concernant l'organisation des séances et de l'évaluation.
-- `#questions-rstudio` : c'est ici que toutes les questions pratiques liées à l'utilisation de `R` et `RStudio` devront êtres posées. Problèmes de syntaxe, problèmes liés à l'interface, à l'installation des packages ou à l'utilisation des fonctions, à la création des graphiques, à la manipulation des tableaux... Tout ce qui concerne directement les logiciels sera traité ici. Vous êtes libres de poser des questions, de poster des captures d'écran, des morceaux de code, des messages d'erreur. Et **vous êtes bien entendus vivement encouragés à vous entraider et à répondre aux questions de vos collègues.** Je n'interviendrai ici que pour répondre aux questions laissées sans réponse ou si les réponses apportées sont inexactes. Le fonctionnement est celui d'un forum de discussion instantané. Vous en tirerez le plus grand bénéfice en participant et en n'ayant pas peur de poser des questions, même si elles vous paraissent idiotes. Rappelez-vous toujours que si vous vous posez une question, d'autres se la posent aussi probablement.
+Ainsi, quand vous travaillerez à vos TP ou TEA, que vous soyez installés chez vous ou en salle de TP, prenez l'habitude de garder Slack ouvert sur votre ordinateur. Même si vous n'avez pas de question à poser, votre participation active pour répondre à vos collègues est souhaitable et souhaitée. Je vous incite donc fortement à vous **entraider** : c'est très formateur pour celui qui explique, et celui qui rencontre une difficulté a plus de chances de comprendre si c'est quelqu'un d'autre qui lui explique plutôt que la personne qui a rédigé les instructions mal comprises. Donc jouez le jeu, ça vous sera bénéfique.
 
-Ainsi, quand vous travaillerez à vos TP ou TEA, que vous soyez installés chez vous ou en salle de TP, prenez l'habitude de garder Slack ouvert sur votre ordinateur. Même si vous n'avez pas de question à poser, votre participation active pour répondre à vos collègues est souhaitable et souhaitée. Je vous incite donc fortement à vous **entraider** : c'est très formateur pour celui qui explique, et celui qui rencontre une difficulté a plus de chances de comprendre si c'est quelqu'un d'autre qui lui explique plutôt que la personne qui a rédigé les instructions mal comprises.
-
-Ce document est fait pour vous permettre d'avancer en autonomie et vous ne devriez normalement pas avoir beaucoup besoin de moi si votre lecture est attentive. L'expérience montre en effet que la plupart du temps, il suffit de lire correctement les paragraphes précédents et/ou suivants pour obtenir la réponse à ses questions. J'essaie néanmoins de rester disponible sur Slack pendant les séances de TP et de TEA de tous les groupes. Cela veut donc dire que même si votre groupe n'est pas en TP, vos questions ont des chances d'être lues et de recevoir des réponses dès que d'autres groupes sont en TP ou TEA. Vous êtes d'ailleurs encouragés à échanger sur Slack aussi pendant vos phases de travail personnels.
+Ce document est fait pour vous permettre d'avancer en autonomie et vous ne devriez normalement pas avoir beaucoup besoin de moi si votre lecture est attentive. L'expérience montre en effet que la plupart du temps, il suffit de lire correctement les paragraphes précédents et/ou suivants pour obtenir la réponse à ses questions. J'essaie néanmoins de rester disponible sur Slack pendant les séances de TP et de TEA de tous les groupes. Cela veut donc dire que même si votre groupe n'est pas en TP, vos questions ont des chances d'être lues et de recevoir des réponses dès que d'autres groupes sont en TP ou TEA. Vous êtes d'ailleurs encouragés à échanger sur Slack aussi pendant vos phases de travail personnels, et les messages privés sont bien entendu possibles 
+également.
 
 
 ## Progression conseillée {-}
 
-Pour apprendre à utiliser des logiciels comme `R` et `RStudio`, il faut faire les choses soi-même, ne pas avoir peur des messages d'erreurs (il faut d'ailleurs apprendre à les déchiffrer pour comprendre d'où viennent les problèmes), essayer maintes fois, se tromper beaucoup, recommencer, et surtout, ne pas se décourager. J'utilise ce logiciel presque quotidiennement depuis bientôt 20 ans et à chaque session de travail, je rencontre des messages d'erreur. Avec suffisamment d'habitude, on apprend à les déchiffrer, et on corrige les problèmes en quelques secondes. Ce livre est conçu pour vous faciliter la tâche, mais ne vous y trompez pas, vous rencontrerez des difficultés, et c'est normal. C'est le prix à payer pour profiter de la puissance du meilleur logiciel permettant d'analyser des données, de produire des graphiques de qualité et de réaliser toutes les statistiques dont vous aurez besoin d'ici la fin de vos études et au-delà.
+Pour apprendre à utiliser des logiciels comme `R` et `RStudio`, il faut faire les choses soi-même, ne pas avoir peur des messages d'erreurs (il faut d'ailleurs apprendre à les déchiffrer pour comprendre d'où viennent les problèmes), essayer maintes fois, se tromper beaucoup, recommencer, et surtout, ne pas se décourager. J'utilise ce logiciel presque quotidiennement depuis 20 ans et à chaque session de travail, je rencontre des messages d'erreur. Avec suffisamment d'habitude, on apprend à les déchiffrer, et on corrige les problèmes en quelques secondes. Ce livre est conçu pour vous faciliter la tâche, mais ne vous y trompez pas, vous rencontrerez des difficultés, et c'est normal. C'est le prix à payer pour profiter de la puissance du meilleur logiciel permettant d'analyser des données, de produire des graphiques de qualité et de réaliser toutes les statistiques dont vous aurez besoin d'ici la fin de vos études et au-delà.
 
 Pour que cet apprentissage soit le moins problématique possible, il convient de prendre les choses dans l'ordre. C'est la raison pour laquelle les chapitres de ce livre doivent être lus attentivement et **dans l'ordre**, et les exercices d'application faits au fur et à mesure de la lecture.
 
@@ -221,6 +208,25 @@ Idéalement, voilà les étapes que vous devriez avoir franchies à chaque séan
 
 Relisez régulièrement cette section (chaque semaine !) pour savoir si les objectifs fixés ici sont atteints et vous assurez que vous ne prenez pas de retard...
 :::
+
+
+## Quelques mots sur les IA génératives
+
+J'attire votre attention sur l'utilisation des IA génératives. La plupart des modèles conversationnels (Large Language Models, LLMs) tels que ChatGPT, Gemini, Claude... sont très bons pour générer du code. Je vous mets néanmoins en garde : si vous ne comprenez pas ce qui est expliqué dans ces pages, vous ne pourrez pas juger de la pertinence du code que les IA pourraient vous fournir. Vous pouvez donc vous faire aider par l'IA pour corriger votre code par exemple, ou pour obtenir des suggestions, mais **il est de votre responsabilité de comprendre ce que vous faites et ce que l'IA fait pour vous** ! Non seulement c'est ce qui vous fera gagner du temps à terme (acceptez de passer du temps pour comprendre les notions et concepts maintenants pour gagner beaucoup de temps plus tard), mais surtout, c'est ce qui vous évitera de faire beaucoup d'erreurs ! Encore cette année, la plupart de nos étudiants de M1 ont utilisé lIA pour calculer un indice statistique un peu exotique. Presque aucun ne s'est rendu compte que le code produit par l'IA ne faisait pas ce qui était demandé. Par conséquent, toute une partie de leur compte-rendu de TP n'avait aucun sens et ils ont donc été lourdement pénalisés à cause de leur confiance aveugle en l'IA. Produire soi-même un code, et demander l'aide de l'IA pour corriger un bug ou demander des améliorations précises, c'est très différents de ne produire aucun code et de demander à l'IA de tout faire. Dans un cas, on fait travailler son cerveau, et l'IA joue le rôle d'un partenaire qui fournit des suggestions souvent pertinentes. Dans l'autre, le cerveau reste au repos, on n'apprend rien, et donc, on perd son temps...
+
+Vous devez donc faire preuve d'esprit critique vis-à-vis de ces outils, qui peuvent êtres très utiles, mais qui demandent la plus grande vigilence et qui se trompent régulièrement. Or, pour faire preuve d'esprit critique, vous devez être en mesure de comprendre le code fourni par ces IA. Si ça n'est pas le cas, reprennez les explications de ce livre en ligne : tout ce dont vous avez besoin s'y trouve noir sur blanc.
+
+Par ailleurs, **si vous utilisez l'IA pour générer du code, vous devez l'indiquer clairement**, et ça doit rester relativement rare. Quelle(s) partie(s) de vos scripts sont réellement de vous, et quelles parties ont été générées par une IA ? À votre niveau, je vous assure qu'il m'est très facile de savoir si du code a été produit par une IA ou par vous. Si vous n'indiquez pas que du code que vous intégrez à vos scripts n'est pas de vous, c'est de la fraude qui peut faire l'objet de sanctions importantes (passage devant le conseil de discipline de l'établissement par exemple). Donc encore une fois, vous pouvez utiliser ces outils, mais à la double condition que (i) ça soit fait à bon escient (assurez-vous que ce qui est produit par l'IA est pertinent, que ça a du sens, et que ça reste rare), et (ii), vous indiquiez clairement dans vos scripts quelles lignes ont été produite à l'aide d'une IA (et laquelle).
+
+Enfin, je me permets une dernière mise en garde. De plus en plus d'études démontrent un effet négatif de l'utilisation excessive des LLMs sur la qualité des apprentissages chez les étudiant·es. Par exemple, [cet article (Stadler et al. 2024)](https://www.sciencedirect.com/science/article/pii/S0747563224002541) montre que
+
+> Bien que les LLM puissent réduire la charge cognitive associée à la collecte d’informations au cours d’une tâche d’apprentissage, ils ne favorisent pas un engagement profond avec le contenu étudié, pourtant nécessaire à un apprentissage durable et de qualité.
+
+De même, [Kosmyna et al. (2025)](https://arxiv.org/abs/2506.08872) ont étudié, par électro-encéphalogramme, les performances cognitives de 3 groupes de participants lors d'exercices de productions écrites (rédaction de synthèses scientifiques). Un groupe avait le droit d'utiliser les AI, un groupe était limité à l'utilisation de Google, un autre groupe n'avait aucun accès à ces outils numériques. Globalement, les participants du groupe LLM sont de loin ceux qui obtiennent les moins bons résultats, qui comprennent et retiennent le moins bien ce qu'ils ont fait. Ceux qui n'avaient droit à aucun outils sont ceux qui ont le plus appris car ils ont dû s'investir pleinement dans l'exercice. En particulier, les auteurs soulignent ceci :
+
+> Les utilisateur d'un LLM ont eu du mal à citer correctement leurs propres travaux. Si les LLM offrent une facilité immédiate, nos résultats mettent en évidence des coûts cognitifs potentiels. Sur une période de quatre mois, les utilisateurs d'un LLM ont systématiquement enregistré des résultats inférieurs aux niveaux neuronal, linguistique et comportemental.
+
+Bref, ces outils sont puissants, ils sont parfois très utiles (et ils vont continuer de s'améliorer), mais ils doivent être utilisés intelligemment pour éviter des conséquences très contre-productives pour vos apprentissages. Là encore, c'est à vous de faire preuve de maturité pour en tirer le meilleur !
 
 
 ## Évaluation(s) {-}

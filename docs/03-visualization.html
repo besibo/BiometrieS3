@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>TP de BiométrieSemestre 3 - 3&nbsp; Visualiser des données avec ggplot2</title>
+<title>3&nbsp; Visualiser des données avec ggplot2 – TP de Biométrie&lt;br&gt;Semestre 3&lt;br&gt;</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -91,10 +91,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-9ea0a49c779b6fc496fdb60b6bf00fef.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0b7eab727d1d43cd835906245a93f7a8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -135,13 +135,13 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-visualization.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Visualiser des données avec <code>ggplot2</code></span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Recherche" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -370,7 +370,7 @@ Objectifs
 <p>Pour l’année 2007, le jeu de données contient des informations pour 142 pays. Examinons les premières lignes de ce jeu de données :</p>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <caption>Les 6 premières lignes du jeu de données <code>gapminder</code> pour l’année 2007.</caption>
 <thead>
 <tr class="header">
@@ -439,7 +439,7 @@ Objectifs
 <p>Examinons maintenant la <a href="#fig-gapminder" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> qui représente ces variables pour chacun des 142 pays de ce jeu de données (notez l’utilisation de la notation scientifique dans la légende, et de l’échelle logarithmique de l’axe des abscisses).</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-gapminder" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-gapminder" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-gapminder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="03-visualization_files/figure-html/fig-gapminder-1.png" class="img-fluid figure-img" width="672">
@@ -472,7 +472,7 @@ Figure&nbsp;3.1: Espérance de vie en fonction du PIB par habitant en 2007.
 </section>
 <section id="le-package-ggplot2" class="level3" data-number="3.3.4">
 <h3 data-number="3.3.4" class="anchored" data-anchor-id="le-package-ggplot2"><span class="header-section-number">3.3.4</span> Le package <code>ggplot2</code></h3>
-<p>Comme indiqué plus haut, le package <code>ggplot2</code> <span class="citation" data-cites="R-ggplot2">(<a href="references.html#ref-R-ggplot2" role="doc-biblioref">Wickham et al. 2024</a>)</span> permet de réaliser des graphiques dans <code>R</code> en respectant les principes de la grammaire des graphiques. Vous avez probablement remarqué que depuis le début de la section <a href="#sec-gggraph" class="quarto-xref"><span>Section 3.3</span></a>, beaucoup de termes sont écrits dans la police réservée au <code>code</code> informatique. C’est parce que les éléments de la grammaire des graphiques sont tous précisés dans la fonction <code>ggplot()</code> qui demande, au grand minimum, que les éléments suivants soient spécifiés :</p>
+<p>Comme indiqué plus haut, le package <code>ggplot2</code> <span class="citation" data-cites="R-ggplot2">(<a href="references.html#ref-R-ggplot2" role="doc-biblioref">Wickham et al. 2025</a>)</span> permet de réaliser des graphiques dans <code>R</code> en respectant les principes de la grammaire des graphiques. Vous avez probablement remarqué que depuis le début de la section <a href="#sec-gggraph" class="quarto-xref"><span>Section 3.3</span></a>, beaucoup de termes sont écrits dans la police réservée au <code>code</code> informatique. C’est parce que les éléments de la grammaire des graphiques sont tous précisés dans la fonction <code>ggplot()</code> qui demande, au grand minimum, que les éléments suivants soient spécifiés :</p>
 <ul>
 <li>le nom du <code>data.frame</code> contenant les variables qui seront utilisées pour le graphique. Ce nom correspond à l’argument <code>data</code> de la fonction <code>ggplot()</code>.</li>
 <li>l’association des variables à des attributs esthétiques. Cela se fait grâce à l’argument <code>mapping</code> et la fonction <code>aes()</code></li>
@@ -511,7 +511,7 @@ Figure&nbsp;3.1: Espérance de vie en fonction du PIB par habitant en 2007.
 </div>
 </div>
 <p>Comme évoqué plus haut, il s’agit d’un <code>tibble</code>. Plusieurs de ses variables concernent la biométrie des manchots, en particulier de son bec (voir <a href="#fig-morpho" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>).</p>
-<div id="fig-morpho" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-morpho" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-morpho-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/culmen_depth.png" class="img-fluid figure-img" style="width:50.0%">
@@ -1064,7 +1064,7 @@ Important
 (`geom_point()`).</code></pre>
 </div>
 <div class="cell-output-display">
-<div id="fig-cloud" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-cloud" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-cloud-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="03-visualization_files/figure-html/fig-cloud-1.png" class="img-fluid figure-img" width="672">
@@ -1085,7 +1085,7 @@ Figure&nbsp;3.3: Nuage de points des masses corporelles des 3 espèces de mancho
 <li><code>fill</code> : la couleur de remplissage des points (pour les symboles qui permettent de spécifier une couleur de remplissage et une couleur de contour)</li>
 <li><code>shape</code> : pour modifier les symboles utilisés. Les symboles possibles sont codés ainsi :</li>
 </ul>
-<div id="fig-pch" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-pch" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/pch.png" class="img-fluid figure-img" style="width:50.0%">
@@ -1148,7 +1148,7 @@ Figure&nbsp;3.4: Liste des symboles et codes correspondants pour les graphiques 
 <div aria-describedby="fig-jitter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-jitter" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div id="fig-jitter-1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-jitter-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-jitter-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="03-visualization_files/figure-html/fig-jitter-1.png" class="img-fluid figure-img" data-ref-parent="fig-jitter" width="288">
@@ -1160,7 +1160,7 @@ Figure&nbsp;3.4: Liste des symboles et codes correspondants pour les graphiques 
 </div>
 </div>
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-jitter" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div id="fig-jitter-2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-jitter-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-jitter-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="03-visualization_files/figure-html/fig-jitter-2.png" class="img-fluid figure-img" data-ref-parent="fig-jitter" width="288">
@@ -1172,7 +1172,7 @@ Figure&nbsp;3.4: Liste des symboles et codes correspondants pour les graphiques 
 </div>
 </div>
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-jitter" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div id="fig-jitter-3" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-jitter-3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-jitter-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="03-visualization_files/figure-html/fig-jitter-3.png" class="img-fluid figure-img" data-ref-parent="fig-jitter" width="288">
@@ -1223,7 +1223,7 @@ Important
 (`geom_point()`).</code></pre>
 </div>
 <div class="cell-output-display">
-<div id="fig-strip" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-strip" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-strip-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="03-visualization_files/figure-html/fig-strip-1.png" class="img-fluid figure-img" width="480">
@@ -1300,7 +1300,7 @@ Figure&nbsp;3.6: Un exemple de stripchart
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(panier, <span class="fu">aes</span>(<span class="at">x =</span> fruit)) <span class="sc">+</span></span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-barplot" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-barplot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-barplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="03-visualization_files/figure-html/fig-barplot-1.png" class="img-fluid figure-img" width="672">
@@ -1317,7 +1317,7 @@ Figure&nbsp;3.7: Barplot pour des données non pré-comptées.
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(panier_counted, <span class="fu">aes</span>(<span class="at">x =</span> fruit, <span class="at">y =</span> nombre)) <span class="sc">+</span></span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-barplotcol" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-barplotcol" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-barplotcol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="03-visualization_files/figure-html/fig-barplotcol-1.png" class="img-fluid figure-img" width="672">
@@ -1360,7 +1360,7 @@ Diagrammes bâtons
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span></span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-bpspecies" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-bpspecies" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bpspecies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="03-visualization_files/figure-html/fig-bpspecies-1.png" class="img-fluid figure-img" width="672">
@@ -1379,7 +1379,7 @@ Figure&nbsp;3.9: Effectifs pour les 3 espèces de manchots étudiées
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(species))) <span class="sc">+</span></span>
 <span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-bpspecies-infreq" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-bpspecies-infreq" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bpspecies-infreq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="03-visualization_files/figure-html/fig-bpspecies-infreq-1.png" class="img-fluid figure-img" width="672">
@@ -1485,7 +1485,7 @@ Levels: Adelie Chinstrap Gentoo</code></pre>
 <p>À titre d’exemple, examinez ce diagramme, qui reprend les mêmes chiffres que précédemment, et tentez de répondre aux questions suivantes :</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-pie" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-pie" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="03-visualization_files/figure-html/fig-pie-1.png" class="img-fluid figure-img" width="672">
@@ -1505,7 +1505,7 @@ Figure&nbsp;3.11: Répartition des effectifs par espèce et par sexe
 <p>Il est difficile (voir impossible) de répondre précisément à ces questions avec le diagramme circulaire de la <a href="#fig-pie" class="quarto-xref">Figure&nbsp;<span>3.11</span></a>, alors qu’il est très simple d’obtenir des réponses précises avec un diagramme bâtons tel que présenté à la <a href="#fig-bpspecies-sex" class="quarto-xref">Figure&nbsp;<span>3.12</span></a> ci-dessous (vérifiez-le !) :</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-bpspecies-sex" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-bpspecies-sex" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bpspecies-sex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="03-visualization_files/figure-html/fig-bpspecies-sex-1.png" class="img-fluid figure-img" width="672">
@@ -1960,7 +1960,7 @@ Important
 (`geom_point()`).</code></pre>
 </div>
 <div class="cell-output-display">
-<div id="fig-facstrip" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-facstrip" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-facstrip-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="03-visualization_files/figure-html/fig-facstrip-1.png" class="img-fluid figure-img" width="288">
@@ -2052,7 +2052,7 @@ Figure&nbsp;3.13: Un exemple de stripchart
 <p>La <a href="#fig-comboxplot" class="quarto-xref">Figure&nbsp;<span>3.14</span></a> illustre ces 3 possibilités de visualisation de la distribution d’une variable numérique (ici, la distribution des masses corporelles des manchots Adélie) :</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-comboxplot" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-comboxplot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-comboxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="03-visualization_files/figure-html/fig-comboxplot-1.png" class="img-fluid figure-img" width="672">
@@ -2182,7 +2182,7 @@ Figure&nbsp;3.14: Trois façons de visualiser la distribution des masses des man
 <p>En particulier, sur ce graphique, il est presque impossible de déterminer la masse des individus mâles. La légende indique en effet des tailles de cercles qui correspondent à des masses spécifiques. Mais nous n’avons aucune indication pour la taille des triangles. Il vaudrait donc mieux procéder ainsi :</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-multivar" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-multivar" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-multivar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="03-visualization_files/figure-html/fig-multivar-1.png" class="img-fluid figure-img" width="672">
@@ -2420,7 +2420,7 @@ Important
 (`geom_point()`).</code></pre>
 </div>
 <div class="cell-output-display">
-<div id="fig-label" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-label" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-label-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="03-visualization_files/figure-html/fig-label-1.png" class="img-fluid figure-img" width="672">
@@ -3076,7 +3076,7 @@ Figure&nbsp;3.16: Une figure correctement légendée
 Jeppson, Haley, Heike Hofmann, et Di Cook. 2021. <em>ggmosaic: Mosaic Plots in the ggplot2 Framework</em>. <a href="https://github.com/haleyjeppson/ggmosaic">https://github.com/haleyjeppson/ggmosaic</a>.
 </div>
 <div id="ref-R-ggplot2" class="csl-entry" role="listitem">
-Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, Dewey Dunnington, et Teun van den Brand. 2024. <em>ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
+Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, Dewey Dunnington, et Teun van den Brand. 2025. <em>ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
 </div>
 <div id="ref-wilkinson2005" class="csl-entry" role="listitem">
 Wilkinson, Leland. 2005. <em>The grammar of graphics</em>. 2nd éd. New-York: Springer-Verlag. <a href="https://www.springer.com/us/book/9780387245447">https://www.springer.com/us/book/9780387245447</a>.
@@ -3120,18 +3120,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -3163,7 +3152,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -3171,7 +3180,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -3275,7 +3284,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
