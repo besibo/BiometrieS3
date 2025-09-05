@@ -5,9 +5,33 @@
 options(replace.assign = TRUE, width = 80)
 options(repos = "http://cran.r-project.org/")
 
-list.of.packages <- c("readxl", "nycflights13", "gapminder", "knitr", "tidyverse", "gridExtra", "devtools", "extrafont", "kableExtra", "skimr", "bindrcpp", "car", "DescTools", "bookdown", "datasauRus", "patchwork", "fontawesome", "palmerpenguins", "ggmosaic")
-new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
-if(length(new.packages)) install.packages(new.packages)
+list.of.packages <- c(
+  "readxl",
+  "nycflights13",
+  "gapminder",
+  "knitr",
+  "tidyverse",
+  "gridExtra",
+  "devtools",
+  "extrafont",
+  "kableExtra",
+  "skimr",
+  "bindrcpp",
+  "car",
+  "DescTools",
+  "bookdown",
+  "datasauRus",
+  "patchwork",
+  "fontawesome",
+  "palmerpenguins",
+  "ggmosaic"
+)
+new.packages <- list.of.packages[
+  !(list.of.packages %in% installed.packages()[, "Package"])
+]
+if (length(new.packages)) {
+  install.packages(new.packages)
+}
 
 library(remotes)
 library(knitr)
@@ -17,15 +41,49 @@ library(tidyverse)
 #   install_github("rstudio/EDAWR")
 # }
 
-opts_chunk$set(fig.path = 'figure/', cache.path = 'cache/', tidy = FALSE,
-               fig.align = 'center', out.width = '90%', fig.asp = 0.618,
-               fig.show = 'hold', fig.pos = 'htpb', par = TRUE, comment = NA, cache = TRUE)
+opts_chunk$set(
+  fig.path = 'figure/',
+  cache.path = 'cache/',
+  tidy = FALSE,
+  fig.align = 'center',
+  out.width = '90%',
+  fig.asp = 0.618,
+  fig.show = 'hold',
+  fig.pos = 'htpb',
+  par = TRUE,
+  comment = NA,
+  cache = TRUE
+)
 ```
 
 ```{r package_bibliography, include=FALSE}
 # automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'quarto', 'tidyverse', 'ggplot2', 'gridExtra', 'skimr', 'bindrcpp', 'tidyr', 'dplyr', 'readr', "car", "readxl", "broom", "DescTools", "patchwork", "fontawesome", "palmerpenguins", "ggmosaic"), 'packages.bib')
+knitr::write_bib(
+  c(
+    .packages(),
+    'bookdown',
+    'knitr',
+    'rmarkdown',
+    'quarto',
+    'tidyverse',
+    'ggplot2',
+    'gridExtra',
+    'skimr',
+    'bindrcpp',
+    'tidyr',
+    'dplyr',
+    'readr',
+    "car",
+    "readxl",
+    "broom",
+    "DescTools",
+    "patchwork",
+    "fontawesome",
+    "palmerpenguins",
+    "ggmosaic"
+  ),
+  'packages.bib'
+)
 
 system("cat book.bib packages.bib > all.bib")
 ```
@@ -212,7 +270,7 @@ Relisez régulièrement cette section (chaque semaine !) pour savoir si les obje
 
 ## Quelques mots sur les IA génératives
 
-J'attire votre attention sur l'utilisation des IA génératives. La plupart des modèles conversationnels (Large Language Models, LLMs) tels que ChatGPT, Gemini, Claude... sont très bons pour générer du code. Je vous mets néanmoins en garde : si vous ne comprenez pas ce qui est expliqué dans ces pages, vous ne pourrez pas juger de la pertinence du code que les IA pourraient vous fournir. Vous pouvez donc vous faire aider par l'IA pour corriger votre code par exemple, ou pour obtenir des suggestions, mais **il est de votre responsabilité de comprendre ce que vous faites et ce que l'IA fait pour vous** ! Non seulement c'est ce qui vous fera gagner du temps à terme (acceptez de passer du temps pour comprendre les notions et concepts maintenants pour gagner beaucoup de temps plus tard), mais surtout, c'est ce qui vous évitera de faire beaucoup d'erreurs ! Encore cette année, la plupart de nos étudiants de M1 ont utilisé lIA pour calculer un indice statistique un peu exotique. Presque aucun ne s'est rendu compte que le code produit par l'IA ne faisait pas ce qui était demandé. Par conséquent, toute une partie de leur compte-rendu de TP n'avait aucun sens et ils ont donc été lourdement pénalisés à cause de leur confiance aveugle en l'IA. Produire soi-même un code, et demander l'aide de l'IA pour corriger un bug ou demander des améliorations précises, c'est très différents de ne produire aucun code et de demander à l'IA de tout faire. Dans un cas, on fait travailler son cerveau, et l'IA joue le rôle d'un partenaire qui fournit des suggestions souvent pertinentes. Dans l'autre, le cerveau reste au repos, on n'apprend rien, et donc, on perd son temps...
+J'attire votre attention sur l'utilisation des IA génératives. La plupart des modèles conversationnels (Large Language Models, LLMs) tels que ChatGPT, Gemini, Claude... sont très bons pour générer du code. Je vous mets néanmoins en garde : si vous ne comprenez pas ce qui est expliqué dans ces pages, vous ne pourrez pas juger de la pertinence du code que les IA pourraient vous fournir. Vous pouvez donc vous faire aider par l'IA pour corriger votre code par exemple, ou pour obtenir des suggestions, mais **il est de votre responsabilité de comprendre ce que vous faites et ce que l'IA fait pour vous** ! Non seulement c'est ce qui vous fera gagner du temps à terme (acceptez de passer du temps maintenant, pour comprendre les notions et concepts, afin de gagner beaucoup de temps plus tard), mais surtout, c'est ce qui vous évitera de faire beaucoup d'erreurs ! Encore cette année, la plupart de nos étudiants de M1 ont utilisé l'IA pour calculer un indice statistique un peu exotique. Presque aucun ne s'est rendu compte que le code produit par l'IA ne faisait pas ce qui était demandé. Par conséquent, toute une partie de leur compte-rendu de TP n'avait aucun sens et ils ont donc été lourdement pénalisés à cause de leur confiance aveugle en l'IA. Produire soi-même un code, et demander l'aide de l'IA pour corriger un bug ou demander des améliorations précises, c'est très différents de ne produire aucun code et de demander à l'IA de tout faire. Dans un cas, on fait travailler son cerveau, et l'IA joue le rôle d'un partenaire qui fournit des suggestions souvent pertinentes. Dans l'autre, le cerveau reste au repos, on n'apprend rien, et donc, on perd son temps...
 
 Vous devez donc faire preuve d'esprit critique vis-à-vis de ces outils, qui peuvent êtres très utiles, mais qui demandent la plus grande vigilence et qui se trompent régulièrement. Or, pour faire preuve d'esprit critique, vous devez être en mesure de comprendre le code fourni par ces IA. Si ça n'est pas le cas, reprennez les explications de ce livre en ligne : tout ce dont vous avez besoin s'y trouve noir sur blanc.
 
