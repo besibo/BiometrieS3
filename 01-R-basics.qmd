@@ -275,11 +275,11 @@ Allez maintenant découvrir [le cours d'introduction à R](https://app.datacamp.
     - La console : l'endroit où vous tapez des commandes
     - Les objets : où les valeurs sont stockées, comment assigner des valeurs à des objets
     - Les types de données : entiers, doubles/numériques, caractères et logiques
-- [Chapitre 2 : vecteurs]()
+- [Chapitre 2 : vecteurs](https://campus.datacamp.com/courses/free-introduction-to-r/chapter-2-vectors-2?ex=2)
     - Les vecteurs : des collections de valeurs du même type
-- [Chapitre 4 : les facteurs]()
+- [Chapitre 4 : les facteurs](https://campus.datacamp.com/courses/free-introduction-to-r/chapter-4-factors-4?ex=1)
     - Des données catégorielles (et non pas *numériques*) représentées dans `R` sous forme de `factor`s
-- [Chapitre 5 : les jeux de données ou `data.frame`]()
+- [Chapitre 5 : les jeux de données ou `data.frame`](https://campus.datacamp.com/courses/free-introduction-to-r/chapter-5-data-frames?ex=1)
     - Les `data.frame`s sont similaires aux feuilles de calcul rectangulaires que l'on peut produire dans un tableur. Dans `R`, ce sont des objets rectangulaires (des tableaux !) contenant des jeux de données : les lignes correspondent aux observations et les colonnes aux variables décrivant les observations. La plupart du temps, c'est le format de données que nous utiliserons. Plus de détails dans le @sec-dataset
     
 
