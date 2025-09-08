@@ -269,17 +269,17 @@ Avant de démarrer, quelques précisions :
 
 Il est important de noter que, bien que ces tutoriels sont d'excellentes introductions, une lecture seule, même attentive, est insuffisante pour un apprentissage en profondeur et une rétention à long terme. Il faut pour cela **pratiquer** et **répéter**. Outre les exercices demandés dans DataCamp, que vous devez effectuer directement dans votre navigateur, je vous encourage à prendre des notes, à multiplier les essais, directement dans la console de `RStudio`, ou, de préférence, dans un script que vous annoterez, pour vous assurer que vous avez bien compris chaque partie.
 
-Allez maintenant découvrir [le cours d'introduction à R](https://app.datacamp.com/learn/courses/introduction-a-r) sur DataCamp, et cliquez sur les liens des chapitres ci-dessous. Au fur et à mesure de votre travail, notez les termes importants et ce à quoi ils font référence.
+Allez maintenant découvrir [le cours d'introduction à R](https://app.datacamp.com/learn/courses/free-introduction-to-r) sur DataCamp, et cliquez sur les liens des chapitres ci-dessous. Au fur et à mesure de votre travail, notez les termes importants et ce à quoi ils font référence.
 
-- [Chapitre 1 : introduction](https://campus.datacamp.com/courses/introduction-a-r/chapitre-1-introduction?ex=1)
+- [Chapitre 1 : introduction](https://campus.datacamp.com/courses/free-introduction-to-r/chapter-1-intro-to-basics-1?ex=1)
     - La console : l'endroit où vous tapez des commandes
     - Les objets : où les valeurs sont stockées, comment assigner des valeurs à des objets
     - Les types de données : entiers, doubles/numériques, caractères et logiques
-- [Chapitre 2 : vecteurs](https://campus.datacamp.com/courses/introduction-a-r/chapitre-2-les-vecteurs?ex=1)
+- [Chapitre 2 : vecteurs]()
     - Les vecteurs : des collections de valeurs du même type
-- [Chapitre 4 : les facteurs](https://campus.datacamp.com/courses/introduction-a-r/chapitre-4-facteurs?ex=1)
+- [Chapitre 4 : les facteurs]()
     - Des données catégorielles (et non pas *numériques*) représentées dans `R` sous forme de `factor`s
-- [Chapitre 5 : les jeux de données ou `data.frame`](https://campus.datacamp.com/courses/introduction-a-r/chapitre-5-les-jeux-de-donnees?ex=1)
+- [Chapitre 5 : les jeux de données ou `data.frame`]()
     - Les `data.frame`s sont similaires aux feuilles de calcul rectangulaires que l'on peut produire dans un tableur. Dans `R`, ce sont des objets rectangulaires (des tableaux !) contenant des jeux de données : les lignes correspondent aux observations et les colonnes aux variables décrivant les observations. La plupart du temps, c'est le format de données que nous utiliserons. Plus de détails dans le @sec-dataset
     
 
