@@ -1053,6 +1053,8 @@ ggplot(penguins, aes(x = sex, fill = species)) +
 Les graphiques en mosaïque sont une alternative aux diagrammes bâtons en tous genre. Ils permettent de visualiser à la fois les effectifs et de comparer les proportions. La difficulté de ce genre de graphique est qu'il n'existe pas d'objet géométrique permettant de les représenter simplement dans le package `ggplot2`. Le package `ggmosaic` de @R-ggmosaic est toutefois entièrement dédié à ce type de graphique. Pour installer ce packages, il faut procéder un peu différemment de d'habitude car nous devons installer sa version de développement (c'est une version plus récente que celle qui est disponible sur les serveurs officiels du CRAN). Pour cela, nous allons utiliser le package `remotes`. Si vous ne l'avez pas encore installé, faites-le maintenant :
 
 ```{r}
+#| eval: false
+
 install.packages("remotes")
 ```
 
@@ -1067,6 +1069,7 @@ remotes::install_github("haleyjeppson/ggmosaic")
 Si vous avez dû redémarrer `R` pour installer le package `remotes`, n'oubliez pas de recharger l'ensemble des packages nécessaires pour ce chapitre :
 
 ```{r}
+#| eval: false
 library(tidyverse)
 library(palmerpenguins)
 library(nycflights13)
@@ -1077,7 +1080,6 @@ library(scales)
 Ajoutez-y le package `ggmosaic` nouvellement installé :
 
 ```{r}
-#| include: false
 library(ggmosaic)
 ```
 

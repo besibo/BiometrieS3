@@ -6,8 +6,6 @@
 # Quarto
 /.quarto/
 _site/
-docs/
-!docs/TP-de-Biométrie-br-Semestre-3-br-.pdf
 
 # LaTeX auxiliary files
 *.aux
@@ -28,11 +26,17 @@ docs/
 *.run.xml
 *.auxlock
 
-# R Markdown/Quarto generated files
-*_files/
-*.html
+# Block all PDFs except specific ones
 *.pdf
 !docs/TP-de-Biométrie-br-Semestre-3-br-.pdf
+!images/*.pdf
+
+# Block the problematic numbered duplicate files with spaces
+# These are the main cause of slowdown
+*" [0-9]*.png"
+*" [0-9]*.pdf"
+*" [0-9][0-9]*.png"
+*" [0-9][0-9]*.pdf"
 
 # Cache directories
 *_cache/

@@ -37,6 +37,8 @@ library(remotes)
 library(knitr)
 library(tidyverse)
 
+remotes::install_github("haleyjeppson/ggmosaic")
+
 # if( !("EDAWR" %in% installed.packages()[,"Package"]) ) {
 #   install_github("rstudio/EDAWR")
 # }
