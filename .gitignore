@@ -38,13 +38,13 @@ _site/
 *" [0-9][0-9]*.png"
 *" [0-9][0-9]*.pdf"
 
+# Allow essential PNG figure files (needed for HTML book display)
+!docs/**/*-1.png
+!docs/**/fig-*.png
+!docs/**/unnamed-chunk-*.png
+
 # Cache directories
 *_cache/
-
-# Figure files
-*-figure/
-figure-*/
-*_figures/
 
 # Temporary files
 .DS_Store
