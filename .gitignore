@@ -31,17 +31,9 @@ _site/
 !docs/TP-de-Biométrie-br-Semestre-3-br-.pdf
 !images/*.pdf
 
-# Block the problematic numbered duplicate files with spaces
-# These are the main cause of slowdown
-*" [0-9]*.png"
-*" [0-9]*.pdf"
-*" [0-9][0-9]*.png"
-*" [0-9][0-9]*.pdf"
-
-# Allow essential PNG figure files (needed for HTML book display)
-!docs/**/*-1.png
-!docs/**/fig-*.png
-!docs/**/unnamed-chunk-*.png
+# Allow all PNG files in docs/ for HTML book display
+# (HTML book needs all figure variants)
+!docs/**/*.png
 
 # Cache directories
 *_cache/
