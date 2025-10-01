@@ -3,4 +3,46 @@
 .RData
 .Ruserdata
 
+# Quarto
 /.quarto/
+_site/
+docs/
+!docs/TP-de-Biométrie-br-Semestre-3-br-.pdf
+
+# LaTeX auxiliary files
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.bcf
+*.run.xml
+*.auxlock
+
+# R Markdown/Quarto generated files
+*_files/
+*.html
+*.pdf
+!docs/TP-de-Biométrie-br-Semestre-3-br-.pdf
+
+# Cache directories
+*_cache/
+
+# Figure files
+*-figure/
+figure-*/
+*_figures/
+
+# Temporary files
+.DS_Store
+*~
+*.tmp
