@@ -1,0 +1,674 @@
+# Manipuler des tableaux avec `dplyr` {#sec-wrangling}
+
+## Pré-requis 
+
+Nous abordons ici une étape essentielle de toute analyse de données : la manipulation de tableaux, la sélection de lignes, de colonnes, la création de nouvelles variables, etc. Bien souvent, les données brutes que nous importons dans `R` ne sont pas utiles en l'état. Il nous faut parfois sélectionner seulement certaines lignes pour travailler sur une petite partie du jeu de données. Il nous faut parfois modifier des variables existantes (pour modifier les unités par exemple) ou en créer de nouvelles à partir des variables existantes. Nous avons aussi très souvent besoin de constituer des groupes et d'obtenir des statistiques descriptives pour chaque groupe (moyenne, écart-type, erreur type, etc). Nous verrons dans ce chapitre comment faire tout cela grâce au package `dplyr` qui fournit un cadre cohérent et des fonctions simples permettant d'effectuer tous les tripatouillages de données dont nous pourrons avoir besoin.
+
+Dans ce chapitre, nous aurons besoin des packages suivants :
+```{r}
+#| message: false
+#| warning: false
+
+library(dplyr)
+library(ggplot2)
+library(palmerpenguins)
+library(readxl)
+```
+
+```{r include=FALSE}
+library(tidyverse)
+```
+
+
+----
+
+## Importer des données depuis un tableur
+
+### Les règles de base
+
+Jusqu'à maintenant, nous avons travaillé exclusivement avec des jeux de données déjà disponibles dans `R`. La plupart du temps, les données sur lesquelles vous devrez travailler devront au préalable être importées dans `R`, à partir de fichiers issus de tableurs. De tels fichiers se présentent généralement sous l'un des 2 formats suivants :
+
+1. Fichiers au format ".csv" : il s'agit d'un format de fichier dit "texte brut", c'est à dire qu'il peut être ouvert avec n'importe quel éditeur de texte, y compris le bloc notes de Windows. L'extension ".csv" est l'abréviation de "Comma Separated Values", autrement dit, dans ce type de fichiers, les colonnes sont séparées par des virgules. Cela peut poser problème en France puisque le symbole des décimales est souvent aussi la virgule (et non le point comme dans les pays anglo-saxons). Le séparateur de colonnes utilisé en France dans les fichiers `.csv` est alors souvent le point-virgule. Il est possible de créer des fichiers `.csv` à partir de n'importe quel tableur en choisissant `Fichier > Exporter...` ou `Fichier > Enregistrer sous...` puis en sélectionnant le format approprié (les dénominations sont variables selon les logiciels : format texte brut, format csv, plain text, etc...).
+2. Fichiers au format tableur : `.xls` ou `.xlsx` pour Excel, `.calc` pour Open Office.
+
+Dans les 2 cas, pour que `R` puisse importer les données contenues dans ces fichiers, un certain nombre de règles doivent être respectées : 
+
+1. La première chose à laquelle il faut veiller est la présentation des données. Les variables doivent être en colonnes et les observations en lignes.
+2. Les cases vides qui correspondent à des données manquantes doivent contenir les lettres `NA` en majuscule. Il est important de bien faire la distinction entre les vrais zéros (*i.e.* les grandeurs mesurées pour lesquelles un zéro a été obtenu), et les valeurs manquantes, c'est à dire pour lesquelles aucune valeur n'a pu être obtenue (*e.g.* variable non mesurée pour un individu donné ou à une station donnée).
+3. Il est généralement conseillé d'utiliser la première ligne du tableau pour stocker le nom des variables
+4. Ne jamais utiliser de caractères spéciaux tels que #, $, %, ^, &, \*, (, ), {, }, [, ], des accents, des cédilles des guillemets ou des apostrophes... Cela pourrait causer des erreurs lors de l'importation dans `R`. Si votre fichier en contient, faites une recherche (*via* le menu `Edition > Rechercher et remplacer...`) pour remplacer chaque instance par un caractère qui ne posera pas de problème.
+5. Évitez les espaces dans vos noms de variables, d'observations ou de catégories et remplacez-les par des points ou des `_`.
+6. Des noms courts pour les variables sont généralement plus faciles à manipuler par la suite.
+7. La première valeur de votre tableau devrait toujours se trouver dans la cellule A1 du tableur. Autrement dit, il ne devrait jamais y avoir de lignes incomplètes ou de lignes de commentaires au-dessus des données, ou de colonne vide à gauche de votre tableau. D'ailleurs, il ne devrait jamais y avoir de commentaires à droite ou en dessous de vos données non plus.
+
+
+### Fichiers au format tableur (.xls ou .xlsx) {#tableur}
+
+À titre d'exemple, téléchargez le fichier [dauphin.xls](data/dauphin.xls) et placez-le dans votre répertoire de travail. Ce jeu de données contient des résultats de dosages de différents métaux lourds (cadmium, cuivre et mercure) dans différents organes (foie et rein) de plusieurs dauphins communs *Delphinus delphis*. Les informations de taille, d'âge et de statut reproducteur sont également précisées. Ouvrez ce fichier dans un tableur. Vous constaterez que son format ne permet pas de l'importer tel quel dans `R` :
+
+- Il contient des lignes vides inutiles au-dessus des données.
+- Il contient des commentaires inutiles au-dessus des données.
+- Les titres de colonnes sont complexes et contiennent des caractères spéciaux.
+- Dans le tableau, les données manquantes sont représentées soit par des "`*`", soit par des cellules vides.
+
+Importer un tel jeu de données dans `R` par les méthodes classiques (c'est-à-dire sans utiliser RStudio et uniquement grâce aux fonctions de base de `R`) demanderait donc un gros travail de mise en forme préalable. Heureusement, `RStudio` et le package `readxl` facilitent grandement le processus.
+
+Dans `RStudio`, localisez l'onglet `Files` situé dans le panneau en bas à droite de l'interface du logiciel. Dans ce panneau, cliquez sur le nom du fichier `Dauphin.xls`, puis, dans le menu qui s'affiche, choisissez `Import Dataset...` :
+
+```{r, import, echo = FALSE, out.width='70%', fig.align='center', fig.cap="L'option `Import Dataset...` dans la fenêtre `Files` de RStudio"}
+knitr::include_graphics('images/import.png')
+```
+
+La nouvelle fenêtre qui s'ouvre est celle de l'"assistant d'importation" :
+
+```{r, import2, echo = FALSE, out.width='100%', fig.align='center', fig.cap="L'assistant d'importation de RStudio"}
+knitr::include_graphics('images/import2.png')
+```
+
+Cette fenêtre contient plusieurs zones importantes :
+
+1. `File/URL` (en haut) : lien vers le fichier contenant les données, sur votre ordinateur ou en ligne.
+2. `Data Preview` : zone principale affichant les 50 premières lignes du fichier que l'on souhaite importer.
+3. `Import Options` (en bas à gauche) : zone dans laquelle des options permettant d'importer les données correctement peuvent être spécifiées.
+4. `Code Preview` (en bas à droite) : les lignes de codes que vous pourrez copier-coller dans votre script une fois les réglages corrects effectués.
+
+Ici, nous constatons que les données ne sont pas au bon format. La première chose que nous pouvons faire est d'indiquer à `R` que nous souhaitons ignorer les 9 premières lignes du fichier. Ensuite, nous précisons à `RStudio` que l'étoile "`*`" a été utilisée pour indiquer des données manquantes :
+
+```{r, import3, echo = FALSE, out.width='100%', fig.align='center', fig.cap="Les bons réglages pour ce fichier"}
+knitr::include_graphics('images/import3.png')
+```
+
+Notez qu'à chaque fois que vous modifiez une valeur dans la zone `Import Options`, 2 choses se produisent simultanément :
+
+1. La zone `Data Preview` est mise à jour. Cela permet de s'assurer que les changements effectués ont bien les effets escomptés.
+2. La zone `Code Preview` est mise à jour. Cela permet de copier-coller dans votre script les commandes permettant d'importer correctement les données. Ici, voilà le code que nous devons ajouter à notre script :
+
+```{r}
+dauphin <- read_excel("data/dauphin.xls", na = "*", skip = 9)
+```
+
+La commande `library(readxl)` est inutile puisque nous l'avons déjà saisie au début de ce chapitre. Nous disposons maintenant d'un nouvel objet nommé `dauphin`. Il est stocké sous la forme d'un `tibble` :
+
+```{r}
+dauphin
+```
+
+Notez toutefois que les noms de colonnes complexes sont toujours présents. Avec de tels noms, les variables ne seront pas faciles à manipuler et les risques d'erreurs de frappes seront nombreux. Nous avons tout intérêt à les modifier à l'aide de la fonction `names()` :
+
+```{r namesdauphins}
+names(dauphin) <- c("ID", "Sexe", "Statut", "Taille",
+                    "Age", "Cd", "Cu", "Hg", "Organe")
+dauphin
+```
+
+Enfin, vous pouvez également noter que certaines variables devraient être modifiées :
+
+- Les variables `Sexe`, `Statut` (qui contient l'information de statut reproducteur des dauphins) et `Organe` (qui indique dans quel organe les métaux ont été dosés) sont de type `<chr>`. L'idéal serait de disposer de facteurs puisqu'ils s'agit de variables catégorielles.
+- La variable `ID` est totalement inutile puisqu'elle est parfaitement redondante avec le numéro de ligne. Nous pourrions donc la supprimer.
+- Certaines catégories (ou niveaux) de la variable `Statut` devraient être ordonnées puisqu'elles reflètent une progression logique : `imm` (immature), `mat` (mature), `pnl` (pregnant non lactating), `pl` (pregnant lactating), `l` (lactating), `repos` (repos somatique).
+
+Nous verrons dans les sections suivantes comment effectuer simplement ces différentes opérations.
+
+
+### Fichiers au format texte brut (.csv) {#plaintext}
+
+Nous allons utiliser les mêmes données que précédemment, mais cette fois-ci, elles sont contenues dans un fichier au format `.csv`. Téléchargez le fichier [dauphin.csv](data/dauphin.csv) (pour cela, faites un clic droit sur le lien et choisissez `Enregistrez la cible du lien sous...` ou `Télécharger le fichier lié sous...`, ou toute autre mention équivalente), placez-le dans votre répertoire de travail, et ouvrez-le avec le bloc notes Windows ou tout autre éditeur de texte brut disponible sur votre ordinateur. **Attention** : Microsoft Word n'est pas un éditeur de texte brut. Un fichier au format `.doc` ou `.docx` est illisible dans un éditeur de texte brut car outre le texte, ces formats de documents contiennent toutes les informations concernant la mise en forme du texte (polices de caractères, tailles, couleurs et autres attributs, présence de figures, de tableaux dans le document, etc.). Attention aussi à ne pas ouvrir vos fichiers `.csv` avec un tableur tel qu'Excel : la plupart du temps, Excel modifie sans le dire le format de ces fichiers (changement des symboles pour les décimales, ajout de caractères spéciaux et ou invisibles mal reconnus par `R`, etc.), ce qui cause toutes sortes de problèmes. Tenez vous-en bien à un éditeur de texte brut pour examiner le contenu des fichiers de ce type.
+
+Les fichiers au format `.txt`, `.csv` et même `.R` (vos scripts !) sont des fichiers au format texte brut. Vous pouvez d'ailleurs essayer d'ouvrir `dauphin.csv` depuis `RStudio`, en allant dans l'onglet `Files` (quart inférieur droit de l'interface de `RStudio`) puis en cliquant sur le nom du fichier et en choisissant `View File`. RStudio ouvre un nouvel onglet à côté de votre script vous permettant d'inspecter le contenu de ce fichier. Par rapport au fichier Excel, vous pouvez noter un certain nombre de différences : 
+
+1. Les colonnes sont séparées par des tabulations.
+2. Les nombres décimaux utilisent la virgule (et non le point comme dans les pays anglo-saxons).
+3. Les noms de colonnes ont déjà été corrigés/simplifiés par rapport au tableau d'origine.
+4. Les valeurs manquantes sont toutes codées par des `NA`s.
+
+Un travail d'édition du fichier `.xls` de départ a donc été réalisé en amont de l'enregistrement au format `.csv`.
+
+Attention, à ce stade, vous avez ouvert un fichier au format texte brut dans `RStudio`, mais les données contenues dans ce fichier n'ont pas été importées pour autant. Pour les importer, on procède comme pour les fichiers au format tableur (voir section précédente).
+
+On commence par cliquer sur `dauphin.csv` dans l'onglet `Files` de `RStudio`. On sélectionne ensuite `Import Dataset...` :
+
+```{r, importcsv1, echo = FALSE, out.width='80%', fig.align='center', fig.cap="Importer un fichier `.csv` depuis l'onglet `Files` de RStudio"}
+knitr::include_graphics('images/importcsv1.png')
+```
+
+La fenêtre qui s'ouvre est en tous points identique à celle obtenue pour l'importation de fichiers tableurs :
+
+```{r, importcsv2, echo = FALSE, out.width='100%', fig.align='center', fig.cap="Importer un fichier `.csv` depuis l'onglet `Files` de RStudio"}
+knitr::include_graphics('images/importcsv2.png')
+```
+
+Nous voyons ici que par défaut, `RStudio` considère qu'une unique colonne est présente. En effet, les fichiers `.csv` utilisent généralement la virgule pour séparer les colonnes. Ce n'est pas le cas ici. Il nous faut donc sélectionner, dans le champ `Delimiter`, l'option `Tab` (tabulation) et non `Comma` (virgule).
+
+À ce stade, chaque variable est maintenant reconnue comme telle, chaque variable occupe donc une colonne distincte. Mais les colonnes `Cd`, `Cu` et `Hg` ne contiennent pas les bonnes valeurs (vous pouvez le vérifier en consultant l'onglet `dauphin.csv` que vous avez ouvert un peu plus tôt à côté de votre script). La cause est simple : `R` s'attend à ce que les nombres décimaux utilisent le point en guise de symbole des décimales. Or, notre fichier `.csv` utilise la virgule. C'est une convention qui dépend du pays dans lequel vous vous trouvez, et de la langue de votre système d'exploitation (en langage technique, on parle de `Locale`). Le fichier `dauphin.csv` ayant été créé sur un ordinateur français, la virgule a été utilisée en guise de symbole des décimales. Pour l'indiquer au logiciel, cliquez sur `Locale > Configure...`, changez le `.` en `,` dans le champ `Decimal Mark` et validez en cliquant sur `Configure`.
+
+```{r, importcsv3, echo = FALSE, out.width='50%', fig.align='center', fig.cap="Changement du symbole utilisé pour les décimales"}
+knitr::include_graphics('images/importcsv3.png')
+```
+
+Les données sont maintenant au bon format, prêtes à être importées dans `RStudio`. Afin de ne pas écraser l'objet `dauphin` que nous avons créé à partir du fichier tableur un peu plus tôt, nous stockerons ces nouvelles données dans un objet nommé `dauphin2`. Pour cela, ajoutez un `2` au nom `dauphin` dans le champ `Name` en bas à gauche :
+
+```{r, importcsv4, echo = FALSE, out.width='100%', fig.align='center', fig.cap="Les données, dans un format correct permettant l'importation"}
+knitr::include_graphics('images/importcsv4.png')
+```
+
+Nous n'avons plus qu'à copier-coller dans notre script le code généré automatiquement en bas à droite de la fenêtre (comme précédemment, la ligne `library(readr)` est inutile : nous avons déjà chargé ce package en début de chapitre).
+
+```{r}
+dauphin2 <- read_delim("data/dauphin.csv", 
+    "\t", escape_double = FALSE, locale = locale(decimal_mark = ","), 
+    trim_ws = TRUE)
+```
+
+Notez que :
+
+1. C'est le package `readr` et non plus `readxl` qui est utilisé.
+2. La fonction `read_delim()` a remplacé la fonction `read_excel()`. Il existe beaucoup d'autres fonctions selon le format de vos données (par exemple `read_csv()` et `read_csv2()`). Il est inutile de toutes les connaître dans la mesure où généralement, `RStudio` vous propose automatiquement la plus appropriée.
+3. `R` indique de quelle façon les colonnes ont été "parsées", autrement dit, quelles fonctions ont été utilisées pour reconnaître le type des données présentes dans chaque colonne. 
+
+Toutes les fonctions permettant d'importer des données n'ont pas nécessairement le même comportement. Ainsi, si l'on compare les objets importés depuis le fichier tableur (`dauphin`) et depuis le fichier texte brut (`dauphin2`), le type de certaines variables peut être différent :
+
+```{r}
+dauphin
+dauphin2
+```
+
+En particulier selon la version des packages que vous utilisez et les réglages spécifiques de vos systèmes d'exploitation, les variables `Taille` et `Age` sont parfois considérées comme réelles dans `dauphin` mais comme entières dans `dauphin2` (ce n'est pas le cas ici). Afin d'éviter les confusions dans la suite du document, nous allons supprimer `dauphin2` en tapant :
+
+```{r}
+rm(dauphin2)
+```
+
+Taper `dauphin2` dans la console devrait maintenant produire une erreur :
+
+```{r, error=TRUE}
+dauphin2
+```
+
+### En cas de problème... {#importproblem}
+
+Il arrive parfois que l'importation de fichiers textes bruts par la méthode décrite ci-dessus échoue en raison d'un bug du package `readr` qui gère mal la présence de caractères spéciaux (accents, cédilles, etc) dans le chemin des fichiers que l'on tente d'importer. À l'heure où j'écris ces lignes ce bug n'est toujours pas corrigé dans la version stable disponible au téléchargement sur les serveurs du CRAN. Il est donc utile de connaître une méthode alternative pour importer de tels fichiers dans `R`. Cette méthode repose sur "la mère de toutes les fonctions d'importation" : `read.table()`.
+
+La fonction `read.table()` est à la base de la plupart des fonctions d'importation décrites dans ce chapitre. Il est donc important d'en connaître la syntaxe et les arguments les plus importants. Cette fonction requiert en général les arguments suivants :
+
+1. Le chemin du fichier texte contenant les données à importer. Si le fichier se trouve dans votre répertoire de travail, il suffit de donner son nom. S'il est dans un sous-dossier de votre répertoire de travail, il faut donner le nom complet : `"sous_dossier/nom_du_fichier.csv"`.
+2. `sep` : la spécification du symbole utilisé en guise de séparateur de colonnes dans le fichier texte. Cela peut-être la virgule (`sep = ","`), le point virgule (`sep = ";"`) ou encore la tabulation (`sep = "\t"`) selon les fichiers importés. 
+3. `dec` : la spécification du symbole utilisé en guise de symbole pour les décimales. Il n'est pas nécessaire de spécifier cet argument lorsque le symbole dans le fichier source est le point. Mais si c'est une virgule (comme c'est souvent le cas dans les pays francophones), il faut alors préciser `dec = ","`.
+4. `header` : la première ligne du fichier source contient-elle des noms de variables. Si oui, il faut indiquer `header = TRUE`.
+
+Ainsi, par exemple, pour le fichier `dauphin.csv` que j'ai placé dans un sous-dossier de mon répertoire de travail nommé `data`, on peut taper ceci :
+
+```{r}
+dauph <- read.table("data/dauphin.csv",
+                    sep = "\t",
+                    dec = ",",
+                    header = TRUE)
+dauph
+```
+
+Puisque la fonction `read.table()` importe les données sous la forme d'un `data.frame`, il est nécessaire de transformer le tableau obtenu en `tibble` grâce à la fonction `as_tibble()` afin de bénéficier de tous les avantages de ce format d'objet.
+
+```{r}
+dauph <- as_tibble(dauph)
+dauph
+```
+
+
+### Exercices {#sec-exo-10}
+
+Avec l'objet `dauphin`, produisez le graphique ci-dessous :
+```{r}
+#| echo: false
+#| warning: false
+dauphin |> 
+  ggplot(aes(x = Age, y = Hg, color = Sexe)) +
+    geom_smooth(method = "lm") +
+    geom_point() +
+    facet_wrap(~Organe, nrow = 2, scales = "free_y") +
+    labs(x = "Âge (années)",
+         y = "Concentration en mercure (mg/kg)",
+         title = "Évolution de la concentration en Hg avec l'âge chez Delphinus delphis",
+         color = "Sexe",
+         caption = "Données : dauphin.xls") +
+    theme_bw()
+```
+Rappel : les droites de régression avec leurs intervalles de confiance sont ajoutés grâce à la fonction `geom_smooth(method = "lm")`.
+
+
+## Le pipe `|>`
+
+Avant d'entrer dans le vif du sujet, je souhaite introduire ici la notion de "pipe" (prononcer à l'anglo-saxonne). Le pipe est un opérateur que nous avons déjà vu apparaître à plusieurs reprises dans les chapitres précédents sans expliquer son fonctionnement.
+
+Le pipe, noté `|>`, peut être obtenu en pressant les touches `ctrl + shift + M` (ou `cmd + shift + M` sous MacOS) de votre clavier. Il permet d'enchaîner logiquement des actions les unes à la suite des autres. Globalement, le pipe prend l'objet situé à sa gauche, et le transmet à la fonction situé à sa droite. En d'autres termes, les 2 expressions suivantes sont strictement équivalentes :
+
+```{r eval = FALSE}
+# Ici, "f" est une fonction quelconque, "x" et "y" sont 2 objets dont la fonction a besoin.
+
+# Il s'agit d'un exemple fictif : ne tapez pas ceci dans votre script !
+f(x, y)
+x |> f(y)
+```
+
+
+Travailler avec le pipe est très intéressant car toutes les fonctions de `dplyr` que nous allons décrire ensuite sont construites autour de la même syntaxe : on leur fournit un `data.frame` (ou encore mieux, un `tibble`), elles effectuent une opération et renvoient un nouveau `data.frame` (ou un nouveau `tibble`). Il est ainsi possible de créer des groupes de commandes cohérentes qui permettent, grâce à l'enchaînement d'étapes simples, d'aboutir à des résultats complexes.
+
+De la même façon que le `+` permet d'ajouter une couche supplémentaire à un graphique `ggplot2`, le pipe `|>` permet d'ajouter une opération supplémentaire dans un groupe de commandes.
+
+Pour reprendre un exemple de la @sec-empil sur les diagrammes bâtons empilés, nous avions utilisé ce code :
+
+```{r}
+penguins |> 
+  filter(!is.na(sex)) |> 
+  ggplot(aes(x = fct_infreq(species), fill = sex)) +
+  geom_bar(alpha = 0.6, color = "black", position = "fill")
+```
+
+Ligne par ligne, voilà la signification de ce code :
+
+- "Prend le tableau `penguins`, puis..."
+- "transmets-le à la fonction `filter()` pour éliminer les lignes pour lequel le sexe est inconnu, puis..."
+- "transmets le résultat à la fonction `ggplot()` pour en faire un graphique"
+
+On aurait pu faire la même chose ainsi :
+
+```{r}
+penguins_clean <- filter(penguins, !is.na(sex))
+ggplot(penguins_clean, aes(x = fct_infreq(species), fill = sex)) +
+    geom_bar(alpha = 0.6, color = "black", position = "fill")
+```
+C'est strictement équivalent. La deuxième méthode à l'inconvénient de nous obliger à créer un objet intermédiaire (que j'ai ici nommé `penguins_clean`). Lorsque l'on a de nombreuses fonctions à enchaîner, il faut donc créer de nombreux objets intermédiaires dont nous n'avons besoin qu'une seule fois, ce qui peut être source de nombreuses erreurs. 
+
+Une troisième façon de procéder est la suivante :
+
+```{r}
+ggplot(filter(penguins, !is.na(sex)), 
+       aes(x = fct_infreq(species), fill = sex)) +
+    geom_bar(alpha = 0.6, color = "black", position = "fill")
+```
+Cette fois, on ne crée plus d'objet intermédiaire, mais on intègre directement la fonction `filter()` à l'intérieur de la fonction `ggplot()`. Le code devient un peu moins lisible, et quand ça n'est pas deux fonctions mais 4, 5 ou plus que nous devons enchaîner, procéder ainsi est la garantie que des erreurs seront commises et qu'elles seront très difficiles à corriger.
+
+On préfère donc toujours utiliser le pipe qui a le mérite de placer chaque fonction sur une nouvelle ligne, et de permettre une lecture plus simple du code, ligne par ligne, étape par étape, et non de façon imbriquée, de l'intérieur d'une commande vers l'extérieur :
+
+```{r}
+#| eval: false
+penguins |> 
+  filter(!is.na(sex)) |> 
+  ggplot(aes(x = fct_infreq(species), fill = sex)) +
+  geom_bar(alpha = 0.6, color = "black", position = "fill")
+```
+
+Notez bien qu'avec le pipe le premier argument de la fonction des fonctions `filter()` et `ggplot()` ont disparu : le pipe a fourni automatiquement à `filter()` les données du tableau `penguins`. Il a ensuite fourni automatiquement à `ggplot()` les données modifiées par la fonction `filter()`.
+
+Comme pour le `+` de `ggplot2`, il est conseillé de placer un seul pipe par ligne, toujours à la fin, et de revenir à la ligne pour préciser l'étape suivante.
+
+Toutes les commandes que nous utiliserons à partir de maintenant reposeront sur le pipe puisqu'il permet de rendre le code plus lisible.
+
+
+
+## Les verbes du tripatouillage de données
+
+Nous allons ici nous concentrer sur les fonctions les plus couramment utilisées pour manipuler et résumer des données. Nous verrons 4 verbes principaux, chacun correspondant à une fonction précise de `dplyr`. Chaque section de ce chapitre sera consacrée à la présentation d'un exemple utilisant un ou plusieurs de ces verbes.
+
+Les 4 verbes sont :
+
+1. `filter()` : choisir des lignes dans un tableau à partir de conditions spécifiques (filtrer).
+2. `arrange()` : trie les lignes d'un tableau selon un ou plusieurs critères (arranger).
+3. `select()` : sélectionner des colonnes d'un tableau.
+4. `mutate()` : créer de nouvelles variables en transformant et combinant des variables existantes (muter).
+
+Toutes ces fonctions, tous ces verbes, sont utilisés de la même façon : on prend un `data.frame`, grâce au pipe, on le transmet à l'une de ces fonctions dont on précise les arguments entre parenthèses, la fonction nous renvoie un nouveau tableau modifié. Évidemment, on peut enchaîner les actions pour modifier plusieurs fois le même tableau, c'est tout l'intérêt du pipe.
+
+Enfin, gardez en tête qu'il existe beaucoup plus de fonctions dans `dplyr` que les 4 que nous allons détailler ici. Nous verrons parfois quelques variantes, mais globalement, maîtriser ces 4 fonctions simples devrait vous permettre d'aborder sereinement le premier semestre de la L2. Nous verrons d'autres fonctions de `dplyr` plus avancées, permettant notamment d'associer plusieurs `data.frame`s et de calculer des résumés numériques des données au semestre prochain, lorsque nous commencerons a nous intéresser à l'analyse statistique des données.
+
+
+## Filtrer des lignes avec `filter()`
+
+### Principe
+
+```{r, filterfig, echo = FALSE, out.width='50%', fig.align='center', fig.cap="Schéma de la fonction `filter()` tiré de la 'cheatsheet' de `dplyr` et `tidyr`"}
+knitr::include_graphics('images/filter.png')
+```
+
+Comme son nom l'indique, `filter()` permet de filtrer des lignes en spécifiant un ou des critères de tri portant sur une ou plusieurs variables. Nous pouvons ainsi créer un nouveau tableau ne contenant que les données de l'espèce Adélie :
+
+```{r tidy = FALSE, eval = FALSE}
+peng_adelie <- penguins |> 
+  filter(species == "Adelie")
+```
+
+La première ligne de code nous permet :
+
+1. d'indiquer le nom du nouvel objet dans lequel les données modifiées seront stockées (ici, `peng_adelie`)
+2. d'indiquer de quel objet les données doivent être extraites (`penguins`)
+3. de passer cet objet à la fonction suivante avec un pipe `|>`
+
+Le premier argument de la fonction `filter()` doit être le nom d'un `data.frame` ou d'un `tibble`. Ici, puisque nous utilisons le pipe, il est inutile de spécifier cet argument : c'est ce qui est placé à gauche du pipe qui est utilisé comme premier argument de la fonction `filter()`. Les arguments suivants constituent la ou les conditions qui doivent être respectées par les lignes du tableau de départ afin d'être intégrées au nouveau tableau de données. 
+
+### Exercice
+
+Créez un objet nommé `adelie_light` qui contiendra uniquement les données de l'espèce Adélie, et uniquement pour les individus pesant 3700 grammes ou moins. Indice : relisez la @sec-comparaison
+
+```{r include=FALSE}
+adelie_light <- penguins |> 
+  filter(species == "Adelie",
+         body_mass_g <= 3700)
+
+adelie_light
+```
+
+Vérifiez que cet objet contient bien `r nrow(adelie_light)` lignes.
+
+### Les conditions logiques
+
+Dans la @sec-comparaison, nous avons présenté en détail le fonctionnement des opérateurs de comparaison dans `R`. Relisez cette section si vous ne savez plus de quoi il s'agit. Les opérateurs de comparaison permettent de vérifier l'égalité ou l'inégalité entre des éléments. Ils renvoient `TRUE` ou `FALSE` et seront particulièrement utiles pour filtrer des lignes dans un tableau. Voici à nouveau la liste des opérateurs de comparaison usuels :
+
+* `==` : égal à
+* `!=` : différent de
+* `>` : supérieur à
+* `<` : inférieur à
+* `>=` : supérieur ou égal à
+* `<=` : inférieur ou égal à
+
+À cette liste, nous pouvons ajouter quelques éléments utiles :
+
+* `is.na()` : renvoie `TRUE` en cas de données manquantes.
+* `!` : permet de tester le contraire d'une expression logique. Par exemple `!is.na()` renvoie `TRUE` s'il n'y a pas de données manquantes.
+* `%in%` : permet de tester si l'élément de gauche est contenu dans la série d'éléments fournie à droite. Par exemple `2 %in% 1:5` renvoie `TRUE`, mais `2 %in% 5:10` renvoie `FALSE`.
+* `|` : opérateur logique `OU`. Permet de tester qu'une condition `OU` une autre est remplie.
+* `&` : opérateur logique `ET`. Permet de tester qu'une condition `ET` une autre sont remplies.
+
+Voyons comment utiliser ces opérateurs avec la fonction `filter()`.
+
+Dans le tableau `penguins`, quels sont les individus pour lesquels la masse n'a pas été mesurée ? Une bonne façon de le savoir est de regarder si, pour la variable `body_mass_g`, des données manquantes sont présentes :
+
+```{r, tidy=FALSE}
+penguins |> 
+  filter(is.na(body_mass_g))
+```
+
+
+Seules les lignes contenant `NA` dans la colonne `body_mass_g` sont retenues. Il y a donc 2 individus dont la masse est inconnue. D'ailleurs, pour ces individu, aucune mesure biométrique n'est disponible. il s'agit d'un manchot Adélie, et d'un manchot Gentoo, tous les deux de sexe inconnu.
+
+Dans le même ordre d'idée, y a t-il des individus dont on ne connait pas le sexe mais dont on connait les mesures biométriques (au moins la masse) ? Là encore, une façon d'obtenir cette information est de sélectionner les individus dont le sexe est manquant, mais pour lesquels la masse n'est pas manquante :
+
+```{r, tidy=FALSE}
+penguins |> 
+  filter(is.na(sex),
+         !is.na(body_mass_g))
+```
+
+Notez l'utilisation du `!` pour la seconde condition. Nous récupérons ici les lignes pour lesquelles `body_mass_g` n'est pas `NA` et pour lesquelles `sex` est `NA`. Seules les lignes qui respectent cette double condition sont retenues. Cette syntaxe est équivalente à :
+
+```{r, tidy=FALSE}
+penguins |> 
+  filter(is.na(sex) & !is.na(body_mass_g))
+```
+
+```{r, tidy=FALSE, include=FALSE}
+missing_sex <- penguins |> 
+  filter(is.na(sex) & !is.na(body_mass_g))
+```
+
+Dans la fonction `filter()`, séparer plusieurs conditions par des virgules signifie que seules les lignes qui remplissent toutes les conditions seront retenues. C'est donc l'équivalent du `ET` logique.
+
+<!-- Il y a donc `r nrow(missing_sex)` individus qui n'ont pas été sexés mais dont on connait les autres caractéristiques morphologiques. -->
+
+Enfin, pour illustrer l'utilisation de `|` (le `OU` logique) et de `%in%`, imaginons que nous souhaitions extraire les informations des individus de l'espèce Adélie qui vivent soit sur l'île Biscoe, soit sur l'île Dream, et dont le bec mesure moins de 42 mm de longueur :
+
+```{r, tidy = FALSE}
+adel_small <- penguins |> 
+  filter(species == "Adelie", 
+         island == "Biscoe" | island == "Dream", 
+         bill_length_mm < 42)
+adel_small
+```
+
+Examinez ce tableau avec `View()` pour vérifier que la variable `island` contient bien uniquement les valeurs `Biscoe` et `Dream` correspondant aux 2 îles qui nous intéressent. Nous avons extrait ici les individus des îles Biscoe **et** Dream, pourtant, il nous a fallu utiliser le `OU` logique. Car chaque individu n'est issu que d'une unique île, or nous souhaitons récupérer toutes les lignes pour lesquelles l'île est soit `Biscoe`, soit `Dream` (l'une **ou** l'autre). Pour chaque ligne, les deux conditions ne peuvent pas être vraies l'une **et** l'autre en même temps. En revanche, on retient chaque ligne qui remplit la première condition **ou** la seconde.
+
+Une autre solution pour obtenir le même tableau est de remplacer l'expression contenant `|` par une expression contenant `%in%` :
+
+```{r, tidy = FALSE}
+adel_small2 <- penguins |> 
+  filter(species == "Adelie", 
+         island %in% c("Biscoe", "Dream"), 
+         bill_length_mm < 42)
+adel_small2
+```
+
+Ici, toutes les lignes du tableau dont la variable `island` est égale à un élément du vecteur `c("Biscoe", "Dream")` sont retenues. L'utilisation du `OU` logique peut être source d'erreur. Je préfère donc utiliser `%in%` qui me semble plus parlant. La fonction `identical()` nous confirme que les deux façons de faire produisent exactement le même résultat. Libre à vous de privilégier la méthode qui vous convient le mieux :
+
+```{r}
+identical(adel_small, adel_small2)
+```
+
+
+
+
+## Sélectionner des variables avec `select()`
+
+```{r, selectfig, echo = FALSE, out.width='50%', fig.align='center', fig.cap="Schéma de la fonction `select()` tiré de la 'cheatsheet' de `dplyr` et `tidyr`"}
+knitr::include_graphics('images/select.png')
+```
+
+Il n'est pas rare de travailler avec des tableaux contenant des centaines, voir des milliers de colonnes. Dans de tels cas, il peut être utile de réduire le jeu de données aux variables qui vous intéressent. Le rôle de la fonction `select()` est de retenir uniquement les colonnes dont on a spécifié le nom, afin de recentrer l'analyse sur les variables utiles.
+
+`select()` n'est pas particulièrement utile pour le jeu de données `penguins` puisqu'il ne contient que 8 variables. Toutefois, on peut malgré tout ces données pour comprendre le fonctionnement général de `select()`. Ainsi, pour sélectionner uniquement les colonnes `species`, `sex` et `body_mass_g`, on tape :
+
+```{r, tidy = FALSE}
+# Sélection de variables par leur nom
+penguins |>
+  select(species, sex, body_mass_g)
+```
+
+Pour retenir des colonnes qui sont côte à côte dans le tableau de départ, on peut utiliser l'opérateur `:` pour les sélectionner :
+
+```{r, tidy = FALSE}
+# Sélection de toutes les variables entre `island` et `bill_depth_mm` (inclues)
+penguins |>
+  select(island:bill_depth_mm)
+```
+
+À l'inverse, si on veut supprimer certaines colonnes, on peut utiliser la notation `-` :
+
+```{r, tidy = FALSE}
+# Sélection de toutes les variables de `penguins` à l'exception
+# de celles comprises entre `island` et `bill_depth_mm` (inclues)
+penguins |>
+  select(-(island:bill_depth_mm))
+```
+
+Il y a beaucoup de fonctions permettant de sélectionner des variables dont les noms respectent certains critères. Par exemple :
+
+- `starts_with("abc")` : renvoie toutes les variables dont les noms commencent par "abc"
+- `ends_with("xyz")` : renvoie toutes les variables dont les noms se terminent par "xyz"
+- `contains("ijk")` : renvoie toutes les variables dont les noms contiennent "ijk"
+
+Il en existe beaucoup d'autres. Vous pouvez consulter l'aide de `?select()` pour en savoir plus.
+
+Ainsi, il est par exemple possible d'extraire toutes les variables contenant le mot "mm" ainsi :
+
+```{r, tidy=FALSE}
+penguins |>
+  select(contains("mm"))
+```
+
+Évidemment, le tableau `penguins` n'est pas modifié par cette opération : il contient toujours les 8 variables de départ. Pour travailler avec ces tableaux de données contenant moins de variables, il faut les stocker dans un nouvel objet en leur donnant un nom :
+
+```{r, tidy=FALSE}
+measures <- penguins |>
+  select(contains("mm"))
+```
+
+Enfin, on peut utiliser `select()` pour renommer des variables. Mais ce n'est que rarement utile car `select()` élimine toutes les variables qui n'ont pas été explicitement nommées :
+
+```{r, tidy=FALSE}
+penguins |>
+  select(species:island,
+         b_length = bill_length_mm,
+         flipper = flipper_length_mm)
+```
+
+Il est donc généralement préférable d'utiliser `rename()` pour renommer certaines variables sans en éliminer aucune :
+
+```{r, tidy=FALSE}
+penguins |>
+  rename(b_length = bill_length_mm,
+         flipper = flipper_length_mm)
+```
+
+
+## Créer de nouvelles variables avec `mutate()` {#mutate}
+
+### Principe
+
+```{r, mutatefig, echo = FALSE, out.width='50%', fig.align='center', fig.cap="Schéma de la fonction `mutate()` tiré de la 'cheatsheet' de `dplyr` et `tidyr`"}
+knitr::include_graphics('images/mutate.png')
+```
+
+La fonction `mutate()` permet de créer de nouvelles variables à partir des variables existantes, ou de modifier des variables déjà présentes dans un jeu de données. Il est en effet fréquent d'avoir besoin de calculer de nouvelles variables, souvent plus informatives que les variables disponibles.
+
+Voyons un exemple. À partir de `penguins`, nous allons calculer 1 nouvelles variable et en modifier une autre :
+
+1. `ratio` : le rapport entre la longueur du bec et son épaisseur. Cela nous donnera un indice de la compacité du bec. Des valeurs faibles de ce ratio un bec très trapu, alors que des valeurs fortes indiqueront un bec très effilé
+2. `mass_kg` : la masse, qui est ici exprimée en grammes sera transformée en kilogrammes par une simple division par 1000
+
+```{r, tidy=FALSE}
+penguins |>
+  mutate(ratio = bill_length_mm / bill_depth_mm,
+         mass_kg = body_mass_g / 1000)
+```
+
+Si on souhaite conserver uniquement les variables nouvellement créées par `mutate()`, on peut utiliser `transmute()` :
+
+```{r, tidy=FALSE}
+penguins |>
+  transmute(ratio = bill_length_mm / bill_depth_mm,
+            mass_kg = body_mass_g / 1000)
+```
+
+Et comme toujours, pour pouvoir réutiliser ces données, on leur donne un nom :
+
+```{r, tidy=FALSE}
+pengu_ratio <-  penguins |>
+  transmute(ratio = bill_length_mm / bill_depth_mm,
+            mass_kg = body_mass_g / 1000)
+```
+
+### Transformer des variables en facteurs
+
+Une autre opération fréquente possible grâce à la fonction `mutate()` est la transformation d'une ou plusieurs variables d'un tableau en facteur avec la fonction `factor()`. Plusieurs variables du tableau `dauphin`, importé plus tôt, devrait être transformées en facteur :
+
+```{r}
+dauphin
+```
+C'est le cas des variables `Sexe`, `Statut` et `Organe`. Par ailleurs, la variable `ID` pourrait être supprimée puisqu'elle n'apporte aucune information est est parfaitement redondante avec les numéros de ligne du tableau. Voyons comment réaliser toutes ces actions :
+
+```{r}
+dauphin_clean <- dauphin |> 
+  select(-ID) |>                 # Suppression de la colonne ID, puis
+  mutate(Sexe = factor(Sexe),     # Transformation de Sexe en facteur
+         Organe = factor(Organe), # Transformation d'Organe en facteur
+         Statut = factor(Statut,  # Transformation de Statut en facteur
+                         levels = c("imm", "mat", "pnl", "pl", "l", "repos")))
+```
+
+L'objet `dauphin_clean` contient les résultats de nos manipulations :
+
+```{r}
+dauphin_clean
+```
+Vous notez que `ID` a disparu et que les 3 variables modifiées sont maintenant bel et bien des facteurs. Vous avez probablement remarqué également que pour la variable `Statut`, la syntaxe que j'ai utilisée est légèrement différente de celle des variables `Sexe` et `Organe`. Pour en comprendre la raison, tapez ceci pour afficher le contenu de ces facteurs :
+
+```{r}
+dauphin_clean$Sexe
+dauphin_clean$Organe
+dauphin_clean$Statut
+```
+Pour les 2 premiers facteurs, les niveaux des facteurs (ou modalités) sont classés par ordre alphabétique. Ainsi, pour le facteur `Sexe`, la catégorie `f` (femelle) apparaît avant `m` (mâles) dans la liste des niveaux (`Levels: ...`). Pour le facteur `Organe`, la modalité `foie` apparaît avant la modalité `rein`. L'ordre des modalités d'un facteur est celui qui sera utilisé par défaut pour ordonner les catégories sur les axes d'un graphique ou dans les légendes. L'ordre alphabétique convient parfaitement pour le `Sexe` ou l'`Organe` puisqu'il n'y a pas, pour ces facteurs, d'ordre dans les modalités.
+
+Pour le facteur `Statut` en revanche, l'ordre importe, car il reflète des stades qui se succèdent logiquement au cours de la vie des individus (et des femelles plus particulièrement). Sur un graphique, on souhaite donc que ces catégories apparaissent dans un ordre bien précis, différent de l'ordre alphabétique. C'est la raison pour laquelle, lorsque l'on crée un facteur avec la fonction `factor()`, on peut spécifier explicitement un ordre pour les catégories grâce à l'argument `levels = `. Il suffit ensuite de fournir un vecteur contenant le nom de chaque catégorie, dans l'ordre souhaité.
+
+
+### Exercices
+
+1. Dans `ggplot2` le jeu de données `mpg` contient des informations sur 234 modèles de voitures. Examinez ce jeu de données avec la fonction `View()` et consultez son fichier d'aide pour savoir à quoi correspondent les différentes variables. Quelle(s) variable(s) nous renseignent sur la consommation des véhicules ? À quoi correspond la variable `disp` ?
+
+2. La consommation est donnée en miles par gallon. Créez une nouvelle variable `conso` qui contiendra la consommation sur autoroute, exprimée en nombre de litres pour 100 kilomètres.
+
+3. Faîtes un graphique présentant la relation entre la cylindrée en litres et la consommation sur autoroute exprimée en nombre de litres pour 100 kilomètres. Vous exclurez les véhicules dont la `class`e est `2seater` de ce graphique (il s'agit de voitures de sports très compactes qu'il est difficile de mesurer aux autres). Sur votre graphique, la couleur devrait représenter le type de véhicule. Vous ajouterez une droite de régression en utilisant `geom_smooth(method = "lm")`. Votre graphique devrait ressembler à ceci :
+
+```{r consommation, tidy=FALSE, warning = FALSE, echo = FALSE, fig.cap = "Consommation en fonction de la cylindrée"}
+mpg |>
+  filter(class != "2seater") |>
+  mutate(conso = 235.215 / hwy) |>
+  ggplot(aes(x = displ, y = conso)) +
+  geom_point(aes(color = class)) +
+  geom_smooth(method = "lm") +
+  labs(x = "Cylindrée (volume du moteur en litres)",
+       y = "Consommation (litres pour 100 kilomètres)",
+       color = "Type de\nvéhicule",
+       title = "Relation positive entre cylindrée et consommation") +
+  theme_minimal()
+```
+
+4. Ce graphique présente-t-il correctement l'ensemble des données de ces 2 variables ? Pourquoi ? Comparez le graphique de la question 3 ci-dessus et le graphique présenté ci-dessous. Selon vous, quels arguments et/ou fonctions ont été modifiés pour arriver à ce nouveau graphique ? Quels sont les avantages et les inconvénients de ce graphique par rapport au précédent ?
+
+```{r consommation2, tidy=FALSE, warning = FALSE, echo = FALSE, fig.cap="Consommation en fonction de la cylindrée"}
+mpg |>
+  filter(class != "2seater") |>
+  mutate(conso = 235.215 / hwy) |>
+  ggplot(aes(x = displ, y = conso)) +
+  geom_jitter(aes(fill = class), shape=21, width=0.05, height=0.05, alpha = 0.7) +
+  geom_smooth(method = "lm") +
+  labs(x = "Cylindrée (volume du moteur en litres)",
+       y = "Consommation (litres pour 100 kilomètres)",
+       fill = "Type de\nvéhicule",
+       title = "Relation positive entre cylindrée et consommation") +
+  theme_minimal()
+```
+
+
+## Trier des lignes avec `arrange()` {#arrange}
+
+```{r, arrangefig, echo = FALSE, out.width='40%', fig.align='center', fig.cap="Schéma de la fonction `arrange()` tiré de la 'cheatsheet' de `dplyr` et `tidyr`"}
+knitr::include_graphics('images/arrange.png')
+```
+
+La fonction `arrange()` permet de trier des tableaux en ordonnant les éléments d'une ou plusieurs colonnes. Les tris peuvent être en ordre croissants (c'est le cas par défaut) ou décroissants (grâce à la fonction `desc()`, abréviation de "descending").
+
+`arrange()` fonctionne donc comme `filter()`, mais au lieu de sélectionner des lignes, cette fonction change leur ordre. Il faut lui fournir le nom d'un tableau et au minimum le nom d'une variable selon laquelle le tri doit être réalisé. Si plusieurs variables sont fournies, chaque variable supplémentaire permet de résoudre les égalités. Ainsi, pour ordonner le tableau `penguins` par ordre croissant d'épaisseur de bec (`bill_depth_mm`), on tape :
+
+```{r, tidy = FALSE}
+penguins |>
+  arrange(bill_depth_mm)
+```
+
+Notez que la variable `dbill_depth_mm` est maintenant triée en ordre croissant. Notez également que 2 individus ont un bec dont l'épaisseur vaut exactement 13,5 mm. Comparez le tableau précédent avec celui-ci :
+
+```{r, tidy = FALSE}
+penguins |>
+  arrange(bill_depth_mm, bill_length_mm)
+```
+
+Les lignes des 2 individus dont l'épaisseur du bec vaut 13,5 mm ont été inversées : la variable `bill_length_mm` a été utilisée pour ordonner les lignes en cas d'égalité de la variable `bill_depth_mm`.
+
+Comme indiqué plus haut, il est possible de trier les données par ordre décroissant :
+
+```{r, tidy = FALSE}
+penguins |>
+  arrange(desc(bill_depth_mm))
+```
+
+Cela est particulièrement utile après l'obtention de résumés groupés (obtenus avec la fonction `count()`) pour connaître la catégorie la plus représentée. Par exemple, si nous souhaitons connaître l'espèce et le sexe les plus fréquemment observés, on peut procéder ainsi :
+
+1. prendre le tableau `penguins`, *puis,*
+2. compter le nombre d'observation par espèce et sexe avec la fonction `count`, *puis,*
+3. trier les données par effectif décroissant.
+
+```{r, tidy=FALSE}
+penguins |>
+  count(species, sex) |>
+  arrange(desc(n))
+```
+
+Deux catégories sont aussi fréquemment observées l'une que l'autre : les mâles et femelles de l'espèce Adélie, pour lesquels 73 individus ont été observés.
+
