@@ -1085,7 +1085,8 @@ Attention à l’ordre des niveaux !
 <div class="cell">
 <div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>Bruant[,<span class="dv">10</span>]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in `[.data.frame`(Bruant, , 10): colonnes non définies sélectionnées</code></pre>
+<pre><code>Error in `[.data.frame`:
+! colonnes non définies sélectionnées</code></pre>
 </div>
 </div>
 <p>Ici, je demande à <code>R</code> d’afficher la dixième colonne du <code>data.frame</code> <code>Bruant</code>, mais ce tableau ne contient que 5 variables. Il n’y a donc pas de dixième colonne à afficher, et <code>R</code> le fait savoir avec un message d’erreur. Pour travailler efficacement avec des <code>data.frame</code>, il est donc important de connaître leurs dimensions. Pour cela, on peut utiliser la fonction <code>dim()</code>, qui affiche le nombre de lignes et le nombre de colonnes d’un <code>data.frame</code>, ou les fonctions <code>nrow()</code> et <code>ncol()</code>, qui affichent respectivement le nombre de lignes et le nombre de colonnes :</p>

@@ -472,7 +472,7 @@ Figure&nbsp;3.1: Espérance de vie en fonction du PIB par habitant en 2007.
 </section>
 <section id="le-package-ggplot2" class="level3" data-number="3.3.4">
 <h3 data-number="3.3.4" class="anchored" data-anchor-id="le-package-ggplot2"><span class="header-section-number">3.3.4</span> Le package <code>ggplot2</code></h3>
-<p>Comme indiqué plus haut, le package <code>ggplot2</code> <span class="citation" data-cites="R-ggplot2">(<a href="references.html#ref-R-ggplot2" role="doc-biblioref">Wickham et al. 2025</a>)</span> permet de réaliser des graphiques dans <code>R</code> en respectant les principes de la grammaire des graphiques. Vous avez probablement remarqué que depuis le début de la section <a href="#sec-gggraph" class="quarto-xref"><span>Section 3.3</span></a>, beaucoup de termes sont écrits dans la police réservée au <code>code</code> informatique. C’est parce que les éléments de la grammaire des graphiques sont tous précisés dans la fonction <code>ggplot()</code> qui demande, au grand minimum, que les éléments suivants soient spécifiés :</p>
+<p>Comme indiqué plus haut, le package <code>ggplot2</code> <span class="citation" data-cites="R-ggplot2">(<a href="references.html#ref-R-ggplot2" role="doc-biblioref">Wickham et al. 2026</a>)</span> permet de réaliser des graphiques dans <code>R</code> en respectant les principes de la grammaire des graphiques. Vous avez probablement remarqué que depuis le début de la section <a href="#sec-gggraph" class="quarto-xref"><span>Section 3.3</span></a>, beaucoup de termes sont écrits dans la police réservée au <code>code</code> informatique. C’est parce que les éléments de la grammaire des graphiques sont tous précisés dans la fonction <code>ggplot()</code> qui demande, au grand minimum, que les éléments suivants soient spécifiés :</p>
 <ul>
 <li>le nom du <code>data.frame</code> contenant les variables qui seront utilisées pour le graphique. Ce nom correspond à l’argument <code>data</code> de la fonction <code>ggplot()</code>.</li>
 <li>l’association des variables à des attributs esthétiques. Cela se fait grâce à l’argument <code>mapping</code> et la fonction <code>aes()</code></li>
@@ -882,7 +882,7 @@ Important
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(penguins<span class="sc">$</span>body_mass_g)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     NAs 
    2700    3550    4050    4202    4750    6300       2 </code></pre>
 </div>
 </div>
@@ -1875,7 +1875,7 @@ Figure&nbsp;3.12: Répartition des effectifs par espèce et par sexe
 </section>
 <section id="sec-mosa" class="level3" data-number="3.8.4">
 <h3 data-number="3.8.4" class="anchored" data-anchor-id="sec-mosa"><span class="header-section-number">3.8.4</span> Mosaïc plots</h3>
-<p>Les graphiques en mosaïque sont une alternative aux diagrammes bâtons en tous genre. Ils permettent de visualiser à la fois les effectifs et de comparer les proportions. La difficulté de ce genre de graphique est qu’il n’existe pas d’objet géométrique permettant de les représenter simplement dans le package <code>ggplot2</code>. Le package <code>ggmosaic</code> de <span class="citation" data-cites="R-ggmosaic">Jeppson, Hofmann, et Cook (<a href="references.html#ref-R-ggmosaic" role="doc-biblioref">2025</a>)</span> est toutefois entièrement dédié à ce type de graphique. Pour installer ce packages, il faut procéder un peu différemment de d’habitude car nous devons installer sa version de développement (c’est une version plus récente que celle qui est disponible sur les serveurs officiels du CRAN). Pour cela, nous allons utiliser le package <code>remotes</code>. Si vous ne l’avez pas encore installé, faites-le maintenant :</p>
+<p>Les graphiques en mosaïque sont une alternative aux diagrammes bâtons en tous genre. Ils permettent de visualiser à la fois les effectifs et de comparer les proportions. La difficulté de ce genre de graphique est qu’il n’existe pas d’objet géométrique permettant de les représenter simplement dans le package <code>ggplot2</code>. Le package <code>ggmosaic</code> de <span class="citation" data-cites="R-ggmosaic">Jeppson, Hofmann, et Cook (<a href="references.html#ref-R-ggmosaic" role="doc-biblioref">2026</a>)</span> est toutefois entièrement dédié à ce type de graphique. Pour installer ce packages, il faut procéder un peu différemment de d’habitude car nous devons installer sa version de développement (c’est une version plus récente que celle qui est disponible sur les serveurs officiels du CRAN). Pour cela, nous allons utiliser le package <code>remotes</code>. Si vous ne l’avez pas encore installé, faites-le maintenant :</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -3104,10 +3104,10 @@ Figure&nbsp;3.16: Une figure correctement légendée
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-R-ggmosaic" class="csl-entry" role="listitem">
-Jeppson, Haley, Heike Hofmann, et Di Cook. 2025. <em>ggmosaic: Mosaic Plots in the ggplot2 Framework</em>. <a href="https://haleyjeppson.github.io/ggmosaic/">https://haleyjeppson.github.io/ggmosaic/</a>.
+Jeppson, Haley, Heike Hofmann, et Di Cook. 2026. <em>ggmosaic: Mosaic Plots in the ggplot2 Framework</em>. <a href="https://haleyjeppson.github.io/ggmosaic/">https://haleyjeppson.github.io/ggmosaic/</a>.
 </div>
 <div id="ref-R-ggplot2" class="csl-entry" role="listitem">
-Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, Dewey Dunnington, et Teun van den Brand. 2025. <em>ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
+Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, Dewey Dunnington, et Teun van den Brand. 2026. <em>ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
 </div>
 <div id="ref-wilkinson2005" class="csl-entry" role="listitem">
 Wilkinson, Leland. 2005. <em>The grammar of graphics</em>. 2nd éd. New-York: Springer-Verlag. <a href="https://www.springer.com/us/book/9780387245447">https://www.springer.com/us/book/9780387245447</a>.
